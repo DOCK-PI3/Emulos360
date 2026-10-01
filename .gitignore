@@ -1,0 +1,30 @@
+# Dependencias descargadas y compilaciones locales
+/.tools/
+/build*/
+/out/
+/local/
+/server/node_modules/
+/XEXplugins/MetroDashboard/build/
+/XEXplugins/MetroDashboard/dist/
+
+# Datos, descargas y archivos generados
+**/__pycache__/
+*.py[cod]
+*.user
+*.log
+*.tmp
+*.bak
+*.iso
+*.7z
+*.rar
+*.xex
+*.gpd
+*.xdb
+/downloads/
+/games/
+
+# Archivos de configuración locales
+.env
+.env.*
+!.env.example
+aqtinstall.log

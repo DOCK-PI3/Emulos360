@@ -1,0 +1,3 @@
+[submodule "engine/xenia"]
+	path = engine/xenia
+	url = https://github.com/AdrianCassar/xenia-canary.git

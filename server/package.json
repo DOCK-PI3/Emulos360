@@ -1,0 +1,10 @@
+{
+  "name": "emulos360-private-netplay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Private authenticated gateway and lifecycle manager for Xenia WebServices",
+  "license": "MIT",
+  "engines": { "node": ">=24" },
+  "dependencies": { "selfsigned": "3.0.1", "nat-upnp": "1.1.1" },
+  "scripts": { "test": "node --test ../tests/private_server.test.cjs" }
+}
