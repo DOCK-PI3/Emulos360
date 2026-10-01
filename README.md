@@ -1,5 +1,7 @@
 # Emulos360
 
+Varios proyectos de terceros,mas parches,mas integracion de varias librerias y codigo propio,todo para emular xb360 con el pc de forma comoda.
+
 Biblioteca nativa en C++20 y Qt Quick/QML: portadas verticales, búsqueda, lectura
 GOD, XBLA y juegos extraídos con `.xex`, descarga y selección de carátulas por región, ajustes persistentes y modos
 escritorio/consola. La interfaz es nativa y no incrusta un navegador. La base es Xenia Canary Netplay
