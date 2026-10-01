@@ -52,6 +52,6 @@ ColumnLayout {
             }
         }
     }
-    Component { id: aboutComponent; AboutScreen {} }
+    Component { id: aboutComponent; AboutScreen { controller: page.controller } }
     Component { id: compatibilityComponent; CompatibilityLegend { controller: page.controller } }
 }

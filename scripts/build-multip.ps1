@@ -31,9 +31,17 @@ try {
         Run-CMake -Arguments @('--build', $build, '--config', 'Release', '--target', 'los360', 'ui_tests', '--parallel', '4')
     }
     New-Item -ItemType Directory -Force $package,"$package/server","$package/licenses" | Out-Null
-    Copy-Item "$build/Release/Emulos360.exe" "$package/Emulos360.exe" -Force
+    $frontend = if ($SkipBuild) {
+        Join-Path $project 'out/Emulos360/Emulos360.exe'
+    } else {
+        "$build/Release/Emulos360.exe"
+    }
+    if (!(Test-Path -LiteralPath $frontend)) {
+        throw 'Falta la interfaz compilada. Ejecuta scripts/build-ui.ps1 -Package primero.'
+    }
+    Copy-Item $frontend "$package/Emulos360.exe" -Force
     # Only runtime assets are read from the stable package. Profiles, saves and settings stay independent.
-    foreach ($folder in @('engine','intro','tools','XEXplugins','licenses')) {
+    foreach ($folder in @('engine','intro','tools','XEXplugins','licenses','updates')) {
         $source = Join-Path $project "out/Emulos360/$folder"
         if (Test-Path $source) { Copy-Item $source $package -Recurse -Force }
     }

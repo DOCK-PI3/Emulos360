@@ -60,6 +60,7 @@ Controller::Controller(const QString& settingsPath, QObject* parent)
     : QObject(parent), settings_(settingsPath, QSettings::IniFormat),
       engineSettings_(QFileInfo(settingsPath).absolutePath() + "/engine", this),
       players_(&engineSettings_,QFileInfo(settingsPath).absolutePath(),this),
+      updater_(QFileInfo(settingsPath).absolutePath(), &players_, this),
       netplayRooms_(&engineSettings_,this), privateNetplay_(QFileInfo(settingsPath).absolutePath(),this),
       voiceParty_(this), importer_(this), store_(&importer_, this),
       compatibility_(QFileInfo(settingsPath).absolutePath(), this),
@@ -294,8 +295,11 @@ bool Controller::useLocalCover(const QString& titleId, const QUrl& fileUrl) {
         if (!saved.open(QIODevice::WriteOnly) || saved.write(png) != png.size() || !saved.commit())
             return fail(tr("No se pudo guardar la carátula en Emulos360."));
     }
-    return saveCoverSelection(id, QUrl::fromLocalFile(filePath),
-                              QStringLiteral("local"), tr("Imagen del equipo"), QString());
+    if (!saveCoverSelection(id, QUrl::fromLocalFile(filePath),
+                            QStringLiteral("local"), tr("Imagen del equipo"), QString())) return false;
+    status_ = tr("Carátula local aplicada. Puedes verla en la biblioteca.");
+    emit statusChanged();
+    return true;
 }
 
 bool Controller::saveCoverSelection(const QString& titleId, const QUrl& image,

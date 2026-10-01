@@ -10,6 +10,7 @@
 #include "game_store.h"
 #include "game_compatibility.h"
 #include "game_content.h"
+#include "app_updater.h"
 #include <QFutureWatcher>
 #include <QObject>
 #include <QSettings>
@@ -42,6 +43,7 @@ class Controller final : public QObject {
     Q_PROPERTY(GameStore* store READ store CONSTANT)
     Q_PROPERTY(GameCompatibility* compatibility READ compatibility CONSTANT)
     Q_PROPERTY(GameContent* content READ content CONSTANT)
+    Q_PROPERTY(AppUpdater* updater READ updater CONSTANT)
     Q_PROPERTY(QVariantList coverOptions READ coverOptions NOTIFY coversChanged)
     Q_PROPERTY(QVariantMap coverImages READ coverImages NOTIFY coversChanged)
     Q_PROPERTY(bool coverBusy READ coverBusy NOTIFY coversChanged)
@@ -69,6 +71,7 @@ public:
     GameStore* store() { return &store_; }
     GameCompatibility* compatibility() { return &compatibility_; }
     GameContent* content() { return &content_; }
+    AppUpdater* updater() { return &updater_; }
     QVariantList coverOptions() const { return coverOptions_; }
     QVariantMap coverImages() const { return coverImages_; }
     bool coverBusy() const { return !coverReplies_.isEmpty() || nextCover_ < coverOptions_.size(); }
@@ -103,6 +106,7 @@ private:
     QSettings settings_;
     EngineSettings engineSettings_;
     PlayerServices players_;
+    AppUpdater updater_;
     NetplayRooms netplayRooms_;
     PrivateNetplay privateNetplay_;
     VoiceParty voiceParty_;

@@ -7,6 +7,7 @@ import Los
 ScrollView {
     id: page
     objectName: "aboutScreen"
+    required property LibraryController controller
     clip: true
     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
@@ -51,6 +52,20 @@ ScrollView {
             text: qsTr("Emulos360 %1 · Orbit 360. Biblioteca, consola y herramientas de Xbox 360 reunidas en una aplicación de escritorio.").arg(Qt.application.version)
             color: Theme.muted
             wrapMode: Text.Wrap
+        }
+        RowLayout {
+            Layout.fillWidth: true
+            ActionButton {
+                text: qsTr("Buscar actualizaciones")
+                enabled: page.controller.updater.phase !== "checking" && page.controller.updater.phase !== "downloading"
+                onClicked: page.controller.updater.check()
+            }
+            Label {
+                Layout.fillWidth: true
+                text: page.controller.updater.status
+                color: Theme.muted
+                wrapMode: Text.Wrap
+            }
         }
         Label {
             Layout.topMargin: 10

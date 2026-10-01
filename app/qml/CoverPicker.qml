@@ -135,10 +135,14 @@ Dialog {
         objectName: "localCoverFileDialog"
         title: qsTr("Elegir carátula para %1").arg(picker.game ? picker.game.title : "")
         fileMode: FileDialog.OpenFile
+        parentWindow: picker.parent ? picker.parent.Window.window : null
         nameFilters: [qsTr("Imágenes (*.png *.jpg *.jpeg *.bmp)")]
         onAccepted: {
-            if (picker.game && picker.controller.useLocalCover(picker.game.titleId, selectedFile))
-                picker.close()
+            const selected = selectedFile
+            Qt.callLater(function() {
+                if (picker.game && picker.controller.useLocalCover(picker.game.titleId, selected))
+                    picker.close()
+            })
         }
     }
 }

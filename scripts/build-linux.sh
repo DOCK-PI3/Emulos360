@@ -40,8 +40,9 @@ cmake -S "$root" -B "$frontend_build" -G Ninja \
 cmake --build "$frontend_build" --target los360 --parallel "$jobs"
 
 mkdir -p "$package/intro" "$package/tools" "$package/licenses" \
-  "$package/data" "$package/XEXplugins/MetroDashboard"
+  "$package/data" "$package/XEXplugins/MetroDashboard" "$package/updates"
 install -m 755 "$frontend_build/Emulos360" "$package/Emulos360"
+install -m 644 updates/apply-update-linux.py "$package/updates/apply-update-linux.py"
 install -m 755 scripts/install-ubuntu-deps.sh "$package/install-dependencies.sh"
 cp docs/GAME_COMPATIBILITY.md "$package/LEEME-Compatibilidad.md"
 install -m 755 scripts/diagnose-linux.sh "$package/diagnose-linux.sh"

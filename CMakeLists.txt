@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-project(Emulos360 VERSION 0.2.0 LANGUAGES C CXX)
+project(Emulos360 VERSION 0.3.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -51,6 +51,7 @@ endif()
 set(EMULOS_SERVICES XEXplugins/MetroDashboard/host/metro_dashboard.cpp XEXplugins/MetroDashboard/host/metro_dashboard.h app/engine_settings.cpp app/engine_settings.h app/player_services.cpp app/player_services.h app/save_store.cpp app/save_store.h app/community_package.cpp app/community_package.h app/core_window_host.cpp app/core_window_host.h app/netplay_rooms.cpp app/netplay_rooms.h app/private_netplay.cpp app/private_netplay.h app/avatar_studio.cpp app/avatar_studio.h app/game_importer.cpp app/game_importer.h app/game_store.cpp app/game_store.h app/voice_party.cpp app/voice_party.h)
 list(APPEND EMULOS_SERVICES app/game_compatibility.cpp app/game_compatibility.h)
 list(APPEND EMULOS_SERVICES app/game_content.cpp app/game_content.h)
+list(APPEND EMULOS_SERVICES app/app_updater.cpp app/app_updater.h)
 qt_add_executable(los360 app/main.cpp app/controller.cpp app/controller.h ${EMULOS_SERVICES})
 target_compile_definitions(los360 PRIVATE EMULOS_VERSION=\"${PROJECT_VERSION}\")
 target_include_directories(los360 PRIVATE engine/xenia engine/xenia/src)
@@ -90,7 +91,7 @@ set(LOS_QML_FILES
     app/qml/ProfilesScreen.qml app/qml/SavesScreen.qml app/qml/CommunityScreen.qml app/qml/PartyPanel.qml app/qml/PrivateNetplayScreen.qml
     app/qml/ConsoleDashboard.qml app/qml/ConsoleTile.qml app/qml/GameSession.qml app/qml/RoomsPanel.qml app/qml/AvatarEditor.qml app/qml/AvatarMaterial.qml
     app/qml/AchievementsScreen.qml app/qml/AchievementDetails.qml
-    app/qml/CompatibilityBadge.qml app/qml/CompatibilityLegend.qml app/qml/GameContentDialog.qml)
+    app/qml/CompatibilityBadge.qml app/qml/CompatibilityLegend.qml app/qml/GameContentDialog.qml app/qml/UpdateDialog.qml)
 qt_add_qml_module(los360 URI Los VERSION 1.0 QML_FILES ${LOS_QML_FILES})
 option(BUILD_TESTING "Build local application tests explicitly" OFF)
 set(LOS_TARGETS los_library emulos_settings emulos_avatar_codec los360)

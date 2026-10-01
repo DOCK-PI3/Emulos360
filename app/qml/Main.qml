@@ -5,6 +5,13 @@ import Los
 ApplicationWindow {
     id: window
     required property LibraryController controller
+    property bool pendingUpdate: false
+    function showPendingUpdate(): void {
+        if (!introFinished || sessionActive || updateDialog.opened) return
+        if (controller.updater.startupError.length) updateDialog.showError()
+        else if (controller.updater.startupVersion.length) updateDialog.showNews()
+        else if (pendingUpdate) { pendingUpdate = false; updateDialog.showOffer() }
+    }
     property string initialPage: "library"
     property bool introEnabled: false
     property bool introFinished: !introEnabled
@@ -48,6 +55,7 @@ ApplicationWindow {
                 libraryShell.focusLibrary()
             }
         })
+        if (!sessionActive) Qt.callLater(function() { window.showPendingUpdate() })
     }
     onShowSessionChanged: {
         if (!showSession) gameChromeVisible = true
@@ -108,6 +116,25 @@ ApplicationWindow {
     Connections {
         target: window.controller
         function onToggleGameChromeRequested() { window.toggleGameChrome() }
+    }
+    Connections {
+        target: window.controller.updater
+        function onUpdateFound() {
+            window.pendingUpdate = true
+            window.showPendingUpdate()
+        }
+    }
+    Timer {
+        interval: 5000
+        running: !window.avatarPreview
+        repeat: false
+        onTriggered: window.controller.updater.check()
+    }
+    UpdateDialog {
+        id: updateDialog
+        objectName: "updateDialog"
+        updater: window.controller.updater
+        canInstall: !window.controller.players.busy
     }
     Connections {
         target: window.controller.players
@@ -228,7 +255,11 @@ ApplicationWindow {
     Shortcut { sequence: "Home"; enabled: window.controller.metro.active; onActivated: window.controller.metro.openPower() }
     Shortcut { sequence: "F8"; enabled: window.sessionActive && window.showSession && window.gameFullScreen && !gameSession.showRooms; onActivated: window.toggleGameChrome() }
     Shortcut { sequence: "Escape"; enabled: powerDialog.visible; onActivated: window.controller.metro.cancelPower() }
-    Component.onCompleted: { if (avatarPreview) controller.players.avatarStudio.preview() }
+    Component.onCompleted: {
+        if (avatarPreview) controller.players.avatarStudio.preview()
+        else Qt.callLater(function() { window.showPendingUpdate() })
+    }
+    onIntroFinishedChanged: if (introFinished) Qt.callLater(function() { window.showPendingUpdate() })
     Dialog {
         id: operationError
         objectName: "operationErrorDialog"

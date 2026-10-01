@@ -37,6 +37,8 @@ try {
             Copy-Item "$metro/default.xex","$metro/font.png" out/Emulos360/XEXplugins/MetroDashboard/
             New-Item -ItemType Directory -Force out/Emulos360/intro | Out-Null
             Copy-Item assets/intro/aurora.mp4,assets/intro/aurora.png,assets/intro/nova.mp4,assets/intro/nova.png out/Emulos360/intro/ -Force
+            New-Item -ItemType Directory -Force out/Emulos360/updates | Out-Null
+            Copy-Item updates/apply-update-windows.ps1 out/Emulos360/updates/ -Force
             $voiceLicenses = @{
                 'libdatachannel-LICENSE.txt' = '.tools/libdatachannel/LICENSE'
                 'libjuice-LICENSE.txt' = '.tools/libdatachannel/deps/libjuice/LICENSE'

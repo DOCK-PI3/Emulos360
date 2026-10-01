@@ -35,7 +35,7 @@ ItemDelegate {
                 Label { anchors.centerIn: parent; text: card.game.title.slice(0, 1).toUpperCase(); color: "#73927b"; font.pixelSize: 106; font.weight: Font.Light }
                 Label { anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter; anchors.bottomMargin: 17; text: qsTr("ELIGE TU CARÁTULA"); color: Theme.muted; font.pixelSize: 9; font.letterSpacing: 1.3 }
             }
-            Image { id: art; anchors.fill: parent; source: card.artwork; asynchronous: true; sourceSize: Qt.size(500, 650); fillMode: Image.PreserveAspectFit }
+            Image { id: art; objectName: "gameCoverArt"; anchors.fill: parent; source: card.artwork; asynchronous: true; cache: false; sourceSize: Qt.size(500, 650); fillMode: Image.PreserveAspectFit }
         }
         Label {
             Layout.fillWidth: true
