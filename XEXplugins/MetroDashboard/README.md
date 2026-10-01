@@ -1,10 +1,16 @@
 # Dashboard Metro para Emulos360
 
-`dist/default.xex` es un título Xbox 360 PowerPC original, construido con el
+`package/default.xex` es un título Xbox 360 PowerPC original, construido con el
 XDK. Xenia lo ejecuta como la pantalla de consola en el PC; no reutiliza las
 pantallas Qt de la biblioteca ni de ajustes. La disposición de mosaicos, barra
 superior y fondo gris toma como referencia la captura Metro facilitada por el
 usuario. La tienda y sus anuncios se sustituyen por Netplay.
+
+`package/default.xex` y `package/font.png` se guardan en Git. Las builds de
+Windows y Linux copian esos dos archivos desde `package/`, así que no hace falta
+el XDK para compilar Emulos360 desde un clon nuevo. Si se modifica el dashboard,
+`build.ps1` lo genera primero en `dist/` y, al terminar correctamente, actualiza
+los dos archivos versionados en `package/` para el siguiente commit.
 
 Desde Emulos360, **Modo consola** o **F11** abre el título. La biblioteca y las
 salas se dibujan dentro del `.xex`. A abre un mosaico o ejecuta el juego,

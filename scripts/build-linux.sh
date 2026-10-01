@@ -49,8 +49,8 @@ install -m 755 scripts/update-linux.sh "$package/update-linux.sh"
 cp docs/LINUX.md "$package/LEEME-Linux.md"
 cp assets/intro/aurora.mp4 assets/intro/aurora.png \
   assets/intro/nova.mp4 assets/intro/nova.png "$package/intro/"
-cp XEXplugins/MetroDashboard/dist/default.xex \
-  XEXplugins/MetroDashboard/dist/font.png \
+cp XEXplugins/MetroDashboard/package/default.xex \
+  XEXplugins/MetroDashboard/package/font.png \
   "$package/XEXplugins/MetroDashboard/"
 
 # Original resources already imported by the owner; never copy profile data.

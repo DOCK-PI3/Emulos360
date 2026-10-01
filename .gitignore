@@ -18,6 +18,7 @@
 *.7z
 *.rar
 *.xex
+!/XEXplugins/MetroDashboard/package/default.xex
 *.gpd
 *.xdb
 /downloads/

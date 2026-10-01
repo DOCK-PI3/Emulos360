@@ -68,11 +68,18 @@ verificada en esta instalación.
 - [Party de voz sin servidor externo](docs/VOICE_CHAT.md)
 
 ```powershell
+./scripts/setup-qt.ps1
+./scripts/setup-shaders.ps1
 ./scripts/build-engine.ps1
-./XEXplugins/MetroDashboard/build.ps1
 ./scripts/build-ui.ps1 -Package
 ./out/Emulos360/Emulos360.exe --library 'D:\XBOX360_GAMES'
 ```
+
+El dashboard Metro ya está en `XEXplugins/MetroDashboard/package/`. Solo hace
+falta un XDK si se modifica y reconstruye ese `.xex`; la compilación normal lo
+copia desde el repositorio. ISO2GOD y 7-Zip quedan dentro del paquete Windows;
+en Linux se copian al paquete y se instalan aparte las bibliotecas dinámicas del
+sistema mediante `install-dependencies.sh`.
 
 Selecciona un juego → **Carátula** → región → imagen → **Usar esta
 carátula**. Con el mando, Y abre el selector y A ejecuta el juego. Dentro del

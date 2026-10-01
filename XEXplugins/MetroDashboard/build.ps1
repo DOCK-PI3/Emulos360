@@ -20,3 +20,8 @@ if ($LASTEXITCODE) { throw 'Falló ImageXEX.' }
 & "$sdkRoot/bin/win32/imagexex.exe" /dump "$payload/default.xex" > "$output/xex-audit.txt"
 if ($LASTEXITCODE) { throw 'Falló la inspección XEX.' }
 Get-FileHash "$payload/default.xex" -Algorithm SHA256
+$tracked = Join-Path $PSScriptRoot 'package'
+New-Item -ItemType Directory -Force $tracked | Out-Null
+Copy-Item -LiteralPath "$payload/default.xex" -Destination "$tracked/default.xex" -Force
+Copy-Item -LiteralPath "$payload/font.png" -Destination "$tracked/font.png" -Force
+Write-Output "Dashboard actualizado en $tracked. GitHub Desktop mostrará los archivos modificados."

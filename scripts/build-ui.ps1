@@ -29,9 +29,9 @@ try {
                 throw 'Falta 7-Zip. Instala 7-Zip antes de empaquetar Emulos360.'
             }
             Copy-Item "$sevenZip/7z.exe","$sevenZip/7z.dll","$sevenZip/License.txt" out/Emulos360/tools/ -Force
-            $metro = 'XEXplugins/MetroDashboard/dist'
+            $metro = 'XEXplugins/MetroDashboard/package'
             if (!(Test-Path "$metro/default.xex") -or !(Test-Path "$metro/font.png")) {
-                throw 'Falta Dashboard Metro. Ejecuta XEXplugins/MetroDashboard/build.ps1 primero.'
+                throw 'Falta el Dashboard Metro versionado en XEXplugins/MetroDashboard/package.'
             }
             New-Item -ItemType Directory -Force out/Emulos360/XEXplugins/MetroDashboard | Out-Null
             Copy-Item "$metro/default.xex","$metro/font.png" out/Emulos360/XEXplugins/MetroDashboard/
@@ -50,10 +50,9 @@ try {
                 Copy-Item $entry.Value (Join-Path 'out/Emulos360/licenses' $entry.Key) -Force
             }
             $core = 'engine/xenia/build/bin/Windows/Release/Emulos360-core.exe'
-            if (Test-Path $core) {
-                New-Item -ItemType Directory -Force out/Emulos360/engine | Out-Null
-                Copy-Item $core out/Emulos360/engine/Emulos360-core.exe
-            } else { Write-Warning 'Falta compilar el motor para crear perfiles y ejecutar juegos.' }
+            if (!(Test-Path $core)) { throw 'Falta el motor. Ejecuta scripts/build-engine.ps1 antes de crear el paquete.' }
+            New-Item -ItemType Directory -Force out/Emulos360/engine | Out-Null
+            Copy-Item $core out/Emulos360/engine/Emulos360-core.exe
             if (!(Test-Path out/Emulos360/data) -and (Test-Path out/LOS360/data)) {
                 Copy-Item out/LOS360/data out/Emulos360/data -Recurse
             }

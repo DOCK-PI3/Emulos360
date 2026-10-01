@@ -2,14 +2,18 @@
 
 ## Interfaz Windows
 
-Requisitos comprobados: Visual Studio Build Tools 2022 con C++, CMake y Python.
-El SDK Qt se descarga dentro de `.tools/`; Python se usa para herramientas, no
-para implementar la aplicación.
+Requisitos comprobados: Git, Visual Studio Build Tools 2022 con C++, CMake,
+Python, Rust/Cargo y 7-Zip. El SDK Qt se descarga dentro de `.tools/`; Python
+se usa para herramientas, no para implementar la aplicación. El XDK solo se
+necesita si se modifica y reconstruye el dashboard Metro; el `.xex` ya está
+versionado en `XEXplugins/MetroDashboard/package/`.
 
 Desde PowerShell en la raíz:
 
 ```powershell
 ./scripts/setup-qt.ps1
+./scripts/setup-shaders.ps1
+./scripts/build-engine.ps1
 ./scripts/build-ui.ps1 -Package
 ./out/Emulos360/Emulos360.exe --library 'D:\XBOX360_GAMES'
 ```
@@ -20,7 +24,8 @@ segundos mientras se escanea la biblioteca; si el escaneo tarda más, se muestra
 «Cargando biblioteca» hasta que termine. En **Ajustes > Emulos360** se puede
 elegir y previsualizar Aurora (azul) o Nova (violeta/coral). Los MP4 y sus
 miniaturas se copian a `out/Emulos360/intro/`.
-F11 desde la biblioteca abre el dashboard Metro `.xex`; Escape vuelve al inicio o abre la guía.
+F11 desde la biblioteca abre el dashboard Metro `.xex` incluido en el repositorio;
+Escape vuelve al inicio o abre la guía.
 Inicio/Home abre la guía. Las preferencias quedan
 en `data/settings.ini` junto al ejecutable; `--data-dir` permite otra ubicación.
 Existe un puente nativo XInput en Windows: A seleccionar, B volver, cruceta/stick
@@ -81,6 +86,7 @@ para desarrollo. La build enlaza Qt y las bibliotecas del sistema de forma
 dinámica; para ejecutarla en otra distribución conviene reconstruirla allí o
 preparar un paquete con sus dependencias. El motor Linux sigue siendo
 experimental y requiere una GPU con Vulkan para ejecutar juegos.
+El dashboard Metro versionado se copia a la build Linux sin XDK.
 La selección de eventos de red usada por netplay todavía no está implementada
 en Linux; falta validar juegos y mandos en un equipo Linux con GPU física.
 
@@ -94,6 +100,22 @@ perfiles: [LINUX.md](LINUX.md).
 Las comprobaciones Linux focalizadas están en `tests/linux-runtime`; utilizan
 un perfil temporal y admiten un juego local mediante `EMULOS_LINUX_GAME` y un
 motor mediante `EMULOS_LINUX_CORE`. Resultados y límites en [VALIDATION.md](VALIDATION.md).
+
+## Qué recibe quien ejecuta la build
+
+La build estándar de Windows copia el motor, Qt, Dashboard Metro, 7-Zip e
+ISO2GOD a `out/Emulos360/`. La build estándar de Linux copia el motor,
+Dashboard Metro, 7-Zip e ISO2GOD a `out/Emulos360-linux/`; Qt y otras
+bibliotecas compartidas se instalan con `install-dependencies.sh` en Ubuntu
+26.04. Quien solo ejecuta una build completa no necesita Visual Studio, CMake,
+Rust ni el XDK. En Linux sí debe instalar las dependencias de ejecución con el
+script y disponer de un controlador Vulkan compatible para los juegos.
+
+MultiP es una edición distinta: Windows la prepara con
+`scripts/setup-multip-server.ps1` y `scripts/build-multip.ps1`. Actualmente su
+empaquetado Linux necesita primero los recursos del servidor preparados en
+Windows. El catálogo y esqueleto originales de avatares son recursos personales
+y no forman parte del repositorio público.
 
 La biblioteca detecta paquetes GOD/XBLA y ejecutables de juego XEX2. Para una
 copia extraída, apunta a la carpeta que contiene los directorios de los juegos;
