@@ -1,0 +1,195 @@
+{
+  "date": "2026-10-02",
+  "scope": "Research and documentation only; no core, game, content or configuration changed by the agent; no game launched.",
+  "offline_test": {
+    "evidence_class": "Local result reported directly by user",
+    "user_statement": "ya probe sin red y pasa lo mismo en el mismo sitio, se queda cargando",
+    "outcome": "Same loading hang at same place",
+    "disconnect_mechanism": null,
+    "effective_emulated_network_mode": null,
+    "dedicated_log_available": false,
+    "interpretation": "External connectivity is a weaker explanation; does not identify the failing guest operation or exclude all emulated XAM networking."
+  },
+  "available_runtime_observation": {
+    "root": "C:/Users/mabe8/Desktop/Emulos360-BETA12",
+    "log_last_write_local": "2026-10-02T11:12:45",
+    "log_bytes": 129561,
+    "log_network_mode": 2,
+    "config_network_modes": {
+      "xenia-canary.config.toml": 2,
+      "xenia-canary-netplay.config.toml": 2
+    },
+    "limitation": "Available logs are the previously captured attempt; not an independently verified mode-0 reproduction."
+  },
+  "local_core_revision": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+  "local_files": [
+    {
+      "path": "engine/xenia/src/xenia/kernel/xthread.cc",
+      "sha256": "25ce72dea090b74eced1762506e734cedd92ae55d56ce3214464ecd9e837a164"
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xobject.cc",
+      "sha256": "944e50d86fbcea39f7b1421a51426a92c86553e01987672b4ec4373e53369426"
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/kernel_flags.cc",
+      "sha256": "d3ca840ea216b092bb5aaef8682bade1a6b27dd1158dd1505c057c2c8dbf9d62"
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/ppc/ppc_context.h",
+      "sha256": "3673fc852532f78bce89065f53e64c8499c02cf70d4a16d101d8b1a9a73088d9"
+    }
+  ],
+  "edge_revision": "34357e25782dca8214b171fd19cf6889139c442a",
+  "upstream_report": "https://github.com/xenia-canary/game-compatibility/issues/561#issuecomment-5150951534",
+  "audit_extent": {
+    "kernel_history_commits": 100,
+    "selected_commit_diffs": 5,
+    "pinned_source_files": 6,
+    "exhaustive_branch_diff": false
+  },
+  "commits": [
+    {
+      "name": "initial-scheduler",
+      "sha": "46dca60a53f765849317a66de0d5b57ac8833ea4",
+      "url": "https://github.com/has207/xenia-edge/commit/46dca60a53f765849317a66de0d5b57ac8833ea4",
+      "subject": "[Kernel] Add cooperative guest-thread fiber scheduler",
+      "changed_file_count": 10,
+      "adds": 523,
+      "deletes": 47
+    },
+    {
+      "name": "preemption-waits",
+      "sha": "c159d855de7c99dc6494c1a20bb85cd4ec5980ea",
+      "url": "https://github.com/has207/xenia-edge/commit/c159d855de7c99dc6494c1a20bb85cd4ec5980ea",
+      "subject": "[Threads] Add JIT preemption and cooperative waits to guest scheduler",
+      "changed_file_count": 47,
+      "adds": 1834,
+      "deletes": 377
+    },
+    {
+      "name": "safepoints",
+      "sha": "e268e113be17257ff9d867a49928b8589cdb4ce4",
+      "url": "https://github.com/has207/xenia-edge/commit/e268e113be17257ff9d867a49928b8589cdb4ce4",
+      "subject": "[Threads] Flag-based JIT safepoints for the guest scheduler",
+      "changed_file_count": 7,
+      "adds": 133,
+      "deletes": 88
+    },
+    {
+      "name": "auto-reset-fifo",
+      "sha": "fb53ac24cebd662c12c97711f3a2352881f39450",
+      "url": "https://github.com/has207/xenia-edge/commit/fb53ac24cebd662c12c97711f3a2352881f39450",
+      "subject": "[Kernel] Only the front cooperative waiter may consume an auto-reset set",
+      "changed_file_count": 2,
+      "adds": 7,
+      "deletes": 0
+    },
+    {
+      "name": "manual-reset-pulse",
+      "sha": "65c0ff7000daf244e7b5fa708209a43eb0763653",
+      "url": "https://github.com/has207/xenia-edge/commit/65c0ff7000daf244e7b5fa708209a43eb0763653",
+      "subject": "[Kernel] Release cooperative fiber waiters on manual-reset event pulses",
+      "changed_file_count": 4,
+      "adds": 47,
+      "deletes": 4
+    }
+  ],
+  "sources": [
+    {
+      "name": "commit34357e2",
+      "url": "https://api.github.com/repos/has207/xenia-edge/commits/34357e2",
+      "bytes": 5612,
+      "sha256": "14e78147caeadf7f06fdd963b9a3412fcd362173a2f7a833bdb6c36f2e80e934"
+    },
+    {
+      "name": "kernel-history",
+      "url": "https://api.github.com/repos/has207/xenia-edge/commits?sha=34357e2&path=src/xenia/kernel&per_page=100",
+      "bytes": 338765,
+      "sha256": "780d8c4bfb9ef5b06cdd95905d8cf0dadd89e46b028f3a9363407d24937715d3"
+    },
+    {
+      "name": "tree34357e2",
+      "url": "https://api.github.com/repos/has207/xenia-edge/git/trees/34357e2?recursive=1",
+      "bytes": 557714,
+      "sha256": "811f9c8bdcfec8913109f622667a86b077307b86d7254c089f04765fa1c159ca"
+    },
+    {
+      "name": "initial-scheduler",
+      "url": "https://api.github.com/repos/has207/xenia-edge/commits/46dca60a53f765849317a66de0d5b57ac8833ea4",
+      "bytes": 40274,
+      "sha256": "087086fc2891eaf4b78dc44613215f2da4e4fd7eb2d00af9d053b8220e3b5599"
+    },
+    {
+      "name": "preemption-waits",
+      "url": "https://api.github.com/repos/has207/xenia-edge/commits/c159d855de7c99dc6494c1a20bb85cd4ec5980ea",
+      "bytes": 176722,
+      "sha256": "2a82158a2f51bba53689e4086f42576fb1e9a4781e286871619b4e633c6c5062"
+    },
+    {
+      "name": "safepoints",
+      "url": "https://api.github.com/repos/has207/xenia-edge/commits/e268e113be17257ff9d867a49928b8589cdb4ce4",
+      "bytes": 26230,
+      "sha256": "581781af12621408e1973c82396b4abeba2d62c9d2e3d160f85e920829ba3548"
+    },
+    {
+      "name": "auto-reset-fifo",
+      "url": "https://api.github.com/repos/has207/xenia-edge/commits/fb53ac24cebd662c12c97711f3a2352881f39450",
+      "bytes": 5374,
+      "sha256": "c5a1cdbb5f0729cee861a444fcba444ca1ec2a88ff9c099b9cd83bb8b6e4a549"
+    },
+    {
+      "name": "manual-reset-pulse",
+      "url": "https://api.github.com/repos/has207/xenia-edge/commits/65c0ff7000daf244e7b5fa708209a43eb0763653",
+      "bytes": 11317,
+      "sha256": "c2b01a1762cb3501e344546f3ed9238219830f823791a725c4f7fe146657ecee"
+    },
+    {
+      "name": "guest_scheduler.cc.raw",
+      "url": "https://raw.githubusercontent.com/has207/xenia-edge/34357e25782dca8214b171fd19cf6889139c442a/src/xenia/kernel/guest_scheduler.cc",
+      "bytes": 40036,
+      "sha256": "7f86b7b2e6e2c5e241cd8db3304ccf248eac9f8813089bf8d25942ef8a23e7ee"
+    },
+    {
+      "name": "guest_scheduler.h.raw",
+      "url": "https://raw.githubusercontent.com/has207/xenia-edge/34357e25782dca8214b171fd19cf6889139c442a/src/xenia/kernel/guest_scheduler.h",
+      "bytes": 14189,
+      "sha256": "6465be60d1a91a4b316b1f662b180378e8c9962f1bd494f058696bcab67fb505"
+    },
+    {
+      "name": "xobject.cc.raw",
+      "url": "https://raw.githubusercontent.com/has207/xenia-edge/34357e25782dca8214b171fd19cf6889139c442a/src/xenia/kernel/xobject.cc",
+      "bytes": 34087,
+      "sha256": "5c670d7b712a4c61311f8bc6df66daecc42d07ad66a79a680147c01c2260d944"
+    },
+    {
+      "name": "xthread.cc.raw",
+      "url": "https://raw.githubusercontent.com/has207/xenia-edge/34357e25782dca8214b171fd19cf6889139c442a/src/xenia/kernel/xthread.cc",
+      "bytes": 51393,
+      "sha256": "96462221c0cad1187f87cc6aa29ed74ca8cd86939114c7ffb6d2095ae0f06747"
+    },
+    {
+      "name": "kernel_flags.cc.raw",
+      "url": "https://raw.githubusercontent.com/has207/xenia-edge/34357e25782dca8214b171fd19cf6889139c442a/src/xenia/kernel/kernel_flags.cc",
+      "bytes": 1373,
+      "sha256": "e077ed4f13c58f6243f7af449b6d39105a994333b36e756cb9cede4e79059f8a"
+    },
+    {
+      "name": "threading_fiber.cc.raw",
+      "url": "https://raw.githubusercontent.com/has207/xenia-edge/34357e25782dca8214b171fd19cf6889139c442a/src/xenia/base/threading_fiber.cc",
+      "bytes": 12725,
+      "sha256": "85ad13d1c2ab2baa57172cc229fc7a5652038f17e39f875e263a8db9849163a3"
+    }
+  ],
+  "static_findings": [
+    "Local XThread creates a host thread per guest thread; XObject waits use host primitives.",
+    "Edge revision has guest fibers, six logical-CPU dispatch threads and priority queues.",
+    "JIT safepoints check a per-context preempt request; wait and blocking I/O paths integrate with scheduling.",
+    "Auto-reset FIFO and manual-reset pulse fixes belong to cooperative waits; the FIFO commit explicitly names Soul Calibur IV.",
+    "Neither code inspection nor the upstream build report identifies the individual change responsible for Rivals progressing."
+  ],
+  "hypothesis": "Investigate JobManager and main-thread progression, wait objects and signalers; distinguish scheduling from pending I/O, audio, GPU fences and XAM.",
+  "edge_executed_locally": false,
+  "rivals_gameplay_confirmed": false,
+  "root_cause_demonstrated": false
+}

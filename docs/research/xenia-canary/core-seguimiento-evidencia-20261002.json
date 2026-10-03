@@ -1,0 +1,176 @@
+{
+  "local_revision": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+  "patch_checks": [
+    {
+      "file": "vulkan-layout-lock.patch",
+      "sha256": "624a399fb7792e7e2027121e4890178e7db73cf0134249a4b97e133c33a68e26",
+      "forward_check": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "reverse_check": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "error: patch failed: src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc:959\nerror: src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc: patch does not apply"
+      },
+      "state": "candidate_applies"
+    },
+    {
+      "file": "vulkan-upload-barrier.patch",
+      "sha256": "32fdfa84ea7900bd512216098f99f4082fe95d850cb2e74d7417caddc1e64b16",
+      "forward_check": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "reverse_check": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "error: patch failed: src/xenia/gpu/vulkan/vulkan_texture_cache.cc:1708\nerror: src/xenia/gpu/vulkan/vulkan_texture_cache.cc: patch does not apply"
+      },
+      "state": "candidate_applies"
+    },
+    {
+      "file": "d3d12-invalid-vertex.patch",
+      "sha256": "edb635b0684c6064bfe2a2c825c39f2171df683ca923af746c5d4b40f2901612",
+      "forward_check": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "reverse_check": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "error: patch failed: src/xenia/gpu/d3d12/d3d12_command_processor.cc:2957\nerror: src/xenia/gpu/d3d12/d3d12_command_processor.cc: patch does not apply"
+      },
+      "state": "candidate_applies"
+    },
+    {
+      "file": "negative-viewport.patch",
+      "sha256": "eccb719912c606064f8339d97540b08d6c54298ef036617b7e1518f4706b8e52",
+      "forward_check": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "reverse_check": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "error: patch failed: src/xenia/gpu/draw_util.h:290\nerror: src/xenia/gpu/draw_util.h: patch does not apply\nerror: patch failed: src/xenia/gpu/draw_util.cc:473\nerror: src/xenia/gpu/draw_util.cc: patch does not apply"
+      },
+      "state": "candidate_applies"
+    }
+  ],
+  "active_source_hashes_before": {
+    "src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc": "b1430cc6db02954db2eca407a23f668942b67903262809fb54dcfc87878edd32",
+    "src/xenia/gpu/vulkan/vulkan_texture_cache.cc": "1702e2d520fcf162bc8b8355e0016cf9df6cb9e0a127435942f44946c043ba62"
+  },
+  "production_changed": false,
+  "gameplay_tested": false,
+  "isolated_source_hashes": {
+    "src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc": "e433426b2a861674b5775e083ee5f5c052cc43ac0658319bcfce6a5bca00c997",
+    "src/xenia/gpu/vulkan/vulkan_texture_cache.cc": "9af7aa72e0d4ec9ecb9f4064763ae0720a5b3aa98f1818aebeb33be64f396d08"
+  },
+  "active_source_hashes_after": {
+    "src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc": "b1430cc6db02954db2eca407a23f668942b67903262809fb54dcfc87878edd32",
+    "src/xenia/gpu/vulkan/vulkan_texture_cache.cc": "1702e2d520fcf162bc8b8355e0016cf9df6cb9e0a127435942f44946c043ba62"
+  },
+  "compile_results": [
+    {
+      "source": "src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc",
+      "compiler": "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe",
+      "release_flags_from": "engine/xenia/build/CMakeFiles/impl-Release.ninja",
+      "exit_code": 0,
+      "log": "local\\core-maintenance-20261002\\vulkan-candidate\\objects\\vulkan_pipeline_cache.cc.compile.txt",
+      "log_sha256": "9357dd4a77853515be733e66595701fe57815f14ed93d3716ba84c2813e7017e"
+    },
+    {
+      "source": "src/xenia/gpu/vulkan/vulkan_texture_cache.cc",
+      "compiler": "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe",
+      "release_flags_from": "engine/xenia/build/CMakeFiles/impl-Release.ninja",
+      "exit_code": 0,
+      "log": "local\\core-maintenance-20261002\\vulkan-candidate\\objects\\vulkan_texture_cache.cc.compile.txt",
+      "log_sha256": "40b5b6e0a87de8e3dcaf9f0a11d468c3e8d2a26cb26ae3e8913eddfff67aa8e8"
+    }
+  ],
+  "compile_scope": "Two patched Vulkan translation units only; no link, executable replacement, GPU execution, sanitizers or gameplay verification.",
+  "active_source_hashes_after_compile": {
+    "src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc": "b1430cc6db02954db2eca407a23f668942b67903262809fb54dcfc87878edd32",
+    "src/xenia/gpu/vulkan/vulkan_texture_cache.cc": "1702e2d520fcf162bc8b8355e0016cf9df6cb9e0a127435942f44946c043ba62"
+  },
+  "sources": {
+    "checked_at_utc": "2026-10-02T10:50:17.296498+00:00",
+    "sources": [
+      {
+        "file": "canary-commits.json",
+        "url": "https://api.github.com/repos/xenia-canary/xenia-canary/commits?sha=canary_experimental&per_page=12",
+        "bytes": 48480,
+        "sha256": "da52cbb787295ec9507c9e3c27c8fc385e030d282eed3d168dcd5d6365a186a7"
+      },
+      {
+        "file": "netplay-commits.json",
+        "url": "https://api.github.com/repos/AdrianCassar/xenia-canary/commits?sha=netplay_canary_experimental&per_page=12",
+        "bytes": 41986,
+        "sha256": "b27e5018dacd552dbbd2bd90b6ff31dcf97698c8b4d5eff6c9d67cd09fb5962d"
+      },
+      {
+        "file": "vulkan-layout-lock.patch",
+        "url": "https://github.com/xenia-canary/xenia-canary/commit/1b242658e535fbd12645e4d2c12693771075b738.patch",
+        "bytes": 1822,
+        "sha256": "624a399fb7792e7e2027121e4890178e7db73cf0134249a4b97e133c33a68e26"
+      },
+      {
+        "file": "vulkan-upload-barrier.patch",
+        "url": "https://github.com/xenia-canary/xenia-canary/commit/c8f214e2a9b0209ca8a0ad6cb3dfb155fe545ae2.patch",
+        "bytes": 1918,
+        "sha256": "32fdfa84ea7900bd512216098f99f4082fe95d850cb2e74d7417caddc1e64b16"
+      },
+      {
+        "file": "d3d12-invalid-vertex.patch",
+        "url": "https://github.com/xenia-canary/xenia-canary/commit/b083312b8b18e07e6e410b82104191f126722794.patch",
+        "bytes": 1402,
+        "sha256": "edb635b0684c6064bfe2a2c825c39f2171df683ca923af746c5d4b40f2901612"
+      },
+      {
+        "file": "negative-viewport.patch",
+        "url": "https://github.com/xenia-canary/xenia-canary/commit/6579cc2a4c8812a101c46fdae2e21df34a8521fd.patch",
+        "bytes": 5163,
+        "sha256": "eccb719912c606064f8339d97540b08d6c54298ef036617b7e1518f4706b8e52"
+      },
+      {
+        "file": "d3d12-invalid-vertex.json",
+        "url": "https://api.github.com/repos/xenia-canary/xenia-canary/commits/b083312b8b18e07e6e410b82104191f126722794",
+        "bytes": 4996,
+        "sha256": "7709d6c854a70d17cfe9046c9e82ec770af0763dfbdd61953612515ea4f1e951"
+      },
+      {
+        "file": "negative-viewport.json",
+        "url": "https://api.github.com/repos/xenia-canary/xenia-canary/commits/6579cc2a4c8812a101c46fdae2e21df34a8521fd",
+        "bytes": 9151,
+        "sha256": "ab1fcaca807633f661b7af547bd3469182e2972190332bc39231724f7ec6bb95"
+      }
+    ]
+  },
+  "canary_head": {
+    "sha": "b083312b8b18e07e6e410b82104191f126722794",
+    "committer_date": "2026-10-02T05:44:06Z",
+    "subject": "[D3D12] Don't drop kInvalidVertex draws"
+  },
+  "netplay_head": {
+    "sha": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+    "committer_date": "2026-09-10T21:08:54Z",
+    "subject": "[XSession] Removed results buffer size check"
+  },
+  "runtime_binary": {
+    "path": "C:\\Users\\mabe8\\Desktop\\Emulos360-BETA12\\engine\\Emulos360-core.exe",
+    "sha256": "63f44fb5cfca5ba3a20a4e9475572a8e81839efb4930bc222a6285cb589b2569",
+    "matches_previous_audit": true
+  },
+  "targeted_title_ids_in_inventory": {
+    "5454086C": false,
+    "425607FE": false,
+    "4D5307DF": false
+  },
+  "gpu_allow_invalid_fetch_constants_declared_default": true
+}

@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-02",
+  "phase": "Loading screen reported by user after installing HD and TU",
+  "logs": [
+    {
+      "name": "core-carga-1112.log",
+      "bytes": 129561,
+      "sha256": "f7e15fb9589bc4adfb99eed4c6cba0c7eda3c5ab8762970d27c43d39d1e34183"
+    },
+    {
+      "name": "core-console-carga-1112.log",
+      "bytes": 129561,
+      "sha256": "f7e15fb9589bc4adfb99eed4c6cba0c7eda3c5ab8762970d27c43d39d1e34183"
+    }
+  ],
+  "installed": [
+    {
+      "relative_path": "00000002/8182BAAB13C42A06A387A9206AFF06435BCF762745",
+      "bytes": 1587830784,
+      "sha256": "813ef20e94d3372543451ea9310e7d8bca6dfd5b1d4ecffcd88d2e481f33d3bc",
+      "matches_library": true
+    },
+    {
+      "relative_path": "000B0000/tu00000004_00000000",
+      "bytes": 17514496,
+      "sha256": "b16fea6915cd1cf1d66f29b9c936e88e6dbf85b4bf22902dd4cddaa9bd47e2f7",
+      "matches_library": true
+    }
+  ],
+  "network_mode": 2,
+  "patched_modules": [
+    "Default",
+    "Race.Splash",
+    "Race.Main",
+    "Engine.BuildInfo"
+  ],
+  "patch_result": "base 0.0.0.4 -> 0.0.2.4; success logged",
+  "last_asset_path": "Data/Xenon/Levels/LoadingScreenHost",
+  "sample": {
+    "duration_seconds_approx": 3,
+    "cpu_seconds_delta": 6.921875,
+    "log_bytes_before": 129561,
+    "log_bytes_after": 129561,
+    "interpretation": "Active CPU and no additional logged operations; does not identify a deadlock or its cause."
+  },
+  "gameplay_confirmed": false,
+  "no_agent_config_or_core_changes": true
+}

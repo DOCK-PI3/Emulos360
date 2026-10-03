@@ -70,7 +70,12 @@ private slots:
     }
     void settingsRoundTripAndConflict() {
         QTemporaryDir dir; QVERIFY(dir.isValid()); EngineSettings settings(dir.path());
-        QCOMPARE(settings.entries().size(),288);
+        QSet<QString> keys;
+        for (const auto& entry : settings.entries()) {
+            const auto key = entry.toMap()["key"].toString();
+            QVERIFY(!key.isEmpty()); QVERIFY(!keys.contains(key)); keys.insert(key);
+        }
+        QVERIFY(keys.contains("GPU.vsync")); QVERIFY(keys.contains("Console.language"));
         QVERIFY(settings.setValue("GPU.vsync",false));
         QVERIFY(settings.setValue("Console.language","5"));
         QVERIFY(settings.save());

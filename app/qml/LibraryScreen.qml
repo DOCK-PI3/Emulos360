@@ -152,12 +152,20 @@ ColumnLayout {
                 Label { text: screen.selectedGame ? qsTr("Xbox 360  ·  %1").arg(screen.selectedGame.titleId) : qsTr("Selecciona un juego para personalizarlo."); color: Theme.muted; font.pixelSize: 11 }
             }
             ActionButton { text: qsTr("Carátula · Y"); enabled: screen.selectedGame !== null; onClicked: screen.editSelectedCover() }
+            ActionButton { objectName: "gameCoreButton"; text: qsTr("Motor"); enabled: screen.selectedGame !== null && !screen.controller.players.busy; onClicked: coreDialog.showFor(screen.selectedGame) }
             ActionButton { text: qsTr("Contenido"); enabled: screen.selectedGame !== null && !screen.controller.content.busy && !screen.controller.players.busy; onClicked: contentDialog.showFor(screen.selectedGame) }
             ActionButton { text: qsTr("Eliminar · X"); enabled: screen.selectedGame !== null && !screen.controller.busy && !screen.controller.players.busy; onClicked: screen.confirmRemoval(screen.selectedGame) }
             ActionButton { text: qsTr("Jugar · A"); primary: true; enabled: screen.selectedGame !== null && screen.selectedGame.complete && !screen.controller.players.busy; onClicked: screen.playSelected() }
         }
     }
+    RowLayout {
+        visible: screen.controller.players.busy && !screen.controller.players.sessionActive
+        Layout.fillWidth: true
+        BusyIndicator { running: parent.visible; Layout.preferredWidth: 28; Layout.preferredHeight: 28 }
+        Label { Layout.fillWidth: true; text: screen.controller.players.status; color: Theme.muted; wrapMode: Text.Wrap }
+    }
     CoverPicker { id: picker; objectName: "libraryCoverPicker"; controller: screen.controller; onClosed: screen.focusLibrary() }
+    GameCoreDialog { id: coreDialog; controller: screen.controller; onClosed: screen.focusLibrary() }
     GameContentDialog { id: contentDialog; objectName: "gameContentDialog"; controller: screen.controller; onClosed: screen.focusLibrary() }
     Dialog {
         id: removeDialog

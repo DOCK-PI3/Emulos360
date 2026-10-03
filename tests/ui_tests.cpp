@@ -25,6 +25,43 @@
 class UiTests : public QObject {
     Q_OBJECT
 private slots:
+    void corePreferencesAndGameDialogLoadAndPersist() {
+        QTemporaryDir directory; Controller controller(directory.filePath("settings.ini"));
+        QQmlEngine engine; QQmlComponent preferences(&engine);
+        preferences.loadFromModule("Los", "CorePreferences");
+        QVERIFY2(preferences.isReady(), qPrintable(preferences.errorString()));
+        QQuickWindow preview; preview.resize(960, 650); preview.show();
+        std::unique_ptr<QObject> page(preferences.createWithInitialProperties({{"controller", QVariant::fromValue(&controller)}}));
+        QVERIFY2(page != nullptr, qPrintable(preferences.errorString()));
+        auto* item = qobject_cast<QQuickItem*>(page.get()); QVERIFY(item);
+        item->setParentItem(preview.contentItem()); item->setSize(QSizeF(900, 610)); item->setPosition(QPointF(24, 18));
+        preview.setColor(QColor("#101211"));
+        QVERIFY(page->findChild<QObject*>("defaultCoreCombo"));
+        QVERIFY(page->findChild<QObject*>("defaultRendererCombo"));
+        auto* selector = qobject_cast<QQuickItem*>(page->findChild<QObject*>("defaultCoreCombo"));
+        QVERIFY(selector); selector->forceActiveFocus();
+        QTest::keyClick(&preview, Qt::Key_End);
+        QTRY_COMPARE(controller.players()->cores()->defaultCore(), QStringLiteral("edge"));
+        const auto capture = qEnvironmentVariable("EMULOS_CORE_UI_CAPTURE");
+        QTest::qWait(250);
+        if (!capture.isEmpty()) QVERIFY(preview.grabWindow().save(capture + "/core-preferences.png"));
+        QQmlComponent dialogComponent(&engine); dialogComponent.loadFromModule("Los", "GameCoreDialog");
+        QVERIFY2(dialogComponent.isReady(), qPrintable(dialogComponent.errorString()));
+        std::unique_ptr<QObject> dialog(dialogComponent.createWithInitialProperties({{"controller", QVariant::fromValue(&controller)}}));
+        QVERIFY2(dialog != nullptr, qPrintable(dialogComponent.errorString()));
+        dialog->setProperty("parent", QVariant::fromValue(preview.contentItem()));
+        const QVariantMap selectedGame{{"title", "Prueba de core"}, {"titleId", "545408B4"}};
+        QVERIFY(QMetaObject::invokeMethod(dialog.get(), "showFor", Q_ARG(QVariant, QVariant(selectedGame))));
+        QTest::qWait(250);
+        if (!capture.isEmpty()) QVERIFY(preview.grabWindow().save(capture + "/game-core-dialog.png"));
+        dialog->setProperty("visible", false);
+        auto* core = dialog->findChild<QObject*>("gameCoreCombo");
+        QVERIFY(core); QVERIFY(dialog->findChild<QObject*>("gameRendererCombo"));
+        QVERIFY(controller.players()->cores()->saveGameOptions("545408B4", "netplay", "vulkan"));
+        Controller reopened(directory.filePath("settings.ini"));
+        QCOMPARE(reopened.players()->cores()->coreFor("545408B4"), QStringLiteral("netplay"));
+        QCOMPARE(reopened.players()->cores()->rendererFor("545408B4"), QStringLiteral("vulkan"));
+    }
     void gameContentFiltersMixedPackages() {
         QTemporaryDir directory; QVERIFY(directory.isValid());
         Controller controller(directory.filePath("settings.ini"));

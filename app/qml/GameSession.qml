@@ -21,18 +21,18 @@ ColumnLayout {
         Layout.margins: 8
         visible: !session.fullScreen || session.chromeVisible
         ActionButton { text: qsTr("Biblioteca"); onClicked: session.browseLibrary() }
-        ActionButton { text: session.showRooms ? qsTr("Volver al juego") : qsTr("Salas Netplay"); onClicked: session.showRooms = !session.showRooms }
+        ActionButton { text: session.showRooms ? qsTr("Volver al juego") : qsTr("Salas Netplay"); enabled: session.controller.players.sessionCore !== "edge"; onClicked: session.showRooms = !session.showRooms }
         Item { Layout.fillWidth: true }
         ActionButton {
             text: qsTr("Controlar juego")
-            enabled: !!session.controller.players.coreWindow.window
+            enabled: session.controller.players.coreWindow.available
             onClicked: {
                 session.showRooms = false
                 Qt.callLater(function() { session.controller.players.coreWindow.focus() })
             }
         }
         ActionButton { text: session.fullScreen ? qsTr("Ventana") : qsTr("Pantalla completa"); onClicked: session.toggleFullScreen() }
-        ActionButton { text: qsTr("Cerrar sesión"); enabled: !!session.controller.players.coreWindow.window; onClicked: session.confirmClose() }
+        ActionButton { text: qsTr("Cerrar sesión"); enabled: session.controller.players.sessionActive; onClicked: session.confirmClose() }
     }
     Label {
         objectName: "gameSessionStatus"
@@ -48,6 +48,17 @@ ColumnLayout {
             anchors.fill: parent
             window: session.controller.players.coreWindow.window
             visible: session.visible && !session.showRooms && !closeDialog.visible && !session.suspended
+        }
+        Label {
+            anchors.centerIn: parent
+            width: Math.min(620, parent.width - 48)
+            visible: session.controller.players.coreWindow.external && !session.showRooms
+            text: qsTr("Canary Edge se ejecuta en una ventana independiente.
+Pulsa Controlar juego para volver a ella.
+Sus partidas y logros se guardan en la carpeta de Edge.")
+            color: Theme.muted
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
         }
         RoomsPanel { anchors.fill: parent; anchors.margins: 16; controller: session.controller; visible: session.showRooms }
     }
@@ -73,7 +84,7 @@ ColumnLayout {
             ActionButton { text: qsTr("Seguir jugando"); DialogButtonBox.buttonRole: DialogButtonBox.RejectRole }
             ActionButton { text: qsTr("Cerrar juego"); DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole }
         }
-        onAccepted: session.controller.players.coreWindow.requestClose()
+        onAccepted: session.controller.players.closeSession()
         onRejected: Qt.callLater(function() { session.controller.players.coreWindow.focus() })
     }
 }

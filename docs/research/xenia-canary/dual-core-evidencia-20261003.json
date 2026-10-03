@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-03",
+  "version": "0.4.0",
+  "edgeRevision": "0788c561e3689d23814224e95d6efc5b88fdc123",
+  "primaryCores": {
+    "windowsSha256": "63f44fb5cfca5ba3a20a4e9475572a8e81839efb4930bc222a6285cb589b2569",
+    "linuxSha256": "8c7da623971879da4d1051ca1ba09191be7395870884b3d70316f754ee6ae507",
+    "rebuilt": false
+  },
+  "builds": {
+    "windows": "MSVC 2022, Qt 6.8.3, x64, Release",
+    "linux": "Ubuntu 26.04, Clang 21.1.8, Qt 6.10.2, x86_64, Release"
+  },
+  "validation": {
+    "ctest": {
+      "passed": 4,
+      "failed": 0
+    },
+    "services": {
+      "passed": 7,
+      "failed": 0
+    },
+    "nativeAndRouting": {
+      "passed": 9,
+      "failed": 0,
+      "skipped": 2,
+      "skipReasons": [
+        "private avatar catalog not supplied",
+        "external HTTPS room server not supplied"
+      ]
+    },
+    "asanUbsanCoreOptions": {
+      "passed": 6,
+      "failed": 0
+    },
+    "realGameBoot": {
+      "titleId": "58410835",
+      "title": "NEW RALLY-X",
+      "durationSeconds": 15,
+      "moduleLoaded": true,
+      "d3d12Initialized": true,
+      "framesPresented": true,
+      "menuVerified": false,
+      "gameplayVerified": false
+    },
+    "updates": {
+      "windows": "0.3.0 installer applied 0.4.0 in disposable store; data preserved",
+      "linux": "0.3.0 installer applied 0.4.0 in disposable store; data preserved"
+    },
+    "windowsRuntimes": {
+      "agilityVersion": "1.619.3",
+      "dxilVersion": "v1.9.2602.24",
+      "pinnedArchivesVerified": true,
+      "includedInFinalZip": true
+    }
+  },
+  "limits": [
+    "No full game session verified",
+    "No new online match verified",
+    "Rivals remains deferred"
+  ],
+  "publication": "User handles commit, push and release publication",
+  "releaseAssets": [
+    {
+      "name": "Emulos360-v0.4.0-linux-x86_64.tar.gz",
+      "bytes": 154341605,
+      "sha256": "2308cf7fdb45fd60670a1be413787d809364634914bfa9e8474d4fc51970126c"
+    },
+    {
+      "name": "Emulos360-v0.4.0-windows-x64.zip",
+      "bytes": 151810875,
+      "sha256": "de0c915762564610e0c1859efbb31784ffcd421c39bd15d258ab0de585bd5e96"
+    }
+  ]
+}

@@ -46,7 +46,7 @@ def checked_archive(archive: Path, staging: Path) -> Path:
                 raise RuntimeError("El paquete descomprimido es demasiado grande.")
         package.extractall(staging, filter="data")
     source = staging / prefix.rstrip("/")
-    for required in ("Emulos360", "engine/Emulos360-core", "updates/apply-update-linux.py"):
+    for required in ("Emulos360", "engine/Emulos360-core", "engine/edge/xenia_edge_linux.AppImage", "engine/edge/release.json", "updates/apply-update-linux.py"):
         if not (source / required).is_file():
             raise RuntimeError(f"Falta {required} en la actualización.")
     return source

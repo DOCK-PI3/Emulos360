@@ -1,0 +1,40 @@
+{
+  "repository": "https://github.com/has207/xenia-edge",
+  "revision": "0788c561e3689d23814224e95d6efc5b88fdc123",
+  "tag": "0788c56",
+  "windows": {
+    "url": "https://github.com/has207/xenia-edge/releases/download/0788c56/xenia_edge_windows.zip",
+    "sha256": "cdc9bc80ff5007ed367f8d16916899e219b7aa85c3fab6109404a39f667181b3",
+    "redists": [
+      {
+        "id": "agility",
+        "url": "https://www.nuget.org/api/v2/package/Microsoft.Direct3D.D3D12/1.619.3",
+        "sha256": "43a7d5a3973812eb4b42623fae5275c790a005b8e48b8d7f5bb43cef39e073c5",
+        "archive": "xenia-edge-agility.nupkg",
+        "entry": "build/native/bin/x64/D3D12Core.dll",
+        "file": "D3D12Core.dll"
+      },
+      {
+        "id": "dxc",
+        "url": "https://github.com/microsoft/DirectXShaderCompiler/releases/download/v1.9.2602.24/dxc_2026_05_27.zip",
+        "sha256": "cf658aacf070d3045e31b8f1f8a696c2945f37c1095019481ef7c513368db3b4",
+        "archive": "xenia-edge-dxc.zip",
+        "entry": "bin/x64/dxil.dll",
+        "file": "dxil.dll"
+      }
+    ]
+  },
+  "linux": {
+    "url": "https://github.com/has207/xenia-edge/releases/download/0788c56/xenia_edge_linux.AppImage",
+    "sha256": "bdb35f41b5acefcf9666b8c5accb85152e3c566b1f91ab308b4a78f85a02309f"
+  },
+  "capabilities": {
+    "embeddedWindow": false,
+    "emulosNetplay": false,
+    "profileHelper": false
+  },
+  "license": {
+    "url": "https://raw.githubusercontent.com/has207/xenia-edge/0788c561e3689d23814224e95d6efc5b88fdc123/LICENSE",
+    "sha256": "369ea6b0f7ba57544067e9d470ca82a927da787fb0a749b11cb55f1fd0ba47ae"
+  }
+}

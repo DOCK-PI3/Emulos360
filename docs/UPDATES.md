@@ -13,3 +13,10 @@ La primera versión con actualización desde la aplicación es **v0.3.0**. Las i
 5. Escribe las novedades en la descripción de la release. Emulos360 las mostrará después del reinicio.
 
 El actualizador instala fuera del proceso principal, conserva `data` (perfil, partidas, carátulas y ajustes), restaura los archivos anteriores si la sustitución falla e intenta reiniciar la aplicación. La build Linux se prepara en Ubuntu 26.04; las dependencias del sistema siguen instalándose con los scripts incluidos en el paquete.
+
+La versión **0.4.0** añade Canary Edge como segundo core en ambos paquetes. La
+instalación 0.3.0 conserva su carpeta de datos y el core actual sigue seleccionado
+por defecto. El instalador de 0.3.0 ya mueve el directorio completo `engine`, por
+lo que instala también `engine/edge`. Los instaladores incluidos desde 0.4.0
+exigen el ejecutable y los metadatos de Edge para las siguientes actualizaciones.
+Consulta [la integración y sus pruebas](DUAL_CORE.md).

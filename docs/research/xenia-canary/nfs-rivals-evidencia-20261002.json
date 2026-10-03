@@ -1,0 +1,532 @@
+{
+  "date": "2026-10-02",
+  "packages": [
+    {
+      "magic": "PIRS",
+      "type": "00000002",
+      "title_id": "454109C6",
+      "media_id": "00000000",
+      "version_hex": "00000000",
+      "base_version_hex": "00000000",
+      "name": "Need for Speed Rivals HD Content",
+      "file_bytes": 1587830784,
+      "header_sha256": "1bc433c1f0763f35f8de8b9d5c7060980c25e0cd2cebbc693162841ee8ebc143",
+      "location": "library",
+      "relative_path": "00000002/8182BAAB13C42A06A387A9206AFF06435BCF762745"
+    },
+    {
+      "magic": "LIVE",
+      "type": "00000002",
+      "title_id": "454109C6",
+      "media_id": "00000000",
+      "version_hex": "00000000",
+      "base_version_hex": "00000000",
+      "name": "Need for Speed™ Rivals Update",
+      "file_bytes": 391356416,
+      "header_sha256": "0cc50e703953c6d97ec98d503b7cfd4cb628b4d49fce61b1ac5b5bc5f2d6fd9e",
+      "location": "library",
+      "relative_path": "00000002/B9F776ADE88E7404FB1F54921DD5FA66BA604C5645"
+    },
+    {
+      "magic": "LIVE",
+      "type": "00000002",
+      "title_id": "454109C6",
+      "media_id": "00000000",
+      "version_hex": "00000000",
+      "base_version_hex": "00000000",
+      "name": "Super Pack v5",
+      "file_bytes": 90112,
+      "header_sha256": "f085e6bbdf48cac5f3aac27ad93575d7b523120023391ab527cc73c7eb122eaf",
+      "location": "library",
+      "relative_path": "00000002/E41FE29A5D7BD82B07D7152E4614A9209CDD954145"
+    },
+    {
+      "magic": "LIVE",
+      "type": "00007000",
+      "title_id": "454109C6",
+      "media_id": "603CD4F9",
+      "version_hex": "00000000",
+      "base_version_hex": "00000000",
+      "name": "Need for Speed™ Rivals",
+      "file_bytes": 45056,
+      "header_sha256": "777bd1553f8734f97b31e33e6ac815685c8b65143fffa0098f3e45e97648dd63",
+      "location": "library",
+      "relative_path": "00007000/623722192039774214FA"
+    },
+    {
+      "magic": "LIVE",
+      "type": "000B0000",
+      "title_id": "454109C6",
+      "media_id": "603CD4F9",
+      "version_hex": "00000004",
+      "base_version_hex": "00000004",
+      "name": "Need for Speed™ Rivals Title Update",
+      "file_bytes": 17514496,
+      "header_sha256": "613a010ca0fb9ae46d3366c713567900cceb4b4540db83b2f22003efcfbb0151",
+      "location": "library",
+      "relative_path": "000B0000/tu00000004_00000000"
+    },
+    {
+      "magic": "PIRS",
+      "type": "00000002",
+      "title_id": "454109C6",
+      "media_id": "00000000",
+      "version_hex": "00000000",
+      "base_version_hex": "00000000",
+      "name": "Need for Speed Rivals HD Content",
+      "file_bytes": 1587830784,
+      "header_sha256": "1bc433c1f0763f35f8de8b9d5c7060980c25e0cd2cebbc693162841ee8ebc143",
+      "location": "downloads",
+      "relative_path": "00000002/8182BAAB13C42A06A387A9206AFF06435BCF762745"
+    },
+    {
+      "magic": "LIVE",
+      "type": "00000002",
+      "title_id": "454109C6",
+      "media_id": "00000000",
+      "version_hex": "00000000",
+      "base_version_hex": "00000000",
+      "name": "Need for Speed™ Rivals Update",
+      "file_bytes": 391356416,
+      "header_sha256": "0cc50e703953c6d97ec98d503b7cfd4cb628b4d49fce61b1ac5b5bc5f2d6fd9e",
+      "location": "downloads",
+      "relative_path": "00000002/B9F776ADE88E7404FB1F54921DD5FA66BA604C5645"
+    },
+    {
+      "magic": "LIVE",
+      "type": "00000002",
+      "title_id": "454109C6",
+      "media_id": "00000000",
+      "version_hex": "00000000",
+      "base_version_hex": "00000000",
+      "name": "Super Pack v5",
+      "file_bytes": 90112,
+      "header_sha256": "f085e6bbdf48cac5f3aac27ad93575d7b523120023391ab527cc73c7eb122eaf",
+      "location": "downloads",
+      "relative_path": "00000002/E41FE29A5D7BD82B07D7152E4614A9209CDD954145"
+    },
+    {
+      "magic": "LIVE",
+      "type": "00007000",
+      "title_id": "454109C6",
+      "media_id": "603CD4F9",
+      "version_hex": "00000000",
+      "base_version_hex": "00000000",
+      "name": "Need for Speed™ Rivals",
+      "file_bytes": 45056,
+      "header_sha256": "777bd1553f8734f97b31e33e6ac815685c8b65143fffa0098f3e45e97648dd63",
+      "location": "downloads",
+      "relative_path": "00007000/623722192039774214FA"
+    },
+    {
+      "magic": "LIVE",
+      "type": "000B0000",
+      "title_id": "454109C6",
+      "media_id": "603CD4F9",
+      "version_hex": "00000004",
+      "base_version_hex": "00000004",
+      "name": "Need for Speed™ Rivals Title Update",
+      "file_bytes": 17514496,
+      "header_sha256": "613a010ca0fb9ae46d3366c713567900cceb4b4540db83b2f22003efcfbb0151",
+      "location": "downloads",
+      "relative_path": "000B0000/tu00000004_00000000"
+    }
+  ],
+  "comparisons": [
+    {
+      "relative_path": "00000002/8182BAAB13C42A06A387A9206AFF06435BCF762745",
+      "library_bytes": 1587830784,
+      "downloads_exists": true,
+      "downloads_bytes": 1587830784,
+      "library_sha256": "813ef20e94d3372543451ea9310e7d8bca6dfd5b1d4ecffcd88d2e481f33d3bc",
+      "downloads_sha256": "813ef20e94d3372543451ea9310e7d8bca6dfd5b1d4ecffcd88d2e481f33d3bc",
+      "equal": true
+    },
+    {
+      "relative_path": "00000002/B9F776ADE88E7404FB1F54921DD5FA66BA604C5645",
+      "library_bytes": 391356416,
+      "downloads_exists": true,
+      "downloads_bytes": 391356416,
+      "library_sha256": "7125b4db1f3218cc6497b83a444704a0b93fc916a98bd01dd9aec858f39282bf",
+      "downloads_sha256": "7125b4db1f3218cc6497b83a444704a0b93fc916a98bd01dd9aec858f39282bf",
+      "equal": true
+    },
+    {
+      "relative_path": "00000002/E41FE29A5D7BD82B07D7152E4614A9209CDD954145",
+      "library_bytes": 90112,
+      "downloads_exists": true,
+      "downloads_bytes": 90112,
+      "library_sha256": "7f49f62bf495de5ca26afc98b849d79df26e726cbf0181b1a387168ab2b93c07",
+      "downloads_sha256": "7f49f62bf495de5ca26afc98b849d79df26e726cbf0181b1a387168ab2b93c07",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA",
+      "library_bytes": 45056,
+      "downloads_exists": true,
+      "downloads_bytes": 45056,
+      "library_sha256": "2406b1fd908a658e4959c6eaf6c7e50c9be17ec4723c1888644ca7346bf7ab17",
+      "downloads_sha256": "2406b1fd908a658e4959c6eaf6c7e50c9be17ec4723c1888644ca7346bf7ab17",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0000",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "91298f82052035f2ac55cf4561430e464d0f275badebac57153a354db102107d",
+      "downloads_sha256": "91298f82052035f2ac55cf4561430e464d0f275badebac57153a354db102107d",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0001",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "c56198b5a7325ca83a517041b8b8bc1b927d2a1155519ebdc7acbce43f727a01",
+      "downloads_sha256": "c56198b5a7325ca83a517041b8b8bc1b927d2a1155519ebdc7acbce43f727a01",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0002",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "d8dc9994de2283a2c6461ccd36101ae7dc83a06fee6c2058d3fdcf489cbd1a0d",
+      "downloads_sha256": "d8dc9994de2283a2c6461ccd36101ae7dc83a06fee6c2058d3fdcf489cbd1a0d",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0003",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "e76c35aaa54552d823a12dd0a70435cac7561589d72bcd548e75b7438cbf92eb",
+      "downloads_sha256": "e76c35aaa54552d823a12dd0a70435cac7561589d72bcd548e75b7438cbf92eb",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0004",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "ddeb221b2922c320b98378f1ae99cf5969341ba22e0db826273daba552bc1408",
+      "downloads_sha256": "ddeb221b2922c320b98378f1ae99cf5969341ba22e0db826273daba552bc1408",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0005",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "ecb3f5b27d0ede030a6f24b6365b88f7a8227f70f3a1f24e510a29d0f74171ee",
+      "downloads_sha256": "ecb3f5b27d0ede030a6f24b6365b88f7a8227f70f3a1f24e510a29d0f74171ee",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0006",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "21e81273134ab26fc593f33b6c8e69b238a9857e7a48a04aaa07d7f6af71c703",
+      "downloads_sha256": "21e81273134ab26fc593f33b6c8e69b238a9857e7a48a04aaa07d7f6af71c703",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0007",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "f71cf0f8ed1bb2c76ff7bf1b9c10ae171c0ff5ceadb4b1900ddce85af7155cc8",
+      "downloads_sha256": "f71cf0f8ed1bb2c76ff7bf1b9c10ae171c0ff5ceadb4b1900ddce85af7155cc8",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0008",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "56c779b4e108cdd7a81c567fbb63a0c619c9ff0d412da06b1fb31dbdca298160",
+      "downloads_sha256": "56c779b4e108cdd7a81c567fbb63a0c619c9ff0d412da06b1fb31dbdca298160",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0009",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "10e3013ec77ac3192b9076841c425506489b1c534c1e4132258fb00551c08f45",
+      "downloads_sha256": "10e3013ec77ac3192b9076841c425506489b1c534c1e4132258fb00551c08f45",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0010",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "5045947b1e482207d1184d42c4a34ce6cb74beff74e72031dbf2cd4dfcbdec7b",
+      "downloads_sha256": "5045947b1e482207d1184d42c4a34ce6cb74beff74e72031dbf2cd4dfcbdec7b",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0011",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "adfeccb07f6c8ed19b034eda5e8ca541e5b2ad2df85a07b0786ece17ae5f1e5c",
+      "downloads_sha256": "adfeccb07f6c8ed19b034eda5e8ca541e5b2ad2df85a07b0786ece17ae5f1e5c",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0012",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "368b3db6297af53d5a11821356ada20f7b0422096f55ce5e82338233fcc5ffe9",
+      "downloads_sha256": "368b3db6297af53d5a11821356ada20f7b0422096f55ce5e82338233fcc5ffe9",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0013",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "d1df6751e9789eff818c1a7f74a0a078b58682e933344f6b3e9cca2aa58762e8",
+      "downloads_sha256": "d1df6751e9789eff818c1a7f74a0a078b58682e933344f6b3e9cca2aa58762e8",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0014",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "2c711bba8a7710d1f11173c1c271ee24251eb20156183ecd58c0422042059a69",
+      "downloads_sha256": "2c711bba8a7710d1f11173c1c271ee24251eb20156183ecd58c0422042059a69",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0015",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "451794f01a54a315fd6938825daec6cd3431f7580bf103ea885868ac0f2e9378",
+      "downloads_sha256": "451794f01a54a315fd6938825daec6cd3431f7580bf103ea885868ac0f2e9378",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0016",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "2a4b658f93b123b488662180c57eb83d49e9682c644488b028e55fc30270c70a",
+      "downloads_sha256": "2a4b658f93b123b488662180c57eb83d49e9682c644488b028e55fc30270c70a",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0017",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "8da4cbdb0ba0df9f08c4d7494ca098448392abf563559da273b71417d8a87950",
+      "downloads_sha256": "8da4cbdb0ba0df9f08c4d7494ca098448392abf563559da273b71417d8a87950",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0018",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "d13ba46e14c0f5ccd1078dfba8f79311e70d24602db5964ec9a11a0f76c46767",
+      "downloads_sha256": "d13ba46e14c0f5ccd1078dfba8f79311e70d24602db5964ec9a11a0f76c46767",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0019",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "7a0a78d27f0641a5391185bad092cdb2968970c05ad0378fa3bfe580dc179d79",
+      "downloads_sha256": "7a0a78d27f0641a5391185bad092cdb2968970c05ad0378fa3bfe580dc179d79",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0020",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "4533499d730dc53d91971d72c71de736520b72c4f07882d41eb36db664bae901",
+      "downloads_sha256": "4533499d730dc53d91971d72c71de736520b72c4f07882d41eb36db664bae901",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0021",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "aa48a8015361c3789f72f28813967bb6220779e63a4417866f674e42a1770771",
+      "downloads_sha256": "aa48a8015361c3789f72f28813967bb6220779e63a4417866f674e42a1770771",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0022",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "3a1465dfdf895288a85a68833c6406bca786b4be432b0aecf56519826e993c6b",
+      "downloads_sha256": "3a1465dfdf895288a85a68833c6406bca786b4be432b0aecf56519826e993c6b",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0023",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "4cadd9c65c091e509a2dc67160b08e5d61301fdeef5e4e5bd1e97fc668ff558f",
+      "downloads_sha256": "4cadd9c65c091e509a2dc67160b08e5d61301fdeef5e4e5bd1e97fc668ff558f",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0024",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "8ea103242b65376cd2f2e5d6cc707ea1c733dd8f0fbeca0839d65db5dd18f4f3",
+      "downloads_sha256": "8ea103242b65376cd2f2e5d6cc707ea1c733dd8f0fbeca0839d65db5dd18f4f3",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0025",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "cc5a069eecceb4016786c147a775fad96ab705a63ce8dfd72bff987c57e5c468",
+      "downloads_sha256": "cc5a069eecceb4016786c147a775fad96ab705a63ce8dfd72bff987c57e5c468",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0026",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "0560adfd258753bdf7ce96cd94779f520d81705825e51f0fd95c08519ef08a24",
+      "downloads_sha256": "0560adfd258753bdf7ce96cd94779f520d81705825e51f0fd95c08519ef08a24",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0027",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "b25c89be1872f7b36fb5b963755f287edd6877f5147c5296614edaabf12743f5",
+      "downloads_sha256": "b25c89be1872f7b36fb5b963755f287edd6877f5147c5296614edaabf12743f5",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0028",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "c42c177b794d5bac6e8ead02277cb01d4a370ea94cfa645d85d19514623e1abe",
+      "downloads_sha256": "c42c177b794d5bac6e8ead02277cb01d4a370ea94cfa645d85d19514623e1abe",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0029",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "7a59312a66c45bb0ddd8208e56bb46e62a64f231807267db58ff04ee43200493",
+      "downloads_sha256": "7a59312a66c45bb0ddd8208e56bb46e62a64f231807267db58ff04ee43200493",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0030",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "7959c9cd1ddd25f2bae2fcf332b2fafe1fec4d92f9b87f201e6df0a0abbeb7d1",
+      "downloads_sha256": "7959c9cd1ddd25f2bae2fcf332b2fafe1fec4d92f9b87f201e6df0a0abbeb7d1",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0031",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "7f20d3c9a7a4a509ab59cea8b22a99fb458149dd80ec682350e0e52c9678c4e5",
+      "downloads_sha256": "7f20d3c9a7a4a509ab59cea8b22a99fb458149dd80ec682350e0e52c9678c4e5",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0032",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "2eb2845b2f251fcaae51f60d4e0b3d1aa0ab1103f1dbd76e34c688114b336c21",
+      "downloads_sha256": "2eb2845b2f251fcaae51f60d4e0b3d1aa0ab1103f1dbd76e34c688114b336c21",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0033",
+      "library_bytes": 170459136,
+      "downloads_exists": true,
+      "downloads_bytes": 170459136,
+      "library_sha256": "57fadf3fe7b80286111ed6eb3ca2e745103b1b38331e1769abe09416a9053543",
+      "downloads_sha256": "57fadf3fe7b80286111ed6eb3ca2e745103b1b38331e1769abe09416a9053543",
+      "equal": true
+    },
+    {
+      "relative_path": "00007000/623722192039774214FA.data/Data0034",
+      "library_bytes": 71098368,
+      "downloads_exists": true,
+      "downloads_bytes": 71098368,
+      "library_sha256": "a62fe18900a1e38e4f77a4eea185082c0a1a2e3435b729141ab2f2fa2161a06d",
+      "downloads_sha256": "a62fe18900a1e38e4f77a4eea185082c0a1a2e3435b729141ab2f2fa2161a06d",
+      "equal": true
+    },
+    {
+      "relative_path": "000B0000/tu00000004_00000000",
+      "library_bytes": 17514496,
+      "downloads_exists": true,
+      "downloads_bytes": 17514496,
+      "library_sha256": "b16fea6915cd1cf1d66f29b9c936e88e6dbf85b4bf22902dd4cddaa9bd47e2f7",
+      "downloads_sha256": "b16fea6915cd1cf1d66f29b9c936e88e6dbf85b4bf22902dd4cddaa9bd47e2f7",
+      "equal": true
+    }
+  ],
+  "installed_rivals_paths": [],
+  "logs": [
+    {
+      "name": "core.log",
+      "bytes": 62272,
+      "sha256": "c0aa026b1c801652152e6373aa204ea9561234e80fd834646fd9142844ef56f2"
+    },
+    {
+      "name": "core-console.log",
+      "bytes": 62272,
+      "sha256": "c0aa026b1c801652152e6373aa204ea9561234e80fd834646fd9142844ef56f2"
+    }
+  ],
+  "interpretation": "No Rivals directory under BETA12 content or external-content; no install or gameplay test performed.",
+  "sources": [
+    {
+      "name": "issue561",
+      "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/561",
+      "sha256": "6772cf07a96841e2a19376e76c657ae94a11d09756ef7732c7aaa5150d275206",
+      "bytes": 4834
+    },
+    {
+      "name": "comments561",
+      "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/561/comments?per_page=100",
+      "sha256": "d9421df15ef8b0dafba2434d258a0d800a5efab6039cc5e8b2764e0e8c81b8cc",
+      "bytes": 1804
+    }
+  ],
+  "core_binary_sha256": "63f44fb5cfca5ba3a20a4e9475572a8e81839efb4930bc222a6285cb589b2569",
+  "local_code_sha256": {
+    "engine/xenia/src/xenia/kernel/xam/xam_ui.cc": "bc7e3cee65953d86b69fff50c2a83aab9adad45dae44b76827feb45c943ba907",
+    "engine/xenia/src/xenia/kernel/kernel_state.cc": "62c91121aa1fb4d5410c09b8490e2b3c183f4e3ff2e834820fd46c1bd0e71e69",
+    "app/game_content.cpp": "157e185fd91b36906c04e4d029421890f72f9d419ecbcab76f93de7243eebe0b",
+    "app/game_importer.cpp": "efdfbcb1e13feb75650eda9f34d3a2888f63037a9cc3db7048363f0749d30b62"
+  }
+}

@@ -1,0 +1,521 @@
+{
+  "research_date": "2026-10-02",
+  "timezone": "Atlantic/Canary",
+  "method": "Public HTTP GET only; no gameplay tests. Hashes identify retrieved response bytes. Mutable URLs are snapshots, not immutable revision references.",
+  "sources": [
+    {
+      "name": "canary-repo",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary",
+      "sha256": "78924e8906415885bf65e164eeda69849a63e43f6076c22877c64155d094d315",
+      "bytes": 17358
+    },
+    {
+      "name": "netplay-repo",
+      "url": "https://api.github.com/repos/AdrianCassar/xenia-canary",
+      "sha256": "cb8887713a265b0383724a524829e3a06d9c0d861207ecc1d31e2258ad3b8567",
+      "bytes": 16598
+    },
+    {
+      "name": "webservices-repo",
+      "url": "https://api.github.com/repos/AdrianCassar/Xenia-WebServices",
+      "sha256": "ef1ca831ddc578ee869e1c6391a545e949ea7dae82af8a4e1fee2f67dfecc7eb",
+      "bytes": 16366
+    },
+    {
+      "name": "patches-repo",
+      "url": "https://api.github.com/repos/xenia-canary/game-patches",
+      "sha256": "0b88ec4f32098c3269127d4b06e7d03ad9296a623bd3adc374613034deb34110",
+      "bytes": 6622
+    },
+    {
+      "name": "canary-commits",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/commits?sha=canary_experimental&per_page=100",
+      "sha256": "41e161302a67d45c376a0712a7dfc7e5c499616349d8a6f9a157b7a041b90002",
+      "bytes": 374245
+    },
+    {
+      "name": "netplay-commits",
+      "url": "https://api.github.com/repos/AdrianCassar/xenia-canary/commits?sha=netplay_canary_experimental&per_page=100",
+      "sha256": "5f016bc2ee6c337e32d100873a59068f5c28b3b07b0500406930db466d5a32ba",
+      "bytes": 347798
+    },
+    {
+      "name": "gpu-commits",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/commits?sha=canary_experimental&path=src/xenia/gpu&per_page=100",
+      "sha256": "939b0188d47b00bb8fdc02f1c62e7a86ce31c1e1d50d37aaa3218fc952be556b",
+      "bytes": 370717
+    },
+    {
+      "name": "cpu-commits",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/commits?sha=canary_experimental&path=src/xenia/cpu&per_page=50",
+      "sha256": "1a794d7ba72430001f1dc33f7884e8b33698af87c1b22f6d8eb74f8b07e44139",
+      "bytes": 178296
+    },
+    {
+      "name": "session-commits",
+      "url": "https://api.github.com/repos/AdrianCassar/xenia-canary/commits?sha=netplay_canary_experimental&path=src/xenia/kernel/xsession.cc&per_page=60",
+      "sha256": "760d7d202b5c7d412e72a6298b3b78c9c00bab3ef9983429417b96a931db2e33",
+      "bytes": 207862
+    },
+    {
+      "name": "socket-commits",
+      "url": "https://api.github.com/repos/AdrianCassar/xenia-canary/commits?sha=netplay_canary_experimental&path=src/xenia/kernel/xsocket.cc&per_page=60",
+      "sha256": "65bbaf58f908d0a9aca2e07efdc5b32923ee76e290256fc741aa5f4fad02104a",
+      "bytes": 206869
+    },
+    {
+      "name": "gears-issues",
+      "url": "https://api.github.com/search/issues?q=repo:xenia-canary/game-compatibility+Gears+in:title&per_page=30",
+      "sha256": "b7b5602c9eb7eaf4eaacabaad9e49427cca04870d08bdc833c7ed0acf66d27b2",
+      "bytes": 22140
+    },
+    {
+      "name": "gpu-prs",
+      "url": "https://api.github.com/search/issues?q=repo:xenia-canary/xenia-canary+is:pr+is:merged+GPU&sort=updated&order=desc&per_page=40",
+      "sha256": "a7881c55a10e81d12e08cf92bd0644a1c250b73915de568e045645535185960b",
+      "bytes": 139043
+    },
+    {
+      "name": "zpd-prs",
+      "url": "https://api.github.com/search/issues?q=repo:xenia-canary/xenia-canary+is:pr+ZPD&per_page=20",
+      "sha256": "fd9e4ffb668a22e1c433058512e1a0b31c9ca58c24e94ec64f2b936b5806529a",
+      "bytes": 29000
+    },
+    {
+      "name": "rov-prs",
+      "url": "https://api.github.com/search/issues?q=repo:xenia-canary/xenia-canary+is:pr+ROV&per_page=20",
+      "sha256": "24abb8d6259b6f47cc50f879ff3d007338c4bb2e4a51f226e5a18dc54445f11c",
+      "bytes": 39983
+    },
+    {
+      "name": "webservices-tree",
+      "url": "https://api.github.com/repos/AdrianCassar/Xenia-WebServices/git/trees/6abcc4397e0b6e0632307d9418ecae086cc95f48?recursive=1",
+      "sha256": "05e262afa96390702475db57ecd8876ec9aa2dae714f202c07232f3892f422b1",
+      "bytes": 75499
+    },
+    {
+      "name": "patches-tree",
+      "url": "https://api.github.com/repos/xenia-canary/game-patches/git/trees/main?recursive=1",
+      "sha256": "ff4ced7d5550dcb534b56a0ced843d960f1543dd1319e5840e11b766076941a4",
+      "bytes": 137202
+    },
+    {
+      "name": "canary-render-targets",
+      "url": "https://raw.githubusercontent.com/xenia-canary/xenia-canary/canary_experimental/src/xenia/gpu/render_target_cache.cc",
+      "sha256": "1b475e6e421aab9d6d233c17aaa5466e31e62b2ed99d527c781e5b01a551456a",
+      "bytes": 86783
+    },
+    {
+      "name": "webservices-readme",
+      "url": "https://raw.githubusercontent.com/AdrianCassar/Xenia-WebServices/6abcc4397e0b6e0632307d9418ecae086cc95f48/README.md",
+      "sha256": "afe426e09b4da698e3288cc0758df5d1f8174c72895c39d99b46f657131dbda4",
+      "bytes": 3187
+    },
+    {
+      "name": "xlink-guide",
+      "url": "https://www.teamxlink.co.uk/wiki/Xenia_Support",
+      "sha256": "1e92c1cfb096765a7dfba83dd1c802d7662593e57ae3978df1f1869d025ce880",
+      "bytes": 24817
+    },
+    {
+      "name": "wiki-netplay-compatibility",
+      "url": "https://raw.githubusercontent.com/wiki/AdrianCassar/xenia-canary/Netplay-Compatibility.md",
+      "sha256": "85adbc2e5c2aba442dc51e2c7f5725342d253f13453ee03645aedec8642fc6fb",
+      "bytes": 443171
+    },
+    {
+      "name": "wiki-config-setup",
+      "url": "https://raw.githubusercontent.com/wiki/AdrianCassar/xenia-canary/Config-Setup.md",
+      "sha256": "46c0ca1801505122c3dcba9e71c6c51a303c3df0face77c15deecbaf8cd667a1",
+      "bytes": 575
+    },
+    {
+      "name": "wiki-systemlink",
+      "url": "https://raw.githubusercontent.com/wiki/AdrianCassar/xenia-canary/Systemlink.md",
+      "sha256": "27043195bb1eaeadc7dfd7bb16e2fee246c4eb7203eb61c4afcbebb2726c21a4",
+      "bytes": 1685
+    },
+    {
+      "name": "wiki-testing-procedure",
+      "url": "https://raw.githubusercontent.com/wiki/AdrianCassar/xenia-canary/Testing-Procedure.md",
+      "sha256": "7a493a7cb79b66d2226cf9a6d640308507aa976e24c3e7bdf91d1d52cfa31680",
+      "bytes": 2048
+    },
+    {
+      "name": "wiki-faq",
+      "url": "https://raw.githubusercontent.com/wiki/AdrianCassar/xenia-canary/FAQ.md",
+      "sha256": "101ea2a013b68ec634f9ba700f9b5757dffc55456f9aa8e9e617622bf9c0bcf6",
+      "bytes": 1149
+    },
+    {
+      "name": "canary-wiki-options",
+      "url": "https://raw.githubusercontent.com/wiki/xenia-canary/xenia-canary/Options.md",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "name": "canary-wiki-faq",
+      "url": "https://raw.githubusercontent.com/wiki/xenia-canary/xenia-canary/FAQ.md",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "name": "canary-wiki-quickstart",
+      "url": "https://raw.githubusercontent.com/wiki/xenia-canary/xenia-canary/Quickstart.md",
+      "sha256": "b67ca7287890d974600e3b6e8ee6ca74f967d5702bf7ff182ed3329a4bb12ef2",
+      "bytes": 11197
+    },
+    {
+      "name": "commit-44f5b4a86080",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/44f5b4a86080189047e9a60f2d2b8041796fcb68.patch",
+      "sha256": "29184594b453bd5a873daf30c9af32f1882fe827760be26660ec933d0231462c",
+      "bytes": 7229
+    },
+    {
+      "name": "commit-c8f214e2a9b0",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/c8f214e2a9b0209ca8a0ad6cb3dfb155fe545ae2.patch",
+      "sha256": "32fdfa84ea7900bd512216098f99f4082fe95d850cb2e74d7417caddc1e64b16",
+      "bytes": 1918
+    },
+    {
+      "name": "commit-c3cd8617b18e",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/c3cd8617b18ef018ea8d638c865e0cced7399846.patch",
+      "sha256": "a95fc86b72f2402152b5ce43c56355faca5e7e1e144e3cda53fc68489c3b9fc9",
+      "bytes": 56489
+    },
+    {
+      "name": "commit-692cd59cfef6",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/692cd59cfef6451314666d7f6d0b127ae78b14b3.patch",
+      "sha256": "6aeaac844dc5d900a8811ff8d07b3391441663bd99f27f918abdffa581652819",
+      "bytes": 168446
+    },
+    {
+      "name": "commit-bc6b7a020295",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/bc6b7a020295a7af21f5919c1d08e6054dc4fcd1.patch",
+      "sha256": "8ec4b35da0738685326203db93926f9a7dcf98172e427ace726abf98edbc904c",
+      "bytes": 2771
+    },
+    {
+      "name": "commit-89609297c7ae",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/89609297c7ae25dc5ba404c6a977260b806bb725.patch",
+      "sha256": "2cb24560aec63bc61aee3ec1d92455b971b0621e142667eb9953a431cd5507d8",
+      "bytes": 5807
+    },
+    {
+      "name": "commit-0bd090dbe979",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/0bd090dbe979bc64959efe519aa320db8e3eb467.patch",
+      "sha256": "8607dfb1a8a4082759d724bf8ed251641d3c239193e48ce3abe588d4ed0197a7",
+      "bytes": 3533
+    },
+    {
+      "name": "commit-3d233a5b2e94",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/3d233a5b2e94b940825847b70c788951e364bb33.patch",
+      "sha256": "aead5af092aab4c3a6c75edce808a158923b4c8a253ae13c613cb0a0c21d91f3",
+      "bytes": 290959
+    },
+    {
+      "name": "commit-1b242658e535",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/1b242658e535fbd12645e4d2c12693771075b738.patch",
+      "sha256": "624a399fb7792e7e2027121e4890178e7db73cf0134249a4b97e133c33a68e26",
+      "bytes": 1822
+    },
+    {
+      "name": "commit-9da693480d09",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/9da693480d0995326b81c3a14f8b1a4c226066eb.patch",
+      "sha256": "aa61d0f0a94620a91ab72cb40b59c1c548d463cb5ce4ede488ce1d140f9eeb09",
+      "bytes": 21280
+    },
+    {
+      "name": "commit-3a44f20c7bc6",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/3a44f20c7bc66db1da583e8a6f0ab740e31908e9.patch",
+      "sha256": "4beda0f8bd761bb4eea1f45759d449dd5a376bf9525c8fe4809af6109ec1be5b",
+      "bytes": 28466
+    },
+    {
+      "name": "commit-437a7280cf95",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/437a7280cf95310d518a2f68087aab61403956ac.patch",
+      "sha256": "80f9dbd7ee9a7aeada2beee37941ccce6d92e3a303b050fbedf520de942bc21d",
+      "bytes": 175127
+    },
+    {
+      "name": "commit-4cc584f47d31",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/4cc584f47d310c95d3686d8f4c9ffb052ee38fcc.patch",
+      "sha256": "8175d071567bca3d4414fad3ecacd24432d01b84553232ae5d97e0294b85e4b0",
+      "bytes": 11455
+    },
+    {
+      "name": "commit-95545f8e7603",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/95545f8e76035d8b904e120a0bf379cbc300d86d.patch",
+      "sha256": "b59381337b606287d9d9d997b7882c0505645bebf3675ccf7620dd161c718fce",
+      "bytes": 1223
+    },
+    {
+      "name": "commit-920f35c9386e",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/920f35c9386e1738b7a80e62f9bf8d484da03320.patch",
+      "sha256": "7c5a90012c627da82d2c28971e6d3cfe77c3bec22ab3236b728e18ca22a0c4ca",
+      "bytes": 2203
+    },
+    {
+      "name": "commit-5ce7c336df06",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/5ce7c336df060d043b0a2351889ec8789322d035.patch",
+      "sha256": "545259423260991ff0ffa4be16efe3639c42b391d868df083f9b224042502021",
+      "bytes": 21863
+    },
+    {
+      "name": "commit-9363df7d8fe0",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/9363df7d8fe02f575442b57a94cb7f55da5ce9d5.patch",
+      "sha256": "321e732dccb2e502a27672360742f0c80f7f49549ec862d29b77e0f5e10a0792",
+      "bytes": 3400
+    },
+    {
+      "name": "commit-577fb8ee1745",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/577fb8ee17457af7493690a408492d800d53af58.patch",
+      "sha256": "2efbb5b8d02ff2c0e70369f53869a5c95993dfaec48e63fb434a193966891aca",
+      "bytes": 4569
+    },
+    {
+      "name": "commit-8ffe24e372fb",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/8ffe24e372fb5c137f14d776e9645b03eafc703a.patch",
+      "sha256": "f6e1d103937ef35fb89c4ffe14677b42373d1de535e5a501c9b96f611d829681",
+      "bytes": 4204
+    },
+    {
+      "name": "commit-ec5c875122b4",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/ec5c875122b43a596fd5fd18edfa5e441b8521a8.patch",
+      "sha256": "fe08d1e586ff5bf4d34e26f7acfa0fdc12cfd5a1c0856024399b839f621f5f8f",
+      "bytes": 22863
+    },
+    {
+      "name": "commit-7ff152a5a7f6",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/7ff152a5a7f69390c1a625d3fdc57681d5ccb7e9.patch",
+      "sha256": "fc85d9cd0c9e2b5e8d7179b60134bdbc7f3ea59f3e075988581183aeb19330c4",
+      "bytes": 5075
+    },
+    {
+      "name": "commit-6dbaa1fefd1e",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c.patch",
+      "sha256": "6eb54c5c1500481cc41f205d3adea5d996dd441d9b9d68aed82fd8a0e9d849c5",
+      "bytes": 1580
+    },
+    {
+      "name": "commit-7835c486a2ed",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/7835c486a2ed62f1f76ef5802f59f6988f4153ea.patch",
+      "sha256": "883a2e3fa5c554a9236f3bf222512441e5303dadce6abb94ed2c834a724daed0",
+      "bytes": 3920
+    },
+    {
+      "name": "commit-8bf03b0038a6",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/8bf03b0038a6a0ee25643c53685a5ea5dd6bcc42.patch",
+      "sha256": "c54c98494be912ed1ff469aa32c49ca1d118bcfca01e18462f1babb184c8381d",
+      "bytes": 11502
+    },
+    {
+      "name": "commit-8f326b1aeb73",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/8f326b1aeb731431a99fce95e43eb1fe1d2fc552.patch",
+      "sha256": "f14edebc95b2728b99f3053121e94a8b2ac7c2e2a7337eee58b2584e1fbcf381",
+      "bytes": 16460
+    },
+    {
+      "name": "commit-80553db6f58a",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/80553db6f58ab65de12568024e61bab3f5f54665.patch",
+      "sha256": "197b401a2e920c6802e7c8211b84fc5af9d2d1cd29a0a2bdc27aee79458d0d19",
+      "bytes": 6680
+    },
+    {
+      "name": "commit-ae18e30b8ff3",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/ae18e30b8ff3a3dd2d617124dc10108133b01743.patch",
+      "sha256": "071fbb456bd52b380e2d7d30c40b3ab761b7ec0bac1b483ea3e0c07fd230feaf",
+      "bytes": 3601
+    },
+    {
+      "name": "commit-4d7e8f42b701",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/4d7e8f42b701ef553fc4e8ad925f2e776fe01427.patch",
+      "sha256": "47ab35afc3919a9815b0d4ed0f63e06b9bf1285b56958e582e7847ff57bdd3bf",
+      "bytes": 10374
+    },
+    {
+      "name": "commit-a0b5fc5cdad1",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/a0b5fc5cdad15d5acddb9bb52db8af3e84d8d7c9.patch",
+      "sha256": "f30d723ffb4132b3146b2ff6a9e711fb4af4a93c82da378cd612bb0d8b9b4a41",
+      "bytes": 9444
+    },
+    {
+      "name": "commit-3d19c39486b6",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/3d19c39486b612664179136561b7eff669e87018.patch",
+      "sha256": "abea77ee93a1ae62e524f24c07917e16abcde2d868039b98c3f4c511d5cf7624",
+      "bytes": 9445
+    },
+    {
+      "name": "pr-1218",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/pulls/1218",
+      "sha256": "ca12e04340c9457c5b38747c86bc4dca5e60d448af09e29fe44c22f8a7567afe",
+      "bytes": 19940
+    },
+    {
+      "name": "pr-1016",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/pulls/1016",
+      "sha256": "4326c124149a41738aa61138830a1bb5130656feac4973eb3d8e130b0fe8fe40",
+      "bytes": 18861
+    },
+    {
+      "name": "pr-1111",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/pulls/1111",
+      "sha256": "a3fdc48a1b7cfdfb6558d7d050eea9d89068a3721933bfd411865b4e546f0f49",
+      "bytes": 19632
+    },
+    {
+      "name": "pr-1250",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/pulls/1250",
+      "sha256": "59ccc1a163d2190f54d8c22114def0f997456cae797713bb1680fc82763d2402",
+      "bytes": 18088
+    },
+    {
+      "name": "pr-1163",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/pulls/1163",
+      "sha256": "2be1505e943247075f8ce1e172fbf8ff26d491f56c1c42f97abbae59e152401c",
+      "bytes": 22544
+    },
+    {
+      "name": "pr-1222",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/pulls/1222",
+      "sha256": "57dbe8a1ba33556300f87bbe2cb429acf6e18458a238c10dcbcd7ea2780e0d9f",
+      "bytes": 17781
+    },
+    {
+      "name": "pr-1190",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/pulls/1190",
+      "sha256": "1dba36d6aa6d8401d97bbdb84af5e02c698cf22785541b7fb778cbcb3c71a785",
+      "bytes": 17873
+    },
+    {
+      "name": "pr-1210",
+      "url": "https://api.github.com/repos/xenia-canary/xenia-canary/pulls/1210",
+      "sha256": "6a9ca90384dc473cb70efcb556a29cea71ea1dbcac6256867541926439dca0ab",
+      "bytes": 20207
+    },
+    {
+      "name": "gears-comments-44",
+      "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/44/comments?per_page=100",
+      "sha256": "b9b779e736ac1aa93a9d09badda9910d5292424b0034b0ccd6e04afba74f5c92",
+      "bytes": 28380
+    },
+    {
+      "name": "gears-comments-46",
+      "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/46/comments?per_page=100",
+      "sha256": "200b1e3443fef6a571ac2b928c53254e2701899254050a5bb40c4be447362645",
+      "bytes": 29587
+    },
+    {
+      "name": "gears-comments-39",
+      "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/39/comments?per_page=100",
+      "sha256": "0750ac9557e8de7d9e123425b87a620cb31d945272db875abae2640040bc9afd",
+      "bytes": 66602
+    },
+    {
+      "name": "gears-comments-45",
+      "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/45/comments?per_page=100",
+      "sha256": "341dcfcb3308ed7f4e50f1056edcb9aeeb273eb9a69f6a62afcff581419656c7",
+      "bytes": 25369
+    },
+    {
+      "name": "patch-4D5307D5 - Gears of War (Japan)",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D5307D5%20-%20Gears%20of%20War%20%28Japan%29.patch.toml",
+      "sha256": "7dc848a7fbf824cd831d6b125ea08e8339a72d9550502c4adca2395eda6f4b8a",
+      "bytes": 1663
+    },
+    {
+      "name": "patch-4D5307D5 - Gears of War (TU5)",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D5307D5%20-%20Gears%20of%20War%20%28TU5%29.patch.toml",
+      "sha256": "e58ca9712a2c0b9a6f437069ce50139b2207d64ee3b3e73ef152e05acf03d0bc",
+      "bytes": 5744
+    },
+    {
+      "name": "patch-4D5307D5 - Gears of War",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D5307D5%20-%20Gears%20of%20War.patch.toml",
+      "sha256": "0e1e782e03b61510f15650fc81603e1d77e9d4f9c77ce7a5898e161298bd79c1",
+      "bytes": 6180
+    },
+    {
+      "name": "patch-4D53082D - Gears of War 2 (TU6)",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D53082D%20-%20Gears%20of%20War%202%20%28TU6%29.patch.toml",
+      "sha256": "ac711a314b70de2a45c44608332ba4098eadfda4ba56bb70c27b939f82f9ec1f",
+      "bytes": 10513
+    },
+    {
+      "name": "patch-4D53082D - Gears of War 2",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D53082D%20-%20Gears%20of%20War%202.patch.toml",
+      "sha256": "795a3e5068f6d005bdcc3021aeeb0c77ff0c2120192c3b8ad5a411ca9d76a15d",
+      "bytes": 10249
+    },
+    {
+      "name": "patch-4D5308AB - Gears of War 3 (TU6 Disc; TU1 XBL)",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D5308AB%20-%20Gears%20of%20War%203%20%28TU6%20Disc%3B%20TU1%20XBL%29.patch.toml",
+      "sha256": "d6047e4fe1f4c7c15b0df3ae09ddab21f611b54e3bbfa06fbc69cd7ffd53127d",
+      "bytes": 7284
+    },
+    {
+      "name": "patch-4D5308AB - Gears of War 3",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D5308AB%20-%20Gears%20of%20War%203.patch.toml",
+      "sha256": "fb8096b7b002160372163abab648e159ddec784e39dee0bacc5a5f374b8ac0ca",
+      "bytes": 7078
+    },
+    {
+      "name": "patch-4D5308C8 - Gears of War 2 (Japan)",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D5308C8%20-%20Gears%20of%20War%202%20%28Japan%29.patch.toml",
+      "sha256": "45416e9ef80672ec4ef3eaf3be8626eb1ec2fe86e656add8cb18cce8aa5f7b98",
+      "bytes": 1918
+    },
+    {
+      "name": "patch-4D530A26 - Gears of War Judgment (TU4)",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D530A26%20-%20Gears%20of%20War%20Judgment%20%28TU4%29.patch.toml",
+      "sha256": "aecd969a0939811daa8d963e146b0aec0a8d01f5eda28b351a3ba90bfc840afc",
+      "bytes": 8007
+    },
+    {
+      "name": "patch-4D530A26 - Gears of War Judgment",
+      "url": "https://raw.githubusercontent.com/xenia-canary/game-patches/01bff555f18e58dde570588449cf3477ce2ea0b8/patches/4D530A26%20-%20Gears%20of%20War%20Judgment.patch.toml",
+      "sha256": "7737a9704a7b34e30935a9e8de72157331a6c73ca53713f05b049adcf1855c62",
+      "bytes": 8046
+    },
+    {
+      "name": "backend-SessionRepository.ts",
+      "url": "https://raw.githubusercontent.com/AdrianCassar/Xenia-WebServices/6abcc4397e0b6e0632307d9418ecae086cc95f48/src/infrastructure/persistance/repositories/SessionRepository.ts",
+      "sha256": "957000f8af6cfe3998eaf7c5b779fb606bab7f522050a137b98885ab33192ae2",
+      "bytes": 15537
+    },
+    {
+      "name": "backend-PlayerRepository.ts",
+      "url": "https://raw.githubusercontent.com/AdrianCassar/Xenia-WebServices/6abcc4397e0b6e0632307d9418ecae086cc95f48/src/infrastructure/persistance/repositories/PlayerRepository.ts",
+      "sha256": "c7c465d5afe2a799e987571ebf35ebc91a4c5c865bb4553ad1eb23722bd3d41f",
+      "bytes": 3065
+    },
+    {
+      "name": "backend-session.controller.ts",
+      "url": "https://raw.githubusercontent.com/AdrianCassar/Xenia-WebServices/6abcc4397e0b6e0632307d9418ecae086cc95f48/src/infrastructure/presentation/controllers/session.controller.ts",
+      "sha256": "09d26b4ccbb04638761a84e303df6a2ecb22e4e3a4cc5882c122a739535bdea0",
+      "bytes": 29660
+    },
+    {
+      "name": "backend-ISessionRepository.ts",
+      "url": "https://raw.githubusercontent.com/AdrianCassar/Xenia-WebServices/6abcc4397e0b6e0632307d9418ecae086cc95f48/src/domain/repositories/ISessionRepository.ts",
+      "sha256": "8b6e5bfdb0d512cbaff2321600f95883dd716026ea6ebc86385d2e92a3a788dd",
+      "bytes": 1090
+    },
+    {
+      "name": "backend-title.controller.ts",
+      "url": "https://raw.githubusercontent.com/AdrianCassar/Xenia-WebServices/6abcc4397e0b6e0632307d9418ecae086cc95f48/src/infrastructure/presentation/controllers/title.controller.ts",
+      "sha256": "d348003f223779e79f25fce937cb162864e5cd0a2e375b7d63cca7599f125fe6",
+      "bytes": 2387
+    },
+    {
+      "name": "pinned-command-processor",
+      "url": "https://raw.githubusercontent.com/AdrianCassar/xenia-canary/6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c/src/xenia/gpu/command_processor.cc",
+      "sha256": "af1a08f35834231eaf6429b5cf314434e9000cb289794ee25a986f35fc00577f",
+      "bytes": 54193
+    },
+    {
+      "name": "branch-comparison",
+      "url": "https://api.github.com/repos/AdrianCassar/xenia-canary/compare/6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c...44f5b4a86080189047e9a60f2d2b8041796fcb68",
+      "sha256": "6ea49acf6869e8bcf53913c60b5aa7aeeed3ce107c2a39531f5eb3ab5a02893e",
+      "bytes": 904122
+    }
+  ]
+}

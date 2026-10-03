@@ -1,0 +1,44 @@
+[
+  {
+    "name": "castlevania-issue",
+    "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/171",
+    "sha256": "30827b15fd0281bd0506e294fa2e0e661a9d75e5889ee36677cf5c67f915551b",
+    "bytes": 6070,
+    "cache_file": "castlevania-issue.json"
+  },
+  {
+    "name": "castlevania-comments",
+    "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/171/comments?per_page=100",
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "bytes": 2,
+    "cache_file": "castlevania-comments.json"
+  },
+  {
+    "name": "daytona-issue",
+    "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/639",
+    "sha256": "42b3f6213e77ea17cf8d4e01a19a8b26035db67324fa66d390835bb9f89ceb6a",
+    "bytes": 4570,
+    "cache_file": "daytona-issue.json"
+  },
+  {
+    "name": "sacred2-issue",
+    "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/868",
+    "sha256": "5fe5cc3e01bec22a2d6a18233e43ee4963446f1a6bcbccc97754fd87c49d4c84",
+    "bytes": 5850,
+    "cache_file": "sacred2-issue.json"
+  },
+  {
+    "name": "sacred2-comments",
+    "url": "https://api.github.com/repos/xenia-canary/game-compatibility/issues/868/comments?per_page=100",
+    "sha256": "1200a954ea9fd1a84142caa08f0c798afbdbdae463d1fce5765516089b9dacd7",
+    "bytes": 2075,
+    "cache_file": "sacred2-comments.json"
+  },
+  {
+    "name": "netplay-wiki",
+    "url": "https://raw.githubusercontent.com/wiki/AdrianCassar/xenia-canary/Netplay-Compatibility.md",
+    "sha256": "85adbc2e5c2aba442dc51e2c7f5725342d253f13453ee03645aedec8642fc6fb",
+    "bytes": 443171,
+    "cache_file": "netplay-wiki.md"
+  }
+]

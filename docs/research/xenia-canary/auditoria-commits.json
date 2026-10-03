@@ -1,0 +1,534 @@
+{
+  "research_date": "2026-10-02",
+  "local_core_head": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+  "method": "git apply --check and git apply --reverse --check against existing working tree; no patch applied; states describe exact patch context only, not runtime behavior",
+  "summary": {
+    "present_exact_patch": 11,
+    "candidate_applies": 13,
+    "diverged_or_partial": 6
+  },
+  "commits": [
+    {
+      "commit_prefix": "0bd090dbe979",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/shaders/host_depth_store_2xmsaa.cs.xesl",
+        "src/xenia/gpu/shaders/host_depth_store_4xmsaa.cs.xesl"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "0bd090dbe979bc64959efe519aa320db8e3eb467",
+      "title": "[GPU] Fix 2x & 4x host depth copy sample layout",
+      "committer_date": "2026-09-20T16:40:36Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/0bd090dbe979bc64959efe519aa320db8e3eb467"
+    },
+    {
+      "commit_prefix": "1b242658e535",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "1b242658e535fbd12645e4d2c12693771075b738",
+      "title": "[Vulkan] Lock the binding layout tables during parallel shader translation",
+      "committer_date": "2026-09-15T09:49:57Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/1b242658e535fbd12645e4d2c12693771075b738"
+    },
+    {
+      "commit_prefix": "3a44f20c7bc6",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/gpu/dxbc_shader_translator.h",
+        "src/xenia/gpu/dxbc_shader_translator_alu.cc",
+        "src/xenia/gpu/dxbc_shader_translator_fetch.cc",
+        "src/xenia/gpu/gpu_flags.cc",
+        "src/xenia/gpu/gpu_flags.h",
+        "src/xenia/gpu/shader_interpreter.cc",
+        "src/xenia/gpu/shader_interpreter.h",
+        "src/xenia/gpu/spirv_shader_translator.h",
+        "src/xenia/gpu/spirv_shader_translator_alu.cc",
+        "src/xenia/gpu/spirv_shader_translator_fetch.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "3a44f20c7bc66db1da583e8a6f0ab740e31908e9",
+      "title": "[GPU] Replace AC6 ground hack with scalar approximation rounding",
+      "committer_date": "2026-08-31T20:07:04Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/3a44f20c7bc66db1da583e8a6f0ab740e31908e9"
+    },
+    {
+      "commit_prefix": "3d19c39486b6",
+      "state": "diverged_or_partial",
+      "files": [
+        "src/xenia/kernel/xam/xam_net.cc",
+        "src/xenia/kernel/xsocket.cc",
+        "src/xenia/kernel/xsocket.h"
+      ],
+      "forward_check": 1,
+      "reverse_check": 1,
+      "sha": "3d19c39486b612664179136561b7eff669e87018",
+      "title": "[XSocket] Fixed WSA event signalling",
+      "committer_date": "2026-04-06T13:50:21Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/3d19c39486b612664179136561b7eff669e87018"
+    },
+    {
+      "commit_prefix": "3d233a5b2e94",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/command_processor.cc",
+        "src/xenia/gpu/command_processor.h",
+        "src/xenia/gpu/d3d12/d3d12_command_processor.cc",
+        "src/xenia/gpu/d3d12/d3d12_command_processor.h",
+        "src/xenia/gpu/d3d12/d3d12_zpd_query_pool.cc",
+        "src/xenia/gpu/d3d12/d3d12_zpd_query_pool.h",
+        "src/xenia/gpu/d3d12/pipeline_cache.cc",
+        "src/xenia/gpu/d3d12/pipeline_cache.h",
+        "src/xenia/gpu/dxbc_shader_translator.cc",
+        "src/xenia/gpu/dxbc_shader_translator.h",
+        "src/xenia/gpu/dxbc_shader_translator_om.cc",
+        "src/xenia/gpu/gpu_flags.cc",
+        "src/xenia/gpu/gpu_flags.h",
+        "src/xenia/gpu/pm4_command_processor_implement.h",
+        "src/xenia/gpu/spirv_shader_translator.cc",
+        "src/xenia/gpu/spirv_shader_translator.h",
+        "src/xenia/gpu/spirv_shader_translator_rb.cc",
+        "src/xenia/gpu/vulkan/vulkan_command_processor.cc",
+        "src/xenia/gpu/vulkan/vulkan_command_processor.h",
+        "src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc",
+        "src/xenia/gpu/vulkan/vulkan_pipeline_cache.h",
+        "src/xenia/gpu/vulkan/vulkan_zpd_query_pool.cc",
+        "src/xenia/gpu/vulkan/vulkan_zpd_query_pool.h",
+        "src/xenia/gpu/xenos.h",
+        "src/xenia/gpu/xenos_zpd_report.h"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "3d233a5b2e94b940825847b70c788951e364bb33",
+      "title": "[GPU] Rewrite ZPD as a running sample counter",
+      "committer_date": "2026-09-20T16:14:05Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/3d233a5b2e94b940825847b70c788951e364bb33"
+    },
+    {
+      "commit_prefix": "437a7280cf95",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/gpu/d3d12/d3d12_render_target_cache.cc",
+        "src/xenia/gpu/dxbc_shader_translator.h",
+        "src/xenia/gpu/dxbc_shader_translator_om.cc",
+        "src/xenia/gpu/shaders/edram.xesli",
+        "src/xenia/gpu/shaders/resolve.xesli",
+        "src/xenia/gpu/shaders/resolve_fast_32bpp_1x2xmsaa.xesli",
+        "src/xenia/gpu/shaders/resolve_fast_32bpp_4xmsaa.xesli",
+        "src/xenia/gpu/shaders/resolve_fast_64bpp_1x2xmsaa.xesli",
+        "src/xenia/gpu/shaders/resolve_fast_64bpp_4xmsaa.xesli",
+        "src/xenia/gpu/shaders/resolve_full_128bpp.xesli",
+        "src/xenia/gpu/shaders/resolve_full_16bpp.xesli",
+        "src/xenia/gpu/shaders/resolve_full_32bpp.xesli",
+        "src/xenia/gpu/shaders/resolve_full_64bpp.xesli",
+        "src/xenia/gpu/shaders/resolve_full_8bpp.xesli",
+        "src/xenia/gpu/spirv_shader_translator_rb.cc",
+        "src/xenia/gpu/vulkan/vulkan_render_target_cache.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "437a7280cf95310d518a2f68087aab61403956ac",
+      "title": "[GPU] Use EDRAM layout with a single sample addressing scheme",
+      "committer_date": "2026-08-26T17:05:58Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/437a7280cf95310d518a2f68087aab61403956ac"
+    },
+    {
+      "commit_prefix": "44f5b4a86080",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/graphics_system.cc",
+        "src/xenia/gpu/graphics_system.h"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "44f5b4a86080189047e9a60f2d2b8041796fcb68",
+      "title": "[GPU] Pace the vblank heartbeat on a deadline on Linux",
+      "committer_date": "2026-10-01T05:21:11Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/44f5b4a86080189047e9a60f2d2b8041796fcb68"
+    },
+    {
+      "commit_prefix": "4cc584f47d31",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/gpu/d3d12/d3d12_command_processor.cc",
+        "src/xenia/gpu/d3d12/d3d12_command_processor.h",
+        "src/xenia/gpu/d3d12/pipeline_cache.cc",
+        "src/xenia/gpu/d3d12/pipeline_cache.h",
+        "src/xenia/ui/d3d12/d3d12_provider.cc",
+        "src/xenia/ui/d3d12/d3d12_provider.h"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "4cc584f47d310c95d3686d8f4c9ffb052ee38fcc",
+      "title": "[D3D12] Fix constant-alpha blending in the RTV path",
+      "committer_date": "2026-08-18T07:16:57Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/4cc584f47d310c95d3686d8f4c9ffb052ee38fcc"
+    },
+    {
+      "commit_prefix": "4d7e8f42b701",
+      "state": "diverged_or_partial",
+      "files": [
+        "src/xenia/kernel/xsocket.cc",
+        "src/xenia/kernel/xsocket.h"
+      ],
+      "forward_check": 1,
+      "reverse_check": 1,
+      "sha": "4d7e8f42b701ef553fc4e8ad925f2e776fe01427",
+      "title": "[XSocket] Fixed potential argument race conditions",
+      "committer_date": "2026-04-11T15:34:01Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/4d7e8f42b701ef553fc4e8ad925f2e776fe01427"
+    },
+    {
+      "commit_prefix": "577fb8ee1745",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/cpu/ppc/ppc_emit_control.cc",
+        "src/xenia/cpu/ppc/testing/instr_mcrf.s"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "577fb8ee17457af7493690a408492d800d53af58",
+      "title": "[CPU] Fix mcrf: copy the CR field instead of comparing it against zero",
+      "committer_date": "2026-09-04T18:03:05Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/577fb8ee17457af7493690a408492d800d53af58"
+    },
+    {
+      "commit_prefix": "5ce7c336df06",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/cpu/hir/value.cc",
+        "src/xenia/cpu/testing/byte_swap_test.cc",
+        "src/xenia/cpu/testing/extract_test.cc",
+        "src/xenia/cpu/testing/opcode_coverage_test.cc",
+        "src/xenia/cpu/testing/swizzle_test.cc",
+        "src/xenia/cpu/testing/util.h",
+        "src/xenia/cpu/testing/vector_add_test.cc",
+        "src/xenia/cpu/testing/vector_rotate_left_test.cc",
+        "src/xenia/cpu/testing/vector_shl_test.cc",
+        "src/xenia/cpu/testing/vector_shr_test.cc"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "5ce7c336df060d043b0a2351889ec8789322d035",
+      "title": "[CPU/HIR] Flip the lane index in the constant Extract fold",
+      "committer_date": "2026-09-13T20:58:58Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/5ce7c336df060d043b0a2351889ec8789322d035"
+    },
+    {
+      "commit_prefix": "692cd59cfef6",
+      "state": "diverged_or_partial",
+      "files": [
+        "src/xenia/gpu/command_processor.cc",
+        "src/xenia/gpu/command_processor.h",
+        "src/xenia/gpu/d3d12/d3d12_command_processor.cc",
+        "src/xenia/gpu/d3d12/d3d12_command_processor.h",
+        "src/xenia/gpu/d3d12/d3d12_zpd_query_pool.cc",
+        "src/xenia/gpu/d3d12/d3d12_zpd_query_pool.h",
+        "src/xenia/gpu/d3d12/deferred_command_list.cc",
+        "src/xenia/gpu/d3d12/deferred_command_list.h",
+        "src/xenia/gpu/d3d12/pipeline_cache.cc",
+        "src/xenia/gpu/d3d12/pipeline_cache.h",
+        "src/xenia/gpu/draw_util.cc",
+        "src/xenia/gpu/draw_util.h",
+        "src/xenia/gpu/dxbc_shader_translator.cc",
+        "src/xenia/gpu/dxbc_shader_translator.h",
+        "src/xenia/gpu/dxbc_shader_translator_om.cc",
+        "src/xenia/gpu/gpu_flags.h",
+        "src/xenia/gpu/pm4_command_processor_implement.h",
+        "src/xenia/gpu/registers.h",
+        "src/xenia/gpu/spirv_shader_translator.cc",
+        "src/xenia/gpu/spirv_shader_translator.h",
+        "src/xenia/gpu/spirv_shader_translator_rb.cc",
+        "src/xenia/gpu/vulkan/deferred_command_buffer.cc",
+        "src/xenia/gpu/vulkan/deferred_command_buffer.h",
+        "src/xenia/gpu/vulkan/vulkan_command_processor.cc",
+        "src/xenia/gpu/vulkan/vulkan_command_processor.h",
+        "src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc",
+        "src/xenia/gpu/vulkan/vulkan_pipeline_cache.h",
+        "src/xenia/gpu/vulkan/vulkan_zpd_query_pool.cc",
+        "src/xenia/gpu/vulkan/vulkan_zpd_query_pool.h",
+        "src/xenia/ui/vulkan/functions/device_ext_conditional_rendering.inc",
+        "src/xenia/ui/vulkan/vulkan_device.cc",
+        "src/xenia/ui/vulkan/vulkan_device.h"
+      ],
+      "forward_check": 1,
+      "reverse_check": 1,
+      "sha": "692cd59cfef6451314666d7f6d0b127ae78b14b3",
+      "title": "[GPU] Implement VIZ_QUERY",
+      "committer_date": "2026-09-29T19:59:37Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/692cd59cfef6451314666d7f6d0b127ae78b14b3"
+    },
+    {
+      "commit_prefix": "6dbaa1fefd1e",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/kernel/xsession.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+      "title": "[XSession] Removed results buffer size check",
+      "committer_date": "2026-09-10T21:08:54Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c"
+    },
+    {
+      "commit_prefix": "7835c486a2ed",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/kernel/xam/apps/xlivebase_app.cc",
+        "src/xenia/kernel/xnet.h",
+        "src/xenia/kernel/xsession.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "7835c486a2ed62f1f76ef5802f59f6988f4153ea",
+      "title": "[NET] Transition to accurate session IDs",
+      "committer_date": "2026-09-06T19:23:14Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/7835c486a2ed62f1f76ef5802f59f6988f4153ea"
+    },
+    {
+      "commit_prefix": "7ff152a5a7f6",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/cpu/backend/x64/x64_sequences.cc",
+        "src/xenia/cpu/ppc/testing/instr__gen_vmaxfp.s",
+        "src/xenia/cpu/ppc/testing/instr__gen_vminfp.s"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "7ff152a5a7f69390c1a625d3fdc57681d5ccb7e9",
+      "title": "[X64] MAX_V128/MIN_V128 Proper NaN handling.",
+      "committer_date": "2026-07-15T21:31:38Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/7ff152a5a7f69390c1a625d3fdc57681d5ccb7e9"
+    },
+    {
+      "commit_prefix": "80553db6f58a",
+      "state": "diverged_or_partial",
+      "files": [
+        "src/xenia/kernel/XLiveAPI.cpp",
+        "src/xenia/kernel/XLiveAPI.h",
+        "src/xenia/kernel/xam/apps/xlivebase_app.cc",
+        "src/xenia/kernel/xam/xam_net.cc",
+        "src/xenia/kernel/xsession.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 1,
+      "sha": "80553db6f58ab65de12568024e61bab3f5f54665",
+      "title": "[XSession] Added PreJoin endpoint to update players session id",
+      "committer_date": "2025-05-25T11:55:42Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/80553db6f58ab65de12568024e61bab3f5f54665"
+    },
+    {
+      "commit_prefix": "89609297c7ae",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/draw_util.cc"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "89609297c7ae25dc5ba404c6a977260b806bb725",
+      "title": "[GPU] Fix tiled resolve offsets below 32bpp",
+      "committer_date": "2026-09-21T04:50:35Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/89609297c7ae25dc5ba404c6a977260b806bb725"
+    },
+    {
+      "commit_prefix": "8bf03b0038a6",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/kernel/XLiveAPI.cpp",
+        "src/xenia/kernel/XLiveAPI.h",
+        "src/xenia/kernel/xsession.cc",
+        "src/xenia/kernel/xsession.h"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "8bf03b0038a6a0ee25643c53685a5ea5dd6bcc42",
+      "title": "[XAM] Implemented ordered session properties",
+      "committer_date": "2026-09-02T20:20:50Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/8bf03b0038a6a0ee25643c53685a5ea5dd6bcc42"
+    },
+    {
+      "commit_prefix": "8f326b1aeb73",
+      "state": "diverged_or_partial",
+      "files": [
+        "src/xenia/kernel/XLiveAPI.cpp",
+        "src/xenia/kernel/json/session_object_json.cc",
+        "src/xenia/kernel/json/session_object_json.h",
+        "src/xenia/kernel/util/xlast.cc",
+        "src/xenia/kernel/util/xlast.h",
+        "src/xenia/kernel/xsession.cc",
+        "src/xenia/kernel/xsession.h"
+      ],
+      "forward_check": 1,
+      "reverse_check": 1,
+      "sha": "8f326b1aeb731431a99fce95e43eb1fe1d2fc552",
+      "title": "[XAM] Implemented session search filtering",
+      "committer_date": "2026-09-01T22:48:59Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/8f326b1aeb731431a99fce95e43eb1fe1d2fc552"
+    },
+    {
+      "commit_prefix": "8ffe24e372fb",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/cpu/entry_table.cc",
+        "src/xenia/cpu/entry_table.h",
+        "src/xenia/cpu/processor.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "8ffe24e372fb5c137f14d776e9645b03eafc703a",
+      "title": "[CPU] Publish JIT entry results under the entry table lock",
+      "committer_date": "2026-08-17T12:23:12Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/8ffe24e372fb5c137f14d776e9645b03eafc703a"
+    },
+    {
+      "commit_prefix": "920f35c9386e",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/cpu/hir/value.cc"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "920f35c9386e1738b7a80e62f9bf8d484da03320",
+      "title": "[CPU/HIR] Fold float vector equality as a float compare",
+      "committer_date": "2026-09-13T20:58:58Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/920f35c9386e1738b7a80e62f9bf8d484da03320"
+    },
+    {
+      "commit_prefix": "9363df7d8fe0",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/cpu/backend/x64/x64_seq_vector.cc"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "9363df7d8fe02f575442b57a94cb7f55da5ce9d5",
+      "title": "[X64] Stop two vector sequences clobbering registers they do not own",
+      "committer_date": "2026-09-13T20:58:58Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/9363df7d8fe02f575442b57a94cb7f55da5ce9d5"
+    },
+    {
+      "commit_prefix": "95545f8e7603",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/gpu/d3d12/d3d12_command_processor.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "95545f8e76035d8b904e120a0bf379cbc300d86d",
+      "title": "[D3D12] Fix over-invalidation of bulk fetch register writes",
+      "committer_date": "2026-08-18T06:32:23Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/95545f8e76035d8b904e120a0bf379cbc300d86d"
+    },
+    {
+      "commit_prefix": "9da693480d09",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/d3d12/d3d12_command_processor.cc",
+        "src/xenia/gpu/render_target_cache.cc",
+        "src/xenia/gpu/render_target_cache.h",
+        "src/xenia/gpu/vulkan/vulkan_command_processor.cc"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "9da693480d0995326b81c3a14f8b1a4c226066eb",
+      "title": "[GPU] EDRAM bits respected for color/depth aliases",
+      "committer_date": "2026-09-10T05:31:17Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/9da693480d0995326b81c3a14f8b1a4c226066eb"
+    },
+    {
+      "commit_prefix": "a0b5fc5cdad1",
+      "state": "diverged_or_partial",
+      "files": [
+        "src/xenia/kernel/xsocket.cc",
+        "src/xenia/kernel/xsocket.h"
+      ],
+      "forward_check": 1,
+      "reverse_check": 1,
+      "sha": "a0b5fc5cdad15d5acddb9bb52db8af3e84d8d7c9",
+      "title": "[XSocket] Set overlapped internal to X_PENDING_STATUS while pending",
+      "committer_date": "2026-04-09T18:02:37Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/a0b5fc5cdad15d5acddb9bb52db8af3e84d8d7c9"
+    },
+    {
+      "commit_prefix": "ae18e30b8ff3",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/kernel/xsocket.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "ae18e30b8ff3a3dd2d617124dc10108133b01743",
+      "title": "[XSocket] Fixed potential deadlock in WSAGetOverlappedResult",
+      "committer_date": "2026-08-14T09:52:36Z",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/ae18e30b8ff3a3dd2d617124dc10108133b01743"
+    },
+    {
+      "commit_prefix": "bc6b7a020295",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/texture_util.cc"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "bc6b7a020295a7af21f5919c1d08e6054dc4fcd1",
+      "title": "[GPU] Fix array and volume mip layout",
+      "committer_date": "2026-09-22T17:46:23Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/bc6b7a020295a7af21f5919c1d08e6054dc4fcd1"
+    },
+    {
+      "commit_prefix": "c3cd8617b18e",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/dxbc_shader_translator.h",
+        "src/xenia/gpu/dxbc_shader_translator_fetch.cc",
+        "src/xenia/gpu/shader.h",
+        "src/xenia/gpu/spirv_shader_translator.h",
+        "src/xenia/gpu/spirv_shader_translator_fetch.cc",
+        "src/xenia/gpu/texture_cache.cc",
+        "src/xenia/gpu/texture_cache.h"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "c3cd8617b18ef018ea8d638c865e0cced7399846",
+      "title": "[GPU] Snap point sampled fetches to guest texel values and centers",
+      "committer_date": "2026-09-30T00:01:56Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/c3cd8617b18ef018ea8d638c865e0cced7399846"
+    },
+    {
+      "commit_prefix": "c8f214e2a9b0",
+      "state": "candidate_applies",
+      "files": [
+        "src/xenia/gpu/vulkan/vulkan_texture_cache.cc"
+      ],
+      "forward_check": 0,
+      "reverse_check": 1,
+      "sha": "c8f214e2a9b0209ca8a0ad6cb3dfb155fe545ae2",
+      "title": "[Vulkan] Keep the barrier between two uploads to the same texture",
+      "committer_date": "2026-10-01T01:47:45Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/c8f214e2a9b0209ca8a0ad6cb3dfb155fe545ae2"
+    },
+    {
+      "commit_prefix": "ec5c875122b4",
+      "state": "present_exact_patch",
+      "files": [
+        "src/xenia/cpu/backend/x64/x64_backend.cc",
+        "src/xenia/cpu/backend/x64/x64_seq_memory.cc",
+        "src/xenia/cpu/backend/x64/x64_seq_vector.cc",
+        "src/xenia/cpu/backend/x64/x64_sequences.cc",
+        "src/xenia/cpu/ppc/ppc_emit_altivec.cc"
+      ],
+      "forward_check": 1,
+      "reverse_check": 0,
+      "sha": "ec5c875122b43a596fd5fd18edfa5e441b8521a8",
+      "title": "[CPU/X64] Optimize VMX dot products, vrsqrtefp, partial stores, and permutes",
+      "committer_date": "2026-08-13T05:25:39Z",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/ec5c875122b43a596fd5fd18edfa5e441b8521a8"
+    }
+  ]
+}

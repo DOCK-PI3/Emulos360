@@ -16,7 +16,7 @@ $archive = Join-Path $release "Emulos360-v$Version-windows-x64.zip"
 $sevenZip = 'C:\Program Files\7-Zip\7z.exe'
 
 foreach ($required in @(
-    'Emulos360.exe', 'engine/Emulos360-core.exe', 'tools/7z.exe',
+    'Emulos360.exe', 'engine/Emulos360-core.exe', 'engine/edge/xenia_edge.exe', 'engine/edge/LICENSE', 'engine/edge/release.json', 'engine/edge/D3D12/D3D12Core.dll', 'engine/edge/D3D12/dxil.dll', 'tools/7z.exe',
     'tools/iso2god.exe', 'server/private-service.cjs', 'server/node.exe',
     'server/mongodb/bin/mongod.exe', 'XEXplugins/MetroDashboard/default.xex',
     'updates/apply-update-windows.ps1'

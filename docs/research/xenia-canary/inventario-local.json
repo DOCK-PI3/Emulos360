@@ -1,0 +1,1181 @@
+{
+  "research_date": "2026-10-02",
+  "root_head": "d28a784dea93d948c9f0f610c9ba289db11b9a80",
+  "core_head": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+  "root_existing_changes": [
+    " M CMakeLists.txt",
+    " M app/controller.cpp",
+    " M app/controller.h",
+    " M app/qml/AboutScreen.qml",
+    " M app/qml/AppPreferences.qml",
+    " M app/qml/CoverPicker.qml",
+    " M app/qml/GameCard.qml",
+    " M app/qml/Main.qml",
+    " M docs/UPDATES.md",
+    " M engine/xenia",
+    " M scripts/build-engine.ps1",
+    " M scripts/build-linux.sh",
+    " M scripts/build-multip.ps1",
+    " M scripts/build-ui.ps1",
+    " M tests/ui_tests.cpp",
+    "?? app/app_updater.cpp",
+    "?? app/app_updater.h",
+    "?? app/qml/UpdateDialog.qml",
+    "?? scripts/package-windows.ps1",
+    "?? scripts/prepare-linux-release.py",
+    "?? scripts/run-clean-build.ps1",
+    "?? tests/update_installer_test.ps1",
+    "?? tests/update_installer_test.py",
+    "?? updates/"
+  ],
+  "core_existing_changes": [
+    " M CMakeLists.txt",
+    " A assets/icon/emulos360.ico",
+    "M  src/xenia/app/CMakeLists.txt",
+    "MM src/xenia/app/emulator_window.cc",
+    " A src/xenia/app/emulos_profile_bridge.cc",
+    " A src/xenia/app/emulos_profile_bridge.h",
+    " M src/xenia/app/gamerpic_browser.cc",
+    "M  src/xenia/app/main_resources.rc",
+    "MM src/xenia/app/xenia_main.cc",
+    " M src/xenia/base/memory.h",
+    "MM src/xenia/emulator.cc",
+    "M  src/xenia/emulator.h",
+    " M src/xenia/gpu/shaders/bytecode/vulkan_spirv/placeholder_ps.h",
+    " M src/xenia/kernel/XLiveAPI.cpp",
+    " M src/xenia/kernel/json/getusersettings_object_json.cc",
+    " M src/xenia/kernel/upnp.cc",
+    " M src/xenia/kernel/util/network_adapter_manager.cc",
+    " M src/xenia/kernel/util/network_adapter_manager.h",
+    " M src/xenia/kernel/xam/content_manager.cc",
+    " M src/xenia/kernel/xam/content_manager.h",
+    " M src/xenia/kernel/xam/user_property.h",
+    " M src/xenia/kernel/xam/xam_avatar.cc",
+    " M src/xenia/kernel/xam/xam_avatar.h",
+    " M src/xenia/kernel/xam/xam_content.cc",
+    " M src/xenia/kernel/xam/xam_content_device.cc",
+    " M src/xenia/kernel/xam/xam_content_device.h",
+    " M src/xenia/kernel/xam/xam_info.cc",
+    " M src/xenia/kernel/xam/xam_net.cc",
+    " M src/xenia/kernel/xam/xam_ui.cc",
+    " M src/xenia/kernel/xam/xcontent/xcontent_package.cc",
+    " M src/xenia/kernel/xsocket.cc",
+    " M src/xenia/kernel/xsocket.h",
+    " M third_party/CMakeLists.txt",
+    " M third_party/mspack/lzxd.c",
+    " M third_party/mspack/readbits.h",
+    "?? src/xenia/app/emulos_achievements.h",
+    "?? src/xenia/kernel/util/emulos_posix_socket_error.h",
+    "?? src/xenia/kernel/xam/emulos_avatar_animation.h",
+    "?? src/xenia/kernel/xam/emulos_avatar_assets.h",
+    "?? src/xenia/kernel/xam/emulos_avatar_guest.h",
+    "?? src/xenia/kernel/xam/emulos_avatar_manifest.h",
+    "?? src/xenia/kernel/xam/emulos_avatar_scene.h"
+  ],
+  "files": [
+    {
+      "path": ".gitmodules",
+      "sha256": "8c766cf0512ab4c3e1398ca850b34bc65253f4deaf032b04f31beb4404027b1c",
+      "sha256_lf": "8c766cf0512ab4c3e1398ca850b34bc65253f4deaf032b04f31beb4404027b1c",
+      "bytes": 104,
+      "lines": 3,
+      "anchors": []
+    },
+    {
+      "path": "README.md",
+      "sha256": "da1faa30af660cb5b304a71555fd3db51bca7db175f03edd0d1e70a5b675f920",
+      "sha256_lf": "da1faa30af660cb5b304a71555fd3db51bca7db175f03edd0d1e70a5b675f920",
+      "bytes": 7043,
+      "lines": 114,
+      "anchors": []
+    },
+    {
+      "path": "app/engine_settings.cpp",
+      "sha256": "57f9e6fe4138576e464c06c3d420b2c7e0feec33d2cd3055d7d5b1d9f1a45ff3",
+      "sha256_lf": "57f9e6fe4138576e464c06c3d420b2c7e0feec33d2cd3055d7d5b1d9f1a45ff3",
+      "bytes": 14718,
+      "lines": 262,
+      "anchors": []
+    },
+    {
+      "path": "app/netplay_rooms.cpp",
+      "sha256": "1c55395fb23ea2c3935fdbaf0a08f834b4859cc761a42a32594172221b296e4a",
+      "sha256_lf": "1c55395fb23ea2c3935fdbaf0a08f834b4859cc761a42a32594172221b296e4a",
+      "bytes": 6203,
+      "lines": 115,
+      "anchors": []
+    },
+    {
+      "path": "app/private_netplay.cpp",
+      "sha256": "6f561cadda55c303448032f363300b4efb6345686fb8adf8b5d2b7525524ab83",
+      "sha256_lf": "6f561cadda55c303448032f363300b4efb6345686fb8adf8b5d2b7525524ab83",
+      "bytes": 7856,
+      "lines": 147,
+      "anchors": []
+    },
+    {
+      "path": "app/settings-catalog.json",
+      "sha256": "1721ec165036e9bfc4c99ef661250d4a3cfbff8a8faaf5aeb4d82aa6d42df881",
+      "sha256_lf": "71b3f19d06597734ebc010fdf535e8d1513f567fd0836acd1ff5120ecb6192c2",
+      "bytes": 142765,
+      "lines": 4147,
+      "anchors": []
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "d78e1ee31495c4af444f1225eed833315e09c96330b7186deb5de5567bdbbd25",
+      "sha256_lf": "d78e1ee31495c4af444f1225eed833315e09c96330b7186deb5de5567bdbbd25",
+      "bytes": 4908,
+      "lines": 87,
+      "anchors": []
+    },
+    {
+      "path": "docs/FORK_CHANGES.md",
+      "sha256": "6cc21d8cde4bd7561ab9758b2ddd13d827e909c98394f2db57ccb6911f7af876",
+      "sha256_lf": "6cc21d8cde4bd7561ab9758b2ddd13d827e909c98394f2db57ccb6911f7af876",
+      "bytes": 18306,
+      "lines": 272,
+      "anchors": []
+    },
+    {
+      "path": "docs/NETPLAY_OPTIONS.md",
+      "sha256": "fe12754e23fbf80fa6e8920cc49a79f23c3a3fa1901a2cfb7f91547e4f8512e6",
+      "sha256_lf": "fe12754e23fbf80fa6e8920cc49a79f23c3a3fa1901a2cfb7f91547e4f8512e6",
+      "bytes": 6134,
+      "lines": 95,
+      "anchors": []
+    },
+    {
+      "path": "docs/PRIVATE_NETPLAY.md",
+      "sha256": "7434ec4de95dd7be4c5833d88523e75a751559f2e5f8edf4bd3043286894283a",
+      "sha256_lf": "7434ec4de95dd7be4c5833d88523e75a751559f2e5f8edf4bd3043286894283a",
+      "bytes": 6671,
+      "lines": 121,
+      "anchors": []
+    },
+    {
+      "path": "docs/QT_NETPLAY_INTEGRATION.md",
+      "sha256": "cb6d0225e4a59fb653cf461ed9f40326ca94610e9f09acb47510137db93c83d5",
+      "sha256_lf": "cb6d0225e4a59fb653cf461ed9f40326ca94610e9f09acb47510137db93c83d5",
+      "bytes": 5616,
+      "lines": 100,
+      "anchors": []
+    },
+    {
+      "path": "docs/STATUS.md",
+      "sha256": "1f02e29f3bed022339d15b0d38a7dfc2650f7063b5f0bc1ce50c19f51a38250e",
+      "sha256_lf": "1f02e29f3bed022339d15b0d38a7dfc2650f7063b5f0bc1ce50c19f51a38250e",
+      "bytes": 7097,
+      "lines": 86,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/apu/audio_system.cc",
+      "sha256": "8ba53a406608d8e1dd183e9670f5240a0619a685c5020ebfec29688048106d3d",
+      "sha256_lf": "f4d86c9f34eb818122453e57fc432f5da5d6082ce9aebeef0ac2b90079f59c12",
+      "bytes": 14327,
+      "lines": 431,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/apu/xma_decoder.cc",
+      "sha256": "54a7751591b84790f3a0e645a5d150140b9322e703cde5a72e095dcc4b45d700",
+      "sha256_lf": "186600669f82474ae7e5cde2a92c225edd1932acb5d93aca6038cc8129afb62d",
+      "bytes": 13951,
+      "lines": 425,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/backend/x64/x64_backend.cc",
+      "sha256": "487e39cc3daac9070f954e0722a154bb17c55fd47d882a9501170df171354953",
+      "sha256_lf": "4f278439e8c54925a18c74e4792e1d42818305423e87b4644d5b8000045af7a5",
+      "bytes": 61416,
+      "lines": 1928,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/backend/x64/x64_seq_memory.cc",
+      "sha256": "8453b50085aef308029b666beb418c6e1676942559249c2e41d3be3298d4e2b0",
+      "sha256_lf": "60404b600e74076d0b7b9ae4c3ee4227e94a7846dbd6944346d0d5f3e1c7a109",
+      "bytes": 71958,
+      "lines": 2066,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/backend/x64/x64_seq_vector.cc",
+      "sha256": "65b81e1159866af97315ef18efcf38a79ed99392708a2a0b8603d286f9aecd0b",
+      "sha256_lf": "abf9c91f57092e639ec718c3bbc6a33dec25ccb60f36d6b40b5890e199cd57fc",
+      "bytes": 127379,
+      "lines": 3600,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/backend/x64/x64_sequences.cc",
+      "sha256": "69a3e8332c05697ebaac53a371144a6d473e0401955ba14f0abfa88089aa83c7",
+      "sha256_lf": "5e5ae94ae672c2ccad1cb547c4545a89d6ccbf5e8e1033096faec6f93b76f2c7",
+      "bytes": 136801,
+      "lines": 3326,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/entry_table.cc",
+      "sha256": "de8993661bde7bca181ee191adf76b5b58da059ea594a2584934643be6485898",
+      "sha256_lf": "4317fae36d3f500ee328aef2ddd56f3ab2af0df811a82f7b4c594dfbc5c4b337",
+      "bytes": 3952,
+      "lines": 122,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/entry_table.h",
+      "sha256": "1effb65fff6b668eb6160ae59321f12afe3fba9a3444f51aebcf9320e9bba081",
+      "sha256_lf": "82b2fa593ca8666ccc6275507922e8311a42afdc328032958cb59db553d157ec",
+      "bytes": 2230,
+      "lines": 68,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/hir/value.cc",
+      "sha256": "4e4bb8cc81baf7c07c3180377fb6901f457c1a0d4a5def8756e31737b1ef31a2",
+      "sha256_lf": "8b492705b3b455e3873f3ef4198c6473ddfd920e8e3dff89b3971983e9f66880",
+      "bytes": 54819,
+      "lines": 1897,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/ppc/ppc_emit_altivec.cc",
+      "sha256": "baec155e333d38ea5762e96d1380864b918799990656b03356e60adccc0022ec",
+      "sha256_lf": "015fc789bfdb63a08157139cea4554a3f701e3cef70f2481064bb4d3c1e5f834",
+      "bytes": 86469,
+      "lines": 2484,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/ppc/ppc_emit_control.cc",
+      "sha256": "9862392b38509ee11da000906ee0d63c39301cd5cc22f8302fe0a7bcfa146ba5",
+      "sha256_lf": "a34b59dffb815981e7c1b213d9e567b3db697ff539d4539b8de0fd34d569f0aa",
+      "bytes": 24829,
+      "lines": 872,
+      "anchors": [
+        {
+          "line": 424,
+          "symbol_line": "int InstrEmit_mcrf(PPCHIRBuilder& f, const InstrData& i) {"
+        }
+      ]
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/ppc/ppc_hir_builder.cc",
+      "sha256": "fdd1a8f15c214d6ac0262f008b1cb77529b8ddc1fc9616ae03a487ecf7321a70",
+      "sha256_lf": "9a7579c3672acb979cfb794af5c0b46be1eaeed2cb6a7325b39962d5933d2b28",
+      "bytes": 20893,
+      "lines": 610,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/ppc/testing/instr__gen_vmaxfp.s",
+      "sha256": "31b33045f08f2a8595a55ae7be64bb0673329c2c1500fe0b138487d353023b6f",
+      "sha256_lf": "8f75e1f7f07d0e38c0b9e7f0c0fc212148fa0f34e33fc8625d5439b89f394559",
+      "bytes": 237870,
+      "lines": 5867,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/ppc/testing/instr__gen_vminfp.s",
+      "sha256": "c2d3dc94edd7c21791f3afbe4edcf65bf1960e4c268747bfc35b56bbe7344040",
+      "sha256_lf": "003de7503d91e66de0cd67f6b8790eaee1047007eddac36ab3c811a412695b80",
+      "bytes": 237870,
+      "lines": 5867,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/ppc/testing/instr_mcrf.s",
+      "sha256": "88a1f536537abe2ae77c0942ee5b89b632ee9ec98c8f9d56623316bc9ab0b574",
+      "sha256_lf": "bf0f478185ccbbe2af29d24a9bb309ee955170c7bb11cc3c2c287b67f4ecab6b",
+      "bytes": 2167,
+      "lines": 119,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/processor.cc",
+      "sha256": "5548ca119bdb1524f86582656780a3fb80f1f6fc92f49c90b4b5c96154c94620",
+      "sha256_lf": "4345a06430a1a23a5825cb3fca2a9beab152b8dacf93e2d6b8b3fecbc9075d86",
+      "bytes": 45268,
+      "lines": 1359,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/byte_swap_test.cc",
+      "sha256": "8ad59532a48d0c2ff04a58cd0ee87058755bcbc1f456436af5ad77a218a753a3",
+      "sha256_lf": "96f2985c04452b96b6d0532609f50fb1688321d9aebc493d9266e827d050b40e",
+      "bytes": 1663,
+      "lines": 46,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/extract_test.cc",
+      "sha256": "04939c7dd52e51fada50591f6063b06bc6adc3dbf14e9172a7a81bc1d8a8deed",
+      "sha256_lf": "623e021b8dba54f3ce1d987537a64a03df918a058fe6fa2da7176c9d37e240bd",
+      "bytes": 4502,
+      "lines": 150,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/opcode_coverage_test.cc",
+      "sha256": "0917f19a9bf38fe52d5614c34b98ccfb047b630ee47a209a156fb0881c218f0f",
+      "sha256_lf": "c3d0ae46a6e3debb12b6acb8b2361e0ef4b2ea363385a89882f46005310e5ac8",
+      "bytes": 29729,
+      "lines": 811,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/swizzle_test.cc",
+      "sha256": "704b5385f574ab5fbd3a7be963d7ed572cdfb17c0fbe46c0fedc1902aaef7a5e",
+      "sha256_lf": "45521d5e01635205ef33c952fbcce6d8cf8ad4f7df8ec0c65b70cfc6a1b8357a",
+      "bytes": 1841,
+      "lines": 49,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/util.h",
+      "sha256": "946504494a10e5a678192c11997f319777c6bdd02e8c4c1d99cc87445e644663",
+      "sha256_lf": "06488eb7d94a7b8078279a7d04f5bc473ece78c1c9109767af3a601f70417636",
+      "bytes": 4250,
+      "lines": 130,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/vector_add_test.cc",
+      "sha256": "77628dca5e4fa1a2dd755c4bcc373b4278f3af484dc3b494423e671d78ddc461",
+      "sha256_lf": "b671d4d63c9116fb73c165d23cf33a8538f3f50b9147471cd373321ff8a1b6cc",
+      "bytes": 9068,
+      "lines": 311,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/vector_rotate_left_test.cc",
+      "sha256": "8932481a33fd4dc95205f8997133df1cf133e75ff164d959075d03c54eedeaf3",
+      "sha256_lf": "f729fe3269cf6f56b1305e62253da2e043dbb32e1d9cbaee2795274fb3e1f643",
+      "bytes": 2659,
+      "lines": 72,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/vector_shl_test.cc",
+      "sha256": "0d70d77376085731041a77ffa289235b5f997221616650ace4865d3e21316fa7",
+      "sha256_lf": "760c406c992ebae32699008059ade69f2d8548ef6e1c5f4b480242048592835b",
+      "bytes": 8329,
+      "lines": 225,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/cpu/testing/vector_shr_test.cc",
+      "sha256": "7152a38b6e704bc7c19df96fa8b3eeeb15930f879e6703ced44a9daa73d269aa",
+      "sha256_lf": "91bff7271fd08240a9427907ca117d781cb0c148d8e6981a3a778d66cdcd89a5",
+      "bytes": 7672,
+      "lines": 215,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/command_processor.cc",
+      "sha256": "d116e28026248a6f0aea176e0fc644128bdd3c27a4a7554b9b12336c0b8834a9",
+      "sha256_lf": "af1a08f35834231eaf6429b5cf314434e9000cb289794ee25a986f35fc00577f",
+      "bytes": 55649,
+      "lines": 1456,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/command_processor.h",
+      "sha256": "074013b99f2ab1c9b82edccf5eee7eaf8241da193b7717aa3e4237d86ab35192",
+      "sha256_lf": "fbe6fb1697bac6c87d7f6d9d675e465909599a1f7be1abe80c47969f814b47b2",
+      "bytes": 20907,
+      "lines": 560,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/d3d12_command_processor.cc",
+      "sha256": "d56e65fad568e9afbe036f829d15f1e2d4492d137e4a623f7afe85a73a5db1f5",
+      "sha256_lf": "ff1b8ffb9b64dce956519835772e80a83da0bd520bc74a1d32e7ae0b9de1bec9",
+      "bytes": 263762,
+      "lines": 5914,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/d3d12_command_processor.h",
+      "sha256": "4c7a37136735a046a0d3b335a58187371adf566ea77659a79fcc393067b2e9e1",
+      "sha256_lf": "d04b7ae5d2febaa5c44c1fe070e79e96b1a21caf9f51413b5c5b7e1761a68f74",
+      "bytes": 40658,
+      "lines": 899,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/d3d12_render_target_cache.cc",
+      "sha256": "fd4d92f372e6957b152e7258ef6aad6e9bcd1bce879c899570875c6e9bc671cd",
+      "sha256_lf": "765d7a8a76590ccab0f344b7cb135d5adc610b95fafe4af4f09a4179c20a1be5",
+      "bytes": 320710,
+      "lines": 6655,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/d3d12_zpd_query_pool.cc",
+      "sha256": "c5c4588208314535e997edfe5096d8162df8eccc50b84d8ea6affddf71c4a2dd",
+      "sha256_lf": "00b835c46786a6e59562325bb4d4ef6aefeffdc852ebd30b50ebb9f381581868",
+      "bytes": 15185,
+      "lines": 421,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/d3d12_zpd_query_pool.h",
+      "sha256": "a23da7208092aaa76957a266e73eabe3a4aec4689820e5acd97ba753afb893ee",
+      "sha256_lf": "d9483280fc543b0e9aa0baff7dfcbdbd72f7104e2b4ba329b9536f337dcbaf41",
+      "bytes": 4946,
+      "lines": 129,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/deferred_command_list.cc",
+      "sha256": "899985c331d1cd4adfe1befd639107424fc633a5946330b4c980d5dce2c25355",
+      "sha256_lf": "9a2f5f44f147cca35d91c7694fd884b0a19bf67defb1dc956cd9a14f3d1945b0",
+      "bytes": 15873,
+      "lines": 341,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/deferred_command_list.h",
+      "sha256": "e40b6385b9d88b14d24ea1eb14f90778553626d770ca1455352b580a09e1f978",
+      "sha256_lf": "036c67181119bc71eb8d4cc5adc161c36dfe8429ba1f84bf4a82afc72f9f80b7",
+      "bytes": 27021,
+      "lines": 681,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/pipeline_cache.cc",
+      "sha256": "e935ce16a11bffbb786f288e990cc343b89092cf90e1ffc939f33962f0015b88",
+      "sha256_lf": "a196fbddd766dd60161a2f4a536f6470529d0c07acbec63a241e59fd00b20153",
+      "bytes": 155149,
+      "lines": 3433,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/d3d12/pipeline_cache.h",
+      "sha256": "a4e4f3cc056bddad11cbac46eb83734d3c169f9d86f3a9ca5bfee8919aa0d2c6",
+      "sha256_lf": "4f21a6915eddd6855636fed26b91fd8bcc51b893b9e457037860ee257529e9c9",
+      "bytes": 20232,
+      "lines": 500,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/draw_util.cc",
+      "sha256": "24bbe1e8ad542e11d19671f2a9dccaeca1b556f17822acb50ba2c1ba04442fc0",
+      "sha256_lf": "932a552cfd1077b8b46af25c80c59bc5383414350d3391bd8322e6c75434bd27",
+      "bytes": 70369,
+      "lines": 1498,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/draw_util.h",
+      "sha256": "425ba7bb87f50e67de2578b6842a0dc827ab24298d091f45c47564ee35b2b966",
+      "sha256_lf": "afc07f0e185cda25a625432db375fadcd17222adaaf59b118623c0f4f829ac5a",
+      "bytes": 35855,
+      "lines": 795,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/dxbc_shader_translator.cc",
+      "sha256": "8a4f977ef935276be4063599d108b405b38bfdf118253aff3def95fe83de63d3",
+      "sha256_lf": "9e2c0b26936d1067ccfb79a25d814309048cded12650e58e9e3c29877b7eee26",
+      "bytes": 168686,
+      "lines": 3797,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/dxbc_shader_translator.h",
+      "sha256": "6040cf1bb988fc2aa907e721904fa77127319debf82465beab4ed5e0c77c9bf9",
+      "sha256_lf": "02e9e3193662b25a457a4bc4e594bb80241e65b67e6229547a0b0fa0daef97d7",
+      "bytes": 59845,
+      "lines": 1301,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/dxbc_shader_translator_alu.cc",
+      "sha256": "0255c48c95fac0d806bbba93acb215b249e4b5b9db01dcf0a47b52e28c6a2467",
+      "sha256_lf": "dbbc2bd82c1c974857100b2b55dfa29ee28954f3b5b25d10adee180a02ec968c",
+      "bytes": 51951,
+      "lines": 1135,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/dxbc_shader_translator_fetch.cc",
+      "sha256": "a328ee997f1a4e50584bf6b4550e1d8d81fd78ba2fa42a7df15c6e3ffe92b366",
+      "sha256_lf": "0ae52a397867db6ef6db0bf6d83f713d1bc6c8584e6ab3ea9a54edc88645a153",
+      "bytes": 115169,
+      "lines": 2337,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/dxbc_shader_translator_om.cc",
+      "sha256": "8a8f77ff13b874a9d3a528bee2f8b6c48500c79732f4229cfdb934d32e2e787e",
+      "sha256_lf": "7d1912927461ece46c28a127e7552fc70e194e249cfa0a759117d65e2ae736bb",
+      "bytes": 191339,
+      "lines": 3989,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/gpu_flags.cc",
+      "sha256": "35d22aced4ce086f5f3b6a9293232ec36a13b446e8215d0b871110c91ef3d363",
+      "sha256_lf": "0b955ce9d4fe46dcf24086790e906035faa8ba8560cb3fd0515fd421ba8f7aad",
+      "bytes": 6031,
+      "lines": 128,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/gpu_flags.h",
+      "sha256": "bc31c3331beae2d99ff3b60bfc48025892aaa96a9efae4b046ff3ecf08d16942",
+      "sha256_lf": "d1a1099143f064e08cafc97e1787864764b2ee62f8f2fff17a6973fb2c1f5995",
+      "bytes": 1459,
+      "lines": 53,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/graphics_system.cc",
+      "sha256": "44d79b36a50055669c7d562061e6dcfb9eccf53db14551c5c6748f1f13626d36",
+      "sha256_lf": "1d894b832157e6601e7d2923ad536e1c68bafed7b6b8851084a520eb26c98ccd",
+      "bytes": 16606,
+      "lines": 448,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/graphics_system.h",
+      "sha256": "7f9619e12280a32e492391e2586e783d411c7d20201abb5fcd7b5ff76593016c",
+      "sha256_lf": "308f1da3dbe8ef8d2dd1a0ed6102026ed12fd2c703292dec24d0b7163e5e5dff",
+      "bytes": 4512,
+      "lines": 143,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/pm4_command_processor_implement.h",
+      "sha256": "fe36598b80d2ed3c380365a1631055a0672049148c8219cf703277700eac1f7c",
+      "sha256_lf": "97a3895c1df7a84d35e1383754e1e962e840c705d7601899109d8f84c921957b",
+      "bytes": 55569,
+      "lines": 1488,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/registers.h",
+      "sha256": "6a41041c6523537d76c6129958eda95289138c85f8f5ba60cf09cf97b229edd9",
+      "sha256_lf": "75e8738dbb9da506bd77106d485f1ec8b0996a3bdfbd7eb0aa5f1534e42a8d7e",
+      "bytes": 41786,
+      "lines": 969,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/render_target_cache.cc",
+      "sha256": "e6b4c183b921633b7a0bdc5ca2111280c5dcfe829c93dec3da8d7519bcb5ac0d",
+      "sha256_lf": "d72afc8801455c0d991adeba44e14457602159832ca7e3a6ec5f0f2d8dc03854",
+      "bytes": 81602,
+      "lines": 1757,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/render_target_cache.h",
+      "sha256": "3e00f8f77142f73acec032cef4b7007b89e00db401a6e0c862664a5a5e0ebb85",
+      "sha256_lf": "d8bad5126dbf15ca008bc16c0d2e7936757ed639135745f57ea63daafc0044da",
+      "bytes": 37892,
+      "lines": 790,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shader.h",
+      "sha256": "626481de46dce821c9786006e1188d6984a76aa639b37195b22353704c9d1509",
+      "sha256_lf": "242512f306b9a5036d51e5450ecda232c68ce4f7001cefffae341dcf7042fecc",
+      "bytes": 46349,
+      "lines": 1114,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shader_interpreter.cc",
+      "sha256": "def2611f95066afff7da0c17a33af3e33a068c01f64f078af41a06f8017b6b4f",
+      "sha256_lf": "eb90c1e2fd009e71719697c42c113d2d8f8444ad1a287010d08e9dced3550820",
+      "bytes": 52292,
+      "lines": 1269,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shader_interpreter.h",
+      "sha256": "36c7ad94915a8bf0e83dcb94a1bc106d031f0933fd06b80995c16dd27484b61a",
+      "sha256_lf": "8a93eb0deb002dd3ab0672029fdacde645d7eb10b7310470547183525316bb06",
+      "bytes": 5261,
+      "lines": 149,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/edram.xesli",
+      "sha256": "dc5d87a4927d16c9ff289a21d4e89cdab052a2d442f26068de92b093578c7bc0",
+      "sha256_lf": "297927ba8d0fe53f608a29dfb33dce5e6988735f78adeb31210d97e7739fafeb",
+      "bytes": 5087,
+      "lines": 99,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/host_depth_store_2xmsaa.cs.xesl",
+      "sha256": "16dce3019156a306cfe381d5b6f96a9a7578ab05d0ab3fc11190b5f67a5e9028",
+      "sha256_lf": "383a73c32f81040ae495cea4ed7feaebad406f536e9b43ddb5d8882a9f3986af",
+      "bytes": 4167,
+      "lines": 84,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/host_depth_store_4xmsaa.cs.xesl",
+      "sha256": "579f40f5efe3bced479b006a8da729d8c9cea87fb79d02cd775a69270ac4c5a7",
+      "sha256_lf": "e4758983b61a44a7d3e6a90755faebec19d266192a181f59a341abd4bde166c1",
+      "bytes": 4075,
+      "lines": 81,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve.xesli",
+      "sha256": "63c038985f8be637aec164a061f17c7142b645197d644b9387ae5295ccebf314",
+      "sha256_lf": "0a4cc0fa8afec088a70a94cbc105cf93732fa4537fa86942873d0ea1cfb8e604",
+      "bytes": 48782,
+      "lines": 1041,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_fast_32bpp_1x2xmsaa.xesli",
+      "sha256": "dba98631baea9adbcae3c7ddcb5c4ad1ac0f5245073e6d5fd389b78fad37523e",
+      "sha256_lf": "38acf867d8bbede63031c92d6af426dc85f9bca1dfabbe32ce8597b012ecc425",
+      "bytes": 4638,
+      "lines": 103,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_fast_32bpp_4xmsaa.xesli",
+      "sha256": "586b97df401cda3b896b3a93564f4a16017783f5fd51a4a89bd6e0d9a0fc0202",
+      "sha256_lf": "6ee4ad7c9adb9e0828638dbee0ad7a80bd13a29854d589107f9c16dc44198e49",
+      "bytes": 3968,
+      "lines": 91,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_fast_64bpp_1x2xmsaa.xesli",
+      "sha256": "4c233787bd17636b3225b90d8bfcd7aa9a94f3f27130b8b4b6247af9bba8d5fe",
+      "sha256_lf": "35577a935b472d3674e984149baa10764ca8930006133596d42464b5970a3c80",
+      "bytes": 3843,
+      "lines": 87,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_fast_64bpp_4xmsaa.xesli",
+      "sha256": "eb431f15b79561bc448c1f47e2a7db31e32794f052699381d8eca7979771d0a3",
+      "sha256_lf": "6c59e74e2f94630f18d36626c14832f15ce7b77eda99b7a5d4627d0d84a7fa29",
+      "bytes": 3213,
+      "lines": 75,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_full_128bpp.xesli",
+      "sha256": "0ee2b6aaf65f0a18d11d2163abef666b9c33abc2bd1ac6f58fc2e5b75377caa8",
+      "sha256_lf": "10f3d1ffff4ceb8a9014a536a01a80c2028efdbeff6a32161a768cc61980ccd9",
+      "bytes": 2905,
+      "lines": 64,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_full_16bpp.xesli",
+      "sha256": "e9ac0ffb38f4308d2c41a5cd88475c400ac76da174d84b818ea7bd9bdce0970e",
+      "sha256_lf": "b543aba81cd36060cc965f508553178540dddf997d3a459e27e22362d8d18c27",
+      "bytes": 2518,
+      "lines": 59,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_full_32bpp.xesli",
+      "sha256": "b0d0b6b02faf95462058222bca9a1fc932887ef79c091ac9f2305aa0b360a686",
+      "sha256_lf": "98c47d9d4cfbea2411b9821b1efa6fe83535332de9bc02fe0bd426b8c38cee92",
+      "bytes": 2577,
+      "lines": 61,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_full_64bpp.xesli",
+      "sha256": "d7097e6625157720d8e212a0f44b60dd047180d7f9463a1cb58ba81d4af4c946",
+      "sha256_lf": "2d9a62132748a99afeffd6369db0c65fc042bd7678c7be7642b7e8e5d732474c",
+      "bytes": 2733,
+      "lines": 65,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/shaders/resolve_full_8bpp.xesli",
+      "sha256": "11c431d5aa5f21095543fd157d5b8dd4cbac76a377ef0b8e8f114b8c4f25faf1",
+      "sha256_lf": "5209a2effd8a9b82c272b4267a05739c3003a12f2764363e87b7ea2b5df0168f",
+      "bytes": 2509,
+      "lines": 60,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/spirv_shader_translator.cc",
+      "sha256": "e97537873940b11250be01400dc1d95b2c52ba2e03e0fb1487d32c6fc5e61a0c",
+      "sha256_lf": "a6389c7efcb07067db46317d1b25ed4519c44351455693bdbb0785f9f9125b36",
+      "bytes": 188130,
+      "lines": 3945,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/spirv_shader_translator.h",
+      "sha256": "21989741a6223bbf0f266ebd737b2d360d982cc3da19f9df33122dd0ab4cb179",
+      "sha256_lf": "fca33bc713fe69640656fd8453856d2196b02d0ffdee70b74f404c7c9ad8fd62",
+      "bytes": 56797,
+      "lines": 1224,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/spirv_shader_translator_alu.cc",
+      "sha256": "cf0a7f2f2316f71a8ec42588701a8adab1156b0627e85872041728552cd4665a",
+      "sha256_lf": "9b5bab7a47dd886a378e4f71caf734ba64c420beeb34c51c176cc23dfafb459a",
+      "bytes": 68225,
+      "lines": 1419,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/spirv_shader_translator_fetch.cc",
+      "sha256": "0b6f3e005d10626e804ba69476979a564f938e7092b3defebf33b19807747786",
+      "sha256_lf": "c9eba25cfb48f3115ca3afd34dda6196370c77a967925076c29f4d6536f6b7b5",
+      "bytes": 152143,
+      "lines": 2922,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/spirv_shader_translator_rb.cc",
+      "sha256": "fb9a2c3777a8e2490250b061ac85425f869e6088eb8212208984051bf0d027b1",
+      "sha256_lf": "fe23f4c1a8e027b128bc0beb78dc934f10645ef23e940d279157611015183f9c",
+      "bytes": 228456,
+      "lines": 4547,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/texture_cache.cc",
+      "sha256": "e1d4285c3cec59625eeb57db6372562abf89a941a71d29c12a9fd74e8c8d6acd",
+      "sha256_lf": "fb21306d7701b316e4b21fa4a6e52cee681d265bc14a28895168454d6d4a5360",
+      "bytes": 48808,
+      "lines": 1213,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/texture_cache.h",
+      "sha256": "96777c273b02a46dbc4a905c840c8beae05281511176e1f029c9b5439fd84ae4",
+      "sha256_lf": "a124b632b15222b19c36a9933388bbe15cb4cc3929cf642e387d037340d56b88",
+      "bytes": 33504,
+      "lines": 719,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/texture_util.cc",
+      "sha256": "f2b70224efb5f3cf49b9a082c62c3aae1a0ee1a86a4a820744b8c53b88a37704",
+      "sha256_lf": "ae073672216d48fa505f566f7064e50167d5293e50412576dacbf5d6e7c4e383",
+      "bytes": 24211,
+      "lines": 584,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/deferred_command_buffer.cc",
+      "sha256": "09d5f3bc19d96f14ecfad3547c6678159ad1a71d409ef7a87a4b792fb23b65d8",
+      "sha256_lf": "a2da246804db2ff06a531f681c4f296dc8ced37257ade554981eb1ffd415a2ca",
+      "bytes": 19065,
+      "lines": 404,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/deferred_command_buffer.h",
+      "sha256": "691d5bebd148c209eb22cac933a6695e61f81062cf2065bec90ca2769848c8d0",
+      "sha256_lf": "58a9554b3f3d612ad7f7c77ac8ea425495195ff47bdfd8f68119303ef7286846",
+      "bytes": 27076,
+      "lines": 680,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/vulkan_command_processor.cc",
+      "sha256": "029bd3f66bb260554e78039d8c5e9eeb3e79e4b6d34234f9c2b58256d4745967",
+      "sha256_lf": "575b4cde44ae1071dc6bddf04b36da0b3e3898a7338ebb90afaf1b14334bd988",
+      "bytes": 277305,
+      "lines": 5980,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/vulkan_command_processor.h",
+      "sha256": "73241da62edffa1e327b5c2723dd6f3d9685d16fd3961a1a059e1bb4651b68b4",
+      "sha256_lf": "2342ddcca5819e85d7332e63c7d1a39455a1f9f8b072647fc3a2ebd100aa7430",
+      "bytes": 39261,
+      "lines": 874,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc",
+      "sha256": "b1430cc6db02954db2eca407a23f668942b67903262809fb54dcfc87878edd32",
+      "sha256_lf": "bd03b8be0da7e0034c5854031eda67f05e79a1839068e0a8ef8309943196fd00",
+      "bytes": 163169,
+      "lines": 3626,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/vulkan_pipeline_cache.h",
+      "sha256": "6ad1fc0fafb72454f4f4186ca0232959cf7a7480a549d468a8f395c262190f43",
+      "sha256_lf": "599e922805fd2f745e2174141d984958dc9eaf5f67f020be4dc16c118736f4e8",
+      "bytes": 21711,
+      "lines": 535,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/vulkan_render_target_cache.cc",
+      "sha256": "f3370434201bff07ccfb1eda14914143b5da0179b2b2b7780384a471e85954f6",
+      "sha256_lf": "1be27fa950453d415d51bbeec54ad79b902f44571d0ddb62d16b4a076da61008",
+      "bytes": 315613,
+      "lines": 6370,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/vulkan_texture_cache.cc",
+      "sha256": "1702e2d520fcf162bc8b8355e0016cf9df6cb9e0a127435942f44946c043ba62",
+      "sha256_lf": "18fa3ac58d701ff77b34bb8a493a72720b20a1fc2f9d18d889ba237af6bc049f",
+      "bytes": 173435,
+      "lines": 3712,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/vulkan_zpd_query_pool.cc",
+      "sha256": "951d2df7e67eb79eb9d36f52c63109a2e738fe94cccc405d677740250708ad7f",
+      "sha256_lf": "b2d313005bfd2c130300a96768fd505312af0352989c03c6a96d5a97aa6bd41a",
+      "bytes": 31419,
+      "lines": 796,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/vulkan/vulkan_zpd_query_pool.h",
+      "sha256": "358b5d298db201a2b4a55892c6c0584bd5f8c00fb135106c9c228dea9b3a598b",
+      "sha256_lf": "5e42d7be983422c7a79a93e09d45427f2286854ea146f3fb232b4a0fb8887026",
+      "bytes": 5476,
+      "lines": 139,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/xenos.h",
+      "sha256": "44b24700217522004541e7ddb1dfad2eb718416db866d62a18ea4461f63fc069",
+      "sha256_lf": "66e17108da2f8f00821708474d674f2657cec38deb1bd587a0075c366387b3c0",
+      "bytes": 70003,
+      "lines": 1725,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/gpu/xenos_zpd_report.h",
+      "sha256": "ced2cbda4b3546589bc3a9bdabe5f137409e45ee7e223248a1bd2002953e1c6c",
+      "sha256_lf": "1b5130e7278d4ede6c98f9784716e05ef951999c52d804c958e4f235046dfd70",
+      "bytes": 6453,
+      "lines": 167,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/XLiveAPI.cpp",
+      "sha256": "7b4f870aae7bfb60d7f34ac4aa8835c2df7ff62aef04067012ef73e0dc3cea90",
+      "sha256_lf": "d76668fdf240e0e744ed2b8b6dfa8af2bbd8e799c3a57e61bb7a40cac2eb658c",
+      "bytes": 80365,
+      "lines": 2607,
+      "anchors": [
+        {
+          "line": 451,
+          "symbol_line": "uint16_t XLiveAPI::GetPlayerPort() const { return 36000; }"
+        }
+      ]
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/XLiveAPI.h",
+      "sha256": "0e227d01480ecd4d4777899d93689273f519e3ee24769440e76f92195422f1a5",
+      "sha256_lf": "77af7832cccd8b4857532dd9122ded1ae994ba5a01868192dfb80ce676022a97",
+      "bytes": 11388,
+      "lines": 348,
+      "anchors": [
+        {
+          "line": 111,
+          "symbol_line": "uint16_t GetPlayerPort() const;"
+        }
+      ]
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/json/session_object_json.cc",
+      "sha256": "e46db1f1aa685c3d7a61959b0b2619fdb75f38a0138b0c06138bad44929c50a1",
+      "sha256_lf": "6512576bdcca61abd91d0ee8568d4089d56940ccc27647e918b6d69fa7291241",
+      "bytes": 4188,
+      "lines": 168,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/json/session_object_json.h",
+      "sha256": "366f39388ccfbec751541dfda9a15807e765a04c9902d0b46f0efe00f11c6b8a",
+      "sha256_lf": "41f54f3a3f9d720dff1eaf2116473dbcb6770b3efee2b2de90bf68e9cbe35982",
+      "bytes": 5106,
+      "lines": 156,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/upnp.cc",
+      "sha256": "d736c87f16ac0a46c35514f8d14d9b33399e9e3cf624051581bc2c673745cd80",
+      "sha256_lf": "822224ddb6b41d1bc7befd0c2bd67116c2136d9fa49ba223dabadd7f6252debf",
+      "bytes": 16030,
+      "lines": 541,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/util/emulos_posix_socket_error.h",
+      "sha256": "20fed12d8d17adc0dc61cd4092361be15409787f27014830712d941da9fd5848",
+      "sha256_lf": "20fed12d8d17adc0dc61cd4092361be15409787f27014830712d941da9fd5848",
+      "bytes": 1937,
+      "lines": 61,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/util/network_adapter_manager.cc",
+      "sha256": "b74e6eae2835fbe6fc83105229c1e8156413c53c16e98a60b3c5c3f124a2b5d8",
+      "sha256_lf": "94a1b3a6cbdca5ebb809ee58171255869b60097664802e39a8b4e6f6b3af19b6",
+      "bytes": 17688,
+      "lines": 554,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/util/xlast.cc",
+      "sha256": "9ea0f9f234ad50b875a03ba83eeeb2148119ca85fdf95a2236af3e7f2817833c",
+      "sha256_lf": "a944fb7612e9cd47c0e987444fcf0a66b1c66e8b3d4336827664e24a45d7298d",
+      "bytes": 20778,
+      "lines": 744,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/util/xlast.h",
+      "sha256": "95f43568b3536afb18a5bde277467ef59ae1846c4e4284664c5df9520cfc4222",
+      "sha256_lf": "8cd7e4eb612a72b530fc1e9ee00a7dc3805df026ad748a556f7d5db0005cc92d",
+      "bytes": 6838,
+      "lines": 189,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xam/apps/xlivebase_app.cc",
+      "sha256": "aade5b7d09c7f97c8bc6c4049eddf613bb5a3f4f180858a80f182515efcb2d33",
+      "sha256_lf": "3c1ace8b0d409fdddd706c9451323d2d98a7b2b3cb84dc4c0880671975d99eb0",
+      "bytes": 106652,
+      "lines": 3204,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xam/online_schema.h",
+      "sha256": "ed423cb4ea3a3f6076252c0e681077a8857dbd97d689d02bd79342c3227eea95",
+      "sha256_lf": "5e15e7e6ff07f5a102bda959255ec3e3b72f6d77b2f112e9e130a6c3ca30fdcb",
+      "bytes": 203080,
+      "lines": 2652,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xam/unmarshaller/generic_unmarshaller.cc",
+      "sha256": "5625900083e35c6ad1cff7b720403b893b13e8f0b984dc1d1294728260c022b3",
+      "sha256_lf": "6b83cb6ed089297fdacb0827b35b6b48df87a108af774cba5b71883d407db81d",
+      "bytes": 1200,
+      "lines": 35,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xam/unmarshaller/schema_in_memory.cc",
+      "sha256": "24d509213667eaafa780a00e705bce84c5da2539f47a85e22aec9bd87386bf7a",
+      "sha256_lf": "627cf20cf4252bdbe7518d6548a0802bfdf79947743e4dd68c30d8c069d38b84",
+      "bytes": 10284,
+      "lines": 311,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xam/unmarshaller/xlivebase_task.cc",
+      "sha256": "a080bfffb1bb4ab68af8870896439d0fabfdf033d0644a3c4d3395da3f2fe744",
+      "sha256_lf": "b717ca0f1d1d326c80f435ef3499a7c1a34db1e92433c5eb3f9e19e6bae87aa2",
+      "bytes": 2843,
+      "lines": 79,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xam/xam_net.cc",
+      "sha256": "f59741910a46bdce0d2ca19b631846f3f1443707139de68f04319d659c6e4c51",
+      "sha256_lf": "222f2e2b1a3d713021d1ca8d73f737fa0129fcceaca921092c2b58e383dc706e",
+      "bytes": 90635,
+      "lines": 2724,
+      "anchors": [
+        {
+          "line": 883,
+          "symbol_line": "dword_result_t NetDll_XNetXnAddrToInAddr_entry(dword_t caller,"
+        },
+        {
+          "line": 1272,
+          "symbol_line": "dword_result_t NetDll_XNetQosListen_entry("
+        },
+        {
+          "line": 1333,
+          "symbol_line": "dword_result_t NetDll_XNetQosLookup_entry("
+        }
+      ]
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xam/xam_user.cc",
+      "sha256": "356b84ac4d7b9451cceaf1fc777e1f21da991a02a2ff05400dcf57def185a2fe",
+      "sha256_lf": "4e7d4918b7d30f48168db6d174c14e88ab333aad842602c864139290f7bda28f",
+      "bytes": 64747,
+      "lines": 1943,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xnet.h",
+      "sha256": "f53eb77048ffcc7652f282d29420b34ea9980bef3ddb650e586aedbab9e1ff06",
+      "sha256_lf": "1b774e416548f6a85fc16a8c742bee7b65bc0f05bdef106986f900a02c20c2b8",
+      "bytes": 55234,
+      "lines": 1587,
+      "anchors": [
+        {
+          "line": 474,
+          "symbol_line": "static_assert_size(XNKID, 0x8);"
+        },
+        {
+          "line": 481,
+          "symbol_line": "static_assert_size(XNKEY, 0x10);"
+        },
+        {
+          "line": 532,
+          "symbol_line": "static_assert_size(XNADDR, 0x24);"
+        },
+        {
+          "line": 543,
+          "symbol_line": "static_assert_size(XSESSION_INFO, 0x3C);"
+        },
+        {
+          "line": 570,
+          "symbol_line": "static_assert_size(XSESSION_SEARCHRESULT, 0x5C);"
+        }
+      ]
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xsession.cc",
+      "sha256": "26ad2242640317fb61130c248d004a1cc3adca50a4c94f159409c3857d813aee",
+      "sha256_lf": "26ebdce02497857af3d9402288f57f474fc051042dcc8b099f053ed94bf0f8bf",
+      "bytes": 46232,
+      "lines": 1367,
+      "anchors": [
+        {
+          "line": 42,
+          "symbol_line": "X_RESULT XSession::CreateSession(uint32_t user_index, uint8_t public_slots,"
+        },
+        {
+          "line": 292,
+          "symbol_line": "X_RESULT XSession::JoinSession(XGI_SESSION_MANAGE* data) {"
+        },
+        {
+          "line": 645,
+          "symbol_line": "X_RESULT XSession::MigrateHost(XGI_SESSION_MIGRATE* data) {"
+        },
+        {
+          "line": 978,
+          "symbol_line": "X_RESULT XSession::GetSessions(KernelState* kernel_state,"
+        }
+      ]
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xsession.h",
+      "sha256": "70f82b106fdb073f051d451d68d6058c6a4661068a717899f3229b2e793b2e45",
+      "sha256_lf": "1d3e7bb25ad20466c9509acee928c8a015d85a2a1c7b3f7a283141c83245b12e",
+      "bytes": 14061,
+      "lines": 440,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xsocket.cc",
+      "sha256": "cb8c0c959cdd75e3139d9c15c1cfbbd204308489088f46d922814c6490c62388",
+      "sha256_lf": "5bbe3f508aedb6aae2a3776527195ef6a3a7599bfa6831431b9adc9b2b11425c",
+      "bytes": 43602,
+      "lines": 1453,
+      "anchors": [
+        {
+          "line": 921,
+          "symbol_line": "int XSocket::WSARecvFrom(XWSABUF* buffers, uint32_t num_buffers,"
+        },
+        {
+          "line": 1007,
+          "symbol_line": "bool XSocket::WSAGetOverlappedResult(XWSAOVERLAPPED* overlapped_ptr,"
+        },
+        {
+          "line": 1193,
+          "symbol_line": "int XSocket::WSACancelOverlappedIO() {"
+        }
+      ]
+    },
+    {
+      "path": "engine/xenia/src/xenia/kernel/xsocket.h",
+      "sha256": "f25fbe60991b1c17ba2281daa330b299a162f505cfd0358c713bd9dcfa901b72",
+      "sha256_lf": "3c927feb1234b56828d72b800c7fe89645024fa51da8cd8c6aeb623530f8e901",
+      "bytes": 9441,
+      "lines": 317,
+      "anchors": [
+        {
+          "line": 133,
+          "symbol_line": "static_assert_size(XWSABUF, 0x8);"
+        },
+        {
+          "line": 142,
+          "symbol_line": "static_assert_size(XWSAOVERLAPPED, 0x14);"
+        }
+      ]
+    },
+    {
+      "path": "engine/xenia/src/xenia/memory.cc",
+      "sha256": "bb54e7e4a75a90b12ad0a2f8711af556cf242d9890b2f220d74b0b14c60772f7",
+      "sha256_lf": "236e18100efb65c2c730f21040a8bbe6aa2f54b3b4b4ac5c565fe08b3eb83940",
+      "bytes": 95734,
+      "lines": 2438,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/ui/d3d12/d3d12_provider.cc",
+      "sha256": "282dbf9de06908a99200289ea5440c4c5702c50d6ac1abc0bded7572bbaa479d",
+      "sha256_lf": "df7b60d3481bca0fa72c0bbbb10fe712cc90aad179b1798a6866a4aac23c9ad0",
+      "bytes": 23481,
+      "lines": 592,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/ui/d3d12/d3d12_provider.h",
+      "sha256": "5dc91dccc2a960ff9e0d7513430b45c51b78a0cb6baa52c7f95abb05902d678c",
+      "sha256_lf": "9807dabb7ca57a4795b6745396aeef45e4f98bd7d43250298dd551a2f64d49f5",
+      "bytes": 8224,
+      "lines": 224,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/ui/vulkan/vulkan_device.cc",
+      "sha256": "2526973e51bc77d3cb9a636deaf9010daca4a5ff9a8ace259fb4d4ed49e1864e",
+      "sha256_lf": "653fa74714f9ef2dfdba442cac09f6b7dbadcc5f85ecad59ebada506d8943c33",
+      "bytes": 38464,
+      "lines": 883,
+      "anchors": []
+    },
+    {
+      "path": "engine/xenia/src/xenia/ui/vulkan/vulkan_device.h",
+      "sha256": "d5cab7cab7de8bc290c4553c64c1397048f6484df7149db7ae3c621a23eedb9e",
+      "sha256_lf": "2bd623079951ba286c976b89b873f73d9c4a4b563f2ea0658a845ea522474018",
+      "bytes": 12961,
+      "lines": 343,
+      "anchors": []
+    },
+    {
+      "path": "server/prepare-upstream.cjs",
+      "sha256": "3f7c75be28550f16d58fb00e3f15cd37e5a1abe0817b82270f1fe28f1c9149c5",
+      "sha256_lf": "3f7c75be28550f16d58fb00e3f15cd37e5a1abe0817b82270f1fe28f1c9149c5",
+      "bytes": 1816,
+      "lines": 21,
+      "anchors": []
+    },
+    {
+      "path": "server/private-service.cjs",
+      "sha256": "e6cc2097f937494bd4b0d93e2a638e231ba63c666414d83fdd1f9f87ce123827",
+      "sha256_lf": "e6cc2097f937494bd4b0d93e2a638e231ba63c666414d83fdd1f9f87ce123827",
+      "bytes": 30318,
+      "lines": 477,
+      "anchors": []
+    }
+  ]
+}

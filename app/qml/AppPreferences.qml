@@ -32,13 +32,19 @@ ColumnLayout {
             primary: page.section === "about"
             onClicked: page.section = "about"
         }
+        ActionButton {
+            objectName: "appCoresTab"
+            text: qsTr("Cores")
+            primary: page.section === "cores"
+            onClicked: page.section = "cores"
+        }
         Item { Layout.fillWidth: true }
     }
 
     Loader {
         Layout.fillWidth: true
         Layout.fillHeight: true
-        sourceComponent: page.section === "about" ? aboutComponent : page.section === "compatibility" ? compatibilityComponent : appearanceComponent
+        sourceComponent: page.section === "cores" ? coresComponent : page.section === "about" ? aboutComponent : page.section === "compatibility" ? compatibilityComponent : appearanceComponent
     }
 
     Component {
@@ -52,6 +58,7 @@ ColumnLayout {
             }
         }
     }
+    Component { id: coresComponent; CorePreferences { controller: page.controller } }
     Component { id: aboutComponent; AboutScreen { controller: page.controller } }
     Component { id: compatibilityComponent; CompatibilityLegend { controller: page.controller } }
 }

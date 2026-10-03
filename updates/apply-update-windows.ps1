@@ -48,7 +48,7 @@ try {
     } finally { $zip.Dispose() }
     Expand-Archive -LiteralPath $archivePath -DestinationPath $extracted
     $source = Join-Path $extracted 'Emulos360'
-    foreach ($required in @('Emulos360.exe','engine/Emulos360-core.exe','updates/apply-update-windows.ps1')) {
+    foreach ($required in @('Emulos360.exe','engine/Emulos360-core.exe','engine/edge/xenia_edge.exe','engine/edge/release.json','engine/edge/D3D12/D3D12Core.dll','engine/edge/D3D12/dxil.dll','updates/apply-update-windows.ps1')) {
         if (!(Test-Path -LiteralPath (Join-Path $source $required) -PathType Leaf)) {
             throw "Falta $required en la actualización."
         }

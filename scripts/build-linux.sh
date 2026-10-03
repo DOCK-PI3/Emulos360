@@ -104,4 +104,5 @@ if [[ -f "$root/engine/xenia/third_party/gamecontrollerdb/gamecontrollerdb.txt" 
   install -m 644 "$root/engine/xenia/third_party/gamecontrollerdb/gamecontrollerdb.txt" "$package/engine/gamecontrollerdb.txt"
 fi
 
+python3 "$root/scripts/setup-edge.py" --destination "$package/engine/edge"
 echo "Build Linux preparada en $package"

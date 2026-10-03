@@ -11,13 +11,13 @@ CoreWindowHost::CoreWindowHost(QObject* parent) : QObject(parent) {
 }
 CoreWindowHost::~CoreWindowHost() { clear(); }
 void CoreWindowHost::clear() {
-    timer_.stop(); pid_ = 0;
+    timer_.stop(); pid_ = 0; nativeWindow_ = 0; embed_ = true;
     auto old = window_; window_ = nullptr;
     status_.clear(); emit changed();
     delete old;
 }
-void CoreWindowHost::watch(qint64 pid) {
-    clear(); pid_ = pid; attempts_ = 0;
+void CoreWindowHost::watch(qint64 pid, bool embed) {
+    clear(); pid_ = pid; embed_ = embed; attempts_ = 0;
 #ifdef Q_OS_WIN
     status_ = tr("Preparando la ventana del motor…"); timer_.start(100);
 #else
@@ -27,21 +27,25 @@ void CoreWindowHost::watch(qint64 pid) {
 }
 void CoreWindowHost::discover() {
 #ifdef Q_OS_WIN
-    struct Search { DWORD pid; HWND hwnd = nullptr; } search{static_cast<DWORD>(pid_)};
+    struct Search { DWORD pid; bool embed; HWND hwnd = nullptr; } search{static_cast<DWORD>(pid_), embed_};
     EnumWindows([](HWND hwnd, LPARAM data) -> BOOL {
         auto* result = reinterpret_cast<Search*>(data);
         DWORD pid = 0; GetWindowThreadProcessId(hwnd, &pid);
-        wchar_t className[128]{};
+        wchar_t className[128]{}, title[512]{};
+        GetWindowTextW(hwnd, title, 512);
         if (pid == result->pid && !GetWindow(hwnd, GW_OWNER) && IsWindowVisible(hwnd) &&
-            GetClassNameW(hwnd, className, 128) && wcscmp(className, L"XeniaWindowClass") == 0) {
+            GetClassNameW(hwnd, className, 128) && (result->embed ? wcscmp(className, L"XeniaWindowClass") == 0 :
+             QString::fromWCharArray(title).startsWith("Xenia-edge", Qt::CaseInsensitive))) {
             result->hwnd = hwnd; return FALSE;
         }
         return TRUE;
     }, reinterpret_cast<LPARAM>(&search));
     if (search.hwnd) {
-        window_ = QWindow::fromWinId(reinterpret_cast<WId>(search.hwnd));
+        nativeWindow_ = reinterpret_cast<quintptr>(search.hwnd);
+        if (embed_) window_ = QWindow::fromWinId(reinterpret_cast<WId>(search.hwnd));
         timer_.stop();
-        status_ = window_ ? tr("Motor integrado. Guarda la partida desde el juego antes de cerrar.")
+        status_ = !embed_ ? tr("Canary Edge está abierto en su ventana nativa. Puedes controlar o cerrar la sesión desde aquí.") :
+                          window_ ? tr("Motor integrado. Guarda la partida desde el juego antes de cerrar.")
                           : tr("No se pudo integrar la ventana. El motor sigue abierto por separado.");
         emit changed();
     } else if (++attempts_ == 600) {
@@ -52,9 +56,9 @@ void CoreWindowHost::discover() {
 #endif
 }
 void CoreWindowHost::focus() {
-    if (!window_) return;
+    if (!available()) return;
 #ifdef Q_OS_WIN
-    const auto child = reinterpret_cast<HWND>(window_->winId());
+    const auto child = reinterpret_cast<HWND>(nativeWindow_);
     DWORD processId = 0;
     const DWORD targetThread = GetWindowThreadProcessId(child, &processId);
     if (!targetThread || processId != static_cast<DWORD>(pid_) || !IsWindowVisible(child)) return;
@@ -82,8 +86,8 @@ void CoreWindowHost::focus() {
 }
 void CoreWindowHost::requestClose() {
 #ifdef Q_OS_WIN
-    if (!window_) return;
-    const auto hwnd = reinterpret_cast<HWND>(window_->winId());
+    if (!available()) return;
+    const auto hwnd = reinterpret_cast<HWND>(nativeWindow_);
     DWORD pid = 0; GetWindowThreadProcessId(hwnd, &pid);
     if (pid == static_cast<DWORD>(pid_)) PostMessageW(hwnd, WM_CLOSE, 0, 0);
 #endif

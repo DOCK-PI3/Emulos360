@@ -1,0 +1,1143 @@
+{
+  "date": "2026-10-02",
+  "library_root": "D:/XBOX360_GAMES",
+  "method": "Emulos360 --inventory; metadata only, no game launched",
+  "wiki_url": "https://github.com/AdrianCassar/xenia-canary/wiki/Netplay-Compatibility",
+  "wiki_sha256": "85adbc2e5c2aba442dc51e2c7f5725342d253f13453ee03645aedec8642fc6fb",
+  "compatibility_sha256": "1f3a586b6d861eb3ea231eb3a03acb93a2cd67db4ad8f8e56b2bcdfade664de2",
+  "inventory_sha256": "7cf0270d9a2404353a4b347ca78b0d1d7c51df3e30a565ea89e9fc7e936c476b",
+  "games": [
+    {
+      "title": "Ace Combat 6 - Fires of Liberation (USA Japan)",
+      "titleId": "4E4D07D1",
+      "format": "XEX",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/128",
+      "canary_updated": "2026-08-29T04:05:06Z",
+      "netplay": [
+        {
+          "title": "ACE COMBAT 6: Fires of Liberation",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "",
+          "comments": "`ac6_ground_fix = true`<br><br>Player and ranked works."
+        }
+      ]
+    },
+    {
+      "title": "After Burner Climax",
+      "titleId": "58410A06",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "ARKANOID Live!",
+      "titleId": "58410991",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/1072",
+      "canary_updated": "2026-05-09T13:36:19Z",
+      "netplay": []
+    },
+    {
+      "title": "Army of Two (USA)",
+      "titleId": "454107F8",
+      "format": "XEX",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/543",
+      "canary_updated": "2026-08-05T01:43:16Z",
+      "netplay": []
+    },
+    {
+      "title": "BAJA: Edge of Control",
+      "titleId": "545107EF",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/258",
+      "canary_updated": "2026-01-31T22:28:49Z",
+      "netplay": []
+    },
+    {
+      "title": "Borderlands",
+      "titleId": "545407E7",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/642",
+      "canary_updated": "2025-07-03T08:34:59Z",
+      "netplay": [
+        {
+          "title": "Borderlands",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Borderlands 2",
+      "titleId": "5454087C",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/646",
+      "canary_updated": "2026-07-27T18:15:29Z",
+      "netplay": [
+        {
+          "title": "Borderlands 2",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Borderlands: The Pre-Sequel",
+      "titleId": "545408B4",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/643",
+      "canary_updated": "2025-07-03T08:35:06Z",
+      "netplay": [
+        {
+          "title": "Borderlands: The Pre-Sequel",
+          "public": "",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Call of Duty : Ghosts",
+      "titleId": "415608FC",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/607",
+      "canary_updated": "2026-06-14T02:40:04Z",
+      "netplay": [
+        {
+          "title": "Call of Duty: Ghosts",
+          "public": "❌",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server.<br><br>Multiplayer and Extinction.<br><br>Recommended Content:<br>Compatibility Pack 1<br>Compatibility Pack 2<br>TU 17"
+        }
+      ]
+    },
+    {
+      "title": "Castle of Illusion",
+      "titleId": "584112C7",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/398",
+      "canary_updated": "2025-01-10T03:58:03Z",
+      "netplay": []
+    },
+    {
+      "title": "Castlevania Harmony of Despair",
+      "titleId": "58410A7A",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/171",
+      "canary_updated": "2026-05-21T02:48:35Z",
+      "netplay": []
+    },
+    {
+      "title": "Castlevania: SOTN",
+      "titleId": "58410847",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/1149",
+      "canary_updated": "2026-07-05T22:38:02Z",
+      "netplay": []
+    },
+    {
+      "title": "Chronicles of Mystara",
+      "titleId": "584113C3",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "Dante's Inferno",
+      "titleId": "454108CF",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/516",
+      "canary_updated": "2026-09-01T10:31:08Z",
+      "netplay": []
+    },
+    {
+      "title": "Dark Sector",
+      "titleId": "445007D4",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/622",
+      "canary_updated": "2025-07-03T08:12:45Z",
+      "netplay": [
+        {
+          "title": "Dark Sector",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server.<br><br>Player & Ranked works"
+        }
+      ]
+    },
+    {
+      "title": "Darkness, The (USA Europe)",
+      "titleId": "545407EE",
+      "format": "XEX",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/229",
+      "canary_updated": "2026-09-21T10:48:39Z",
+      "netplay": [
+        {
+          "title": "The Darkness",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "DAYTONA USA",
+      "titleId": "58410B1D",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/639",
+      "canary_updated": "2026-01-13T08:16:39Z",
+      "netplay": []
+    },
+    {
+      "title": "DD: Dark Arisen",
+      "titleId": "43430814",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/300",
+      "canary_updated": "2026-09-26T03:11:10Z",
+      "netplay": []
+    },
+    {
+      "title": "Diablo III: Ultimate Evil Edition",
+      "titleId": "394F07D4",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/48",
+      "canary_updated": "2026-09-24T21:51:50Z",
+      "netplay": [
+        {
+          "title": "Diablo III: Reaper of Souls",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "⚠️",
+          "comments": ""
+        }
+      ]
+    },
+    {
+      "title": "Doom 3: BFG Edition",
+      "titleId": "425307F1",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/8",
+      "canary_updated": "2026-07-27T18:04:34Z",
+      "netplay": [
+        {
+          "title": "Doom 3: BFG Edition",
+          "public": "⚠️",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "",
+          "comments": "DOOM works.<br>DOOM 2 requires overlapped networking.<br>DOOM 3 is buggy."
+        }
+      ]
+    },
+    {
+      "title": "Doritos Crash Course",
+      "titleId": "58410A71",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/616",
+      "canary_updated": "2026-05-17T22:00:05Z",
+      "netplay": []
+    },
+    {
+      "title": "Double Dragon",
+      "titleId": "58411252",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/873",
+      "canary_updated": "2025-10-03T15:11:40Z",
+      "netplay": []
+    },
+    {
+      "title": "F1 2014",
+      "titleId": "434D0852",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/1070",
+      "canary_updated": "2026-07-27T17:51:47Z",
+      "netplay": [
+        {
+          "title": "F1 2014",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "`protect_zero = false` required to prevent session search from crashing.<br><br>Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Forza Horizon 2",
+      "titleId": "4D530AA4",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/111",
+      "canary_updated": "2026-09-09T04:12:20Z",
+      "netplay": []
+    },
+    {
+      "title": "Gears of War",
+      "titleId": "4D5307D5",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/44",
+      "canary_updated": "2026-09-25T18:22:10Z",
+      "netplay": [
+        {
+          "title": "Gears of War",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Gears of War 2",
+      "titleId": "4D53082D",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/46",
+      "canary_updated": "2026-09-13T10:40:28Z",
+      "netplay": [
+        {
+          "title": "Gears of War 2",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Gears of War 3",
+      "titleId": "4D5308AB",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/39",
+      "canary_updated": "2026-09-08T21:08:01Z",
+      "netplay": [
+        {
+          "title": "Gears of War 3",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server.<br>Systemlink is more stable than xbox live.<br><br>Base version most stable for matchmaking & coop.<br><br>Player & Ranked works."
+        }
+      ]
+    },
+    {
+      "title": "Gears of War: Judgment",
+      "titleId": "4D530A26",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/45",
+      "canary_updated": "2026-09-13T04:35:56Z",
+      "netplay": [
+        {
+          "title": "Gears of War: Judgment",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Halo 3",
+      "titleId": "4D5307E6",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/214",
+      "canary_updated": "2026-07-31T20:22:22Z",
+      "netplay": [
+        {
+          "title": "Halo 3: Mythic",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "⚠️",
+          "comments": "Patch required for systemlink.<br><br>Systemlink requires a server (MAC)."
+        }
+      ]
+    },
+    {
+      "title": "Halo 4",
+      "titleId": "4D530919",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/216",
+      "canary_updated": "2026-08-28T02:57:32Z",
+      "netplay": [
+        {
+          "title": "Halo 4",
+          "public": "⚠️",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "⚠️",
+          "comments": "`readback_resolve = true` used to fix lighting.<br><br>Patch required for Xbox Live and systemlink.<br><br>Systemlink requires a server.<br><br>Join Xbox Live sessions via friends."
+        }
+      ]
+    },
+    {
+      "title": "Halo: Reach",
+      "titleId": "4D53085B",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/981",
+      "canary_updated": "2026-09-17T04:33:35Z",
+      "netplay": [
+        {
+          "title": "Halo Reach",
+          "public": "⚠️",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "⚠️",
+          "comments": "Patch required for systemlink & Xbox Live.<br><br>Systemlink requires a server.<br><br>Join public sessions works via friends list."
+        }
+      ]
+    },
+    {
+      "title": "Hydro Thunder",
+      "titleId": "5841096A",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/738",
+      "canary_updated": "2026-09-19T11:03:07Z",
+      "netplay": []
+    },
+    {
+      "title": "Left 4 Dead",
+      "titleId": "45410830",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/910",
+      "canary_updated": "2026-06-02T19:25:06Z",
+      "netplay": [
+        {
+          "title": "Left 4 Dead",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Xbox Live compatible with GOTY on TU 7.<br><br>Systemlink works without a server."
+        },
+        {
+          "title": "Left 4 Dead - GOTY",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "LOST PLANET 2",
+      "titleId": "434307ED",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/500",
+      "canary_updated": "2026-09-23T11:09:43Z",
+      "netplay": [
+        {
+          "title": "Lost Planet 2",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "⚠️",
+          "comments": "Systemlink requires a server (QoS)."
+        }
+      ]
+    },
+    {
+      "title": "LOST PLANET COLONIES",
+      "titleId": "434307DE",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/658",
+      "canary_updated": "2026-05-07T20:58:51Z",
+      "netplay": [
+        {
+          "title": "Lost Planet: Extreme Condition Colonies Edition",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server.<br><br>`mount_cache = false`"
+        }
+      ]
+    },
+    {
+      "title": "Mass Effect",
+      "titleId": "4D5307E8",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/154",
+      "canary_updated": "2026-08-05T20:38:41Z",
+      "netplay": []
+    },
+    {
+      "title": "Metal Slug 3",
+      "titleId": "584108CF",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "METAL SLUG XX",
+      "titleId": "58410972",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "Modern Warfare 2",
+      "titleId": "41560817",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/241",
+      "canary_updated": "2026-09-20T20:49:52Z",
+      "netplay": [
+        {
+          "title": "Call of Duty: Modern Warfare 2",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Modern Warfare 3",
+      "titleId": "415608CB",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/232",
+      "canary_updated": "2026-08-22T22:30:34Z",
+      "netplay": [
+        {
+          "title": "Call of Duty: Modern Warfare 3",
+          "public": "❌",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Monkey Island 2: SE",
+      "titleId": "58410A53",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/877",
+      "canary_updated": "2025-10-03T15:13:46Z",
+      "netplay": []
+    },
+    {
+      "title": "Monkey Island: SE",
+      "titleId": "58410995",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/876",
+      "canary_updated": "2026-05-26T12:18:09Z",
+      "netplay": []
+    },
+    {
+      "title": "MONOPOLY",
+      "titleId": "4541086F",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "MotoGP15",
+      "titleId": "513107D9",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": [
+        {
+          "title": "MotoGP 15",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "",
+          "comments": ""
+        }
+      ]
+    },
+    {
+      "title": "Need for Speed Most Wanted",
+      "titleId": "454107D9",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/28",
+      "canary_updated": "2026-08-07T05:23:31Z",
+      "netplay": []
+    },
+    {
+      "title": "Need for Speed™ Rivals",
+      "titleId": "454109C6",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Loads",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/561",
+      "canary_updated": "2026-08-01T10:05:31Z",
+      "netplay": []
+    },
+    {
+      "title": "NEW RALLY-X",
+      "titleId": "58410835",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/849",
+      "canary_updated": "2025-09-22T17:27:27Z",
+      "netplay": []
+    },
+    {
+      "title": "OutRun™ Online Arcade",
+      "titleId": "58410968",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/191",
+      "canary_updated": "2026-07-19T00:03:21Z",
+      "netplay": [
+        {
+          "title": "OutRun Online Arcade",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "",
+          "comments": ""
+        }
+      ]
+    },
+    {
+      "title": "PAC-MAN CE DX",
+      "titleId": "58410A8C",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "Pinball FX",
+      "titleId": "58410834",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/730",
+      "canary_updated": "2025-07-10T07:11:40Z",
+      "netplay": [
+        {
+          "title": "Pinball FX",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "",
+          "comments": ""
+        }
+      ]
+    },
+    {
+      "title": "Pinball FX2",
+      "titleId": "58410A23",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/719",
+      "canary_updated": "2025-07-10T07:09:26Z",
+      "netplay": []
+    },
+    {
+      "title": "PRO EVOLUTION SOCCER 2018",
+      "titleId": "4A3007D3",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/463",
+      "canary_updated": "2026-08-23T01:45:19Z",
+      "netplay": []
+    },
+    {
+      "title": "RAGE",
+      "titleId": "425307EC",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/163",
+      "canary_updated": "2026-09-27T21:07:38Z",
+      "netplay": []
+    },
+    {
+      "title": "resident evil 4",
+      "titleId": "4343081C",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/237",
+      "canary_updated": "2026-07-30T18:01:44Z",
+      "netplay": []
+    },
+    {
+      "title": "Resident Evil 5",
+      "titleId": "434307D4",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/337",
+      "canary_updated": "2026-07-09T01:38:03Z",
+      "netplay": [
+        {
+          "title": "Resident Evil 5",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink can be buggy."
+        }
+      ]
+    },
+    {
+      "title": "Resident Evil: Revelations 2",
+      "titleId": "43430840",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "Sacred 2 Fallen Angel",
+      "titleId": "4B4D07D1",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Loads",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/868",
+      "canary_updated": "2026-08-02T19:10:14Z",
+      "netplay": []
+    },
+    {
+      "title": "Sacred 3",
+      "titleId": "4B4D07E7",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "Sega Superstars Tennis (USA Europe)",
+      "titleId": "534507F5",
+      "format": "XEX",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/1175",
+      "canary_updated": "2026-07-27T20:21:37Z",
+      "netplay": [
+        {
+          "title": "SEGA Superstars Tennis",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "",
+          "comments": ""
+        }
+      ]
+    },
+    {
+      "title": "Shinobi",
+      "titleId": "584109A4",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/1027",
+      "canary_updated": "2026-03-30T06:25:13Z",
+      "netplay": []
+    },
+    {
+      "title": "Skyrim",
+      "titleId": "425307E6",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/1100",
+      "canary_updated": "2026-09-04T18:25:16Z",
+      "netplay": []
+    },
+    {
+      "title": "SOF Payback",
+      "titleId": "41560802",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "SROA",
+      "titleId": "58410AC2",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/959",
+      "canary_updated": "2026-08-13T15:10:10Z",
+      "netplay": [
+        {
+          "title": "SEGA Rally Online Arcade",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "",
+          "comments": ""
+        }
+      ]
+    },
+    {
+      "title": "STRIDER",
+      "titleId": "584113C7",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "SVC: Alex Kidd & Co.",
+      "titleId": "58410B70",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "SVC: Golden Axe",
+      "titleId": "58410B6F",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "SVC: Monster World",
+      "titleId": "58410B72",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "SVC: Streets of Rage",
+      "titleId": "58410B71",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "SVC: Toe Jam & Earl",
+      "titleId": "5841124C",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "TC's RainbowSix Vegas2",
+      "titleId": "55530807",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/470",
+      "canary_updated": "2025-01-27T09:55:32Z",
+      "netplay": [
+        {
+          "title": "Tom Clancy's Rainbow Six: Vegas 2",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "TEKKEN 6",
+      "titleId": "4E4D07FC",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/747",
+      "canary_updated": "2026-08-20T23:34:29Z",
+      "netplay": [
+        {
+          "title": "Tekken 6",
+          "public": "⚠️",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "",
+          "comments": "Latest TU for COOP & PVP. Player & COOP go in-game.<br><br>Ranked requires a file from xbox live.<br><br>PVP works on public.<br>CO-OP often disconnects mid-match."
+        }
+      ]
+    },
+    {
+      "title": "Tetris Splash",
+      "titleId": "5841083B",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Playable",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/533",
+      "canary_updated": "2025-03-27T07:37:03Z",
+      "netplay": [
+        {
+          "title": "Tetris Splash",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "",
+          "comments": ""
+        }
+      ]
+    },
+    {
+      "title": "The Orange Box - Half-Life 2 (incl. Episodes 1 & 2) / Team Fortress 2 / Portal",
+      "titleId": "4541080F",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/235",
+      "canary_updated": "2026-07-18T00:45:57Z",
+      "netplay": [
+        {
+          "title": "Orange Box (Team Fortress 2)",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Tom Clancy's Ghost Recon: Future Soldier",
+      "titleId": "55530833",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/466",
+      "canary_updated": "2026-07-27T18:23:04Z",
+      "netplay": [
+        {
+          "title": "Tom Clancy's Ghost Recon: Future Soldier",
+          "public": "❌",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Top Spin 4",
+      "titleId": "54540859",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/358",
+      "canary_updated": "2026-08-27T16:38:33Z",
+      "netplay": [
+        {
+          "title": "Top Spin 4",
+          "public": "✅",
+          "tested_local": "",
+          "only_local": "",
+          "system_link": "",
+          "comments": ""
+        }
+      ]
+    },
+    {
+      "title": "Trivial Pursuit",
+      "titleId": "45410898",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "Turtles In Time RS",
+      "titleId": "584109D2",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Unknown",
+      "canary_url": null,
+      "canary_updated": null,
+      "netplay": []
+    },
+    {
+      "title": "Undertow",
+      "titleId": "58410873",
+      "format": "XBLA",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/325",
+      "canary_updated": "2025-03-17T14:37:45Z",
+      "netplay": [
+        {
+          "title": "Undertow",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Unreal Tournament 3",
+      "titleId": "4D5707DB",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/1017",
+      "canary_updated": "2026-02-03T23:42:52Z",
+      "netplay": [
+        {
+          "title": "Unreal Tournament 3",
+          "public": "",
+          "tested_local": "✅",
+          "only_local": "",
+          "system_link": "✅",
+          "comments": "Systemlink works without a server."
+        }
+      ]
+    },
+    {
+      "title": "Williams Pinball Classics",
+      "titleId": "534A07D1",
+      "format": "GOD",
+      "complete": true,
+      "canary": "Gameplay",
+      "canary_url": "https://github.com/xenia-canary/game-compatibility/issues/753",
+      "canary_updated": "2026-04-08T08:23:23Z",
+      "netplay": []
+    }
+  ]
+}

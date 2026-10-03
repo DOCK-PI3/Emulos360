@@ -16,7 +16,7 @@ try {
     try {
         $env:PATH = "$qtRoot/bin;$originalPath"
         if ($Test) {
-            ctest --test-dir build -C $Configuration -R '^(library_tests|ui_tests|voice_party_tests)$' --output-on-failure
+            ctest --test-dir build -C $Configuration -R '^(core_options_tests|library_tests|ui_tests|voice_party_tests)$' --output-on-failure
             if ($LASTEXITCODE) { throw 'Fallaron las pruebas. Revisa build/*-results.txt.' }
         }
         if ($Package) {
@@ -55,6 +55,7 @@ try {
             if (!(Test-Path $core)) { throw 'Falta el motor. Ejecuta scripts/build-engine.ps1 antes de crear el paquete.' }
             New-Item -ItemType Directory -Force out/Emulos360/engine | Out-Null
             Copy-Item $core out/Emulos360/engine/Emulos360-core.exe
+            & ./scripts/setup-edge.ps1 -Destination (Join-Path $projectRoot "out/Emulos360/engine/edge")
             if (!(Test-Path out/Emulos360/data) -and (Test-Path out/LOS360/data)) {
                 Copy-Item out/LOS360/data out/Emulos360/data -Recurse
             }
