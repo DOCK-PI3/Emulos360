@@ -21,7 +21,7 @@ ColumnLayout {
         Layout.margins: 8
         visible: !session.fullScreen || session.chromeVisible
         ActionButton { text: qsTr("Biblioteca"); onClicked: session.browseLibrary() }
-        ActionButton { text: session.showRooms ? qsTr("Volver al juego") : qsTr("Salas Netplay"); enabled: session.controller.players.sessionCore !== "edge"; onClicked: session.showRooms = !session.showRooms }
+        ActionButton { text: session.showRooms ? qsTr("Volver al juego") : qsTr("Salas Netplay"); onClicked: session.showRooms = !session.showRooms }
         Item { Layout.fillWidth: true }
         ActionButton {
             text: qsTr("Controlar juego")
@@ -53,9 +53,7 @@ ColumnLayout {
             anchors.centerIn: parent
             width: Math.min(620, parent.width - 48)
             visible: session.controller.players.coreWindow.external && !session.showRooms
-            text: qsTr("Canary Edge se ejecuta en una ventana independiente.
-Pulsa Controlar juego para volver a ella.
-Sus partidas y logros se guardan en la carpeta de Edge.")
+            text: qsTr("El juego está abierto en una ventana independiente.")
             color: Theme.muted
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap

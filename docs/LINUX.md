@@ -37,3 +37,15 @@ bash diagnose-linux.sh
 ```
 
 Adjunta el archivo `diagnostico-linux-*.txt`, `data/core.log` y `data/core-console.log`. El último archivo también registra los mensajes que salen antes de que se inicialice el registro del motor. El diagnóstico no copia perfiles, partidas ni invitaciones privadas.
+
+## Si falla la actualización automática
+
+Si el registro indica que falta `libQt6Concurrent.so.6` (código 127), cierra la
+aplicación, ejecuta `sudo apt update` y `sudo apt install libqt6concurrent6`
+en Ubuntu y repite la actualización. El instalador actualizado ya incluye esa
+biblioteca; la release 0.4.0 publicada la omitía.
+
+El error «La nueva versión se cerró durante el arranque» activa la restauración
+de la versión anterior. Sigue [estos pasos](LINUX_UPDATE_RECOVERY.md) para
+instalar el ayudante corregido también en 0.3.0 y conservar el error original en
+la carpeta de datos.

@@ -1,5 +1,11 @@
 # Investigación del core y multijugador de Xenia Canary para Emulos360
 
+> **Actualización del 5 de octubre de 2026:** Nexia/Edge retirados del proyecto.
+> Único core: Xenia Canary. Priorizar compatibilidad, estabilidad, rendimiento
+> y gráficos, conservando juegos y Netplay funcionales. XBLIG descartado.
+> [Retirada y evidencia](../../SINGLE_CORE.md); [prioridades](../../NEXT_PRIORITIES.md).
+
+
 Fecha de consulta: **2 de octubre de 2026**. Alcance: investigación y documentación; no se ha modificado, compilado ni ejecutado el motor, instalado software de red o cambiado perfiles, juegos o configuración. Las comprobaciones de parches usaron exclusivamente `git apply --check` y `--reverse --check`, que no aplican cambios.
 
 Esta documentación sirve como base de trabajo para futuras implementaciones. No es una garantía de emulación perfecta: cada cambio requiere reproducción, revisión y validación con los juegos y equipos afectados. Las conclusiones distinguen código inspeccionado, reportes upstream e hipótesis de mejora.
@@ -18,7 +24,8 @@ Esta documentación sirve como base de trabajo para futuras implementaciones. No
 | [08 — Biblioteca y Sacred 2](08-CANDIDATOS-BIBLIOTECA.md) | 80 títulos cruzados, candidatos de multijugador, leyenda y evidencia de Sacred 2 |
 | [09 — Rivals y contenido HD](09-NFS-RIVALS-CONTENIDO-HD.md) | Error inicial, carga detenida con HD/TU también sin red según la prueba del usuario, y diferencias del scheduler de Edge |
 | [10 — Seguimiento y mejoras del core](10-SEGUIMIENTO-Y-MEJORAS-DEL-CORE.md) | Canary actualizado, cuatro candidatos preparados, compilación aislada de dos fuentes Vulkan y revisión semanal |
-| [11 — Segundo core opcional: Edge](11-SEGUNDO-CORE-EDGE.md) | Integración 0.4.0, selección por título, aislamiento, builds y límites de las pruebas |
+| [11 — Segundo core opcional: Edge](11-SEGUNDO-CORE-EDGE.md) | Historial de Edge 0.4.0, retirado el 5 de octubre; evidencia y límites |
+| [12 — Juegos Avatar XBLIG](12-XBLIG-AVATAR.md) | Historial XNA/Nexia; XBLIG descartado y proveedor retirado |
 | [Fuentes e inventarios](FUENTES.md) | Enlaces, revisiones, hashes y límites de la investigación |
 
 ## Conclusiones que deben orientar el siguiente trabajo
@@ -50,3 +57,7 @@ hashes iniciales como registro histórico.
 ## Integración posterior del 3 de octubre
 
 El usuario autorizó un segundo core opcional. Consulta el [capítulo 11](11-SEGUNDO-CORE-EDGE.md) y [DUAL_CORE.md](../../DUAL_CORE.md) antes de cambiar sus contratos. El core activo conserva su binario y el gameplay pendiente continúa distinguiéndose de las pruebas de integración.
+
+## Integración indie posterior del 5 de octubre
+
+Consultar [el capítulo 12](12-XBLIG-AVATAR.md) y [XBLIG.md](../../XBLIG.md). La biblioteca reconoce XBLIG y Windows añade un proveedor independiente. Se obtuvo el runtime de consola y se instaló XNA Windows con autorización. Perfil y partidas se comparten; gameplay y avatares requieren validación y hay fallos de resolución XNA 3.1 documentados. El core Netplay permanece intacto.

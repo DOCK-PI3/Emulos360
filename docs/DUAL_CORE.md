@@ -1,5 +1,16 @@
 # Segundo core: Canary Edge (0.4.0)
 
+> **Historial de una integración retirada el 5 de octubre de 2026.**
+> No es una función actual ni una prioridad futura. Véase
+> [el funcionamiento con un único core](SINGLE_CORE.md).
+
+
+> **Decisión del usuario, 5 de octubre de 2026:** retirar primero Nexia y después
+> Edge al retomar el trabajo. XBLIG queda descartado. El objetivo es mejorar
+> compatibilidad, estabilidad, rendimiento y gráficos del core principal,
+> conservando juegos y Netplay funcionales. Este documento conserva el historial;
+> no continuar ampliando estos proveedores. Ver [la próxima prioridad](NEXT_PRIORITIES.md).
+
 Integración realizada el **3 de octubre de 2026** en el proyecto GitHub
 `C:\Users\mabe8\Documents\GitHub\Emulos360`.
 
@@ -36,35 +47,37 @@ el core actual. El Edge distribuido no implementa la integración `--emulos_*` d
 Emulos360. No se le pasan esos argumentos ni los de nuestra API de sesiones.
 Intentar iniciar Edge dentro de una sesión MultiP produce un mensaje que pide
 seleccionar el core actual. No hay cambio silencioso a otro ejecutable si falta el
-core elegido. La interfaz de Logros y Partidas de Emulos360 consulta el core actual;
-los avances de Edge se consultan en Edge o en su carpeta de contenido.
+core elegido. La interfaz de Logros y Partidas consulta ahora el almacenamiento común.
+Los cambios de perfil y partidas de Edge usan esa misma ubicación; la persistencia
+de un juego concreto requiere comprobar guardar y cargar con ambos cores.
 
-## Almacenamiento independiente
+## Perfil y partidas compartidos — 5 de octubre de 2026
 
-Todo se encuentra bajo la carpeta de datos elegida por el usuario:
+Por petición del usuario se comparte el perfil seleccionado y las partidas.
+DLC/TU, configuración y cachés continúan siendo independientes.
 
 | Ruta | Contenido |
 | --- | --- |
 | `cores.ini` | Core global, GPU por core y excepciones por Title ID |
 | `cores/edge/xenia-edge.config.toml` | Ajustes nativos de Edge |
-| `cores/edge/content/` | Perfiles, partidas, DLC y TU usados por Edge |
+| `cores/edge/content/` | Vista del perfil y partidas comunes; DLC/TU propios |
 | `cores/edge/cache/` | Cachés de Edge |
 | `cores/edge/core.log`, `core-console.log` | Diagnóstico de Edge |
-| `cores/edge/imports/` | Marcadores de copia inicial por perfil y Title ID |
 
-Al iniciar un título en Edge por primera vez se copian, en segundo plano, el perfil
-seleccionado y su contenido de ese título desde las unidades interna y externa.
-También se copia contenido público del título (DLC/TU). Solo se añaden archivos
-que faltan. Las fuentes se leen y ningún archivo existente de Edge se sobrescribe.
-Las carpetas enlazadas o solapadas se rechazan y se bloquea el almacenamiento
-mientras se prepara la sesión. Una unidad externa desconectada no se recrea.
+Al preparar Edge se conectan el directorio `FFFE07D1` del perfil y el `00000001`
+del título con enlaces de directorio. No se copian ni sincronizan periódicamente.
+Se respeta la unidad de partidas elegida; si solo existe progreso en la otra
+unidad, se utiliza esa ubicación. Los datos y helpers principales quedan
+bloqueados durante preparación y sesión.
 
-Después de la copia inicial, perfiles y partidas evolucionan por separado. Se
-siguen incorporando archivos nuevos de DLC/TU, pero **no se sincronizan partidas,
-logros ni paquetes reemplazados con el mismo nombre**. La aplicación no elimina
-contenido antiguo de Edge. Para reemplazar deliberadamente un TU o DLC con el mismo
-nombre, cierra ambos cores y gestiona la copia independiente desde «Partidas de
-Edge». Conserva una copia de seguridad antes de reemplazar progreso.
+Las carpetas de una integración anterior se conservan en `.before-shared`.
+Se recuperan partidas que faltan; cuando existen versiones diferentes de un
+archivo se conservan ambas y se muestran sus rutas antes de iniciar Edge.
+No se sobrescribe automáticamente progreso. Los DLC/TU que faltan mantienen
+la copia independiente anterior; los paquetes con el mismo nombre no se sustituyen.
+Una unidad externa desconectada no se recrea. Windows requiere datos en un disco
+local NTFS; Linux utiliza enlaces simbólicos. No se ha migrado la instalación real
+del usuario en estas pruebas.
 
 La configuración inicial copia únicamente idioma y notificación de logros.
 Después se conserva cualquier edición nativa. Los parches específicos, las
@@ -135,3 +148,19 @@ candidatos de mantenimiento del core. Esta integración permite probar Edge sin
 portar esos cambios al motor activo. Registra por título revisión, Media ID/TU,
 GPU, configuración, síntoma y resultado real, separando arranque, menú, gameplay
 y multijugador funcional.
+
+## Prueba del usuario — 3 de octubre de 2026
+
+El usuario confirma que la actualización a esta entrega y el reinicio de la
+aplicación finalizaron correctamente en su instalación real. Indica una demora
+moderada y una carpeta `data` de varios GB. No se midieron tiempos, fases ni
+integridad de los datos en esta comprobación, por lo que no se establece una
+causa verificada de la demora.
+
+Las pruebas de juegos y de ambos cores en su instalación siguen pendientes;
+el usuario comunicará cualquier error. Este reporte acredita actualización y
+reinicio según su observación, sin ampliar la compatibilidad de gameplay.
+
+## Ruta independiente para XBLIG — 5 de octubre de 2026
+
+Los paquetes administrados XNA no usan el selector Netplay/Edge de los juegos XEX. Se detectan antes de esa selección y se dirigen al proveedor experimental Nexia, con paquete y ajustes privados por VirtualTitleID, perfil común y partidas separadas por indie. No modifica estos dos cores ni sus argumentos. La primera integración ejecuta solo en Windows, offline; gameplay, avatares XNA y multijugador pendientes. Consultar [XBLIG.md](XBLIG.md) para dependencias, almacenamiento y pruebas.

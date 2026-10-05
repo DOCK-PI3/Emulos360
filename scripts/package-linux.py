@@ -11,8 +11,7 @@ args = parser.parse_args()
 package = args.package.resolve()
 if not (package / 'Emulos360').is_file():
     parser.error('La carpeta debe contener la build Linux de Emulos360.')
-for required in ('engine/Emulos360-core', 'engine/edge/xenia_edge_linux.AppImage',
-                 'engine/edge/LICENSE', 'engine/edge/release.json', 'updates/apply-update-linux.py'):
+for required in ('engine/Emulos360-core', 'updates/apply-update-linux.py'):
     if not (package / required).is_file():
         parser.error(f'Falta en la build Linux: {required}')
 for private in ('server/data', 'server/logs', 'server/.env', 'server/mongodb/data'):
@@ -21,11 +20,13 @@ for private in ('server/data', 'server/logs', 'server/.env', 'server/mongodb/dat
 archive = package.with_name(package.name + '.tar.gz')
 excluded = {'build', 'engine-build', 'iso2god-build', 'data'}
 executables = {'Emulos360', 'engine/Emulos360-core', 'tools/7z', 'tools/iso2god',
-               'server/node', 'server/mongodb/bin/mongod', 'engine/edge/xenia_edge_linux.AppImage'}
+               'server/node', 'server/mongodb/bin/mongod', }
 
 
 def runtime(info):
     relative = pathlib.PurePosixPath(info.name).relative_to(package.name)
+    if relative.parts[:2] in (('engine', 'edge'), ('engine', 'xblig')) or relative.name in {'LEEME-XBLIG.md', 'LEEME-DUAL-CORE.md', 'LEEME-CORES.md'}:
+        return None
     if relative.parts and relative.parts[0] in excluded:
         return None
     info.uid = info.gid = 0

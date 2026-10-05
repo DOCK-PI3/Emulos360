@@ -26,17 +26,14 @@
 class NetplayIntegrationTests : public QObject {
     Q_OBJECT
 private slots:
-    void dualCoreRoutesCommandsAndKeepsIndependentStorage() {
+    void singleCoreRoutesKeepStorageAndPrivateNetplay() {
         const auto stub = qEnvironmentVariable("EMULOS_TEST_STUB");
-        if (stub.isEmpty()) QSKIP("Set EMULOS_TEST_STUB to the core_launch_stub executable");
+        if (stub.isEmpty()) QSKIP("Set EMULOS_TEST_STUB to core_launch_stub");
         QTemporaryDir directory; QVERIFY(directory.isValid());
-        const auto data = directory.filePath("data"), appRoot = directory.filePath("app");
-        CoreOptions paths(data, nullptr, appRoot);
-        for (const auto& id : {QStringLiteral("netplay"), QStringLiteral("edge")}) {
-            const auto file = paths.executable(id); QVERIFY(QDir().mkpath(QFileInfo(file).absolutePath()));
-            QVERIFY(QFile::copy(stub, file));
-            QVERIFY(QFile::setPermissions(file, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner));
-        }
+        const auto data = directory.filePath("data"), record = directory.filePath("arguments.json");
+        QVERIFY(QDir().mkpath(data));
+        QFile legacy(data + "/cores.ini"); QVERIFY(legacy.open(QIODevice::WriteOnly));
+        legacy.write("defaultCore=edge\n[games]\n545408B4\\core=edge\n545408B4\\renderer=vulkan\n"); legacy.close();
         EngineSettings settings(data + "/engine");
         QVERIFY(settings.setValue("Live.network_mode", "0"));
         QVERIFY(settings.setValue("Profiles.logged_profile_slot_0_xuid", "E000000000000001"));
@@ -46,147 +43,37 @@ private slots:
         QVERIFY(account.open(QIODevice::WriteOnly)); account.write("fixture"); account.close();
         const auto target = directory.filePath("test.god"); QFile game(target);
         QVERIFY(game.open(QIODevice::WriteOnly)); game.write("LIVEfixture"); game.close();
-        QFile original(settings.configPath()); QVERIFY(original.open(QIODevice::ReadOnly));
-        const auto originalConfig = original.readAll(); original.close();
-        const auto record = directory.filePath("arguments.json");
         qputenv("EMULOS_STUB_OUTPUT", record.toUtf8());
         const auto cleanup = qScopeGuard([] { qunsetenv("EMULOS_STUB_OUTPUT"); });
-        PlayerServices players(&settings, data, nullptr, paths.executable("netplay"), appRoot);
+        PlayerServices players(&settings, data, nullptr, stub);
         QSignalSpy failures(&players, &PlayerServices::operationFailed);
         const auto readArguments = [&record] {
             QFile file(record); if (!file.open(QIODevice::ReadOnly)) return QStringList{};
             const auto array = QJsonDocument::fromJson(file.readAll()).object()["args"].toArray();
             QStringList args; for (const auto& value : array) args << value.toString(); return args;
         };
-        players.cores()->setDefaultCore("edge");
         players.refreshProfiles(); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 10000);
         QVERIFY2(failures.isEmpty(), qPrintable(players.status()));
-        QVERIFY(readArguments().first().endsWith("Emulos360-core.exe") || readArguments().first().endsWith("Emulos360-core"));
         QVERIFY(readArguments().contains("--emulos_profile_command=list"));
         QCOMPARE(players.profiles().size(), 1);
-        QVERIFY(players.cores()->saveGameOptions("545408B4", "edge", "vulkan"));
-        players.launchGame(target, "545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 10000);
-        QVERIFY2(failures.isEmpty(), qPrintable(players.status()));
-        const auto edgeArgs = readArguments();
-        QVERIFY(edgeArgs.contains("--gpu=vulkan"));
-        QVERIFY(edgeArgs.contains("--storage_root=" + players.cores()->edgeStorage()));
-        QVERIFY(edgeArgs.contains("--content_root=" + players.cores()->edgeContent()));
-        QVERIFY(edgeArgs.contains("--logged_profile_slot_0_xuid=E000000000000001"));
-        for (const auto& arg : edgeArgs) {
-            QVERIFY(!arg.startsWith("--emulos_")); QVERIFY(!arg.startsWith("--api_"));
-            QVERIFY(!arg.startsWith("--network_mode=")); QVERIFY(!arg.startsWith("--auto_check_updates="));
-        }
-        QVERIFY(QFileInfo::exists(players.cores()->edgeContent() + "/E000000000000001/FFFE07D1/00010000/E000000000000001/Account"));
-        QVERIFY(original.open(QIODevice::ReadOnly)); QCOMPARE(original.readAll(), originalConfig); original.close();
-        QVERIFY(players.cores()->saveGameOptions("545408B4", "netplay", ""));
         players.launchGame(target, "545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 10000);
         QVERIFY2(failures.isEmpty(), qPrintable(players.status()));
         QVERIFY(readArguments().contains("--content_root=" + settings.contentPath()));
+        QVERIFY(readArguments().contains("--gpu=vulkan"));
         QVERIFY(readArguments().contains("--auto_check_updates=false"));
-#ifdef Q_OS_WIN
-        QVERIFY(!readArguments().contains("--gpu=vulkan"));
-#else
-        QVERIFY(readArguments().contains("--gpu=" + settings.values().value("GPU.gpu").toString()));
-#endif
-        QVERIFY(players.cores()->saveGameOptions("545408B4", "netplay", "vulkan"));
-        players.launchGame(target, "545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 10000);
-        QCOMPARE(readArguments().count("--gpu=vulkan"), 1);
-        const auto gpuArgs = readArguments();
-        QCOMPARE(std::count_if(gpuArgs.cbegin(), gpuArgs.cend(),
-            [](const QString& arg) { return arg.startsWith("--gpu="); }), 1);
-        players.launchNetplay(); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 10000);
-        QCOMPARE(players.sessionCore(), QStringLiteral("netplay"));
-        QVERIFY(readArguments().contains("--content_root=" + settings.contentPath()));
-        QVERIFY(players.cores()->saveGameOptions("545408B4", "edge", ""));
+        const auto args = readArguments();
+        QCOMPARE(std::count_if(args.cbegin(), args.cend(), [](const QString& arg) { return arg.startsWith("--gpu="); }), 1);
         players.setPrivateApi("http://127.0.0.1:8080/");
-        players.launchGame(target, "545408B4"); QVERIFY(!players.busy());
-        QCOMPARE(failures.size(), 1); QVERIFY(players.status().contains("MultiP"));
-        players.setPrivateApi({}); QVERIFY(QFile::remove(paths.executable("edge")));
-        players.launchGame(target, "545408B4"); QVERIFY(!players.busy());
-        QCOMPARE(failures.size(), 2); QVERIFY(players.status().contains("core seleccionado"));
-    }
-    void officialEdgeWindowOpensAndCloses() {
-        const auto current = qEnvironmentVariable("EMULOS_TEST_CORE");
-        const auto edge = qEnvironmentVariable("EMULOS_TEST_EDGE");
-        if (current.isEmpty() || edge.isEmpty()) QSKIP("Set the actual bundled core paths for a native smoke test");
-        QTemporaryDir directory; QVERIFY(directory.isValid());
-        CoreOptions paths(directory.path(), nullptr, directory.filePath("app"));
-        QVERIFY(QDir().mkpath(QFileInfo(paths.executable("edge")).absolutePath()));
-        QVERIFY(QFile::copy(edge, paths.executable("edge")));
-        EngineSettings settings(directory.filePath("engine"));
-        QVERIFY(settings.setValue("Live.network_mode", "0")); QVERIFY(settings.save());
-        PlayerServices players(&settings, directory.path(), nullptr, current, directory.filePath("app"));
-        QSignalSpy failures(&players, &PlayerServices::operationFailed);
-        players.openEdgeSettings();
-        QTRY_VERIFY_WITH_TIMEOUT(players.sessionActive() || !failures.isEmpty(), 15000);
+        players.launchGame(target, "545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 10000);
         QVERIFY2(failures.isEmpty(), qPrintable(players.status()));
-#ifdef Q_OS_WIN
-        QTRY_VERIFY_WITH_TIMEOUT(players.coreWindow()->available(), 30000);
-        QVERIFY(players.coreWindow()->external()); QVERIFY(!players.coreWindow()->window());
-        players.closeSession(); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 15000);
+        QVERIFY(readArguments().contains("--api_address=http://127.0.0.1:8080/"));
+        QVERIFY(readArguments().contains("--content_root=" + settings.contentPath()));
+        players.launchNetplay(); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 10000);
         QVERIFY2(failures.isEmpty(), qPrintable(players.status()));
-#else
-        players.closeSession(); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 15000);
-#endif
-    }
-    void officialEdgeGameLaunch() {
-#ifndef Q_OS_WIN
-        QSKIP("Native game-frame capture is checked on Windows");
-#else
-        const auto target = qEnvironmentVariable("EMULOS_TEST_EDGE_GAME");
-        const auto title = qEnvironmentVariable("EMULOS_TEST_EDGE_TITLE");
-        const auto current = qEnvironmentVariable("EMULOS_TEST_CORE");
-        const auto edge = qEnvironmentVariable("EMULOS_TEST_EDGE");
-        if (target.isEmpty() || title.isEmpty() || current.isEmpty() || edge.isEmpty())
-            QSKIP("Set an owned game and bundled cores for a real boot smoke test");
-        QTemporaryDir directory; QVERIFY(directory.isValid());
-        CoreOptions paths(directory.path(), nullptr, directory.filePath("app"));
-        QVERIFY(QDir().mkpath(QFileInfo(paths.executable("edge")).absolutePath()));
-        QVERIFY(QFile::copy(edge, paths.executable("edge")));
-        const auto runtimeSource = QFileInfo(edge).absoluteDir().filePath("D3D12");
-        const auto runtimeTarget = QFileInfo(paths.executable("edge")).absoluteDir().filePath("D3D12");
-        QVERIFY(QDir().mkpath(runtimeTarget));
-        for (const auto& dll : {QStringLiteral("D3D12Core.dll"), QStringLiteral("dxil.dll")})
-            QVERIFY(QFile::copy(runtimeSource + '/' + dll, runtimeTarget + '/' + dll));
-        EngineSettings settings(directory.filePath("engine"));
-        QVERIFY(settings.setValue("Live.network_mode", "0")); QVERIFY(settings.save());
-        PlayerServices players(&settings, directory.path(), nullptr, current, directory.filePath("app"));
-        QSignalSpy failures(&players, &PlayerServices::operationFailed);
-        players.createProfile("EdgeBoot"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 60000);
-        QVERIFY2(failures.isEmpty(), qPrintable(players.status()));
-        QCOMPARE(players.profiles().size(), 1);
-        QVERIFY(players.selectProfile(players.profiles().first().toMap()["xuid"].toString()));
-        players.cores()->setDefaultCore("edge");
-        players.launchGame(target, title);
-        QTRY_VERIFY_WITH_TIMEOUT(players.coreWindow()->available() || !failures.isEmpty(), 30000);
-        QVERIFY2(failures.isEmpty(), qPrintable(players.status()));
-        QVERIFY(players.sessionActive());
-        QTest::qWait(15000); QVERIFY(players.sessionActive());
-        const auto capture = qEnvironmentVariable("EMULOS_CORE_UI_CAPTURE");
-        if (!capture.isEmpty()) {
-            struct Search { DWORD pid; HWND hwnd = nullptr; } search{static_cast<DWORD>(players.sessionProcessId())};
-            EnumWindows([](HWND hwnd, LPARAM param) -> BOOL {
-                auto* result = reinterpret_cast<Search*>(param); DWORD pid = 0;
-                GetWindowThreadProcessId(hwnd, &pid);
-                wchar_t name[512]{}; GetWindowTextW(hwnd, name, 512);
-                if (pid == result->pid && IsWindowVisible(hwnd) && !GetWindow(hwnd, GW_OWNER) &&
-                    QString::fromWCharArray(name).startsWith("Xenia-edge", Qt::CaseInsensitive)) {
-                    result->hwnd = hwnd; return FALSE;
-                }
-                return TRUE;
-            }, reinterpret_cast<LPARAM>(&search));
-            QVERIFY(search.hwnd);
-            QVERIFY(QGuiApplication::primaryScreen()->grabWindow(reinterpret_cast<WId>(search.hwnd))
-                    .save(capture + "/edge-game-boot.png"));
-        }
-        players.closeSession(); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(), 15000);
-        QVERIFY2(failures.isEmpty(), qPrintable(players.status()));
-        if (!capture.isEmpty()) {
-            QFile log(players.cores()->edgeStorage() + "/core.log"), output(capture + "/edge-game-core.log");
-            QVERIFY(log.open(QIODevice::ReadOnly)); QVERIFY(output.open(QIODevice::WriteOnly));
-            const auto bytes = log.readAll(); QCOMPARE(output.write(bytes), bytes.size());
-        }
-#endif
+        QVERIFY(readArguments().contains("--content_root=" + settings.contentPath()));
+        QVERIFY(account.open(QIODevice::ReadOnly)); QCOMPARE(account.readAll(), QByteArray("fixture"));
+        QVERIFY(!QFileInfo::exists(data + "/cores/edge"));
+        QVERIFY(!QFileInfo::exists(data + "/cores/xblig"));
     }
     void originalAvatarProfileRoundTrip() {
         const auto core=qEnvironmentVariable("EMULOS_TEST_CORE");

@@ -8,7 +8,7 @@ if command -v fuser >/dev/null && fuser "$target_dir/Emulos360" "$target_dir/eng
   echo 'Cierra Emulos360 y el juego antes de actualizar.' >&2; exit 1
 fi
 # Explicit runtime paths: data (profiles, saves, covers and settings) is never copied.
-for item in Emulos360 engine tools intro server assets licenses XEXplugins install-dependencies.sh install-base-dependencies.sh diagnose-linux.sh update-linux.sh LEEME-Linux.md LEEME-MultiP.md LEEME-Compatibilidad.md; do
+for item in Emulos360 engine updates tools intro server assets licenses XEXplugins install-dependencies.sh install-base-dependencies.sh diagnose-linux.sh update-linux.sh repair-linux-updater.sh LINUX_UPDATE_RECOVERY.md LEEME-Linux.md LEEME-MultiP.md LEEME-Compatibilidad.md; do
   [[ ! -e "$source_dir/$item" ]] || cp -a -- "$source_dir/$item" "$target_dir/"
 done
 echo "Actualizada la aplicación en $target_dir. Tus datos siguen en $target_dir/data."

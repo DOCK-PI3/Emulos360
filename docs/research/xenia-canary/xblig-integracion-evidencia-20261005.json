@@ -1,0 +1,423 @@
+{
+  "date": "2026-10-05",
+  "scope": "XBLIG detection and isolated provider integration; canonical shared profile and saves; real host loading tested, gameplay not confirmed",
+  "project": "C:/Users/mabe8/Documents/GitHub/Emulos360",
+  "provider": {
+    "provider": "Nexia360",
+    "tag": "Nexia_v0.4.2",
+    "revision": "faa3c915b0cb8e7036743b6d36d91270a29837c6",
+    "platform": "windows-x64",
+    "exeSha256": "2d625237bc1c6af08fd44a894454326d9549c305b1aba264c9bf05ba63384a53",
+    "licenseSha256": "3d58f25c15634b6ec01d1f133ef798209ae06626ab8d2227b6223d5a9f5113f4",
+    "exeUrl": "https://github.com/Nexia360/Nexia360/releases/download/Nexia_v0.4.2/Nexia360.exe",
+    "licenseUrl": "https://github.com/Nexia360/Nexia360/releases/download/Nexia_v0.4.2/LICENSE",
+    "runtimeIncluded": false,
+    "note": "Console XNA runtime must be supplied locally; never redistribute private console files.",
+    "dependencyNotices": [
+      {
+        "name": "SDL2-LICENSE.txt",
+        "version": "2.32.10",
+        "url": "https://raw.githubusercontent.com/libsdl-org/SDL/release-2.32.10/LICENSE.txt",
+        "sha256": "97f35b302b361680ec1e891e95d2d52097bb95abff361434916d99dc1305f127",
+        "source": "https://github.com/libsdl-org/SDL/tree/release-2.32.10"
+      },
+      {
+        "name": "OpenAL-Soft-LGPL.txt",
+        "version": "1.24.3",
+        "url": "https://raw.githubusercontent.com/kcat/openal-soft/1.24.3/COPYING",
+        "sha256": "d808ce217e5b611854da622b57ec29fe545584c48bc5352fae72a4b6e5074a15",
+        "source": "https://github.com/kcat/openal-soft/tree/1.24.3"
+      },
+      {
+        "name": "Mono-Cecil-LICENSE.md",
+        "version": "0.9.6",
+        "url": "https://raw.githubusercontent.com/jbevain/cecil/c30e727490dcfe850ac01c5db9eaf744f88fa4e1/LICENSE.md",
+        "sha256": "13d58ecbed676511c0c4c4009bff107025e50007ff5e7901dc562700ec62509e",
+        "source": "https://github.com/jbevain/cecil/tree/c30e727490dcfe850ac01c5db9eaf744f88fa4e1"
+      }
+    ]
+  },
+  "primaryCore": {
+    "revision": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+    "windowsSha256": "63f44fb5cfca5ba3a20a4e9475572a8e81839efb4930bc222a6285cb589b2569",
+    "changedThisTask": false,
+    "preexistingSourceChangesPreserved": true
+  },
+  "library": {
+    "before": 84,
+    "after": 86,
+    "nativeRetained": 84,
+    "nativePathTitleIdAndFormatEqual": true,
+    "added": [
+      {
+        "title": "SFG Beach Volleyball",
+        "libraryId": "XBLIG-20AE0FC7446B422EBFD720463A857A60",
+        "managedEntry": "584E07D1/SFG Beach Volleyball.exe"
+      },
+      {
+        "title": "Survival Games Season 1",
+        "libraryId": "XBLIG-D2095566CA90425884E2AA45F01908CB",
+        "managedEntry": "584E07D1/BlockWorld.exe"
+      }
+    ]
+  },
+  "avatarPackages": [
+    {
+      "title": "Avatar Bowling",
+      "libraryId": "XBLIG-FE4539025CCA4710A2A65D8C94B5F179",
+      "managedEntry": "584E07D1/AvatarBowling.exe",
+      "sizeBytes": 21987328,
+      "sha256": "571b54adbdfddc64b7b75ce7b72c43fa580af249486b6b637bc1321944cd4b79",
+      "iconPresent": true
+    },
+    {
+      "title": "Avatar Karting",
+      "libraryId": "XBLIG-10620FAFC4624290B706D56917C61A24",
+      "managedEntry": "584E07D1/AvatarKarting.exe",
+      "sizeBytes": 49565696,
+      "sha256": "fbaa4b869590594f4978715b2ad7a201da7c060c0632d5ddf66e9a8a68ae7a81",
+      "iconPresent": true
+    },
+    {
+      "title": "Avatar Warfare!",
+      "libraryId": "XBLIG-BFE7092F4C9149B5BD3E89AD37142FE4",
+      "managedEntry": "584E07D1/AvatarWarfare.exe",
+      "sizeBytes": 59789312,
+      "sha256": "a3424fff1982064b9e53e3117806d830050a6ec82ec0f7928e6b0ba2990d7d01",
+      "iconPresent": true
+    }
+  ],
+  "tests": {
+    "windowsXblig": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "log": "build-dual-core/xblig-results.txt"
+    },
+    "linuxAsanUbsan": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "instrumentation": "-fsanitize=address,undefined; detect_leaks=1; halt_on_error=1",
+      "log": "local/xblig-integration/xblig-shared-linux-sanitizers-final.txt"
+    },
+    "windowsCtest": {
+      "passed": 5,
+      "failed": 0,
+      "targets": [
+        "core_options_tests",
+        "xblig_tests",
+        "library_tests",
+        "ui_tests",
+        "voice_party_tests"
+      ],
+      "log": "local/xblig-integration/ctest-shared-final-contracts.txt",
+      "note": "UI: 17 passed, 5 optional private fixtures skipped; no gameplay claim"
+    },
+    "nativeRoutesAndWindow": {
+      "passed": 4,
+      "failed": 0,
+      "tests": [
+        "dualCoreRoutesCommandsAndKeepsIndependentStorage",
+        "officialXbligWindowOpensAndCloses"
+      ],
+      "providerWindow": "Actual pinned Nexia; opens, recognized by PID, closes, releases locks",
+      "log": "local/xblig-integration/routes-and-window-results.txt",
+      "firstWindowRun": "Close took longer than initial 15-second assertion; passed with 30-second allowance, no application shutdown behavior changed"
+    },
+    "build": [
+      "Windows Release frontend with shared storage",
+      "Linux Ubuntu 26.04 frontend with shared storage"
+    ],
+    "previewSmoke": {
+      "exitCode": 0,
+      "libraryScreenshot": "local/xblig-integration/preview-library.png",
+      "log": "local/xblig-integration/preview-smoke.log",
+      "packagedQtDependencies": true
+    },
+    "avatarInventoryBothPlatforms": 3,
+    "windowsCoreOptions": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "log": "build-dual-core/core-options-results.txt"
+    },
+    "realProfileAndRoutes": {
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        "officialXbligHostLoadsCommonProfileAndConsoleRuntime",
+        "dualCoreRoutesCommandsAndKeepsIndependentStorage"
+      ],
+      "log": "local/xblig-integration/real-profile-and-routes-final.txt",
+      "assertions": [
+        "Real current-core profile read by pinned Nexia as SharedXna in slot 0",
+        "Account path targets same OS file",
+        "Both XNA save aliases target per-VirtualTitleID canonical directories",
+        "Native helper/Netplay/Edge arguments preserved"
+      ],
+      "gameplayAsserted": false
+    }
+  },
+  "consoleSearch": {
+    "sourceMountedContent": "X:",
+    "sourceMountedSystemExt": "Q:",
+    "sourceAccess": "Read-only; no copies, edits, moves or deletions on either source",
+    "runtimeFound": false,
+    "launcher": "Q:/32000100/Xna_TitleLauncher.xex",
+    "contentFileCountSystemExt": 151,
+    "cacheFilesContent": 2107,
+    "titleUpdatesChecked": 11,
+    "systemPackagesInspected": [
+      {
+        "id": "FFFE07DF00000001",
+        "entries": 33
+      },
+      {
+        "id": "FFFE07DF00000002",
+        "entries": 2
+      },
+      {
+        "id": "FFFE07DF00000006",
+        "entries": 82
+      },
+      {
+        "id": "FFFE07DF00000008",
+        "entries": 146
+      }
+    ]
+  },
+  "microsoftSdk": {
+    "url": "https://download.microsoft.com/download/e/c/6/ec68782d-872a-4d58-a8d3-87881995cdd4/XNAGS40_setup.exe",
+    "sha256": "e905f67edefb228ebb58277f8d24e1ec3460ead5d0ab57bd544246cb4465154b",
+    "signature": "Valid Microsoft",
+    "installedGlobally": false,
+    "inspection": "Cecil IL inspection of extracted Xbox360Reference DLLs: stub methods, no native PInvokes",
+    "runtimeSubstitution": false
+  },
+  "pending": [
+    "XNA 3.1 assembly resolution and ABI support in isolated provider",
+    "Real menu/gameplay/save/load/avatar validation",
+    "XBLIG multiplayer integration and real sessions",
+    "Linux XNA provider"
+  ],
+  "preview": {
+    "folder": "out/Emulos360-XBLIG-preview",
+    "published": false,
+    "releaseVersionUnchanged": "0.4.0",
+    "sourceCodeCommitAndPush": "User handles",
+    "includesConsoleAssets": true,
+    "usesUserInstalledData": false,
+    "privateLocalDataOnly": true,
+    "consoleAssemblies": 16,
+    "publicPackageExcludesData": true,
+    "frontendSha256": "a19b0bf83940cf4164ec6241f619fc7f6db3a420056e3f60b1ce0ae1c0258f82",
+    "primaryCoreSha256": "63f44fb5cfca5ba3a20a4e9475572a8e81839efb4930bc222a6285cb589b2569"
+  },
+  "linuxUpdaterRecoverySha256": "7b643e46c5878fe2cff31af608ea4a38229708bad0c89eb263d805d01e467272",
+  "sourceFiles": [
+    "src/xenia/kernel/xna/xna_launcher.cc",
+    "src/xenia/kernel/xna/xna_host.cc",
+    "src/xenia/kernel/xna/xna_runtime_install.cc",
+    "src/xenia/kernel/xna/xna_dependencies.cc",
+    "src/xenia/kernel/xna/xna_avatar.cc",
+    "src/xenia/kernel/xam/xam_net.cc",
+    "src/xenia/kernel/xna/xna_os.cc",
+    "src/xenia/kernel/xna/xna_exports_impl.cc",
+    "src/xenia/kernel/xam/content_manager.cc",
+    "src/xenia/kernel/xna/managed/ConsoleAssemblies.cs",
+    "src/xenia/kernel/xna/managed/CompactFramework.cs"
+  ],
+  "sourceBase": "https://github.com/Nexia360/Nexia360/blob/faa3c915b0cb8e7036743b6d36d91270a29837c6/",
+  "historicalProbeMissingWindowsXna": {
+    "title": "Avatar Bowling",
+    "stfsMounted": true,
+    "managedEntryFound": true,
+    "clrStarted": false,
+    "renderedGameplay": false,
+    "diagnostic": "XNA Framework 3.1 and XNA Framework 4.0 Refresh not installed; Failed to launch target C0000001",
+    "processStoppedByTest": true,
+    "log": "local/xblig-integration/native-probe-correct/core.log"
+  },
+  "storage": {
+    "userScope": "Profile and saves only; installed content, configs and caches stay independent",
+    "profile": "Canonical selected profile FFFE07D1, directory links; no ongoing profile copies",
+    "nativeSaves": "Edge 00000001 linked to selected primary save device, existing alternate used only when selected location absent",
+    "xnaConsoleBridge": "Nexia_XnaStorageRoot -> view/<xuid>/584E07D2/00000001/{PlayerN,AllPlayers} -> saves/<VirtualTitleID>/<xuid>/native",
+    "xnaManagedFacade": "ResolveStorageContainer -> canonical profile/584E07D2/<displayName> -> saves/<VirtualTitleID>/<xuid>/containers",
+    "profileSaveBranchSwitch": "Only profile 584E07D2 branch switches per VirtualTitleID; shared content lock held throughout session",
+    "migration": "Old private directories retained under .before-shared; differing native save versions block instead of overwrite; unidentified old common XNA saves preserved",
+    "actualInstalledProfilesMigrated": false,
+    "saveLoadInsideGameVerified": false,
+    "canonicalPathWindows": "GetFinalPathNameByHandleW; QFileInfo canonicalFilePath alone did not resolve the junction directory in the Windows test"
+  },
+  "windowsPrerequisites": {
+    "authorizedByUser": true,
+    "installed": [
+      {
+        "version": "XNA Framework 3.1",
+        "url": "https://download.microsoft.com/download/5/9/1/5912526c-b950-4662-99b6-119a83e60e5c/xnafx31_redist.msi",
+        "sha256": "409173b3a4f4ee6ff4e6910eece26f95af8073efae2c9fa4c0f8dad24f7774de",
+        "signature": "Valid Microsoft",
+        "exitCode": 0,
+        "registryInstalled": 1
+      },
+      {
+        "version": "XNA Framework 4.0 Refresh",
+        "url": "https://download.microsoft.com/download/5/3/a/53a804c8-ec78-43cd-a0f0-2fb4d45603d3/xnafx40_redist.msi",
+        "sha256": "2b03c130c4bb5f106b9619bea8150201f7e982709cfe9a0cc8bde75ff0a83b27",
+        "signature": "Valid Microsoft",
+        "exitCode": 0,
+        "registryInstalled": 1
+      }
+    ],
+    "rebootRequested": false,
+    "rebootPerformed": false
+  },
+  "consoleRuntime": {
+    "found": true,
+    "sourcePage": "https://digiex.net/threads/xna-title-update.10600/",
+    "archiveUrl": "https://download.digiex.net/Consoles/Xbox360/TitleUpdates/IndyGameTitleUpdate.zip",
+    "archiveSha256": "f03e8edf476e7bcc2e5c218eea3fcdfb510031ee8271411ef46b54c6fcffb213",
+    "titleUpdateSha256": "2e5a4f44cfd9135a940954474f67bd6100050844c0093ec73a70dfc7d239c249",
+    "archiveBytes": 20550784,
+    "titleUpdateBytes": 28303360,
+    "titleId": "584E07D2",
+    "contentType": "000B0000",
+    "versionsInTitleUpdate": [
+      "3.0",
+      "3.1",
+      "4.0"
+    ],
+    "deployedVersion": "4.0",
+    "validation": "Pinned SHA-256, bounded read-only STFS extraction, SHA-1 of read blocks, managed PE headers and inspection of implemented IL",
+    "xboxRsaSignatureVerified": false,
+    "publicAssetsIncluded": false,
+    "files": [
+      {
+        "name": "mscorlib.dlx",
+        "bytes": 1001472,
+        "sha256": "6ae395e7a9359ada09b6eff3ed967e8047ea5248aa3b334241a92d2f6d642aa3"
+      },
+      {
+        "name": "MXF.Avatar.dlx",
+        "bytes": 30208,
+        "sha256": "4ec20769bc896eb7796cf533d08711befa8eaf362d46d8f812d54e294c8c517c"
+      },
+      {
+        "name": "MXF.dlx",
+        "bytes": 391680,
+        "sha256": "e4d27c195127954c3dd0eb9f794435c59d641da2a8d6c2f506d9a20c32954d4a"
+      },
+      {
+        "name": "MXF.Game.dlx",
+        "bytes": 58368,
+        "sha256": "3e53fdef2c18b97bc3f119c9ccf359f1d0520b7ecf61c8b48abccea1af16046d"
+      },
+      {
+        "name": "MXF.GamerServices.dlx",
+        "bytes": 66560,
+        "sha256": "5ab4fb2126749093513db5a0013092fc0dcba4331220da72b4916ffa7bc6ed4f"
+      },
+      {
+        "name": "MXF.Graphics.dlx",
+        "bytes": 298496,
+        "sha256": "abbe81e9db5f4abfea7e3df0f75a278144d329c7baa230cf351feea8f684bcf1"
+      },
+      {
+        "name": "MXF.Input.Touch.dlx",
+        "bytes": 22528,
+        "sha256": "3698b47c9a2cd71a3edd54b74f12fdea437a3d9bd79698f697c769ecd3e4af55"
+      },
+      {
+        "name": "MXF.Net.dlx",
+        "bytes": 53248,
+        "sha256": "88918c9d581b34d627c65826524353523b51a42689fe6e81c56065f2281fa938"
+      },
+      {
+        "name": "MXF.Storage.dlx",
+        "bytes": 22528,
+        "sha256": "2a39abe234ad5b9bd1f918db47655a420f2567fcd4d6063fbbbe3725d6c909b2"
+      },
+      {
+        "name": "MXF.Video.dlx",
+        "bytes": 17920,
+        "sha256": "972467b79a9d233d520383a10badf3c02657ad61b3246715511c436e10d831af"
+      },
+      {
+        "name": "MXF.Xact.dlx",
+        "bytes": 23552,
+        "sha256": "ba367efa93c6a5316f070c451c9c5e881611c28b42f01f68b96f29bf1eaeceeb"
+      },
+      {
+        "name": "System.Core.dlx",
+        "bytes": 89600,
+        "sha256": "87738a0e87dd033326e097b8b501b6ac6e1e123928809fb60a477abb2a1464a3"
+      },
+      {
+        "name": "System.dlx",
+        "bytes": 295936,
+        "sha256": "751175b5454aba947f389837607a55a3bf8d3263adf7f51d8713c8d3d8efa7cd"
+      },
+      {
+        "name": "System.sr.dlx",
+        "bytes": 442880,
+        "sha256": "fcc777788a810d94780b864bfff73dcf049d7ba159a7aabee0257cf629deca0a"
+      },
+      {
+        "name": "System.xml.dlx",
+        "bytes": 1127424,
+        "sha256": "ea694f341784c2da59e1af16d796b4dfba32bdca13b2c5344a2c75576955b12f"
+      },
+      {
+        "name": "System.xml.linq.dlx",
+        "bytes": 86528,
+        "sha256": "d58005ca6e8a52c7b7f2aa79bdf8fff2cf61a14a6b325c0495e88ceb7fa9e2b2"
+      }
+    ]
+  },
+  "directProviderProbes": [
+    {
+      "title": "Avatar Bowling (World) (XBLIG)",
+      "profileRecognized": true,
+      "clrStarted": true,
+      "hostStarted": true,
+      "result": "XNA 3.1 AvatarBone unresolved during rewrite; Graphics.Viewport TypeLoadException, 0 frames",
+      "gameplayVerified": false,
+      "log": "local/xblig-integration/shared-final-probes/Avatar Bowling (World) (XBLIG)/title-host-core.log",
+      "capture": "local/xblig-integration/shared-final-probes/Avatar Bowling (World) (XBLIG)/title-host.png",
+      "captureLimit": "HWND capture is black; does not independently validate D3D12 swapchain"
+    },
+    {
+      "title": "Avatar Karting (World) (XBLIG)",
+      "profileRecognized": true,
+      "clrStarted": true,
+      "hostStarted": true,
+      "result": "GamerServicesDispatcher TypeLoadException, 0 frames",
+      "gameplayVerified": false,
+      "log": "local/xblig-integration/shared-final-probes/Avatar Karting (World) (XBLIG)/title-host-core.log",
+      "capture": "local/xblig-integration/shared-final-probes/Avatar Karting (World) (XBLIG)/title-host.png",
+      "captureLimit": "HWND capture is black; does not independently validate D3D12 swapchain"
+    },
+    {
+      "title": "Avatar Warfare! (World) (XBLIG)",
+      "profileRecognized": true,
+      "clrStarted": true,
+      "hostStarted": true,
+      "result": "Console runtime 4.0 loads assets, shaders and audio; remains active after 30 seconds; menu, gameplay and save/load not verified",
+      "gameplayVerified": false,
+      "log": "local/xblig-integration/warfare-observation/title-host-core.log",
+      "capture": "local/xblig-integration/warfare-observation/title-host.png",
+      "captureLimit": "HWND capture is black; does not independently validate D3D12 swapchain"
+    }
+  ],
+  "discardedRuntime31Probe": {
+    "scope": "Disposable test only, not application launch",
+    "trials": [
+      "3.1 main/game DLL with resolver aliases in overlay: D3D DllNotFoundException",
+      "Resolver aliases moved out of default overlay: process stopped; no working gameplay"
+    ],
+    "integrated": false
+  }
+}

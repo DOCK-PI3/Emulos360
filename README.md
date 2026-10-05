@@ -31,9 +31,8 @@ clientes XEX. Incluye Netplay y System Link del motor, dos unidades de guardado
 independientes y un dashboard Metro `.xex` para el modo consola. Una partida online entre dos equipos aún no está
 verificada en esta instalación.
 
-- **Cores (0.4.0):** core actual o Canary Edge experimental, con GPU global y por
-  título desde Biblioteca → Motor. Edge conserva almacenamiento independiente y
-  usa su propia ventana. [Funcionamiento y límites](docs/DUAL_CORE.md).
+- **Motor:** Xenia Canary, con GPU global y por título desde Biblioteca → Gráficos.
+  [Funcionamiento con un único core](docs/SINGLE_CORE.md).
 - **Partidas:** ver interno/externo, configurar la carpeta externa, copiar y restaurar.
   Dentro del juego se elige unidad cuando el título solicita almacenamiento.
 - **Acerca de:** en Ajustes → Emulos360 se muestran las funciones creadas para

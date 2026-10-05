@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-05",
+  "status": "completed_in_project_not_published",
+  "repository_head": "9dd9965e6ee39d3661bbf91a647dfe8ce53de6d5",
+  "core_revision": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+  "primary_core_source_unchanged": true,
+  "primary_binary_sha256": "63f44fb5cfca5ba3a20a4e9475572a8e81839efb4930bc222a6285cb589b2569",
+  "protected_files_unchanged": 293,
+  "data_directories_and_links_deleted_or_moved": false,
+  "retired_source_files": [
+    "app/xblig_package.cpp",
+    "app/xblig_package.h",
+    "app/xblig_runtime.cpp",
+    "app/xblig_runtime.h",
+    "app/shared_content.cpp",
+    "app/shared_content.h",
+    "tests/xblig_fixture.h",
+    "tests/xblig_tests.cpp",
+    "scripts/setup-xblig.ps1",
+    "scripts/setup-xna-windows.ps1",
+    "scripts/setup-xna-console.ps1",
+    "scripts/extract-xna-runtime.py",
+    "scripts/setup-edge.ps1",
+    "scripts/setup-edge.py",
+    "engine/edge-release.json",
+    "engine/xblig-release.json"
+  ],
+  "builds": {
+    "windows": "MSVC 2022, Qt 6.8.3, Release frontend",
+    "linux": "Ubuntu 26.04, Qt 6.10.2, Release frontend"
+  },
+  "tests": {
+    "ctest_windows": "4/4 passed; UI re-run after portability fixes passed",
+    "ctest_linux": "4/4 passed",
+    "windows_ui": "17 passed, 5 optional private fixture skips",
+    "linux_ui": "16 passed, 6 optional/platform fixture skips",
+    "windows_netplay_routes_and_actual_profile_bridge": "6 passed including init/cleanup; temporary profile with unchanged real main core",
+    "linux_netplay_routes": "5 passed including init/cleanup; simulated core and local session server",
+    "services_windows_linux": "7 passed each including init/cleanup",
+    "asan_ubsan_renderer_migration": "6 passed including init/cleanup; leak detection disabled for system Qt",
+    "linux_updater": "7 passed",
+    "windows_package_and_updater": "package exclusion, single-core update and missing-core rollback passed in temporary fixtures",
+    "linux_package": "single core, no retired providers or data, original save sentinel preserved",
+    "standalone_windows_inventory": "84 GOD/XBLA/XEX games; no game launch or profile/data write",
+    "standalone_windows_ui": "Portable Windows UI opened, settings capture inspected, no QML missing-type/plugin errors; isolated empty test data.",
+    "automation_saved": "Saved automation verified: Monday 10:00 remains active, only Canary and Netplay repository URLs, no Edge URL/manifest."
+  },
+  "local_build": "out/Emulos360-MultiP",
+  "frontend_sha256": "7fc806fb17b0bb391dc0ff6348cf4300b001f870a4e47eeedb44bcae12f956f5",
+  "version_unchanged": "0.4.0; local development build, no release created",
+  "known_transition": "The old 0.4.0 updater requires Edge: replace its helper or perform the first upgrade manually, preserving data. New helpers accept a main-core-only package.",
+  "limitations": [
+    "No new game compatibility or actual multiplayer gameplay claimed.",
+    "Linux frontend compiled and tested; no new full Linux distribution/core build produced.",
+    "User performs commit, push, release publication and gameplay checks."
+  ],
+  "automation": {
+    "id": "mejoras-de-xenia-canary",
+    "scope": [
+      "xenia-canary/xenia-canary:canary_experimental",
+      "AdrianCassar/xenia-canary:netplay_canary_experimental"
+    ],
+    "unchanged_schedule": "Monday at 10:00 Atlantic/Canary",
+    "status": "ACTIVE"
+  },
+  "historical_artifacts": "Ignored old previews/downloads/private runtime/data stay intact and are excluded from current packages."
+}

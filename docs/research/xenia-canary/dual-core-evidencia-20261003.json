@@ -52,6 +52,18 @@
       "dxilVersion": "v1.9.2602.24",
       "pinnedArchivesVerified": true,
       "includedInFinalZip": true
+    },
+    "userInstallationUpdate": {
+      "date": "2026-10-03",
+      "releaseContext": "0.4.0",
+      "source": "Direct user report in this chat",
+      "updateSucceeded": true,
+      "applicationRestartSucceeded": true,
+      "largeDataDirectoryReported": true,
+      "elapsedTimeMeasured": false,
+      "delayCauseVerified": false,
+      "dataIntegrityMeasured": false,
+      "gameAndCoreGameplayTests": "Pending; user will test and report errors"
     }
   },
   "limits": [

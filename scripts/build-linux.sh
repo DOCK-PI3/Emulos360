@@ -47,6 +47,8 @@ install -m 755 scripts/install-ubuntu-deps.sh "$package/install-dependencies.sh"
 cp docs/GAME_COMPATIBILITY.md "$package/LEEME-Compatibilidad.md"
 install -m 755 scripts/diagnose-linux.sh "$package/diagnose-linux.sh"
 install -m 755 scripts/update-linux.sh "$package/update-linux.sh"
+install -m 755 scripts/repair-linux-updater.sh "$package/repair-linux-updater.sh"
+cp docs/LINUX_UPDATE_RECOVERY.md "$package/LINUX_UPDATE_RECOVERY.md"
 cp docs/LINUX.md "$package/LEEME-Linux.md"
 cp assets/intro/aurora.mp4 assets/intro/aurora.png \
   assets/intro/nova.mp4 assets/intro/nova.png "$package/intro/"
@@ -104,5 +106,4 @@ if [[ -f "$root/engine/xenia/third_party/gamecontrollerdb/gamecontrollerdb.txt" 
   install -m 644 "$root/engine/xenia/third_party/gamecontrollerdb/gamecontrollerdb.txt" "$package/engine/gamecontrollerdb.txt"
 fi
 
-python3 "$root/scripts/setup-edge.py" --destination "$package/engine/edge"
 echo "Build Linux preparada en $package"

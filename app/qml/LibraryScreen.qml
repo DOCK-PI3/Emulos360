@@ -152,7 +152,7 @@ ColumnLayout {
                 Label { text: screen.selectedGame ? qsTr("Xbox 360  ·  %1").arg(screen.selectedGame.titleId) : qsTr("Selecciona un juego para personalizarlo."); color: Theme.muted; font.pixelSize: 11 }
             }
             ActionButton { text: qsTr("Carátula · Y"); enabled: screen.selectedGame !== null; onClicked: screen.editSelectedCover() }
-            ActionButton { objectName: "gameCoreButton"; text: qsTr("Motor"); enabled: screen.selectedGame !== null && !screen.controller.players.busy; onClicked: coreDialog.showFor(screen.selectedGame) }
+            ActionButton { objectName: "gameCoreButton"; text: qsTr("Gráficos"); enabled: screen.selectedGame !== null && !screen.controller.players.busy; onClicked: coreDialog.showFor(screen.selectedGame) }
             ActionButton { text: qsTr("Contenido"); enabled: screen.selectedGame !== null && !screen.controller.content.busy && !screen.controller.players.busy; onClicked: contentDialog.showFor(screen.selectedGame) }
             ActionButton { text: qsTr("Eliminar · X"); enabled: screen.selectedGame !== null && !screen.controller.busy && !screen.controller.players.busy; onClicked: screen.confirmRemoval(screen.selectedGame) }
             ActionButton { text: qsTr("Jugar · A"); primary: true; enabled: screen.selectedGame !== null && screen.selectedGame.complete && !screen.controller.players.busy; onClicked: screen.playSelected() }

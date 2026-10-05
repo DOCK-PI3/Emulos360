@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-04",
+  "scope": "Read-only diagnosis of three undetected games; documentation only",
+  "games": [
+    {
+      "title": "Avatar Bowling",
+      "directory": "Avatar Bowling (World) (XBLIG)",
+      "package": "8A883CA88E4752553BACF734A7516877E87C67E358",
+      "bytes": 21987328,
+      "assembly": "AvatarBowling.exe",
+      "fileTableBlocks": 5,
+      "path": "D:/XBOX360_GAMES/Avatar Bowling (World) (XBLIG)/584E07D2/00000002/8A883CA88E4752553BACF734A7516877E87C67E358",
+      "magic": "LIVE",
+      "contentType": "00000002",
+      "containerTitleId": "584E07D2",
+      "managedAssembly": true,
+      "clrHeaderRva": 8200,
+      "clrHeaderBytes": 72,
+      "libraryInventoryGames": 0,
+      "libraryInventoryError": "",
+      "coreExecuted": false
+    },
+    {
+      "title": "Avatar Karting",
+      "directory": "Avatar Karting (World) (XBLIG)",
+      "package": "C5132F0619F7F5D79DF7AB1453C7A046646724C258",
+      "bytes": 49565696,
+      "assembly": "AvatarKarting.exe",
+      "fileTableBlocks": 7,
+      "path": "D:/XBOX360_GAMES/Avatar Karting (World) (XBLIG)/584E07D2/00000002/C5132F0619F7F5D79DF7AB1453C7A046646724C258",
+      "magic": "LIVE",
+      "contentType": "00000002",
+      "containerTitleId": "584E07D2",
+      "managedAssembly": true,
+      "clrHeaderRva": 8200,
+      "clrHeaderBytes": 72,
+      "libraryInventoryGames": 0,
+      "libraryInventoryError": "",
+      "coreExecuted": false
+    },
+    {
+      "title": "Avatar Warfare!",
+      "directory": "Avatar Warfare! (World) (XBLIG)",
+      "package": "7442D5005491DABE2CAB579D0F4F549A1DCC72CD58",
+      "bytes": 59789312,
+      "assembly": "AvatarWarfare.exe",
+      "fileTableBlocks": 7,
+      "path": "D:/XBOX360_GAMES/Avatar Warfare! (World) (XBLIG)/584E07D2/00000002/7442D5005491DABE2CAB579D0F4F549A1DCC72CD58",
+      "magic": "LIVE",
+      "contentType": "00000002",
+      "containerTitleId": "584E07D2",
+      "managedAssembly": true,
+      "clrHeaderRva": 8200,
+      "clrHeaderBytes": 72,
+      "libraryInventoryGames": 0,
+      "libraryInventoryError": "",
+      "coreExecuted": false
+    }
+  ],
+  "localEvidence": [
+    "Package headers read without modifying files",
+    "First STFS file-table block inspected; remaining directory blocks not fully traversed",
+    "First block of each game assembly inspected; DOS/PE headers and CLR directory present",
+    "Installed Emulos360 --inventory returned no games and no error for each directory",
+    "app/library.cpp filters container folders and header content types; package type 00000002 excluded"
+  ],
+  "limits": [
+    "No full integrity/signature/hash-tree verification of packages",
+    "No gameplay or avatar rendering tested",
+    "Nexia360 statements are upstream README claims; no local execution or code audit"
+  ],
+  "upstreamReferences": [
+    {
+      "url": "https://github.com/Nexia360/Nexia360",
+      "claim": "README announces XNA/XBLIG managed host and avatar rendering",
+      "revisionVerified": false
+    },
+    {
+      "url": "https://github.com/xenia-project/game-compatibility/issues/1101",
+      "evidence": "Historical XNA/XBLIG incompatibility report with shared container Title ID 584E07D2; not proof about every modern fork"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 #include "controller.h"
+#include "runtime_paths.h"
 #include "../XEXplugins/MetroDashboard/host/guide_hold.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -25,7 +26,7 @@
 class UiTests : public QObject {
     Q_OBJECT
 private slots:
-    void corePreferencesAndGameDialogLoadAndPersist() {
+    void rendererPreferencesAndGameDialogLoadAndPersist() {
         QTemporaryDir directory; Controller controller(directory.filePath("settings.ini"));
         QQmlEngine engine; QQmlComponent preferences(&engine);
         preferences.loadFromModule("Los", "CorePreferences");
@@ -36,12 +37,10 @@ private slots:
         auto* item = qobject_cast<QQuickItem*>(page.get()); QVERIFY(item);
         item->setParentItem(preview.contentItem()); item->setSize(QSizeF(900, 610)); item->setPosition(QPointF(24, 18));
         preview.setColor(QColor("#101211"));
-        QVERIFY(page->findChild<QObject*>("defaultCoreCombo"));
+        QVERIFY(!page->findChild<QObject*>("defaultCoreCombo"));
+        QVERIFY(!page->findChild<QObject*>("openXbligSettings"));
+        QVERIFY(!page->findChild<QObject*>("openEdgeSettings"));
         QVERIFY(page->findChild<QObject*>("defaultRendererCombo"));
-        auto* selector = qobject_cast<QQuickItem*>(page->findChild<QObject*>("defaultCoreCombo"));
-        QVERIFY(selector); selector->forceActiveFocus();
-        QTest::keyClick(&preview, Qt::Key_End);
-        QTRY_COMPARE(controller.players()->cores()->defaultCore(), QStringLiteral("edge"));
         const auto capture = qEnvironmentVariable("EMULOS_CORE_UI_CAPTURE");
         QTest::qWait(250);
         if (!capture.isEmpty()) QVERIFY(preview.grabWindow().save(capture + "/core-preferences.png"));
@@ -55,11 +54,9 @@ private slots:
         QTest::qWait(250);
         if (!capture.isEmpty()) QVERIFY(preview.grabWindow().save(capture + "/game-core-dialog.png"));
         dialog->setProperty("visible", false);
-        auto* core = dialog->findChild<QObject*>("gameCoreCombo");
-        QVERIFY(core); QVERIFY(dialog->findChild<QObject*>("gameRendererCombo"));
-        QVERIFY(controller.players()->cores()->saveGameOptions("545408B4", "netplay", "vulkan"));
+        QVERIFY(!dialog->findChild<QObject*>("gameCoreCombo")); QVERIFY(dialog->findChild<QObject*>("gameRendererCombo"));
+        QVERIFY(controller.players()->cores()->saveGameOptions("545408B4", "vulkan"));
         Controller reopened(directory.filePath("settings.ini"));
-        QCOMPARE(reopened.players()->cores()->coreFor("545408B4"), QStringLiteral("netplay"));
         QCOMPARE(reopened.players()->cores()->rendererFor("545408B4"), QStringLiteral("vulkan"));
     }
     void gameContentFiltersMixedPackages() {
@@ -511,9 +508,13 @@ private slots:
             QVERIFY(iso.open(QIODevice::WriteOnly));
             iso.write("invalid ISO");
         }
+        const auto priorCount = los::scanLibrary(libraryPath).games.size();
+        QSignalSpy importResult(&importer, &GameImporter::completed);
         importer.importFile(QUrl::fromLocalFile(badIso), libraryPath);
         QTRY_VERIFY_WITH_TIMEOUT(!importer.busy(), 10000);
-        QVERIFY(!importer.status().contains("instalado"));
+        QCOMPARE(importResult.size(), 1);
+        QVERIFY(!importResult.first().first().toBool());
+        QCOMPARE(los::scanLibrary(libraryPath).games.size(), priorCount);
         QVERIFY(QFileInfo(badIso).isFile());
         QVERIFY(QDir(libraryPath).entryList({".emulos-import-*"}, QDir::Dirs | QDir::Hidden).isEmpty());
     }
@@ -838,8 +839,14 @@ private slots:
         QTRY_VERIFY(!consoleCoverPicker->property("visible").toBool());
         QVERIFY(!window->property("editingMetroCover").toBool());
         QTRY_VERIFY(grid->hasActiveFocus());
+#ifdef Q_OS_WIN
+        const auto coreFile = QCoreApplication::applicationDirPath() + "/engine/Emulos360-core.exe";
+#else
+        const auto coreFile = QCoreApplication::applicationDirPath() + "/engine/Emulos360-core";
+#endif
+        const auto prerequisite = emulos::runnableFile(coreFile) ? QString("Selecciona un perfil") : QString("Falta el core");
         QTest::keyClick(window, Qt::Key_Return);
-        QTRY_VERIFY2(controller.players()->status().contains("Selecciona un perfil"), qPrintable(controller.players()->status()));
+        QTRY_VERIFY2(controller.players()->status().contains(prerequisite), qPrintable(controller.players()->status()));
         auto* operationError = window->findChild<QObject*>("operationErrorDialog");
         QVERIFY(operationError);
         QTRY_VERIFY(operationError->property("visible").toBool());
@@ -989,7 +996,7 @@ private slots:
         QVERIFY(carousel); QVERIFY(path);
         QTRY_COMPARE(path->property("count").toInt(), 5);
         QTRY_VERIFY(path->hasActiveFocus());
-        QVERIFY(carousel->width() > 700);
+        QTRY_VERIFY(carousel->width() > 700);
         QCOMPARE(path->property("pathItemCount").toInt(), 3);
         path->setProperty("currentIndex", 0);
         QTest::keyClick(window, Qt::Key_Left);

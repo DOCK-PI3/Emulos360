@@ -26,7 +26,6 @@ class PlayerServices final : public QObject {
     Q_PROPERTY(bool sessionActive READ sessionActive NOTIFY changed)
     Q_PROPERTY(CoreWindowHost* coreWindow READ coreWindow CONSTANT)
     Q_PROPERTY(CoreOptions* cores READ cores CONSTANT)
-    Q_PROPERTY(QString sessionCore READ sessionCore NOTIFY changed)
     Q_PROPERTY(QString communityXex READ communityXex NOTIFY changed)
     Q_PROPERTY(QString avatarEditorXex READ avatarEditorXex NOTIFY changed)
     Q_PROPERTY(AvatarStudio* avatarStudio READ avatarStudio CONSTANT)
@@ -34,7 +33,7 @@ class PlayerServices final : public QObject {
     Q_PROPERTY(QString internalStorage READ internalStorage NOTIFY changed)
     Q_PROPERTY(QString externalStorage READ externalStorage NOTIFY changed)
 public:
-    PlayerServices(EngineSettings* engine, const QString& data, QObject* parent = nullptr, const QString& coreExecutable = {}, const QString& coreApplicationRoot = {});
+    PlayerServices(EngineSettings* engine, const QString& data, QObject* parent = nullptr, const QString& coreExecutable = {});
     ~PlayerServices() override;
     QVariantList profiles() const { return profiles_; }
     QVariantList saves() const { return saves_; }
@@ -45,13 +44,11 @@ public:
     Q_INVOKABLE void refreshAchievements();
     QString activeXuid() const;
     QString status() const { return status_; }
-    bool busy() const { return process_.state() != QProcess::NotRunning || fileJob_.isRunning() || edgePreparing_; }
+    bool busy() const { return process_.state() != QProcess::NotRunning || fileJob_.isRunning(); }
     bool sessionActive() const { return process_.state() != QProcess::NotRunning && command_.isEmpty(); }
     qint64 sessionProcessId() const { return sessionActive() ? process_.processId() : 0; }
     CoreWindowHost* coreWindow() { return &coreWindow_; }
     CoreOptions* cores() { return &cores_; }
-    QString sessionCore() const { return sessionCore_; }
-    Q_INVOKABLE void openEdgeSettings();
     Q_INVOKABLE void closeSession();
     QString communityXex() const;
     QString avatarEditorXex() const;
@@ -91,8 +88,6 @@ private:
     QString privateApi_;
     QString corePath() const;
     QStringList arguments() const;
-    void startEdge(const QString& path, const QString& titleId);
-    void prepareEdge(const QString& path, const QString& titleId);
     bool prepare(bool requireProfile = false);
     QString saveContentPath() const;
     QString backupRoot() const;
@@ -111,18 +106,16 @@ private:
     QString coreExecutable_;
     QSettings preferences_;
     CoreOptions cores_;
-    QString sessionCore_ = "netplay", edgeTarget_, edgeTitle_;
     QProcess process_;
     AvatarStudio avatarStudio_;
     QString avatarProfile_, avatarInput_;
     CoreWindowHost coreWindow_;
     QTimer timeout_;
-    QFutureWatcher<QString> fileJob_, edgeJob_;
-    std::unique_ptr<QLockFile> edgeLock_;
+    QFutureWatcher<QString> fileJob_;
     std::unique_ptr<QLockFile> lock_;
     std::unique_ptr<QLockFile> externalLock_;
     int saveDevice_ = 0;
-    bool consoleMode_ = false, edgePreparing_ = false, closeRequested_ = false;
+    bool consoleMode_ = false, closeRequested_ = false;
     QVariantList profiles_, saves_, backups_;
     QVariantList achievementGames_;
     QString achievementStatus_, achievementXuid_, achievementContent_;

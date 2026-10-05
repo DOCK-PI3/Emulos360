@@ -1,5 +1,11 @@
 # Estado de Emulos360 — 2026-09-22
 
+> **Actualizado el 5 de octubre de 2026:** Nexia y Edge retirados del proyecto,
+> con perfiles/partidas conservados. Único core: Xenia Canary. Compilación y pruebas
+> Windows/Ubuntu pasan. Builds 0.5.0 listas; [entrega](RELEASE_0.5.0.md) y
+> [evidencia](releases/0.5.0-validation.json). [Detalle del único core](SINGLE_CORE.md).
+> La tabla siguiente mantiene el estado histórico de septiembre.
+
 Este documento conserva el estado de la entrega de esa fecha. Las versiones
 posteriores y la preparación para Linux se documentan en [BUILD.md](BUILD.md),
 [LINUX.md](LINUX.md) y [FORK_CHANGES.md](FORK_CHANGES.md).

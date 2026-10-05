@@ -34,7 +34,7 @@ ColumnLayout {
         }
         ActionButton {
             objectName: "appCoresTab"
-            text: qsTr("Cores")
+            text: qsTr("Gráficos")
             primary: page.section === "cores"
             onClicked: page.section = "cores"
         }

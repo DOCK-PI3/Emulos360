@@ -57,7 +57,7 @@ fi
 
 runtime_packages=(
   ca-certificates fonts-dejavu-core xdg-utils 7zip xwayland
-  libqt6core6t64 libqt6svg6 qt6-svg-plugins qt6-qpa-plugins qt6-wayland
+  libqt6core6t64 libqt6concurrent6 libqt6svg6 qt6-svg-plugins qt6-qpa-plugins qt6-wayland
   qml6-module-qtquick qml6-module-qtquick-window
   qml6-module-qtquick-controls qml6-module-qtquick-layouts
   qml6-module-qtquick-dialogs qml6-module-qtquick3d

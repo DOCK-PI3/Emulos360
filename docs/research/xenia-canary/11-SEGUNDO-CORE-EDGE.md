@@ -1,5 +1,10 @@
 # 11 — Segundo core opcional: Canary Edge
 
+> **Historial de una integración retirada el 5 de octubre de 2026.**
+> No es una función actual ni una prioridad futura. Véase
+> [el funcionamiento con un único core](../../SINGLE_CORE.md).
+
+
 Fecha: **3 de octubre de 2026**. El usuario autorizó integrar Edge como segunda
 opción en el proyecto GitHub, manteniendo el core actual. La implementación,
 revisión fijada, contratos auditados, almacenamiento y pruebas están en

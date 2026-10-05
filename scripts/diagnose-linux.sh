@@ -20,6 +20,17 @@ report="$package/diagnostico-linux-$(date +%Y%m%d-%H%M%S).txt"
     ls -l "$package/$binary"
     ldd "$package/$binary"
   done
+  printf '\nActualizador Linux\n'
+  python3 --version
+  dpkg-query -W -f='${Package} ${Version}\n' libqt6core6t64 libqt6concurrent6 libqt6gui6 libqt6quick6 libqt6multimedia6 qt6-qpa-plugins qt6-wayland 2>/dev/null
+  printf '\nComprobación del cargador y Qt sin abrir la interfaz\n'
+  QT_QPA_PLATFORM=offscreen timeout 10s "$package/Emulos360" --version
+  for log in update-last-error.txt update-error.txt update-startup.log update-rollback-startup.log; do
+    [[ -f "$package/data/$log" ]] || continue
+    printf '\ndata/%s (últimos 16 KiB)\n' "$log"
+    tail -c 16384 "$package/data/$log"
+    printf '\n'
+  done
   printf '\nVulkan\n'
   if command -v vulkaninfo >/dev/null; then timeout 30s vulkaninfo --summary; else echo 'Falta vulkan-tools.'; fi
   printf '\nEventos recientes de memoria y fallos (si el sistema permite leerlos)\n'

@@ -1,0 +1,29 @@
+# Prioridades del core principal
+
+Decisión y solicitud de retirada: **5 de octubre de 2026**.
+Proyecto activo: `C:/Users/mabe8/Documents/GitHub/Emulos360`.
+
+Retirada de Nexia360/Xenia Edge **terminada y verificada** en el proyecto.
+[Funcionamiento, build local y conservación de datos](SINGLE_CORE.md).
+
+1. **Mejorar Xenia Canary**, nuestro único core: compatibilidad de juegos,
+   estabilidad, rendimiento y correcciones de texturas/personajes, preservando
+   títulos y Netplay funcionales. No añadir otros cores ni retomar XBLIG.
+2. **Seguimiento de los lunes:** solo Canary oficial y el fork Netplay;
+   comparar revisiones antes de repetir trabajo. Preparar candidatos pequeños
+   con causa comprobable. No integrar al estable sin validar regresiones.
+3. **Publicación 0.5.0 autorizada para preparar builds:** resolver la transición
+   del helper 0.4.0 antes de publicar un paquete sin Edge. El usuario hace commit,
+   push, publicación y comprobaciones de juegos; no publicar por cuenta propia.
+
+Los datos históricos y enlaces se conservan en su ubicación original; no borrar
+`data/cores` ni desinstalar los frameworks XNA. La reparación previa del
+actualizador Linux permanece. Commit, push, publicación y pruebas de juegos
+continúan a cargo del usuario. No crear otra release por cuenta propia.
+
+Consultar primero [el dossier](research/xenia-canary/README.md), el capítulo
+correspondiente y [el seguimiento](research/xenia-canary/10-SEGUIMIENTO-Y-MEJORAS-DEL-CORE.md).
+Reproducir un defecto concreto, registrar versión/TU, GPU, configuración y logs,
+preparar un cambio acotado, medir y probar regresiones. Los cuatro candidatos
+upstream preparados siguen sin estar integrados. Rivals sigue aplazado.
+Los documentos Nexia/Edge/XBLIG se conservan únicamente como historial.

@@ -1,0 +1,49 @@
+{
+  "version": "0.5.0",
+  "date": "2026-10-05",
+  "published": false,
+  "records": {
+    "Emulos360-v0.5.0-windows-x64.zip": {
+      "bytes": 138365021,
+      "sha256": "b42d4d949af1507ff6c73a3530af3beb22b05a960480fc2a2cc244e7e6487f2b"
+    },
+    "Emulos360-v0.5.0-linux-x86_64.tar.gz": {
+      "bytes": 135470602,
+      "sha256": "eda9ff59cac4aa2f97889655f32a6665ef8e72cd70e9afea49031adcd18156a2"
+    },
+    "Emulos360-v0.5.0-reparar-actualizador.zip": {
+      "bytes": 8438,
+      "sha256": "f106c8b2991350b0c0862775c64936d6c608c35259d6224f7d5f76379ce986a9"
+    },
+    "windows_runtime": {
+      "files": 19861,
+      "core_sha256": "63f44fb5cfca5ba3a20a4e9475572a8e81839efb4930bc222a6285cb589b2569",
+      "frontend_sha256": "07bfd1084524b4792e860564b1eefa184b593a4ccc4e181c52649a4595259f1f",
+      "only_primary_core": true,
+      "no_personal_data": true
+    },
+    "linux_runtime": {
+      "files": 18424,
+      "core_sha256": "8c7da623971879da4d1051ca1ba09191be7395870884b3d70316f754ee6ae507",
+      "frontend_sha256": "09b5c8a379941c67ade50a63fda62cc8cb7ef20fa632b7e8bc01389a2fc0e367",
+      "only_primary_core": true,
+      "no_personal_data": true,
+      "executable_modes_verified": true,
+      "concurrent_installed_and_checked": true
+    }
+  },
+  "verification": {
+    "windows_ctest": "4/4",
+    "linux_ctest": "4/4",
+    "linux_updater_fixtures": "7 passed",
+    "windows_package_updater_fixtures": "passed",
+    "windows_repair_backup_and_idempotency": "passed",
+    "runtime_startup_captures": "passed on Windows and Ubuntu WSL",
+    "linux_dependencies": "passed on packaged runtime",
+    "gpu_migration_asan_ubsan": "6 passed",
+    "readonly_library_detection": "84 GOD/XBLA/XEX titles",
+    "native_sources_unchanged": true
+  },
+  "owner_confirmation": "Ubuntu update dependency failure resolved before building 0.5.0",
+  "gameplay": "not tested for this release; primary core binaries preserved"
+}

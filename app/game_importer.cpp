@@ -173,7 +173,7 @@ GameImporter::Result GameImporter::importWorker(const QString& source, const QSt
     const QDir library(libraryPath);
     const auto stage = library.filePath(QStringLiteral(".emulos-import-") +
                                         QUuid::createUuid().toString(QUuid::WithoutBraces));
-    auto fail = [this, &stage](const QString& message) -> Result {
+    auto fail = [&stage](const QString& message) -> Result {
         // The selected source is never inside the staging directory and is never removed.
         QDir(stage).removeRecursively();
         return {false, message};

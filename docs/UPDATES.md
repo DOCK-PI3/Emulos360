@@ -14,9 +14,17 @@ La primera versión con actualización desde la aplicación es **v0.3.0**. Las i
 
 El actualizador instala fuera del proceso principal, conserva `data` (perfil, partidas, carátulas y ajustes), restaura los archivos anteriores si la sustitución falla e intenta reiniciar la aplicación. La build Linux se prepara en Ubuntu 26.04; las dependencias del sistema siguen instalándose con los scripts incluidos en el paquete.
 
-La versión **0.4.0** añade Canary Edge como segundo core en ambos paquetes. La
-instalación 0.3.0 conserva su carpeta de datos y el core actual sigue seleccionado
-por defecto. El instalador de 0.3.0 ya mueve el directorio completo `engine`, por
-lo que instala también `engine/edge`. Los instaladores incluidos desde 0.4.0
-exigen el ejecutable y los metadatos de Edge para las siguientes actualizaciones.
-Consulta [la integración y sus pruebas](DUAL_CORE.md).
+La release histórica **0.4.0** incorporaba Edge. La revisión del 5 de octubre
+retira los proveedores externos y mantiene un único core. Los instaladores nuevos
+aceptan paquetes sin Edge y conservan `data`. El helper de una instalación 0.4.0
+anterior debe corregirse antes de usar una release sin Edge; véase
+[la transición y conservación de datos](SINGLE_CORE.md). Para 0.5.0, se entrega
+además un ZIP de reparación de ambos ayudantes con copia de seguridad; véanse
+[las instrucciones de la release](RELEASE_0.5.0.md).
+
+## Fallo de arranque en Linux
+
+Si aparece «La nueva versión se cerró durante el arranque», consulta
+[la recuperación del actualizador y el diagnóstico](LINUX_UPDATE_RECOVERY.md).
+El instalador corregido conserva la salida de arranque y permite distinguir el
+cierre de la aplicación del proceso de descarga e instalación.

@@ -22,8 +22,8 @@
 #include <QtConcurrentRun>
 #include <algorithm>
 
-PlayerServices::PlayerServices(EngineSettings* engine,const QString& data,QObject* parent,const QString& coreExecutable,const QString& coreApplicationRoot)
-    : QObject(parent),engine_(engine),data_(QDir(data).absolutePath()),coreExecutable_(coreExecutable),preferences_(data_ + "/players.ini",QSettings::IniFormat),cores_(data_,this,coreApplicationRoot),avatarStudio_(data_,this) {
+PlayerServices::PlayerServices(EngineSettings* engine,const QString& data,QObject* parent,const QString& coreExecutable)
+    : QObject(parent),engine_(engine),data_(QDir(data).absolutePath()),coreExecutable_(coreExecutable),preferences_(data_ + "/players.ini",QSettings::IniFormat),cores_(data_,this),avatarStudio_(data_,this) {
     connect(&avatarStudio_,&AvatarStudio::saveRequested,this,[this](const QString& xuid,const QByteArray& bytes) {
         if(busy() || !knownProfile(xuid)) { fail(tr("Cierra el juego antes de guardar el avatar.")); return; }
         QDir().mkpath(data_+"/ipc");
@@ -33,12 +33,6 @@ PlayerServices::PlayerServices(EngineSettings* engine,const QString& data,QObjec
         avatarProfile_=xuid;profileCommand("avatar-write",{},xuid);
     });
     connect(this, &PlayerServices::changed, this, [this] { cores_.setLocked(busy() || engine_->locked()); });
-    connect(&edgeJob_, &QFutureWatcher<QString>::finished, this, [this] {
-        const auto error = edgeJob_.result();
-        edgePreparing_ = false;
-        if (!error.isEmpty()) { release(); fail(error); return; }
-        startEdge(edgeTarget_, edgeTitle_);
-    });
     knownContent_ = engine_->contentPath();
     process_.setProcessChannelMode(QProcess::MergedChannels);
 #ifdef Q_OS_LINUX
@@ -59,7 +53,7 @@ PlayerServices::PlayerServices(EngineSettings* engine,const QString& data,QObjec
     });
     connect(&process_,&QProcess::finished,this,&PlayerServices::finishProcess);
     connect(&process_,&QProcess::started,this,[this] {
-        if (command_.isEmpty()) coreWindow_.watch(process_.processId(), sessionCore_ != "edge");
+        if (command_.isEmpty()) coreWindow_.watch(process_.processId());
         emit changed();
     });
     connect(&process_,&QProcess::errorOccurred,this,[this](QProcess::ProcessError error) {
@@ -87,14 +81,12 @@ PlayerServices::~PlayerServices() {
     // Disconnect before CoreWindowHost and the other members are destroyed.
     disconnect(&process_, nullptr, this, nullptr);
     disconnect(&fileJob_, nullptr, this, nullptr);
-    disconnect(&edgeJob_, nullptr, this, nullptr);
     timeout_.stop();
     if (process_.state() != QProcess::NotRunning) {
         process_.kill();
         process_.waitForFinished(5000);
     }
     fileJob_.waitForFinished();
-    edgeJob_.waitForFinished();
     release();
 }
 QString PlayerServices::corePath() const {
@@ -156,14 +148,13 @@ bool PlayerServices::prepare(bool requireProfile) {
     }
     closeRequested_ = false; engine_->setLocked(true); return true;
 }
-void PlayerServices::release() { edgePreparing_ = false; edgeLock_.reset(); externalLock_.reset(); lock_.reset(); engine_->setLocked(false); emit changed(); }
+void PlayerServices::release() { externalLock_.reset(); lock_.reset(); engine_->setLocked(false); emit changed(); }
 void PlayerServices::profileCommand(const QString& command,const QString& name,const QString& xuid) {
     if (!QFileInfo::exists(corePath())) { message(tr("Falta engine/Emulos360-core. Genera el paquete completo.")); return; }
     if (!prepare()) return;
     QDir().mkpath(data_ + "/ipc");
     output_ = data_ + "/ipc/" + QUuid::createUuid().toString(QUuid::Id128) + ".toml";
     command_ = command;
-    sessionCore_ = "netplay";
     auto args = arguments();
     args << "--network_mode=0" << "--upnp=false" << "--discord=false";
     // Listing must not sign profiles in or write their GPDs as a side effect.
@@ -277,7 +268,6 @@ void PlayerServices::finishProcess(int code,QProcess::ExitStatus exit) {
     coreWindow_.clear();
     timeout_.stop(); release();
     if (command_.isEmpty()) {
-        const auto logRoot = sessionCore_ == "edge" ? cores_.edgeStorage() : data_;
         bool successful = exit == QProcess::NormalExit && code == 0;
 #ifdef Q_OS_LINUX
         successful = successful || (closeRequested_ && exit == QProcess::CrashExit && code == 15);
@@ -287,12 +277,12 @@ void PlayerServices::finishProcess(int code,QProcess::ExitStatus exit) {
         else if (!successful) {
 #ifndef Q_OS_WIN
             if (exit == QProcess::CrashExit && code == 9)
-                fail(tr("El sistema finalizó el motor con SIGKILL (9). Puede ocurrir al forzar su cierre o por falta de memoria. Registros: %1/core.log y %1/core-console.log").arg(logRoot));
+                fail(tr("El sistema finalizó el motor con SIGKILL (9). Puede ocurrir al forzar su cierre o por falta de memoria. Registros: %1/core.log y %1/core-console.log").arg(data_));
             else
 #endif
-                fail(tr("El motor terminó con un error (%1). Registros: %2/core.log y %2/core-console.log").arg(code).arg(logRoot));
+                fail(tr("El motor terminó con un error (%1). Registros: %2/core.log y %2/core-console.log").arg(code).arg(data_));
         }
-        else message(sessionCore_ == "edge" ? tr("Sesión de Edge terminada. Sus partidas y logros permanecen en su almacenamiento independiente.") : tr("Sesión terminada. Las partidas permanecen en la carpeta de contenido."));
+        else { message(tr("Sesión terminada. Las partidas permanecen en la carpeta de contenido.")); }
         emit sessionEnded(successful ? 0 : exit == QProcess::NormalExit ? code : -1);
         return;
     }
@@ -401,7 +391,7 @@ void PlayerServices::launchMetro(const QString& path) { launch(path,true,"454D36
 void PlayerServices::launchNetplay() {
     if (!QFileInfo::exists(corePath())) { message(tr("Falta el motor Netplay en el paquete.")); return; }
     if (!prepare()) return;
-    command_.clear(); sessionCore_ = "netplay";
+    command_.clear();
     process_.setWorkingDirectory(QFileInfo(corePath()).absolutePath());
     auto args = arguments();
 #ifdef Q_OS_WIN
@@ -428,20 +418,20 @@ void PlayerServices::chooseExternalStorage(const QUrl& folder) {
     } else message(engine_->status());
 }
 void PlayerServices::launch(const QString& path,bool xexOnly,const QString& titleId,bool writableGame) {
-    const auto selectedCore = xexOnly || writableGame ? QStringLiteral("netplay") : cores_.coreFor(titleId);
-    const auto executable = selectedCore == "edge" ? cores_.executable("edge") : corePath();
-    if (!emulos::runnableFile(executable)) { fail(tr("Falta el core seleccionado (%1) en el paquete. Reinstala el paquete completo o selecciona el core actual.").arg(selectedCore)); return; }
+    if (!emulos::runnableFile(corePath())) { fail(tr("Falta el core Xenia Canary en el paquete. Reinstala el paquete completo.")); return; }
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly)) { message(tr("No se encuentra el ejecutable o el motor.")); return; }
-    const auto header=file.read(8); const auto magic=header.first(4); file.close();
-    if (magic=="XEX2" && header.size()==8 && (qFromBigEndian<quint32>(header.constData()+4)&8)) {
+    const auto header=file.read(0x364); const auto magic=header.first(4); file.close();
+    if ((magic == "LIVE" || magic == "PIRS" || magic == "CON ") && header.size() >= 0x364 &&
+        qFromBigEndian<quint32>(header.constData() + 0x344) == 2 &&
+        qFromBigEndian<quint32>(header.constData() + 0x360) == 0x584E07D2) {
+        fail(tr("XBLIG no está soportado por Xenia Canary.")); return;
+    }
+    if (magic=="XEX2" && header.size()>=8 && (qFromBigEndian<quint32>(header.constData()+4)&8)) {
         message(tr("Este XEX es un módulo DLL, no una aplicación independiente. Los módulos DLL necesitan un cargador compatible.")); return;
     }
     if ((xexOnly && !magic.startsWith("XEX")) || (!xexOnly && !magic.startsWith("XEX") && magic!="LIVE" && magic!="PIRS" && magic!="CON ")) { message(tr("Selecciona un ejecutable XEX o un paquete Xbox 360 compatible.")); return; }
-    if (selectedCore == "edge" && !privateApi_.isEmpty()) { fail(tr("Canary Edge no tiene integración MultiP. Para esta sesión privada selecciona el core actual.")); return; }
     if (!prepare(!writableGame)) return;
-    if (selectedCore == "edge") { prepareEdge(path, titleId); return; }
-    sessionCore_ = "netplay";
     command_.clear(); auto args=arguments();
     if (!xexOnly && !writableGame && !cores_.rendererFor(titleId).isEmpty()) {
         args.removeIf([](const QString& argument) { return argument.startsWith("--gpu="); });
@@ -467,56 +457,6 @@ void PlayerServices::launch(const QString& path,bool xexOnly,const QString& titl
     process_.setStandardOutputFile(data_ + "/core-console.log");
     process_.start(corePath(),args);
     message(xexOnly ? tr("XEX iniciado. El estado de autenticación lo determina el servicio dentro del motor.") : tr("Sesión en curso. Guarda desde el menú del juego antes de cerrar el motor."));
-}
-void PlayerServices::prepareEdge(const QString& path, const QString& titleId) {
-    if (!cores_.ensureEdgeConfig(engine_->values().value("Console.language", 1).toInt(),
-                                 engine_->values().value("UI.show_achievement_notification").toBool())) {
-        release(); fail(cores_.status()); return;
-    }
-    QDir().mkpath(cores_.edgeContent());
-    edgeLock_ = std::make_unique<QLockFile>(cores_.edgeContent() + "/.emulos-session.lock");
-    if (!edgeLock_->tryLock(0)) { release(); fail(tr("Otra instancia está usando el almacenamiento de Edge.")); return; }
-    edgeTarget_ = path; edgeTitle_ = titleId;
-    const auto internal = engine_->contentPath(), external = engine_->externalContentPath();
-    const auto content = cores_.edgeContent(), xuid = activeXuid();
-    edgePreparing_ = true;
-    edgeJob_.setFuture(QtConcurrent::run([internal, external, content, xuid, titleId] {
-        return emulos::seedEdgeContent(internal, external, content, xuid, titleId);
-    }));
-    message(tr("Preparando la copia independiente del perfil y contenido para Edge…"));
-}
-void PlayerServices::startEdge(const QString& path, const QString& titleId) {
-    command_.clear(); sessionCore_ = "edge";
-    auto args = QStringList{"--config=" + cores_.edgeConfig(), "--storage_root=" + cores_.edgeStorage(),
-        "--content_root=" + cores_.edgeContent(), "--cache_root=" + cores_.edgeStorage() + "/cache",
-        "--log_file=" + cores_.edgeStorage() + "/core.log", "--fullscreen=false"};
-    if (!path.isEmpty()) args << "--target=" + QFileInfo(path).absoluteFilePath();
-    const auto xuid = activeXuid();
-    if (QFileInfo::exists(cores_.edgeContent() + '/' + xuid + "/FFFE07D1/00010000/" + xuid))
-        args << "--logged_profile_slot_0_xuid=" + xuid;
-    // A core's native settings are not passed the default renderer of a different core.
-    if (!path.isEmpty() && !cores_.rendererFor(titleId).isEmpty()) args << "--gpu=" + cores_.rendererFor(titleId);
-#ifdef Q_OS_LINUX
-    auto environment = process_.processEnvironment();
-    environment.insert("APPIMAGE_EXTRACT_AND_RUN", "1");
-    process_.setProcessEnvironment(environment);
-#endif
-    process_.setWorkingDirectory(cores_.edgeStorage());
-    process_.setStandardOutputFile(cores_.edgeStorage() + "/core-console.log");
-    process_.start(cores_.executable("edge"), args);
-    message(tr("Canary Edge abierto en su ventana nativa. Sus partidas y logros se guardan por separado."));
-}
-void PlayerServices::openEdgeSettings() {
-    if (!emulos::runnableFile(cores_.executable("edge"))) { fail(tr("Falta Canary Edge en el paquete.")); return; }
-    if (!prepare()) return;
-    if (!cores_.ensureEdgeConfig(engine_->values().value("Console.language", 1).toInt(),
-                                 engine_->values().value("UI.show_achievement_notification").toBool())) {
-        release(); fail(cores_.status()); return;
-    }
-    QDir().mkpath(cores_.edgeContent());
-    edgeLock_ = std::make_unique<QLockFile>(cores_.edgeContent() + "/.emulos-session.lock");
-    if (!edgeLock_->tryLock(0)) { release(); fail(tr("Otra instancia está usando el almacenamiento de Edge.")); return; }
-    startEdge({}, {});
 }
 void PlayerServices::closeSession() {
     if (!sessionActive()) return;

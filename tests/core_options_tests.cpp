@@ -4,77 +4,72 @@
 #include <QFile>
 #include <QDir>
 
-namespace {
-bool put(const QString& path, const QByteArray& bytes) {
-    QDir().mkpath(QFileInfo(path).absolutePath()); QFile file(path);
-    return file.open(QIODevice::WriteOnly) && file.write(bytes) == bytes.size();
-}
-QByteArray read(const QString& path) { QFile file(path); return file.open(QIODevice::ReadOnly) ? file.readAll() : QByteArray{}; }
-}
 class CoreOptionsTests : public QObject {
     Q_OBJECT
 private slots:
-    void selectionPersistsAndOverridesOnlyItsTitle() {
+    void rendererPreferencesPersistByTitle() {
+        QTemporaryDir directory; CoreOptions options(directory.path());
+        QCOMPARE(options.rendererFor("545408B4"), QString{});
+        options.setDefaultRenderer("vulkan");
+        QCOMPARE(options.rendererFor("545408B4"), QString("vulkan"));
+        QVERIFY(options.saveGameOptions("545408b4", ""));
+        CoreOptions reopened(directory.path());
+        QCOMPARE(reopened.defaultRenderer(), QString("vulkan"));
+#ifdef Q_OS_WIN
+        QVERIFY(reopened.saveGameOptions("545408B4", "d3d12"));
+        QCOMPARE(reopened.rendererFor("545408B4"), QString("d3d12"));
+        QCOMPARE(reopened.rendererFor("454109C6"), QString("vulkan"));
+#endif
+        QVERIFY(reopened.saveGameOptions("545408B4", ""));
+        QCOMPARE(reopened.rendererFor("545408B4"), QString("vulkan"));
+    }
+    void invalidAndLockedChangesAreRejected() {
+        QTemporaryDir directory; CoreOptions options(directory.path());
+        QVERIFY(!options.saveGameOptions("../engine", "vulkan"));
+        QVERIFY(!options.saveGameOptions("545408B4", "unknown"));
+        options.setDefaultRenderer("unknown"); QCOMPARE(options.defaultRenderer(), QString{});
+        options.setLocked(true); options.setDefaultRenderer("vulkan");
+        QVERIFY(!options.saveGameOptions("545408B4", "vulkan"));
+        QCOMPARE(options.defaultRenderer(), QString{});
+        QVERIFY(!QFileInfo::exists(directory.filePath("cores.ini")));
+    }
+    void retiredCoreSelectionsAreBackedUpAndMainGpuPreserved() {
+        QTemporaryDir directory; const auto path = directory.filePath("cores.ini");
+        {
+            QSettings legacy(path, QSettings::IniFormat);
+            legacy.setValue("defaultCore", "edge"); legacy.setValue("renderers/edge", "vulkan");
+#ifdef Q_OS_WIN
+            legacy.setValue("renderers/netplay", "d3d12");
+#endif
+            legacy.setValue("games/545408B4/core", "edge");
+            legacy.setValue("games/545408B4/renderer", "vulkan"); legacy.sync();
+        }
+        QFile original(path); QVERIFY(original.open(QIODevice::ReadOnly)); const auto bytes=original.readAll(); original.close();
+        CoreOptions options(directory.path());
+        QCOMPARE(options.rendererFor("545408B4"), QString("vulkan"));
+#ifdef Q_OS_WIN
+        QCOMPARE(options.defaultRenderer(), QString("d3d12"));
+#else
+        QCOMPARE(options.defaultRenderer(), QString{});
+#endif
+        QSettings migrated(path, QSettings::IniFormat);
+        QVERIFY(!migrated.contains("defaultCore")); QVERIFY(!migrated.contains("renderers/edge"));
+        QVERIFY(!migrated.contains("games/545408B4/core"));
+        QFile backup(path+".before-single-core"); QVERIFY(backup.open(QIODevice::ReadOnly)); QCOMPARE(backup.readAll(),bytes);
+        CoreOptions reopened(directory.path()); QCOMPARE(reopened.rendererFor("545408B4"),QString("vulkan"));
+        QCOMPARE(QDir(directory.path()).entryList({"cores.ini.before-single-core*"},QDir::Files).size(),1);
+    }
+    void migrationDoesNotCreateOrChangeContent() {
         QTemporaryDir directory;
-        CoreOptions cores(directory.path(), nullptr, directory.path());
-        QCOMPARE(cores.defaultCore(), QStringLiteral("netplay"));
-        QCOMPARE(cores.rendererFor("545408B4"), QString{});
-        cores.setDefaultCore("edge"); cores.setDefaultRenderer("vulkan");
-        QVERIFY(cores.saveGameOptions("545408b4", "netplay", ""));
-        QCOMPARE(cores.coreFor("545408B4"), QStringLiteral("netplay"));
-        QCOMPARE(cores.rendererFor("545408B4"), QString{});
-        QCOMPARE(cores.coreFor("454109C6"), QStringLiteral("edge"));
-        QCOMPARE(cores.rendererFor("454109C6"), QStringLiteral("vulkan"));
-        CoreOptions reopened(directory.path(), nullptr, directory.path());
-        QCOMPARE(reopened.coreFor("545408B4"), QStringLiteral("netplay"));
-        QVERIFY(reopened.saveGameOptions("545408B4", "", ""));
-        QCOMPARE(reopened.coreFor("545408B4"), QStringLiteral("edge"));
-        QCOMPARE(reopened.rendererFor("545408B4"), QStringLiteral("vulkan"));
-    }
-    void lockedOrInvalidSelectionsDoNotAlterPreferences() {
-        QTemporaryDir directory; CoreOptions cores(directory.path(), nullptr, directory.filePath("app"));
-        QVERIFY(!cores.saveGameOptions("../engine", "edge", "vulkan"));
-        QVERIFY(!cores.saveGameOptions("545408B4", "unknown", ""));
-        QVERIFY(!cores.saveGameOptions("545408B4", "edge", "unknown"));
-        cores.setLocked(true); cores.setDefaultCore("edge");
-        QVERIFY(!cores.saveGameOptions("545408B4", "edge", "vulkan"));
-        QCOMPARE(cores.defaultCore(), QStringLiteral("netplay"));
-        QVERIFY(!cores.gameOptions("545408B4")["available"].toBool());
-        QVERIFY(cores.executable("../../elsewhere").isEmpty());
-    }
-    void configIsIndependentAndPreservesNativeEdits() {
-        QTemporaryDir directory; CoreOptions cores(directory.path(), nullptr, directory.filePath("app"));
-        const auto original = directory.filePath("engine/xenia-canary.config.toml");
-        QVERIFY(put(original, "original config\n"));
-        QVERIFY(cores.ensureEdgeConfig(5, true));
-        QVERIFY(read(cores.edgeConfig()).contains("show_achievement_notification = true"));
-        QVERIFY(put(cores.edgeConfig(), "native Edge options\n"));
-        QVERIFY(cores.ensureEdgeConfig(1, false));
-        QCOMPARE(read(cores.edgeConfig()), QByteArray("native Edge options\n"));
-        QCOMPARE(read(original), QByteArray("original config\n"));
-    }
-    void importCopiesContentAndNeverReplacesProgress() {
-        QTemporaryDir directory;
-        const auto source = directory.filePath("current");
-        const auto destination = directory.filePath("edge/content");
-        const QString xuid = "E000000000000001", title = "545408B4";
-        const auto profile = xuid + "/FFFE07D1/00010000/" + xuid + "/Account";
-        const auto save = xuid + '/' + title + "/00000001/Save";
-        const auto dlc = "0000000000000000/" + title + "/00000002/DLC";
-        QVERIFY(put(source + '/' + profile, "profile"));
-        QVERIFY(put(source + '/' + save, "old save"));
-        QVERIFY(put(source + '/' + dlc, "content"));
-        QCOMPARE(emulos::seedEdgeContent(source, {}, destination, xuid, title), QString{});
-        QCOMPARE(read(destination + '/' + profile), QByteArray("profile"));
-        QCOMPARE(read(destination + '/' + dlc), QByteArray("content"));
-        QVERIFY(put(destination + '/' + save, "new Edge progress"));
-        QCOMPARE(emulos::seedEdgeContent(source, {}, destination, xuid, title), QString{});
-        QCOMPARE(read(destination + '/' + save), QByteArray("new Edge progress"));
-        QCOMPARE(read(source + '/' + save), QByteArray("old save"));
-        QCOMPARE(emulos::seedEdgeContent(source, {}, destination, xuid, "454109C6"), QString{});
-        QCOMPARE(read(destination + '/' + save), QByteArray("new Edge progress"));
-        QVERIFY(!emulos::seedEdgeContent(source, {}, destination, "invalid", title).isEmpty());
-        QVERIFY(!emulos::seedEdgeContent(source, {}, source + "/nested", xuid, title).isEmpty());
+        for (const auto& relative : {QString("engine/content/profile/Account"),QString("cores/edge/content/save"),QString("cores/xblig/saves/game/native/save")}) {
+            const auto path=directory.filePath(relative); QVERIFY(QDir().mkpath(QFileInfo(path).absolutePath()));
+            QFile file(path); QVERIFY(file.open(QIODevice::WriteOnly)); file.write(relative.toUtf8());
+        }
+        { QSettings legacy(directory.filePath("cores.ini"),QSettings::IniFormat); legacy.setValue("defaultCore","edge"); legacy.sync(); }
+        CoreOptions options(directory.path()); options.setDefaultRenderer("vulkan");
+        for (const auto& relative : {QString("engine/content/profile/Account"),QString("cores/edge/content/save"),QString("cores/xblig/saves/game/native/save")}) {
+            QFile file(directory.filePath(relative)); QVERIFY(file.open(QIODevice::ReadOnly)); QCOMPARE(file.readAll(),relative.toUtf8());
+        }
     }
 };
 QTEST_GUILESS_MAIN(CoreOptionsTests)

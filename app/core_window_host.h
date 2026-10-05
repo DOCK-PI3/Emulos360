@@ -19,8 +19,14 @@ public:
     QWindow* window() const { return window_; }
     QString status() const { return status_; }
     bool available() const { return window_ || nativeWindow_; }
-    bool external() const { return !embed_; }
-    void watch(qint64 pid, bool embed = true);
+    bool external() const {
+#ifdef Q_OS_WIN
+        return false;
+#else
+        return true;
+#endif
+    }
+    void watch(qint64 pid);
     void clear();
     Q_INVOKABLE void focus();
     Q_INVOKABLE void requestClose();
@@ -32,7 +38,6 @@ private:
     QWindow* window_ = nullptr;
     qint64 pid_ = 0;
     quintptr nativeWindow_ = 0;
-    bool embed_ = true;
     int attempts_ = 0;
     QString status_;
 };

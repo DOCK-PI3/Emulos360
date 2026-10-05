@@ -1,4 +1,4 @@
-param([string]$Version = '')
+param([string]$Version = '', [string]$SourceDirectory = '', [string]$ReleaseDirectory = '')
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 if (!$Version) {
@@ -10,13 +10,13 @@ if (!$Version) {
 }
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'La versión debe tener formato X.Y.Z.' }
 $out = Join-Path $root 'out'
-$source = Join-Path $out 'Emulos360-MultiP'
-$release = Join-Path $out "release-v$Version"
+$source = if ($SourceDirectory) { (Resolve-Path -LiteralPath $SourceDirectory).Path } else { Join-Path $out 'Emulos360-MultiP' }
+$release = if ($ReleaseDirectory) { [IO.Path]::GetFullPath($ReleaseDirectory) } else { Join-Path $out "release-v$Version" }
 $archive = Join-Path $release "Emulos360-v$Version-windows-x64.zip"
 $sevenZip = 'C:\Program Files\7-Zip\7z.exe'
 
 foreach ($required in @(
-    'Emulos360.exe', 'engine/Emulos360-core.exe', 'engine/edge/xenia_edge.exe', 'engine/edge/LICENSE', 'engine/edge/release.json', 'engine/edge/D3D12/D3D12Core.dll', 'engine/edge/D3D12/dxil.dll', 'tools/7z.exe',
+    'Emulos360.exe', 'engine/Emulos360-core.exe', 'tools/7z.exe',
     'tools/iso2god.exe', 'server/private-service.cjs', 'server/node.exe',
     'server/mongodb/bin/mongod.exe', 'XEXplugins/MetroDashboard/default.xex',
     'updates/apply-update-windows.ps1'
@@ -45,13 +45,22 @@ try {
     $payload = Join-Path $stage 'Emulos360'
     New-Item -ItemType Directory -Force -Path $payload | Out-Null
     Get-ChildItem -LiteralPath $source -Force | Where-Object {
-        $_.Name -notin @('build', 'data', 'linux-build', 'linux-engine-build') -and
+        $_.Name -notin @('build', 'data', 'linux-build', 'linux-engine-build', 'LEEME-XBLIG.md', 'LEEME-DUAL-CORE.md', 'LEEME-CORES.md') -and
         $_.Extension -notin @('.log', '.pdb', '.ilk')
     } | ForEach-Object {
         if ($_.Attributes -band [IO.FileAttributes]::ReparsePoint) {
             throw "Enlace inesperado en el paquete: $($_.FullName)"
         }
-        Copy-Item -LiteralPath $_.FullName -Destination $payload -Recurse -Force
+        if ($_.Name -eq 'engine') {
+            $engineTarget = Join-Path $payload 'engine'
+            New-Item -ItemType Directory -Force -Path $engineTarget | Out-Null
+            Get-ChildItem -LiteralPath $_.FullName -Force | Where-Object { $_.Name -notin @('edge', 'xblig') } | ForEach-Object {
+                if ($_.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw "Enlace inesperado: $($_.FullName)" }
+                Copy-Item -LiteralPath $_.FullName -Destination $engineTarget -Recurse -Force
+            }
+        } else {
+            Copy-Item -LiteralPath $_.FullName -Destination $payload -Recurse -Force
+        }
     }
     Push-Location $stage
     try {

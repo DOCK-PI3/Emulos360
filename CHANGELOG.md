@@ -1,5 +1,15 @@
 # Cambios
 
+## 0.5.0 — 5 de octubre de 2026 (preparada para publicación)
+
+- Retirada de Nexia360 y Xenia Edge; Xenia Canary es el único motor.
+- Se mantienen GPU global/por juego, perfiles, partidas, avatares y Netplay/MultiP.
+- Paquetes e instaladores de actualización sin requisitos de cores externos.
+- Se conserva la reparación del actualizador Linux y los datos históricos.
+- Ubuntu: se instala y comprueba `libqt6concurrent6`, cuya ausencia impedía
+  arrancar la nueva interfaz tras actualizar (código 127).
+
+
 ## 0.4.0 — 3 de octubre de 2026
 
 - Segundo core opcional Canary Edge, con revisión oficial fijada y verificación

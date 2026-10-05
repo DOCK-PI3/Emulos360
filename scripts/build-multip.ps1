@@ -43,7 +43,14 @@ try {
     # Only runtime assets are read from the stable package. Profiles, saves and settings stay independent.
     foreach ($folder in @('engine','intro','tools','XEXplugins','licenses','updates')) {
         $source = Join-Path $project "out/Emulos360/$folder"
-        if (Test-Path $source) { Copy-Item $source $package -Recurse -Force }
+        if (!(Test-Path $source)) { continue }
+        if ($folder -eq 'engine') {
+            New-Item -ItemType Directory -Force "$package/engine" | Out-Null
+            Get-ChildItem -LiteralPath $source -Force | Where-Object { $_.Name -notin @('edge','xblig') } | ForEach-Object {
+                if ($_.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Enlace inesperado en engine.' }
+                Copy-Item -LiteralPath $_.FullName -Destination "$package/engine" -Recurse -Force
+            }
+        } else { Copy-Item -LiteralPath $source -Destination $package -Recurse -Force }
     }
     Copy-Item "$project/server/private-service.cjs","$project/server/panel.html","$project/server/panel.js","$project/server/package.json","$project/server/package-lock.json" "$package/server/" -Force
     Copy-Item "$project/server/node_modules" "$package/server/" -Recurse -Force
