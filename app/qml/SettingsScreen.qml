@@ -9,6 +9,7 @@ ColumnLayout {
     objectName: "settingsScreen"
     required property LibraryController controller
     readonly property EngineSettings settings: controller.engineSettings
+    readonly property CoreOptions cores: controller.players.cores
     signal chooseFolder()
     property string category: "graphics"
     property string query: ""
@@ -67,6 +68,12 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
             spacing: 8
+            Loader {
+                active: (page.category === "graphics" || page.category === "display") && !page.query.length
+                visible: active
+                Layout.fillWidth: true
+                sourceComponent: Component { GraphicsProfileSelector { cores: page.cores } }
+            }
             RowLayout {
                 visible: page.category !== "app" || page.query.length
                 Layout.fillWidth: true
@@ -94,6 +101,7 @@ ColumnLayout {
                     width: settingsList.width - 14
                     entry: modelData
                     settings: page.settings
+                    profileValues: page.cores.defaultGraphicsValues
                 }
                 ScrollBar.vertical: ScrollBar {}
                 Label { anchors.centerIn: parent; visible: settingsList.count === 0; text: qsTr("No hay ajustes que coincidan."); color: Theme.muted }

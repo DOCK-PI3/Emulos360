@@ -16,6 +16,11 @@ Ajustes → Emulos360 → Gráficos conserva GPU global. Biblioteca → Gráfico
 GPU por título. Direct3D 12 está disponible en Windows y Vulkan en ambas plataformas.
 «Usar ajustes del motor» respeta la configuración principal.
 
+El 5 de octubre se añaden [perfiles gráficos globales y por juego](GRAPHICS_PROFILES.md),
+desde 720p mejorado hasta 4K. Se aplican al iniciar mediante los controles
+existentes de resolución/CAS/FSR. Predeterminado recupera los valores originales
+de esos controles y Personalizado conserva la configuración manual anterior.
+
 `data/cores.ini` conserva `renderers/netplay` y las opciones gráficas válidas por
 Title ID. Al abrir la interfaz se respalda el archivo anterior como
 `cores.ini.before-single-core` y se eliminan únicamente las selecciones de core y

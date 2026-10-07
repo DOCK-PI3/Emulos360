@@ -1,0 +1,175 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-06T20:11:14.4741799+01:00",
+  "state": "Candidato aislado; pruebas automatizadas aprobadas; gameplay pendiente; no integrado al motor estable",
+  "baseline": {
+    "revision": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+    "localChangesPreserved": true,
+    "valueSha256": "4e4bb8cc81baf7c07c3180377fb6901f457c1a0d4a5def8756e31737b1ef31a2",
+    "stableInstalledExeSha256": "63f44fb5cfca5ba3a20a4e9475572a8e81839efb4930bc222a6285cb589b2569"
+  },
+  "upstream": {
+    "candidateRevision": "5ce7c336df060d043b0a2351889ec8789322d035",
+    "author": "Herman S.",
+    "url": "https://github.com/xenia-canary/xenia-canary/commit/5ce7c336df060d043b0a2351889ec8789322d035",
+    "canaryHeadConsulted": "7ba916c010f8ea48960bfde377f8fceb6054d754",
+    "netplayHeadConsulted": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+    "comparisonCommits": 40,
+    "revertMessagesFound": 0,
+    "laterImplementationInspected": true,
+    "exhaustiveAuditOfAllLaterCommits": false
+  },
+  "patch": {
+    "path": "patches/xenia-upstream-candidates/cpu-extract-fold.patch",
+    "sha256": "3b7213080385c4dc6bb1394a8834100dcb503e582c6aa7a8ec7c643910a43666",
+    "scope": "Solo implementación Value::Extract; cuatro expresiones y comentario",
+    "candidateValueSha256": "ece157c4869036500a2a99b4bb05784c4974ca97d13347ad65865153fe5dd6bf"
+  },
+  "sourceAudit": {
+    "comparedFiles": 2029,
+    "unexpectedDifferences": 0,
+    "exclusions": [
+      "Value.cc corregido",
+      "bytecodes de shaders regenerados por el pipeline nativo"
+    ],
+    "extraTestingSources": [
+      "extract_fold_contract_test.cc",
+      "emulos_app_flags_test.cc"
+    ],
+    "snapshotGitAliasRemoved": true
+  },
+  "componentTests": {
+    "vectors": 4101,
+    "validLaneChecks": 123030,
+    "baselineFailures": 98108,
+    "baselineFailuresI8": 65316,
+    "baselineFailuresI16": 32792,
+    "baselineFailuresI32": 0,
+    "baselineFailuresI64": 0,
+    "baselineSanitizerError": "index 16 out of bounds for uint8_t[16], value.cc:834",
+    "candidateAllIndexChecks": 4199424,
+    "candidateFailures": 0,
+    "windows": {
+      "compiler": "MSVC 14.50.35717",
+      "configuration": "C++20 Release",
+      "ctest": "2/2",
+      "compiledFullValueTranslationUnit": true,
+      "linkedOriginalExtractBodySlice": true
+    },
+    "linux": {
+      "compiler": "Clang 21.1.8",
+      "configuration": "C++20 RelWithDebInfo",
+      "ctest": "2/2",
+      "sanitizers": [
+        "AddressSanitizer",
+        "UndefinedBehaviorSanitizer"
+      ],
+      "leakDetection": true,
+      "candidateSanitizerReports": 0,
+      "compiledAndLinkedRealValueTranslationUnit": true
+    }
+  },
+  "jitTests": {
+    "platform": "Windows x64",
+    "configuration": "MSVC Release LTCG",
+    "generatedFunctions": 84,
+    "widths": [
+      8,
+      16,
+      32
+    ],
+    "differentialAssertions": 252,
+    "differentialPassed": true,
+    "totalCpuTestCases": 247,
+    "totalCpuAssertions": 1077,
+    "totalCpuSuitePassed": true,
+    "sanitizersUsed": false,
+    "realMemoryProcessorCompilerBackend": true,
+    "kernelUiFlagDefinition": "Mismo cvar emulos_embedded=false del ejecutable app; registro real, solo en tests"
+  },
+  "experimentalEmulator": {
+    "target": "xenia-app",
+    "platform": "Windows x64",
+    "configuration": "Release",
+    "linked": true,
+    "reproducedBuildAndTests": true,
+    "path": "local\\core-maintenance-20261006\\jit-windows-build\\bin\\Windows\\Release\\Emulos360-core.exe",
+    "bytes": 19284480,
+    "sha256": "df826f206bd2bd04a704d0cf1de914db5c7a47c04003b3b172f54107b08ee0a5",
+    "launchedWithGames": false,
+    "installed": false,
+    "releasePublished": false
+  },
+  "limits": [
+    "Sin gameplay local con el candidato",
+    "Sin prueba Netplay entre equipos",
+    "Sin validación GPU de imagen o DRED",
+    "Sin emulador completo Linux compilado",
+    "Sin afirmación de FPS o títulos nuevos funcionales",
+    "Un estado de fuente con cambios propios; no es una build Netplay limpia",
+    "No se valida EXTRACT_I64 dinámico ni índices inválidos dentro del JIT",
+    "JIT Windows no ejecutado bajo ASan/UBSan"
+  ],
+  "logs": [
+    {
+      "path": "local/core-maintenance-20261006/windows/baseline-lanes.log",
+      "sha256": "16ccd83abdb09542a9d4e67dd7937572fe5e30f350c236c8c8466208170622ab"
+    },
+    {
+      "path": "local/core-maintenance-20261006/windows/candidate-tests.log",
+      "sha256": "29add44d78d29df60602481fb576c8d38594816b4a7d4c6289db7d9de2b58162"
+    },
+    {
+      "path": "local/core-maintenance-20261006/windows/candidate-lanes.log",
+      "sha256": "00f1b2afa8eaea94c02ffb6398c7754691a0648ad35095a2caec4c7964791ddd"
+    },
+    {
+      "path": "local/core-maintenance-20261006/windows/candidate-all-indices.log",
+      "sha256": "dbc6b7683954037c1b48717e496e2e64e8944acb335c04ab29b594f4d8f6702f"
+    },
+    {
+      "path": "local/core-maintenance-20261006/linux/baseline-lanes.log",
+      "sha256": "2fdd997f9afb8d32042ed66ec3855953e5b81be74e807556c9e962edab68689b"
+    },
+    {
+      "path": "local/core-maintenance-20261006/linux/baseline-bounds.log",
+      "sha256": "57cddcd0b68bcc93cc6fb3e47a119ca16ef3806d3ee3b609cdca4d904e39cd40"
+    },
+    {
+      "path": "local/core-maintenance-20261006/linux/candidate-tests.log",
+      "sha256": "b6cf305cc33f203acc0f47c897df2b726a8965d867f1759352adf464f1ec2e0f"
+    },
+    {
+      "path": "local/core-maintenance-20261006/linux/candidate-lanes.log",
+      "sha256": "d01268ffb2b2d0020046e80bacfe684fb61956c58c5f149804d6e6cf60dbbec4"
+    },
+    {
+      "path": "local/core-maintenance-20261006/linux/candidate-all-indices.log",
+      "sha256": "b08c817717f55e37325e108994338ffa657e15a9ff6c9cea1b786fd915dbdbe8"
+    },
+    {
+      "path": "local/core-maintenance-20261006/jit-extract-tests.log",
+      "sha256": "7c74852febb718f0f105d45bdfced28b128c98a3bab5ab937d125726c8fdc963"
+    },
+    {
+      "path": "local/core-maintenance-20261006/jit-full-cpu-tests.log",
+      "sha256": "0157619e038edaf2602882d5957498d74f20d1348f7073fc3538aa48923f529e"
+    },
+    {
+      "path": "local/core-maintenance-20261006/jit-build-first.log",
+      "sha256": "30bf73d00d8068d530f860f98f463d164a48bcc39cb07b4726cae200963b01bb"
+    },
+    {
+      "path": "local/core-maintenance-20261006/candidate-core-build-first.log",
+      "sha256": "c20dc8b8abb79da8ddf8908ac7df739a8e3e0c7f6e63e1ce2de77b41076ed7e0"
+    },
+    {
+      "path": "local/core-maintenance-20261006/snapshot-dependencies.log",
+      "sha256": "8c46c6f999685bee41003d0228c1270c319f52693c512053aaf06a4d17adda61"
+    },
+    {
+      "path": "local/core-maintenance-20261006/snapshot-sources.json",
+      "sha256": "85d7400a071ea641bcb5b4806585b101cc9d8c8c9c5008ded411a6af351c580a"
+    }
+  ]
+}

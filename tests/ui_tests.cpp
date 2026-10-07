@@ -18,6 +18,7 @@
 #include <QtEndian>
 #include <QTcpServer>
 #include <QSignalSpy>
+#include <QScopeGuard>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -41,6 +42,12 @@ private slots:
         QVERIFY(!page->findChild<QObject*>("openXbligSettings"));
         QVERIFY(!page->findChild<QObject*>("openEdgeSettings"));
         QVERIFY(page->findChild<QObject*>("defaultRendererCombo"));
+        auto* globalProfile=page->findChild<QObject*>("globalGraphicsProfileCombo"); QVERIFY(globalProfile);
+        QCOMPARE(globalProfile->property("currentValue").toString(), QString("custom"));
+        globalProfile->setProperty("currentIndex", 5);
+        QVERIFY(QMetaObject::invokeMethod(globalProfile,"activated",Q_ARG(int,5)));
+        QCOMPARE(controller.players()->cores()->defaultGraphicsProfile(),QString("4k-fsr"));
+        QTRY_COMPARE(globalProfile->property("currentValue").toString(), QString("4k-fsr"));
         const auto capture = qEnvironmentVariable("EMULOS_CORE_UI_CAPTURE");
         QTest::qWait(250);
         if (!capture.isEmpty()) QVERIFY(preview.grabWindow().save(capture + "/core-preferences.png"));
@@ -55,9 +62,130 @@ private slots:
         if (!capture.isEmpty()) QVERIFY(preview.grabWindow().save(capture + "/game-core-dialog.png"));
         dialog->setProperty("visible", false);
         QVERIFY(!dialog->findChild<QObject*>("gameCoreCombo")); QVERIFY(dialog->findChild<QObject*>("gameRendererCombo"));
-        QVERIFY(controller.players()->cores()->saveGameOptions("545408B4", "vulkan"));
+        auto* gameProfile=dialog->findChild<QObject*>("gameGraphicsProfileCombo"); QVERIFY(gameProfile);
+        QCOMPARE(gameProfile->property("count").toInt(), 8);
+        QCOMPARE(gameProfile->property("currentValue").toString(), QString{});
+        QVERIFY(controller.players()->cores()->saveGameOptions("545408B4", "vulkan", "720p"));
+        QVERIFY(QMetaObject::invokeMethod(dialog.get(), "showFor", Q_ARG(QVariant, QVariant(selectedGame))));
+        QTRY_COMPARE(gameProfile->property("currentValue").toString(), QString("720p"));
+        controller.players()->cores()->setLocked(true);
+        QTRY_VERIFY(!gameProfile->property("enabled").toBool());
+        controller.players()->cores()->setLocked(false);
+        gameProfile->setProperty("currentIndex",4);
+        auto* saveButton=dialog->findChild<QObject*>("gameSaveGraphicsButton"); QVERIFY(saveButton);
+        QVERIFY(QMetaObject::invokeMethod(saveButton,"clicked"));
+        QCOMPARE(controller.players()->cores()->graphicsProfileFor("545408B4"),QString("1080p-fsr"));
+        QVERIFY(QMetaObject::invokeMethod(dialog.get(),"showFor",Q_ARG(QVariant,QVariant(selectedGame))));
+        auto* globalButton=dialog->findChild<QObject*>("gameUseGlobalGraphicsButton"); QVERIFY(globalButton);
+        QVERIFY(QMetaObject::invokeMethod(globalButton,"clicked"));
+        QCOMPARE(controller.players()->cores()->graphicsProfileFor("545408B4"),QString("4k-fsr"));
+        QCOMPARE(controller.players()->cores()->gameOptions("545408B4")["graphicsProfile"].toString(),QString{});
+        QVERIFY(controller.players()->cores()->saveGameOptions("545408B4","vulkan","720p"));
+        dialog->setProperty("visible", false);
         Controller reopened(directory.filePath("settings.ini"));
         QCOMPARE(reopened.players()->cores()->rendererFor("545408B4"), QStringLiteral("vulkan"));
+        QCOMPARE(reopened.players()->cores()->graphicsProfileFor("545408B4"), QString("720p"));
+        QCOMPARE(reopened.players()->cores()->defaultGraphicsProfile(), QString("4k-fsr"));
+    }
+    void graphicsFactoryDefaultsMatchCatalogAndManualSettingsStayIntact() {
+        QTemporaryDir directory; Controller controller(directory.filePath("settings.ini"));
+        auto* cores=controller.players()->cores(); auto* settings=controller.engineSettings();
+        const auto original=settings->values();
+        for (const auto& choice : cores->graphicsProfileChoices()) {
+            cores->setDefaultGraphicsProfile(choice.toMap()["value"].toString());
+            const auto values=cores->defaultGraphicsValues();
+            for (const auto& entry : settings->entries()) {
+                const auto row=entry.toMap(); const auto key=row["key"].toString();
+                if (!values.contains(key)) continue;
+                const auto value=values[key];
+                if (cores->defaultGraphicsProfile()=="default") {
+                    if (row["type"]=="double") QCOMPARE(value.toDouble(),row["default"].toDouble());
+                    else QCOMPARE(value,row["default"]);
+                }
+                if (row.contains("min")) QVERIFY(value.toDouble() >= row["min"].toDouble());
+                if (row.contains("max")) QVERIFY(value.toDouble() <= row["max"].toDouble());
+                if (!row["choices"].toList().isEmpty()) {
+                    bool found=false; for (const auto& option : row["choices"].toList()) if (option.toMap()["value"]==value) found=true;
+                    QVERIFY(found);
+                }
+            }
+            QCOMPARE(settings->values(),original); QVERIFY(!settings->dirty());
+        }
+        cores->setDefaultGraphicsProfile("custom"); QVERIFY(cores->defaultGraphicsValues().isEmpty());
+        QQmlEngine engine; QQmlComponent component(&engine); component.loadFromModule("Los", "SettingsScreen");
+        QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+        std::unique_ptr<QObject> page(component.createWithInitialProperties({{"controller",QVariant::fromValue(&controller)}}));
+        QVERIFY(page); QVERIFY(page->findChild<QObject*>("globalGraphicsProfileCombo"));
+        QVariantMap scaleEntry;
+        for(const auto& entry:settings->entries()) if(entry.toMap()["key"]=="GPU.draw_resolution_scale_x") scaleEntry=entry.toMap();
+        QVERIFY(!scaleEntry.isEmpty());
+        cores->setDefaultGraphicsProfile("4k-quality");
+        QQmlComponent rowComponent(&engine); rowComponent.loadFromModule("Los","SettingRow");
+        QVERIFY2(rowComponent.isReady(),qPrintable(rowComponent.errorString()));
+        std::unique_ptr<QObject> row(rowComponent.createWithInitialProperties({{"entry",scaleEntry},
+            {"settings",QVariant::fromValue(settings)},{"profileValues",cores->defaultGraphicsValues()}}));
+        QVERIFY(row); QCOMPARE(row->property("current").toString(),QString("3"));
+        QVERIFY(!row->property("editable").toBool());
+        row->setProperty("profileValues",QVariantMap{});
+        QVERIFY(settings->setValue("GPU.draw_resolution_scale_x","2"));
+        QTRY_COMPARE(row->property("current").toString(),QString("2")); QVERIFY(row->property("editable").toBool());
+        settings->setLocked(true); QTRY_VERIFY(!row->property("editable").toBool());
+        settings->setLocked(false);
+    }
+    void graphicsProfilesReachGameLaunchWithoutChangingStorageOrNetplay() {
+        const auto stub=QDir(QCoreApplication::applicationDirPath()).filePath(
+#ifdef Q_OS_WIN
+            "core_launch_stub.exe"
+#else
+            "core_launch_stub"
+#endif
+        );
+        QVERIFY(QFileInfo::exists(stub));
+        QTemporaryDir directory; const auto data=directory.filePath("data"), record=directory.filePath("args.json");
+        EngineSettings settings(data+"/engine");
+        QVERIFY(settings.setValue("Live.network_mode","0"));
+        QVERIFY(settings.setValue("Profiles.logged_profile_slot_0_xuid","E000000000000001")); QVERIFY(settings.save());
+        QFile config(settings.configPath()); QVERIFY(config.open(QIODevice::ReadOnly)); const auto before=config.readAll(); config.close();
+        const auto profile=settings.contentPath()+"/E000000000000001/FFFE07D1/00010000/E000000000000001";
+        QVERIFY(QDir().mkpath(profile)); QFile account(profile+"/Account");
+        QVERIFY(account.open(QIODevice::WriteOnly)); account.write("fixture"); account.close();
+        const auto target=directory.filePath("fixture.god"); QFile game(target);
+        QVERIFY(game.open(QIODevice::WriteOnly)); game.write("LIVEfixture"); game.close();
+        const auto previousRecord=qgetenv("EMULOS_STUB_OUTPUT"); qputenv("EMULOS_STUB_OUTPUT",record.toUtf8());
+        const auto cleanup=qScopeGuard([previousRecord] { if(previousRecord.isNull()) qunsetenv("EMULOS_STUB_OUTPUT"); else qputenv("EMULOS_STUB_OUTPUT",previousRecord); });
+        PlayerServices players(&settings,data,nullptr,stub); QSignalSpy failures(&players,&PlayerServices::operationFailed);
+        auto readArguments=[&record] {
+            QFile file(record); if(!file.open(QIODevice::ReadOnly)) return QStringList{};
+            QStringList result; for(const auto& value:QJsonDocument::fromJson(file.readAll()).object()["args"].toArray()) result << value.toString(); return result;
+        };
+        players.refreshProfiles(); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(),10000);
+        QVERIFY2(failures.isEmpty(),qPrintable(players.status())); QCOMPARE(players.profiles().size(),1);
+        auto* cores=players.cores();
+        for(const auto& choice:cores->graphicsProfileChoices()) {
+            cores->setDefaultGraphicsProfile(choice.toMap()["value"].toString());
+            players.launchGame(target,"545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(),10000);
+            QVERIFY2(failures.isEmpty(),qPrintable(players.status()));
+            const auto args=readArguments();
+            for(const auto& value:cores->graphicsArgumentsFor("545408B4")) QVERIFY(args.contains(value));
+            QVERIFY(args.contains("--storage_root="+settings.storagePath()));
+            QVERIFY(args.contains("--content_root="+settings.contentPath()));
+            QVERIFY(!args.contains("--network_mode=2"));
+        }
+        cores->setDefaultGraphicsProfile("4k-quality");
+        QVERIFY(cores->saveGameOptions("545408B4","vulkan","720p"));
+        players.setPrivateApi("http://127.0.0.1:8080/");
+        players.launchGame(target,"545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(),10000);
+        auto args=readArguments(); QVERIFY(args.contains("--draw_resolution_scale_x=1"));
+        QVERIFY(args.contains("--gpu=vulkan")); QVERIFY(args.contains("--network_mode=2"));
+        QVERIFY(args.contains("--api_address=http://127.0.0.1:8080/"));
+        QVERIFY(cores->saveGameOptions("545408B4","","custom"));
+        players.launchGame(target,"545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(),10000);
+        for(const auto& arg:readArguments()) QVERIFY(!arg.startsWith("--draw_resolution") && !arg.startsWith("--postprocess"));
+        players.refreshProfiles(); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(),10000);
+        for(const auto& arg:readArguments()) QVERIFY(!arg.startsWith("--draw_resolution") && !arg.startsWith("--postprocess"));
+        QVERIFY2(failures.isEmpty(),qPrintable(players.status()));
+        QVERIFY(config.open(QIODevice::ReadOnly)); QCOMPARE(config.readAll(),before);
+        QVERIFY(account.open(QIODevice::ReadOnly)); QCOMPARE(account.readAll(),QByteArray("fixture"));
     }
     void gameContentFiltersMixedPackages() {
         QTemporaryDir directory; QVERIFY(directory.isValid());

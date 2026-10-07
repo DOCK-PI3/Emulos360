@@ -437,6 +437,7 @@ void PlayerServices::launch(const QString& path,bool xexOnly,const QString& titl
         args.removeIf([](const QString& argument) { return argument.startsWith("--gpu="); });
         args << "--gpu=" + cores_.rendererFor(titleId);
     }
+    if (!xexOnly && !writableGame) args << cores_.graphicsArgumentsFor(titleId);
     args << "--target=" + QFileInfo(path).absoluteFilePath();
     // The dashboard XEX runs from a disposable IPC directory. Other titles remain read-only.
     if(writableGame) args << "--allow_game_relative_writes=true";

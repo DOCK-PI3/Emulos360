@@ -136,3 +136,113 @@ Valores y descripciones proceden de los `DEFINE_*` locales. `readback_resolve` t
 6. Validar el arreglo en la escena afectada y al menos un consumidor de la ruta compartida; incluir MSAA y escalado cuando el cambio los afecta. No adoptar un parche visual como corrección universal del core.
 
 Este procedimiento es una propuesta de trabajo; no se ejecutaron capturas ni pruebas gráficas en esta investigación.
+
+## 9. Perfiles de presentación incorporados el 5 de octubre de 2026
+
+La interfaz añade [perfiles gráficos](../../GRAPHICS_PROFILES.md) globales y
+por título, con retorno a los valores originales de resolución/postprocesado.
+Usan controles ya presentes de escala entera, CAS, FSR 1.0, dithering y FXAA
+(esta última etapa disponible en Direct3D 12). No alteran EDRAM, readback,
+oclusiones ni otros ajustes de compatibilidad. Se mantiene Personalizado como
+estado inicial para conservar configuraciones existentes.
+
+Las etiquetas 720p/1080p/1440p/4K son orientativas desde una base de 720p; no
+demuestran resolución nativa del juego, soporte de sparse/tiled de la GPU ni
+mejor rendimiento. Consultar la ficha para el comportamiento de herencia,
+precedencia, pruebas automatizadas y gameplay pendiente.
+
+## 10. Zonas negras en personajes de Gears 1 y 3 — 7 de octubre de 2026
+
+### Evidencia y alcance
+
+El usuario identifica **Gears of War 1 y 3**, además de otros títulos sin
+identificar, con partes negras en cara/cuerpo, especialmente en cinemáticas.
+Es un **reporte del usuario**: esta revisión no reproduce una escena ni obtiene
+una captura GPU del defecto. No se conocen misión, cámara, hash de Gears 1 ni
+configuración efectiva del incidente. No se demuestra una causa común para
+todos los títulos. Distinguir cinemática renderizada por el juego de vídeo
+prerenderizado antes de atribuir el defecto al pipeline de materiales.
+
+El core local continúa en Netplay
+`6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c`, con los cambios propios existentes.
+Canary consultado llega a `cc4981a4659086acb1c25a485adebefc3f432ae1`.
+Los TOML se verificaron en game-patches
+`106bb0a40be27b5a2444162562975e4885e1ce74`. Las consultas fueron de lectura;
+no se activaron parches ni se sustituyeron ejecutables o configuraciones.
+
+### Gears 1: modificación del juego y corrección del core son alternativas distintas
+
+Los ficheros oficiales ofrecen `Black Shading Fix`, desactivado inicialmente:
+
+| Edición | Hash de parches del módulo | Cambio inspeccionado |
+| --- | --- | --- |
+| [Base](https://github.com/xenia-canary/game-patches/blob/106bb0a40be27b5a2444162562975e4885e1ce74/patches/4D5307D5%20-%20Gears%20of%20War.patch.toml) | `1B591620508434A2` | `GUseTilingCode = FALSE`, byte `0x82bb6bbb = 0`; evita una interacción de iluminación dinámica y tiling MSAA |
+| [TU5](https://github.com/xenia-canary/game-patches/blob/106bb0a40be27b5a2444162562975e4885e1ce74/patches/4D5307D5%20-%20Gears%20of%20War%20%28TU5%29.patch.toml) | `34849A59634915F6` | Mismo estado en `0x82f9779b`; su descripción indica que desactiva efectivamente MSAA |
+
+Sirve como comparación diagnóstica por título/versión; no acredita una
+corrección general del emulador y puede perder antialiasing. No copiar
+direcciones entre ediciones ni cambiar el hash para forzar aplicación.
+
+**Novedad upstream directamente relacionada:**
+[`cc4981a46590`](https://github.com/xenia-canary/xenia-canary/commit/cc4981a4659086acb1c25a485adebefc3f432ae1),
+publicada el 6 de octubre a las 19:48:42 UTC, reproduce posiciones MSAA de Xenos.
+El autor vincula el sombreado ausente de `4D5307D5` a resolver profundidad de
+la muestra 0 y volver a compararla con posiciones distintas en la GPU host.
+La inspección de hunks seleccionados confirma cambios de viewport, shaders,
+transferencias y transiciones en D3D12/Vulkan: 23 archivos, 810 adiciones y
+279 eliminaciones. RTV/FBO incorporan `xenos_sample_positions`, **false** por
+defecto y condicionado al soporte GPU/driver; ROV/FSI ajustan cobertura y
+profundidad en shader. Este reporte upstream no valida nuestra build ni
+Gears 3. Es un candidato relevante de alcance amplio, **sin portar ni compilar
+en esta revisión**.
+
+No aislar un cambio de viewport y omitir las transiciones/transferencias del
+mismo contrato. La base diverge: el contexto D3D12 upstream contiene, por
+ejemplo, `occlusion_query_full_counters`, ausente en el archivo local
+inspeccionado. Eso exige revisar dependencias/equivalencias; no justifica
+importar toda la reescritura de oclusión automáticamente. La propiedad de
+capacidad D3D12 `GetProgrammableSamplePositionsTier` sí existe localmente.
+
+### Gears 3 y candidatos relacionados
+
+Los [parches base de Gears 3](https://github.com/xenia-canary/game-patches/blob/106bb0a40be27b5a2444162562975e4885e1ce74/patches/4D5308AB%20-%20Gears%20of%20War%203.patch.toml)
+(`EF4AD5E9DD1982ED`) y TU6 disco/TU1 digital (`7775898137CE1CE3`)
+no contienen un `Black Shading Fix` equivalente. Sí ofrecen desactivar AO y
+recortar sombras mediante opciones de rendimiento. Esos recortes cambian
+efectos y no demuestran que reparen la causa de las caras negras. No activar
+conjuntos de parches sin una comparación que permita atribuir el resultado.
+
+También merece evaluación [`0bd090dbe979`](https://github.com/xenia-canary/xenia-canary/commit/0bd090dbe979bc64959efe519aa320db8e3eb467):
+corrige la dirección de muestras al copiar profundidad host 2x/4x a EDRAM.
+**2x/4x son muestras MSAA, no escalas de resolución.** El diff afecta dos
+shaders de copia; no prueba por sí mismo la causa del fallo reportado.
+Layout de mips/arrays, alias color-profundidad y precisión de shaders siguen
+como otras clases de defecto del capítulo, sin atribución a Gears 3.
+
+`depth_float24_convert_in_pixel_shader` ya está en el core y en
+`app/settings-catalog.json`; puede comparar problemas de profundidad al
+recuperar EDRAM, pero tiene coste de compresión/shading por muestra y no
+se recomienda como valor global. `depth_float24_round = false` es la
+recomendación declarada del core. La compilación asíncrona puede causar
+artefactos transitorios; no explica automáticamente un defecto persistente
+tras calentar la caché. FSR/CAS y mayor resolución no reparan una pasada de
+iluminación ausente.
+
+### Próxima validación, antes de integrar al estable
+
+1. Guardar escena reproducible, módulo/TU y configuración efectiva. Empezar
+   a resolución 1x, comparando la misma cámara y luz sin recortes de calidad.
+2. En Gears 1, usar el parche de sombreado correspondiente como comparación
+   aislada si se decide probarlo; registrar imagen y pérdida de MSAA. Mantener
+   esta modificación del juego separada del candidato de core.
+3. Capturar el primer pase incorrecto: textura convertida, luz/material,
+   profundidad/resolve o composición. Preparar el cambio coherente que esa
+   evidencia justifique en una copia de prueba.
+4. Para posiciones/copia MSAA, comprobar soporte host, muestras 1/2/4 y escala
+   1x/escalada, sombras y transiciones de depth. Contrastar Gears 1, Gears 3 y
+   consumidores de la ruta que ya funcionen; incluir sesiones Netplay de
+   control antes de aceptar el motor como reemplazo del estable.
+5. Registrar corrección visual, frametimes, errores y regresiones por separado.
+   En esta revisión solo hay reporte del usuario, evidencia upstream e
+   inspección estática; **no hay pruebas automatizadas nuevas ni gameplay
+   validado de estas correcciones**.

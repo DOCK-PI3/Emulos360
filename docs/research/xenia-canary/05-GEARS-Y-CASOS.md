@@ -119,3 +119,11 @@ Todas las filas siguientes son **reportes de la wiki Netplay consultada**, no va
 | God Mode | System Link sin servidor y receta histórica de QueryBatch | Las recetas deben migrarse al modelo de oclusión de la build actual |
 
 Fuera de red, el [arreglo de idTech 5](https://github.com/xenia-canary/xenia-canary/pull/1250) permite estudiar texturas virtuales y precisión de muestreo; el [layout EDRAM](https://github.com/xenia-canary/xenia-canary/pull/1163) enseña a corregir coherencia entre vistas; y el [vblank Linux](https://github.com/xenia-canary/xenia-canary/pull/1210) distingue estabilidad del reloj de potencia del renderizador. Son patrones transferibles, no una lista de presets universales.
+
+## Seguimiento visual — 7 de octubre de 2026
+
+El usuario reporta zonas negras en personajes de Gears 1 y 3. Se verificaron
+los parches por versión y una novedad de posiciones MSAA que upstream
+relaciona con Gears 1. [Evidencia, costes y pruebas pendientes](02-GRAFICOS.md#10-zonas-negras-en-personajes-de-gears-1-y-3--7-de-octubre-de-2026).
+No se aplica un arreglo ni se valida gameplay en esta revisión. No extrapolar
+el reporte de Gears 1 a Gears 3 o a toda la biblioteca.

@@ -1,0 +1,35 @@
+From 5ce7c336df060d043b0a2351889ec8789322d035 Mon Sep 17 00:00:00 2001
+From: "Herman S." <429230+has207@users.noreply.github.com>
+Date: Tue, 25 Aug 2026 18:18:02 +0900
+Subject: [PATCH] [CPU/HIR] Flip the lane index in the constant Extract fold (implementation only)
+
+# Xenia Canary 5ce7c336df060d043b0a2351889ec8789322d035
+# Implementation hunk only; original attribution and complete patch archived locally.
+# Source: https://github.com/xenia-canary/xenia-canary/commit/5ce7c336df060d043b0a2351889ec8789322d035
+diff --git a/src/xenia/cpu/hir/value.cc b/src/xenia/cpu/hir/value.cc
+index deb1fbf68aa..953e45429f3 100644
+--- a/src/xenia/cpu/hir/value.cc
++++ b/src/xenia/cpu/hir/value.cc
+@@ -830,17 +830,18 @@ void Value::RotateLeft(Value* other) {
+ void Value::Extract(Value* vec, Value* index) {
+   assert_true(vec->type == VEC128_TYPE);
+   switch (type) {
++    // Guest element numbers need the backends' VEC128_B/W flip.
+     case INT8_TYPE:
+-      constant.u8 = vec->constant.v128.u8[index->constant.u8 & 0x1F];
++      constant.u8 = vec->constant.v128.u8[(index->constant.u8 & 0xF) ^ 3];
+       break;
+     case INT16_TYPE:
+-      constant.u16 = vec->constant.v128.u16[index->constant.u16 & 0x7];
++      constant.u16 = vec->constant.v128.u16[(index->constant.u8 & 0x7) ^ 1];
+       break;
+     case INT32_TYPE:
+-      constant.u32 = vec->constant.v128.u32[index->constant.u32 & 0x3];
++      constant.u32 = vec->constant.v128.u32[index->constant.u8 & 0x3];
+       break;
+     case INT64_TYPE:
+-      constant.u64 = vec->constant.v128.u64[index->constant.u64 & 0x1];
++      constant.u64 = vec->constant.v128.u64[index->constant.u8 & 0x1];
+       break;
+     default:
+       assert_unhandled_case(type);

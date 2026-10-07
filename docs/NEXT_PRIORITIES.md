@@ -9,7 +9,10 @@ Retirada de Nexia360/Xenia Edge **terminada y verificada** en el proyecto.
 1. **Mejorar Xenia Canary**, nuestro único core: compatibilidad de juegos,
    estabilidad, rendimiento y correcciones de texturas/personajes, preservando
    títulos y Netplay funcionales. No añadir otros cores ni retomar XBLIG.
-2. **Seguimiento de los lunes:** solo Canary oficial y el fork Netplay;
+2. **Trabajo de mejora iniciado el 6 de octubre, sin esperar a los lunes:**
+   estudiar contratos y preparar correcciones pequeñas con pruebas. La primera
+   mejora CPU y sus límites están en [el capítulo 13](research/xenia-canary/13-MEJORAS-CPU-Y-VALIDACION.md).
+   El seguimiento de los lunes complementa este trabajo: solo Canary oficial y el fork Netplay;
    comparar revisiones antes de repetir trabajo. Preparar candidatos pequeños
    con causa comprobable. No integrar al estable sin validar regresiones.
 3. **Publicación 0.5.0 autorizada para preparar builds:** resolver la transición
@@ -24,6 +27,6 @@ continúan a cargo del usuario. No crear otra release por cuenta propia.
 Consultar primero [el dossier](research/xenia-canary/README.md), el capítulo
 correspondiente y [el seguimiento](research/xenia-canary/10-SEGUIMIENTO-Y-MEJORAS-DEL-CORE.md).
 Reproducir un defecto concreto, registrar versión/TU, GPU, configuración y logs,
-preparar un cambio acotado, medir y probar regresiones. Los cuatro candidatos
+preparar un cambio acotado, medir y probar regresiones. Los candidatos
 upstream preparados siguen sin estar integrados. Rivals sigue aplazado.
 Los documentos Nexia/Edge/XBLIG se conservan únicamente como historial.

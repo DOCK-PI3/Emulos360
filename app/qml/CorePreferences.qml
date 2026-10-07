@@ -14,6 +14,7 @@ ScrollView {
         spacing: 14
         Label { text: qsTr("Motor gráfico"); color: Theme.text; font.pointSize: Theme.heading }
         Label { Layout.fillWidth: true; text: qsTr("Xenia Canary es el motor de emulación. Puedes elegir una GPU global o configurarla por juego desde Biblioteca → Gráficos."); color: Theme.muted; wrapMode: Text.Wrap }
+        GraphicsProfileSelector { Layout.fillWidth: true; cores: page.cores }
         Label { text: qsTr("Motor gráfico predeterminado"); color: Theme.text }
         AppComboBox {
             objectName: "defaultRendererCombo"
@@ -26,6 +27,6 @@ ScrollView {
             Accessible.name: qsTr("Motor gráfico predeterminado")
             onActivated: page.cores.defaultRenderer = currentValue
         }
-        Label { Layout.fillWidth: true; text: page.cores.status; color: Theme.muted; wrapMode: Text.Wrap }
+
     }
 }

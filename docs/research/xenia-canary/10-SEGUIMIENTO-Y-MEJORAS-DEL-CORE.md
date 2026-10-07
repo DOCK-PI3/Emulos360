@@ -153,3 +153,40 @@ proyecto accesible cuando se ejecute, según la
 [documentación oficial de tareas programadas](https://learn.chatgpt.com/docs/automations?surface=app).
 La tarea fue creada y se verificó su estado; no se ha observado todavía una
 ejecución programada.
+
+## Mejora inmediata solicitada — 6 de octubre de 2026
+
+El usuario solicita estudiar y mejorar el core ahora; los lunes complementan
+este trabajo y no condicionan su inicio. Se revisaron el recorrido de CPU/HIR,
+las constantes, la representación vectorial y el backend x64 antes de preparar
+una corrección de `Value::Extract`. Se reproduce una selección errónea de bytes
+y shorts y un acceso fuera del array detectado por UBSan en la base Netplay.
+
+Canary consultado: `7ba916c010f8ea48960bfde377f8fceb6054d754`.
+Netplay consultado: `6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c`.
+La corrección oficial `5ce7c336df060d043b0a2351889ec8789322d035` sigue presente;
+no aparece un revert por mensaje en los 40 commits de la comparación consultada.
+No se presume que toda la rama nueva esté auditada ni se actualiza la base.
+
+El quinto candidato añade exclusivamente el hunk de CPU. Pasa 4199424
+extracciones en MSVC Windows y Clang Linux con ASan/UBSan; el JIT x64 real
+aprueba 252 assertions del contrato y toda la batería de CPU pasa **247 casos,
+1077 assertions**. Estas son pruebas automatizadas, no de gameplay, GPU o
+Netplay. El estado, procedimientos, hashes y validación pendiente quedan en
+[el capítulo 13](13-MEJORAS-CPU-Y-VALIDACION.md) y
+[su evidencia](core-cpu-extract-evidencia-20261006.json).
+
+Los cuatro candidatos gráficos conservan sus límites históricos. No se cambian
+perfiles, partidas, contenido, configuración o el motor instalado. Solo se
+aceptará una integración al estable después de controles en títulos que ya
+funcionan. No se añade Edge/Nexia ni se retoma XBLIG o el scheduler amplio.
+
+## Investigación gráfica inmediata — 7 de octubre de 2026
+
+Canary consultado avanza a `cc4981a4659086acb1c25a485adebefc3f432ae1`;
+Netplay local continúa en `6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c`.
+Se registra un candidato adicional de posiciones MSAA, sin preparar un
+parche de incorporación: [análisis de Gears 1/3](02-GRAFICOS.md#10-zonas-negras-en-personajes-de-gears-1-y-3--7-de-octubre-de-2026).
+Estado: inspección estática parcial y reporte upstream; dependencias,
+regresiones y gameplay pendientes. Ningún candidato previo cambia de estado.
+No se modifica el motor activo ni datos o ajustes de los juegos.

@@ -92,7 +92,7 @@ set(LOS_QML_FILES
     app/qml/ConsoleDashboard.qml app/qml/ConsoleTile.qml app/qml/GameSession.qml app/qml/RoomsPanel.qml app/qml/AvatarEditor.qml app/qml/AvatarMaterial.qml
     app/qml/AchievementsScreen.qml app/qml/AchievementDetails.qml
     app/qml/CompatibilityBadge.qml app/qml/CompatibilityLegend.qml app/qml/GameContentDialog.qml app/qml/UpdateDialog.qml
-    app/qml/CorePreferences.qml app/qml/GameCoreDialog.qml)
+    app/qml/CorePreferences.qml app/qml/GameCoreDialog.qml app/qml/GraphicsProfileSelector.qml)
 qt_add_qml_module(los360 URI Los VERSION 1.0 QML_FILES ${LOS_QML_FILES})
 option(BUILD_TESTING "Build local application tests explicitly" OFF)
 set(LOS_TARGETS los_library emulos_settings emulos_avatar_codec los360)
@@ -150,6 +150,7 @@ qt_add_resources(ui_tests compatibility_data_test PREFIX "/" FILES ${EMULOS_COMP
 qt_add_resources(ui_tests branding_test PREFIX "/" FILES assets/emulos360.png)
 qt_add_resources(ui_tests avatar_shaders_test PREFIX "/" FILES app/shaders/avatar.vert app/shaders/avatar.frag)
 qt_add_qml_module(ui_tests URI Los VERSION 1.0 OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/ui-test/Los QML_FILES ${LOS_QML_FILES})
+add_dependencies(ui_tests core_launch_stub)
 add_test(NAME ui_tests COMMAND ui_tests -platform offscreen -o ui-results.txt,txt)
 set_tests_properties(library_tests ui_tests PROPERTIES TIMEOUT 45)
 set_tests_properties(ui_tests PROPERTIES ENVIRONMENT "QT_QUICK_BACKEND=software")

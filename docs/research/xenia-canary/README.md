@@ -10,6 +10,11 @@ Fecha de consulta: **2 de octubre de 2026**. Alcance: investigación y documenta
 
 Esta documentación sirve como base de trabajo para futuras implementaciones. No es una garantía de emulación perfecta: cada cambio requiere reproducción, revisión y validación con los juegos y equipos afectados. Las conclusiones distinguen código inspeccionado, reportes upstream e hipótesis de mejora.
 
+El alcance anterior describe la investigación inicial. El **6 de octubre** se
+inició una mejora CPU con ejecución de componente, sanitizers Linux, JIT real
+Windows y compilación de un emulador experimental; el producto estable no se
+sustituye. [Estado actual y evidencia](13-MEJORAS-CPU-Y-VALIDACION.md).
+
 ## Lectura y navegación
 
 | Documento | Utilidad |
@@ -23,9 +28,10 @@ Esta documentación sirve como base de trabajo para futuras implementaciones. No
 | [07 — Prioridades y validación](07-PLAN-Y-VALIDACION.md) | Backlog concreto, dependencias, pruebas propuestas, criterios y plantillas |
 | [08 — Biblioteca y Sacred 2](08-CANDIDATOS-BIBLIOTECA.md) | 80 títulos cruzados, candidatos de multijugador, leyenda y evidencia de Sacred 2 |
 | [09 — Rivals y contenido HD](09-NFS-RIVALS-CONTENIDO-HD.md) | Error inicial, carga detenida con HD/TU también sin red según la prueba del usuario, y diferencias del scheduler de Edge |
-| [10 — Seguimiento y mejoras del core](10-SEGUIMIENTO-Y-MEJORAS-DEL-CORE.md) | Canary actualizado, cuatro candidatos preparados, compilación aislada de dos fuentes Vulkan y revisión semanal |
+| [10 — Seguimiento y mejoras del core](10-SEGUIMIENTO-Y-MEJORAS-DEL-CORE.md) | Comparación upstream, candidatos gráficos y CPU, evidencia histórica y seguimiento semanal |
 | [11 — Segundo core opcional: Edge](11-SEGUNDO-CORE-EDGE.md) | Historial de Edge 0.4.0, retirado el 5 de octubre; evidencia y límites |
 | [12 — Juegos Avatar XBLIG](12-XBLIG-AVATAR.md) | Historial XNA/Nexia; XBLIG descartado y proveedor retirado |
+| [13 — Primera mejora de CPU y validación](13-MEJORAS-CPU-Y-VALIDACION.md) | Extracción de elementos reproducida, candidato aislado y pruebas de regresión |
 | [Fuentes e inventarios](FUENTES.md) | Enlaces, revisiones, hashes y límites de la investigación |
 
 ## Conclusiones que deben orientar el siguiente trabajo
