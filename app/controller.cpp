@@ -64,7 +64,8 @@ Controller::Controller(const QString& settingsPath, QObject* parent)
       netplayRooms_(&engineSettings_,this), privateNetplay_(QFileInfo(settingsPath).absolutePath(),this),
       voiceParty_(this), importer_(this), store_(&importer_, this),
       compatibility_(QFileInfo(settingsPath).absolutePath(), this),
-      content_(&engineSettings_, &players_, this) {
+      content_(&engineSettings_, &players_, this),
+      gamepadMapper_(QFileInfo(settingsPath).absolutePath(), this) {
     QTimer::singleShot(2000, &compatibility_, &GameCompatibility::refreshIfDue);
     metro_ = new MetroDashboard(this,QFileInfo(settingsPath).absolutePath(),this);
     players_.setConsoleMode(consoleMode());

@@ -19,8 +19,14 @@ with tempfile.TemporaryDirectory(prefix='emulos-catalog-',dir=project/'local') a
     actual=flatten(tomllib.loads(config.read_text(encoding='utf-8-sig')))
     catalog=json.loads((project/'app/settings-catalog.json').read_text(encoding='utf-8'))
     expected={e['key'] for e in catalog['entries']}
-    missing=sorted(actual.keys()-expected); extra=sorted(expected-actual.keys())
-    report=dict(actualCount=len(actual),catalogCount=len(expected),missing=missing,extra=extra)
+    # PlayerServices owns these CLI options when passing the AvatarStudio
+    # resource root. They are implementation details, not editable UI options.
+    managed={'Kernel.emulos_avatar_guest_assets': False,
+             'Kernel.emulos_avatar_resource_root': ''}
+    for key,default in managed.items():
+        assert key in actual and actual[key] == default, f'Managed flag contract changed: {key}'
+    missing=sorted(actual.keys()-expected-managed.keys()); extra=sorted(expected-actual.keys())
+    report=dict(actualCount=len(actual),catalogCount=len(expected),managed=list(managed),missing=missing,extra=extra)
     (project/'local/netplay-catalog-report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     print(json.dumps(report))
     assert not missing and not extra, 'Catalog differs from compiled core'

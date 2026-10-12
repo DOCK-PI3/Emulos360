@@ -190,3 +190,19 @@ parche de incorporación: [análisis de Gears 1/3](02-GRAFICOS.md#10-zonas-negra
 Estado: inspección estática parcial y reporte upstream; dependencias,
 regresiones y gameplay pendientes. Ningún candidato previo cambia de estado.
 No se modifica el motor activo ni datos o ajustes de los juegos.
+
+## Revisión semanal — 12 de octubre de 2026
+
+Canary: `2372a54105d9d598ab5bc7ba94a72ef1bea4b271`, 13 commits posteriores
+al 7 de octubre. Netplay: `1892233f02b5758972ccd6ccb978dbde107f32ba`, 15
+posteriores a la base local. Se prepararon cinco candidatos de sockets/QoS,
+POSIX y ASCII, sin aplicarlos: [informe, límites y validación pendiente](14-SEGUIMIENTO-20261012.md).
+Comprobaciones de contexto aprobadas; sin compilación o gameplay nuevos.
+Los candidatos anteriores conservan su estado. Motor y datos activos intactos.
+
+## Preparación autorizada de 0.6.0 — 12 de octubre
+
+El usuario autoriza incorporar correcciones acotadas en main y preparar Windows/Linux.
+Ocho cambios seleccionados se conservan en la serie de parches 0001 + 0002;
+la validación de gameplay y Netplay del propietario sigue pendiente.
+[Alcance y validación de la entrega](../../releases/0.6.0.md).

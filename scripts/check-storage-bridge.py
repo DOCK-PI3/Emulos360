@@ -1,7 +1,7 @@
 """Only checks Emulos360's two-device extension, without booting any game."""
-import pathlib, subprocess, tempfile, tomllib, shutil
+import os, pathlib, subprocess, tempfile, tomllib, shutil
 project=pathlib.Path(__file__).resolve().parents[1]
-core=project/'engine/xenia/build/bin/Windows/Release/Emulos360-core.exe'
+core=pathlib.Path(os.environ.get('EMULOS_CORE_TEST_BINARY',str(project/'engine/xenia/build/bin/Windows/Release/Emulos360-core.exe')))
 with tempfile.TemporaryDirectory(prefix='emulos-storage-',dir=project/'local') as folder:
     root=pathlib.Path(folder)
     (root/'content').mkdir(); (root/'external').mkdir()

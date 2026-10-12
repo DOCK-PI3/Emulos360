@@ -17,6 +17,7 @@
 #include <QPainter>
 #include <QRegularExpression>
 #include <QProcessEnvironment>
+#include "gamepad_mapper.h"
 #include <QSaveFile>
 #include <QUuid>
 #include <QtConcurrentRun>
@@ -110,6 +111,13 @@ QStringList PlayerServices::arguments() const {
          << "--hid=" + engine_->values().value("HID.hid").toString();
 #endif
     if (!privateApi_.isEmpty()) args << "--api_address=" + privateApi_ << "--api_list=" + privateApi_ + "," << "--network_mode=2";
+    if (command_.isEmpty()) {
+        const auto mappings = GamepadMapper::launchArguments(data_);
+        if (!mappings.isEmpty()) {
+            args.removeIf([](const QString& argument) { return argument.startsWith("--hid="); });
+            args << mappings;
+        }
+    }
     return args;
 }
 bool PlayerServices::prepare(bool requireProfile) {

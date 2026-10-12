@@ -1,11 +1,12 @@
 """Checks only Emulos360's new profile IPC, in an isolated directory, without a game."""
+import os
 import pathlib
 import subprocess
 import tempfile
 import tomllib
 
 project = pathlib.Path(__file__).resolve().parent.parent
-core = project / "engine/xenia/build/bin/Windows/Release/Emulos360-core.exe"
+core = pathlib.Path(os.environ.get("EMULOS_CORE_TEST_BINARY", str(project / "engine/xenia/build/bin/Windows/Release/Emulos360-core.exe")))
 with tempfile.TemporaryDirectory(prefix="emulos-profile-", dir=project / "local") as folder:
     root = pathlib.Path(folder)
     def command(action):

@@ -1,0 +1,148 @@
+From 1c81b867473806b2845a1946b2d185c9d888a319 Mon Sep 17 00:00:00 2001
+From: Tim <theeyeofodinopensup@pm.me>
+Date: Fri, 28 Aug 2026 13:28:31 -0500
+Subject: [PATCH] [Base] Fix a lost resume of a thread created suspended on
+ POSIX
+
+On Linux a thread created suspended could miss its first Resume(). The
+new thread announced itself as started before it set its suspend count
+to 1; a Resume() arriving in between found nothing to resume and the
+thread then waited forever. Xenia creates every guest thread this way,
+so a stranded thread meant the game waited forever on something it was
+never going to get. Windows sets the count atomically in CreateThread,
+so the Windows build never saw it.
+
+Set the count together with the state, and make the new thread wait on
+the same semaphore Resume() posts, so an early post is not lost.
+
+Also implements PosixEvent::Query(), which was assert_always().
+
+Lost Odyssey (4D5307FA) hung on "Loading" in 5 of 10 runs on the native
+Linux build and in 0 of 10 with this change.
+---
+ src/xenia/base/testing/threading_test.cc | 60 ++++++++++++++++++++++++
+ src/xenia/base/threading_posix.cc        | 22 +++++----
+ 2 files changed, 73 insertions(+), 9 deletions(-)
+
+diff --git a/src/xenia/base/testing/threading_test.cc b/src/xenia/base/testing/threading_test.cc
+index c3560b8fc34..1e93afab7a0 100644
+--- a/src/xenia/base/testing/threading_test.cc
++++ b/src/xenia/base/testing/threading_test.cc
+@@ -1065,6 +1065,66 @@ TEST_CASE("Test Suspending Thread", "[thread]") {
+   REQUIRE(result == threading::WaitResult::kSuccess);
+ }
+ 
++TEST_CASE("Test Resuming Thread Created Suspended", "[thread]") {
++  // Resume straight after creation, racing the new thread's startup, from
++  // more threads than there are cores so the startup gets preempted.
++  const uint32_t resumer_count = 4 * logical_processor_count();
++  std::atomic<uint32_t> lost(0);
++  std::vector<std::unique_ptr<Thread>> resumers;
++  for (uint32_t r = 0; r < resumer_count; ++r) {
++    resumers.push_back(Thread::Create({}, [&lost] {
++      Thread::CreationParameters params = {};
++      params.create_suspended = true;
++      for (int i = 0; i < 200; ++i) {
++        std::atomic<bool> ran(false);
++        auto thread = Thread::Create(params, [&ran] { ran = true; });
++        // A lost resume leaves the thread suspended for good.
++        if (!thread->Resume() ||
++            Wait(thread.get(), false, 1s) != WaitResult::kSuccess || !ran) {
++          ++lost;
++        }
++      }
++    }));
++  }
++  for (auto& resumer : resumers) {
++    REQUIRE(Wait(resumer.get(), false, 120s) == WaitResult::kSuccess);
++  }
++  REQUIRE(lost == 0);
++}
++
++TEST_CASE("Test Suspending Thread After First Resume", "[thread]") {
++  Thread::CreationParameters params = {};
++  params.create_suspended = true;
++  std::atomic<uint64_t> counter(0);
++  std::atomic<bool> stop(false);
++  auto thread = Thread::Create(params, [&counter, &stop] {
++    while (!stop) {
++      ++counter;
++    }
++  });
++
++  Sleep(20ms);
++  REQUIRE(counter == 0);
++  REQUIRE(thread->Resume());
++  while (counter == 0) {
++    MaybeYield();
++  }
++
++  // Suspend is asynchronous on POSIX; let it land before sampling.
++  REQUIRE(thread->Suspend());
++  Sleep(20ms);
++  uint64_t suspended_at = counter;
++  Sleep(50ms);
++  REQUIRE(counter == suspended_at);
++
++  REQUIRE(thread->Resume());
++  Sleep(20ms);
++  REQUIRE(counter > suspended_at);
++
++  stop = true;
++  REQUIRE(Wait(thread.get(), false, 1s) == WaitResult::kSuccess);
++}
++
+ TEST_CASE("Test Thread QueueUserCallback", "[thread]") {
+   std::unique_ptr<Thread> thread;
+   WaitResult result;
+diff --git a/src/xenia/base/threading_posix.cc b/src/xenia/base/threading_posix.cc
+index b8ab01c42c7..39c2a4e2376 100644
+--- a/src/xenia/base/threading_posix.cc
++++ b/src/xenia/base/threading_posix.cc
+@@ -484,6 +484,12 @@ class PosixCondition<Event> : public PosixConditionBase {
+     signal_ = false;
+   }
+ 
++  EventInfo Query() {
++    auto lock = std::unique_lock(mutex_);
++    // EVENT_TYPE: NotificationEvent = 0, SynchronizationEvent = 1.
++    return EventInfo{manual_reset_ ? 0u : 1u, signal_ ? 1u : 0u};
++  }
++
+  private:
+   [[nodiscard]] bool signaled() const override { return signal_; }
+   void post_execution() override {
+@@ -1218,11 +1224,7 @@ class PosixEvent final : public PosixConditionHandle<Event> {
+   ~PosixEvent() override = default;
+   void Set() override { handle_.Signal(); }
+   void Reset() override { handle_.Reset(); }
+-  EventInfo Query() override {
+-    EventInfo result{};
+-    assert_always();
+-    return result;
+-  }
++  EventInfo Query() override { return handle_.Query(); }
+   void Pulse() override {
+     using namespace std::chrono_literals;
+     handle_.Signal();
+@@ -1407,14 +1409,16 @@ void* PosixCondition<Thread>::ThreadStartRoutine(void* parameter) {
+     std::unique_lock lock(thread->handle_.state_mutex_);
+     thread->handle_.state_ =
+         create_suspended ? State::kSuspended : State::kRunning;
++    // Set the initial suspend count before Resume can pass WaitStarted.
++    if (create_suspended) {
++      thread->handle_.suspend_count_ = 1;
++    }
+     thread->handle_.state_signal_.notify_all();
+   }
+ 
+   if (create_suspended) {
+-    std::unique_lock lock(thread->handle_.state_mutex_);
+-    thread->handle_.suspend_count_ = 1;
+-    thread->handle_.state_signal_.wait(
+-        lock, [thread] { return thread->handle_.suspend_count_ == 0; });
++    // Wait on the semaphore Resume posts when the suspend count reaches zero.
++    thread->handle_.WaitSuspended();
+   }
+ 
+   start_routine();

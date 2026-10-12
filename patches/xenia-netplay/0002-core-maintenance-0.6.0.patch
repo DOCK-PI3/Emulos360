@@ -1,0 +1,402 @@
+diff --git a/src/xenia/base/testing/emulos_app_flags_test.cc b/src/xenia/base/testing/emulos_app_flags_test.cc
+new file mode 100644
+index 0000000..1ba71e0
+--- /dev/null
++++ b/src/xenia/base/testing/emulos_app_flags_test.cc
+@@ -0,0 +1,7 @@
++// The app defines this transient cvar in emulator_window.cc. CPU tests do not
++// link that window; expose the same default through the real cvar registry.
++#include "xenia/base/cvar.h"
++
++DEFINE_transient_bool(emulos_embedded, false,
++                      "Emulos360: let the Qt host own fullscreen state.",
++                      "Emulos360");
+diff --git a/src/xenia/base/testing/threading_test.cc b/src/xenia/base/testing/threading_test.cc
+index c3560b8..1e93afa 100644
+--- a/src/xenia/base/testing/threading_test.cc
++++ b/src/xenia/base/testing/threading_test.cc
+@@ -1065,6 +1065,66 @@ TEST_CASE("Test Suspending Thread", "[thread]") {
+   REQUIRE(result == threading::WaitResult::kSuccess);
+ }
+ 
++TEST_CASE("Test Resuming Thread Created Suspended", "[thread]") {
++  // Resume straight after creation, racing the new thread's startup, from
++  // more threads than there are cores so the startup gets preempted.
++  const uint32_t resumer_count = 4 * logical_processor_count();
++  std::atomic<uint32_t> lost(0);
++  std::vector<std::unique_ptr<Thread>> resumers;
++  for (uint32_t r = 0; r < resumer_count; ++r) {
++    resumers.push_back(Thread::Create({}, [&lost] {
++      Thread::CreationParameters params = {};
++      params.create_suspended = true;
++      for (int i = 0; i < 200; ++i) {
++        std::atomic<bool> ran(false);
++        auto thread = Thread::Create(params, [&ran] { ran = true; });
++        // A lost resume leaves the thread suspended for good.
++        if (!thread->Resume() ||
++            Wait(thread.get(), false, 1s) != WaitResult::kSuccess || !ran) {
++          ++lost;
++        }
++      }
++    }));
++  }
++  for (auto& resumer : resumers) {
++    REQUIRE(Wait(resumer.get(), false, 120s) == WaitResult::kSuccess);
++  }
++  REQUIRE(lost == 0);
++}
++
++TEST_CASE("Test Suspending Thread After First Resume", "[thread]") {
++  Thread::CreationParameters params = {};
++  params.create_suspended = true;
++  std::atomic<uint64_t> counter(0);
++  std::atomic<bool> stop(false);
++  auto thread = Thread::Create(params, [&counter, &stop] {
++    while (!stop) {
++      ++counter;
++    }
++  });
++
++  Sleep(20ms);
++  REQUIRE(counter == 0);
++  REQUIRE(thread->Resume());
++  while (counter == 0) {
++    MaybeYield();
++  }
++
++  // Suspend is asynchronous on POSIX; let it land before sampling.
++  REQUIRE(thread->Suspend());
++  Sleep(20ms);
++  uint64_t suspended_at = counter;
++  Sleep(50ms);
++  REQUIRE(counter == suspended_at);
++
++  REQUIRE(thread->Resume());
++  Sleep(20ms);
++  REQUIRE(counter > suspended_at);
++
++  stop = true;
++  REQUIRE(Wait(thread.get(), false, 1s) == WaitResult::kSuccess);
++}
++
+ TEST_CASE("Test Thread QueueUserCallback", "[thread]") {
+   std::unique_ptr<Thread> thread;
+   WaitResult result;
+diff --git a/src/xenia/base/testing/utf8_test.cc b/src/xenia/base/testing/utf8_test.cc
+index 77e04dd..f3ed666 100644
+--- a/src/xenia/base/testing/utf8_test.cc
++++ b/src/xenia/base/testing/utf8_test.cc
+@@ -220,8 +220,16 @@ TEST_CASE("UTF-8 Count", "[utf8]") {
+   TEST_LANGUAGE_EXAMPLES(utf8::count, results);
+ }
+ 
+-// TODO(gibbed): lower_ascii
+-// TODO(gibbed): upper_ascii
++TEST_CASE("UTF-8 Lower ASCII", "[utf8]") {
++  REQUIRE(utf8::lower_ascii("Hello, World 123") == "hello, world 123");
++  REQUIRE(utf8::lower_ascii("ÆBLE ÅB") == "Æble Åb");
++}
++
++TEST_CASE("UTF-8 Upper ASCII", "[utf8]") {
++  REQUIRE(utf8::upper_ascii("Hello, World 123") == "HELLO, WORLD 123");
++  REQUIRE(utf8::upper_ascii("HELLO") == "HELLO");
++  REQUIRE(utf8::upper_ascii("æble åb") == "æBLE åB");
++}
+ // TODO(gibbed): hash_fnv1a
+ // TODO(gibbed): hash_fnv1a_case
+ 
+diff --git a/src/xenia/base/threading_posix.cc b/src/xenia/base/threading_posix.cc
+index b45e72e..dbd82e2 100644
+--- a/src/xenia/base/threading_posix.cc
++++ b/src/xenia/base/threading_posix.cc
+@@ -422,6 +422,12 @@ class PosixCondition<Event> : public PosixConditionBase {
+     signal_ = false;
+   }
+ 
++  EventInfo Query() {
++    auto lock = std::unique_lock(mutex_);
++    // EVENT_TYPE: NotificationEvent = 0, SynchronizationEvent = 1.
++    return EventInfo{manual_reset_ ? 0u : 1u, signal_ ? 1u : 0u};
++  }
++
+  private:
+   [[nodiscard]] bool signaled() const override { return signal_; }
+   void post_execution() override {
+@@ -1130,11 +1136,7 @@ class PosixEvent final : public PosixConditionHandle<Event> {
+   ~PosixEvent() override = default;
+   void Set() override { handle_.Signal(); }
+   void Reset() override { handle_.Reset(); }
+-  EventInfo Query() override {
+-    EventInfo result{};
+-    assert_always();
+-    return result;
+-  }
++  EventInfo Query() override { return handle_.Query(); }
+   void Pulse() override {
+     using namespace std::chrono_literals;
+     handle_.Signal();
+@@ -1319,14 +1321,16 @@ void* PosixCondition<Thread>::ThreadStartRoutine(void* parameter) {
+     std::unique_lock lock(thread->handle_.state_mutex_);
+     thread->handle_.state_ =
+         create_suspended ? State::kSuspended : State::kRunning;
++    // Set the initial suspend count before Resume can pass WaitStarted.
++    if (create_suspended) {
++      thread->handle_.suspend_count_ = 1;
++    }
+     thread->handle_.state_signal_.notify_all();
+   }
+ 
+   if (create_suspended) {
+-    std::unique_lock lock(thread->handle_.state_mutex_);
+-    thread->handle_.suspend_count_ = 1;
+-    thread->handle_.state_signal_.wait(
+-        lock, [thread] { return thread->handle_.suspend_count_ == 0; });
++    // Wait on the semaphore Resume posts when the suspend count reaches zero.
++    thread->handle_.WaitSuspended();
+   }
+ 
+   start_routine();
+diff --git a/src/xenia/base/utf8.cc b/src/xenia/base/utf8.cc
+index 9305f1f..71256a3 100644
+--- a/src/xenia/base/utf8.cc
++++ b/src/xenia/base/utf8.cc
+@@ -36,7 +36,7 @@ uint32_t lower_ascii(const uint32_t c) {
+ }
+ 
+ uint32_t upper_ascii(const uint32_t c) {
+-  return c >= 'A' && c <= 'Z' ? c + 32 : c;
++  return c >= 'a' && c <= 'z' ? c - 32 : c;
+ }
+ 
+ bool equal_ascii_case(const uint32_t l, const uint32_t r) {
+diff --git a/src/xenia/cpu/hir/value.cc b/src/xenia/cpu/hir/value.cc
+index deb1fbf..953e454 100644
+--- a/src/xenia/cpu/hir/value.cc
++++ b/src/xenia/cpu/hir/value.cc
+@@ -830,17 +830,18 @@ void Value::RotateLeft(Value* other) {
+ void Value::Extract(Value* vec, Value* index) {
+   assert_true(vec->type == VEC128_TYPE);
+   switch (type) {
++    // Guest element numbers need the backends' VEC128_B/W flip.
+     case INT8_TYPE:
+-      constant.u8 = vec->constant.v128.u8[index->constant.u8 & 0x1F];
++      constant.u8 = vec->constant.v128.u8[(index->constant.u8 & 0xF) ^ 3];
+       break;
+     case INT16_TYPE:
+-      constant.u16 = vec->constant.v128.u16[index->constant.u16 & 0x7];
++      constant.u16 = vec->constant.v128.u16[(index->constant.u8 & 0x7) ^ 1];
+       break;
+     case INT32_TYPE:
+-      constant.u32 = vec->constant.v128.u32[index->constant.u32 & 0x3];
++      constant.u32 = vec->constant.v128.u32[index->constant.u8 & 0x3];
+       break;
+     case INT64_TYPE:
+-      constant.u64 = vec->constant.v128.u64[index->constant.u64 & 0x1];
++      constant.u64 = vec->constant.v128.u64[index->constant.u8 & 0x1];
+       break;
+     default:
+       assert_unhandled_case(type);
+diff --git a/src/xenia/cpu/testing/emulos_app_flags_test.cc b/src/xenia/cpu/testing/emulos_app_flags_test.cc
+new file mode 100644
+index 0000000..1ba71e0
+--- /dev/null
++++ b/src/xenia/cpu/testing/emulos_app_flags_test.cc
+@@ -0,0 +1,7 @@
++// The app defines this transient cvar in emulator_window.cc. CPU tests do not
++// link that window; expose the same default through the real cvar registry.
++#include "xenia/base/cvar.h"
++
++DEFINE_transient_bool(emulos_embedded, false,
++                      "Emulos360: let the Qt host own fullscreen state.",
++                      "Emulos360");
+diff --git a/src/xenia/cpu/testing/emulos_extract_fold_test.cc b/src/xenia/cpu/testing/emulos_extract_fold_test.cc
+new file mode 100644
+index 0000000..ca7ef68
+--- /dev/null
++++ b/src/xenia/cpu/testing/emulos_extract_fold_test.cc
+@@ -0,0 +1,63 @@
++// Regression gate for the actual x64 JIT, with the candidate's constant folder.
++#include <array>
++#include <cstdint>
++
++#include "xenia/cpu/testing/util.h"
++
++namespace {
++using xe::cpu::hir::HIRBuilder;
++using xe::cpu::hir::INT8_TYPE;
++using xe::cpu::hir::INT16_TYPE;
++using xe::cpu::hir::INT32_TYPE;
++using xe::cpu::hir::INT64_TYPE;
++using xe::cpu::hir::TypeName;
++using xe::cpu::testing::LoadVR;
++using xe::cpu::testing::StoreGPR;
++using xe::cpu::testing::TestFunction;
++using xe::cpu::ppc::PPCContext;
++
++uint64_t ExpectedElement(const xe::vec128_t& vector, unsigned width,
++                         unsigned index) {
++  if (width == 8) {
++    return (vector.u32[index / 4] >> (24U - (index % 4) * 8U)) & 0xFFU;
++  }
++  if (width == 16) {
++    return (vector.u32[index / 2] >> (16U - (index % 2) * 16U)) & 0xFFFFU;
++  }
++  return vector.u32[index];
++}
++}  // namespace
++
++TEST_CASE("EMULOS_EXTRACT_FOLD_MATCHES_REAL_JIT", "[emulos-extract]") {
++  const std::array<xe::vec128_t, 3> inputs{
++      xe::vec128i(0x00010203U, 0x04050607U, 0x08090A0BU, 0x0C0D0E0FU),
++      xe::vec128i(0x12345678U, 0x9ABCDEF0U, 0x13579BDFU, 0x2468ACE0U),
++      xe::vec128i(0x80000001U, 0x7FFFFFFEU, 0xFFFF0000U, 0x0000FFFFU)};
++  constexpr std::array<TypeName, 3> types{INT8_TYPE, INT16_TYPE, INT32_TYPE};
++  constexpr std::array<unsigned, 3> widths{8, 16, 32};
++  for (const auto& input : inputs) {
++    for (size_t part = 0; part < types.size(); ++part) {
++      const auto type = types[part];
++      const auto width = widths[part];
++      for (unsigned index = 0; index < 128U / width; ++index) {
++        const auto expected = ExpectedElement(input, width, index);
++        INFO("width=" << width << " index=" << index);
++        TestFunction test([input, type, index](HIRBuilder& b) {
++          StoreGPR(b, 3, b.ZeroExtend(
++              b.Extract(LoadVR(b, 4), static_cast<uint8_t>(index), type),
++              INT64_TYPE));
++          StoreGPR(b, 6, b.ZeroExtend(
++              b.Extract(b.LoadConstantVec128(input),
++                        static_cast<uint8_t>(index), type), INT64_TYPE));
++          b.Return();
++        });
++        test.Run([&](PPCContext* context) { context->v[4] = input; },
++                 [&](PPCContext* context) {
++                   REQUIRE(context->r[3] == expected);
++                   REQUIRE(context->r[6] == expected);
++                   REQUIRE(context->r[3] == context->r[6]);
++                 });
++      }
++    }
++  }
++}
+diff --git a/src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc b/src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc
+index a1d1c37..005510e 100644
+--- a/src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc
++++ b/src/xenia/gpu/vulkan/vulkan_pipeline_cache.cc
+@@ -959,6 +959,9 @@ bool VulkanPipelineCache::TranslateAnalyzedShader(
+           texture_binding_count * sizeof(*texture_bindings.data());
+       uint64_t texture_binding_layout_hash =
+           XXH3_64bits(texture_bindings.data(), texture_binding_layout_bytes);
++      // The layout vector and map are shared by every thread translating
++      // shaders for the storage at startup.
++      std::lock_guard<std::mutex> layouts_lock(layouts_mutex_);
+       auto found_range =
+           texture_binding_layout_map_.equal_range(texture_binding_layout_hash);
+       for (auto it = found_range.first; it != found_range.second; ++it) {
+diff --git a/src/xenia/gpu/vulkan/vulkan_texture_cache.cc b/src/xenia/gpu/vulkan/vulkan_texture_cache.cc
+index f01d7d4..c674fda 100644
+--- a/src/xenia/gpu/vulkan/vulkan_texture_cache.cc
++++ b/src/xenia/gpu/vulkan/vulkan_texture_cache.cc
+@@ -1708,13 +1708,15 @@ bool VulkanTextureCache::LoadTextureDataFromResidentMemoryImpl(Texture& texture,
+   } else {
+     // Same layout/usage but another upload may have written the image earlier
+     // in this submission - emit a TRANSFER_WRITE -> TRANSFER_WRITE barrier so
+-    // the next CmdCopyBufferToImage is ordered after any prior copy.
++    // the next CmdCopyBufferToImage is ordered after any prior copy. Its source
++    // and destination masks are equal, so it must not be skipped as a no-op.
+     command_processor_.PushImageMemoryBarrier(
+         vulkan_texture.image(), ui::vulkan::util::InitializeSubresourceRange(),
+         VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT,
+         VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_TRANSFER_WRITE_BIT,
+         VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+-        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
++        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_QUEUE_FAMILY_IGNORED,
++        VK_QUEUE_FAMILY_IGNORED, false);
+   }
+   command_processor_.SubmitBarriers(true);
+   VkBufferImageCopy* copy_regions = command_buffer.CmdCopyBufferToImageEmplace(
+diff --git a/src/xenia/kernel/xam/xam_net.cc b/src/xenia/kernel/xam/xam_net.cc
+index f1d6aaa..b52375f 100644
+--- a/src/xenia/kernel/xam/xam_net.cc
++++ b/src/xenia/kernel/xam/xam_net.cc
+@@ -7,6 +7,7 @@
+  ******************************************************************************
+  */
+ 
++#include <limits>
+ #include <random>
+ 
+ // clang-format off
+@@ -1443,16 +1444,21 @@ dword_result_t NetDll_XNetQosLookup_entry(
+       }
+ 
+       if (chunk.http_code == HTTP_STATUS_CODE::HTTP_OK) {
+-        if (chunk.response && chunk.size) {
+-          uint32_t data_ptr = kernel_memory()->SystemHeapAlloc(
+-              static_cast<uint16_t>(chunk.size));
+-          uint8_t* data = kernel_memory()->TranslateVirtual<uint8_t*>(data_ptr);
++        if (chunk.response && chunk.size &&
++            chunk.size <= std::numeric_limits<uint16_t>::max()) {
++          const uint16_t size = static_cast<uint16_t>(chunk.size);
++          const uint32_t data_ptr = kernel_memory()->SystemHeapAlloc(size);
+ 
+-          std::memcpy(data, chunk.response, chunk.size);
++          if (data_ptr) {
++            uint8_t* data =
++                kernel_memory()->TranslateVirtual<uint8_t*>(data_ptr);
+ 
+-          qos_info.data_ptr = data_ptr;
+-          qos_info.data_len = static_cast<uint16_t>(chunk.size);
+-          qos_info.flags |= XNET_XNQOSINFO::DATA_RECEIVED;
++            std::memcpy(data, chunk.response, size);
++
++            qos_info.data_ptr = data_ptr;
++            qos_info.data_len = size;
++            qos_info.flags |= XNET_XNQOSINFO::DATA_RECEIVED;
++          }
+         }
+       }
+ 
+@@ -2151,15 +2157,14 @@ dword_result_t NetDll_bind_entry(dword_t caller, dword_t socket_handle,
+ 
+   const auto upnp = kernel_state()->emulator()->GetUPnP();
+ 
+-  uint16_t upnp_internal_port = upnp->GetMappedBindPort(name->address_port);
++  // Support wildcard port
++  uint16_t upnp_internal_port = socket->bound_port();
+ 
+   if (upnp) {
+     const uint16_t mapped_internal_port =
+         upnp->GetMappedBindPort(name->address_port);
+-
+-    // Support wildcard port
+-    if (!upnp_internal_port || !mapped_internal_port) {
+-      upnp_internal_port = socket->bound_port();
++    if (mapped_internal_port) {
++      upnp_internal_port = mapped_internal_port;
+     }
+ 
+     const std::string protocol = socket->GetProtocolUPnPString();
+@@ -2259,7 +2264,7 @@ struct host_set {
+   object_ref<XSocket> sockets[X_FD_SETSIZE];
+ 
+   void Load(const x_fd_set* guest_set) {
+-    assert_true(guest_set->fd_count < X_FD_SETSIZE);
++    assert_true(guest_set->fd_count <= X_FD_SETSIZE);
+ 
+     count = guest_set->fd_count;
+     for (uint32_t i = 0; i < count; ++i) {
+@@ -2317,9 +2322,13 @@ struct host_set {
+ };
+ 
+ bool verify_x_fd_set(const x_fd_set* guest_set) {
++  if (!guest_set || guest_set->fd_count > X_FD_SETSIZE) {
++    return false;
++  }
++
+   for (uint32_t i = 0; i < guest_set->fd_count; ++i) {
+     auto socket_handle = static_cast<X_HANDLE>(guest_set->fd_array[i]);
+-    if (socket_handle == -1) {
++    if (socket_handle == static_cast<X_HANDLE>(-1)) {
+       break;
+     }
+     // Convert from Xenia -> native

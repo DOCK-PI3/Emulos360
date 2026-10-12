@@ -28,7 +28,7 @@ try {
     }
     if (!$SkipBuild) {
         Run-CMake -Arguments @('-S', '.', '-B', $build, '-G', 'Visual Studio 17 2022', '-A', 'x64', "-DCMAKE_PREFIX_PATH=$qt", '-DBUILD_TESTING=ON')
-        Run-CMake -Arguments @('--build', $build, '--config', 'Release', '--target', 'los360', 'ui_tests', '--parallel', '4')
+        Run-CMake -Arguments @('--build', $build, '--config', 'Release', '--target', 'los360', 'ui_tests', 'gamepad_mapper_tests', '--parallel', '4')
     }
     New-Item -ItemType Directory -Force $package,"$package/server","$package/licenses" | Out-Null
     $frontend = if ($SkipBuild) {
@@ -52,6 +52,7 @@ try {
             }
         } else { Copy-Item -LiteralPath $source -Destination $package -Recurse -Force }
     }
+    Copy-Item "$project/engine/xenia/third_party/SDL2/LICENSE.txt" "$package/licenses/SDL2-LICENSE.txt" -Force
     Copy-Item "$project/server/private-service.cjs","$project/server/panel.html","$project/server/panel.js","$project/server/package.json","$project/server/package-lock.json" "$package/server/" -Force
     Copy-Item "$project/server/node_modules" "$package/server/" -Recurse -Force
     $node = (Get-Command node.exe).Source

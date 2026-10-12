@@ -68,6 +68,27 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
             spacing: 8
+            Rectangle {
+                visible: page.category === "input" && !page.query.length
+                Layout.fillWidth: true
+                implicitHeight: mappingCard.implicitHeight + 28
+                radius: 10; color: Theme.panel; border.color: Theme.outline
+                RowLayout {
+                    id: mappingCard
+                    anchors.fill: parent; anchors.margins: 14
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        Label { text: qsTr("Tu mando, a tu manera"); color: Theme.text; font.bold: true }
+                        Label { Layout.fillWidth: true; text: qsTr("Todos los botones, gatillos y sticks. Prueba en directo o configura con el asistente."); color: Theme.muted; wrapMode: Text.Wrap }
+                    }
+                    ActionButton {
+                        objectName: "openGamepadMapping"
+                        text: qsTr("Mapear mando"); primary: true
+                        enabled: !page.controller.players.sessionActive
+                        onClicked: mappingLoader.active = true
+                    }
+                }
+            }
             Loader {
                 active: (page.category === "graphics" || page.category === "display") && !page.query.length
                 visible: active
@@ -119,4 +140,15 @@ ColumnLayout {
     }
     FileDialog { id: importer; title: qsTr("Importar configuración de Xenia"); nameFilters: ["TOML (*.toml)"]; onAccepted: page.settings.importConfig(selectedFile) }
     FileDialog { id: exporter; title: qsTr("Exportar configuración"); nameFilters: ["TOML (*.toml)"]; fileMode: FileDialog.SaveFile; defaultSuffix: "toml"; onAccepted: page.settings.exportConfig(selectedFile) }
+    Loader {
+        id: mappingLoader
+        active: false
+        sourceComponent: Component {
+            GamepadMappingDialog {
+                controller: page.controller
+                onClosed: mappingLoader.active = false
+            }
+        }
+        onLoaded: if (status === Loader.Ready) item.open()
+    }
 }

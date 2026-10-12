@@ -1,0 +1,493 @@
+{
+  "date": "2026-10-12",
+  "local_core": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+  "canary_head": "2372a54105d9d598ab5bc7ba94a72ef1bea4b271",
+  "netplay_head": "1892233f02b5758972ccd6ccb978dbde107f32ba",
+  "scope": "Descarga de parches oficiales y comprobación de contexto sin aplicar; no compilación, GPU, gameplay o Netplay",
+  "watched_sources_unchanged": true,
+  "sources_before": [
+    {
+      "path": "src/xenia/kernel/xam/xam_net.cc",
+      "sha256": "F59741910A46BDCE0D2CA19B631846F3F1443707139DE68F04319D659C6E4C51"
+    },
+    {
+      "path": "src/xenia/base/threading_posix.cc",
+      "sha256": "D7E6493E9AD91447D015355A49CEE71BAB0DC21448355DE49E7297EEB0396592"
+    },
+    {
+      "path": "src/xenia/base/testing/threading_test.cc",
+      "sha256": "C94E8AEEC82B36A6E6383DDBB38AA083666D6C3B39B60AF410D2AE201653D9E4"
+    },
+    {
+      "path": "src/xenia/base/utf8.cc",
+      "sha256": "A3C546BD7FDC7A38738E139581DE2EF1537CE2C946AFAA8AF58999B5E3BA9C8D"
+    },
+    {
+      "path": "src/xenia/base/testing/utf8_test.cc",
+      "sha256": "4FCE428B6A707650C104DF762F597380EE58742742F4A6920BA86D62DF0574AD"
+    }
+  ],
+  "sources_after": [
+    {
+      "path": "src/xenia/kernel/xam/xam_net.cc",
+      "sha256": "F59741910A46BDCE0D2CA19B631846F3F1443707139DE68F04319D659C6E4C51"
+    },
+    {
+      "path": "src/xenia/base/threading_posix.cc",
+      "sha256": "D7E6493E9AD91447D015355A49CEE71BAB0DC21448355DE49E7297EEB0396592"
+    },
+    {
+      "path": "src/xenia/base/testing/threading_test.cc",
+      "sha256": "C94E8AEEC82B36A6E6383DDBB38AA083666D6C3B39B60AF410D2AE201653D9E4"
+    },
+    {
+      "path": "src/xenia/base/utf8.cc",
+      "sha256": "A3C546BD7FDC7A38738E139581DE2EF1537CE2C946AFAA8AF58999B5E3BA9C8D"
+    },
+    {
+      "path": "src/xenia/base/testing/utf8_test.cc",
+      "sha256": "4FCE428B6A707650C104DF762F597380EE58742742F4A6920BA86D62DF0574AD"
+    }
+  ],
+  "candidates": [
+    {
+      "name": "netplay-bind-null-upnp.patch",
+      "repo": "AdrianCassar/xenia-canary",
+      "sha": "c7f5f15e1232a5f1aac77c40e2a171e12faec3f8",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/c7f5f15e1232a5f1aac77c40e2a171e12faec3f8",
+      "sha256": "DE7BD2BF7F65142E2C529A2AC82BF60F6AE24C88CCCDA7AEDCC9B4825ABE3750",
+      "bytes": 1263,
+      "forward_exit": 0,
+      "forward_output": "",
+      "reverse_exit": 1,
+      "reverse_output": "error: patch failed: src/xenia/kernel/xam/xam_net.cc:2159\r\nerror: src/xenia/kernel/xam/xam_net.cc: patch does not apply"
+    },
+    {
+      "name": "netplay-fd-set-bounds.patch",
+      "repo": "AdrianCassar/xenia-canary",
+      "sha": "493d2d32ddb0d4b3d7073b1e4cc98da49305e28c",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/493d2d32ddb0d4b3d7073b1e4cc98da49305e28c",
+      "sha256": "10EF93B62F6268BE9A0FF553A5E75D97BBF32612ED459663E5DBC8607C673866",
+      "bytes": 836,
+      "forward_exit": 0,
+      "forward_output": "",
+      "reverse_exit": 1,
+      "reverse_output": "error: patch failed: src/xenia/kernel/xam/xam_net.cc:2321\r\nerror: src/xenia/kernel/xam/xam_net.cc: patch does not apply"
+    },
+    {
+      "name": "netplay-qos-copy-size.patch",
+      "repo": "AdrianCassar/xenia-canary",
+      "sha": "4a904011fb1a18f30a2bb77e3477b3510e35d063",
+      "url": "https://github.com/AdrianCassar/xenia-canary/commit/4a904011fb1a18f30a2bb77e3477b3510e35d063",
+      "sha256": "62B84CCBE2B332F7F3761057B14E4985F31495783D5FDD59E260A87B8C662910",
+      "bytes": 1667,
+      "forward_exit": 0,
+      "forward_output": "",
+      "reverse_exit": 1,
+      "reverse_output": "error: patch failed: src/xenia/kernel/xam/xam_net.cc:1448\r\nerror: src/xenia/kernel/xam/xam_net.cc: patch does not apply"
+    },
+    {
+      "name": "posix-created-suspended-resume.patch",
+      "repo": "xenia-canary/xenia-canary",
+      "sha": "1c81b867473806b2845a1946b2d185c9d888a319",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/1c81b867473806b2845a1946b2d185c9d888a319",
+      "sha256": "EBD9230B0981B1493F64E6F3C30FF861B3592CCB404E53283C9E99BEEAA0994F",
+      "bytes": 5521,
+      "forward_exit": 0,
+      "forward_output": "",
+      "reverse_exit": 1,
+      "reverse_output": "error: patch failed: src/xenia/base/threading_posix.cc:484\r\nerror: src/xenia/base/threading_posix.cc: patch does not apply\r\nerror: patch failed: src/xenia/base/testing/threading_test.cc:1065\r\nerror: src/xenia/base/testing/threading_test.cc: patch does not apply"
+    },
+    {
+      "name": "utf8-upper-ascii.patch",
+      "repo": "xenia-canary/xenia-canary",
+      "sha": "19c23eb1123f891d44f6548429758b612fe0ae7e",
+      "url": "https://github.com/xenia-canary/xenia-canary/commit/19c23eb1123f891d44f6548429758b612fe0ae7e",
+      "sha256": "DEA7FFF4ECB4E69934ED20FE41012C0107D8CCBCE5FC87B425F33B612ED1B4AC",
+      "bytes": 1712,
+      "forward_exit": 0,
+      "forward_output": "",
+      "reverse_exit": 1,
+      "reverse_output": "error: patch failed: src/xenia/base/utf8.cc:36\r\nerror: src/xenia/base/utf8.cc: patch does not apply\r\nerror: patch failed: src/xenia/base/testing/utf8_test.cc:220\r\nerror: src/xenia/base/testing/utf8_test.cc: patch does not apply"
+    }
+  ],
+  "comparisons": [
+    {
+      "repo": "xenia-canary/xenia-canary",
+      "previous": "cc4981a4659086acb1c25a485adebefc3f432ae1",
+      "head": "2372a54105d9d598ab5bc7ba94a72ef1bea4b271",
+      "url": "https://github.com/xenia-canary/xenia-canary/compare/cc4981a4659086acb1c25a485adebefc3f432ae1...2372a54105d9d598ab5bc7ba94a72ef1bea4b271",
+      "status": "ahead",
+      "ahead": 13,
+      "behind": 0,
+      "commits": [
+        {
+          "sha": "6435e79904e1b7c3b34651d92bd017036aa4ad62",
+          "subject": "[Base/POSIX] Block a multi-object wait instead of polling it",
+          "date": "2026-10-07T17:31:14Z"
+        },
+        {
+          "sha": "5629c82ab121c545b7c45e8945c2ed0106390ec5",
+          "subject": "[XAM/NET] - Stub NetDll_XHttpStartup & NetDll_XHttpOpen",
+          "date": "2026-10-07T17:32:38Z"
+        },
+        {
+          "sha": "19c23eb1123f891d44f6548429758b612fe0ae7e",
+          "subject": "[Base] Fix upper_ascii lowering instead of raising",
+          "date": "2026-10-07T17:49:23Z"
+        },
+        {
+          "sha": "82d0cd1f445ca9712296a10f4e1fbdf18acf0725",
+          "subject": "[XAM] - Implement & stub more ui functions",
+          "date": "2026-10-07T19:41:57Z"
+        },
+        {
+          "sha": "f41ee57bc3af652d9b9163fbea0c45cd01a9d07f",
+          "subject": "[XAM] Add mutex for properties vector",
+          "date": "2026-10-08T17:29:20Z"
+        },
+        {
+          "sha": "828014b9083714947c145669e1e41bd87567ac7f",
+          "subject": "[Kernel] Limit kXNotificationSystemStorageDevicesChanged to dashboard.",
+          "date": "2026-10-08T18:41:53Z"
+        },
+        {
+          "sha": "6e2caa5c6e0c44a83a6fbd50eb3001cfd536f35b",
+          "subject": "[Base] xb script: Fixed searching for toolset for VS on Windows",
+          "date": "2026-10-09T07:20:33Z"
+        },
+        {
+          "sha": "c3ec0ba255e243c93b44ffd75e2f130957b20e22",
+          "subject": "[XAM] Implement XamShowNuiMessageBoxUI and XamShowNuiDeviceSelectorUI",
+          "date": "2026-10-10T08:05:15Z"
+        },
+        {
+          "sha": "1c81b867473806b2845a1946b2d185c9d888a319",
+          "subject": "[Base] Fix a lost resume of a thread created suspended on POSIX",
+          "date": "2026-10-10T15:52:43Z"
+        },
+        {
+          "sha": "21faab895a0e4ce0c5b39c4c958ffd43ce09e77b",
+          "subject": "[XAM/NUI] - Improve NUI",
+          "date": "2026-10-10T18:46:30Z"
+        },
+        {
+          "sha": "04f85416e0f8ab59808e2275d6e6b05630c3c044",
+          "subject": "[Kernel] Use guest object types in ObReferenceObjectByHandle",
+          "date": "2026-10-10T18:56:02Z"
+        },
+        {
+          "sha": "103257c5aa0a49a0893dc9b93dc1882e129bc165",
+          "subject": "[HID/SDL] Let a slot say what kind of controller it is, and fix a guitar's whammy",
+          "date": "2026-10-11T06:40:18Z"
+        },
+        {
+          "sha": "2372a54105d9d598ab5bc7ba94a72ef1bea4b271",
+          "subject": "[APU] Round XMA samples instead of truncating",
+          "date": "2026-10-11T19:24:09Z"
+        }
+      ],
+      "files": [
+        {
+          "filename": "src/xenia/apu/xma_context.cc",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 2
+        },
+        {
+          "filename": "src/xenia/base/testing/threading_test.cc",
+          "status": "modified",
+          "additions": 60,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/base/testing/utf8_test.cc",
+          "status": "modified",
+          "additions": 10,
+          "deletions": 2
+        },
+        {
+          "filename": "src/xenia/base/threading_posix.cc",
+          "status": "modified",
+          "additions": 76,
+          "deletions": 15
+        },
+        {
+          "filename": "src/xenia/base/utf8.cc",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1
+        },
+        {
+          "filename": "src/xenia/hid/input.h",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/hid/sdl/sdl_input_driver.cc",
+          "status": "modified",
+          "additions": 162,
+          "deletions": 5
+        },
+        {
+          "filename": "src/xenia/hid/sdl/sdl_input_driver.h",
+          "status": "modified",
+          "additions": 12,
+          "deletions": 1
+        },
+        {
+          "filename": "src/xenia/kernel/kernel_state.cc",
+          "status": "modified",
+          "additions": 7,
+          "deletions": 1
+        },
+        {
+          "filename": "src/xenia/kernel/kernel_state.h",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/nui.cc",
+          "status": "added",
+          "additions": 61,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/nui.h",
+          "status": "added",
+          "additions": 83,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/xam/apps/messenger_app.cc",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 3
+        },
+        {
+          "filename": "src/xenia/kernel/xam/apps/xam_app.cc",
+          "status": "modified",
+          "additions": 44,
+          "deletions": 8
+        },
+        {
+          "filename": "src/xenia/kernel/xam/apps/xam_app.h",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/xam/user_profile.h",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/xam/user_tracker.cc",
+          "status": "modified",
+          "additions": 14,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/xam/xam_info.cc",
+          "status": "modified",
+          "additions": 17,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/xam/xam_net.cc",
+          "status": "modified",
+          "additions": 61,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/xam/xam_nui.cc",
+          "status": "modified",
+          "additions": 130,
+          "deletions": 228
+        },
+        {
+          "filename": "src/xenia/kernel/xam/xam_ui.cc",
+          "status": "modified",
+          "additions": 167,
+          "deletions": 37
+        },
+        {
+          "filename": "src/xenia/kernel/xboxkrnl/xboxkrnl_ob.cc",
+          "status": "modified",
+          "additions": 18,
+          "deletions": 9
+        },
+        {
+          "filename": "src/xenia/kernel/xobject.cc",
+          "status": "modified",
+          "additions": 14,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/xobject.h",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 0
+        },
+        {
+          "filename": "xenia-build.py",
+          "status": "modified",
+          "additions": 20,
+          "deletions": 6
+        }
+      ]
+    },
+    {
+      "repo": "AdrianCassar/xenia-canary",
+      "previous": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+      "head": "1892233f02b5758972ccd6ccb978dbde107f32ba",
+      "url": "https://github.com/AdrianCassar/xenia-canary/compare/6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c...1892233f02b5758972ccd6ccb978dbde107f32ba",
+      "status": "ahead",
+      "ahead": 15,
+      "behind": 0,
+      "commits": [
+        {
+          "sha": "b25ff43a925c3023258684181484fea3a192ef95",
+          "subject": "[NET] Use copy_truncating in XNetInAddrToString",
+          "date": "2026-10-10T13:58:42Z"
+        },
+        {
+          "sha": "493d2d32ddb0d4b3d7073b1e4cc98da49305e28c",
+          "subject": "[NET] Validate fd_count count",
+          "date": "2026-10-10T13:58:49Z"
+        },
+        {
+          "sha": "4a904011fb1a18f30a2bb77e3477b3510e35d063",
+          "subject": "[NET] Use consistent size in XNetQosLookup when copying payload",
+          "date": "2026-10-10T14:09:50Z"
+        },
+        {
+          "sha": "c7f5f15e1232a5f1aac77c40e2a171e12faec3f8",
+          "subject": "[NET] Fixed potential null dereference in bind",
+          "date": "2026-10-10T14:34:58Z"
+        },
+        {
+          "sha": "4a4e298b8031b67c5e7e7ea94b65f24f00822830",
+          "subject": "[XLiveBase] Use title provided buffer for XOnlineQuerySearch",
+          "date": "2026-10-10T15:18:33Z"
+        },
+        {
+          "sha": "112acd07da8d20172211d63b0d2bf8684af6acd5",
+          "subject": "[XLiveBase] Removed duplicate IsUserSignedIn in XPresenceSubscribe and XPresenceUnsubscribe",
+          "date": "2026-10-10T15:47:04Z"
+        },
+        {
+          "sha": "fc58414b8725a3434061ad67c4fb1bd71e629476",
+          "subject": "[XLiveBase] Ensure folder exists before checking files",
+          "date": "2026-10-10T15:47:59Z"
+        },
+        {
+          "sha": "ee0d5d54c46831dcfa992a815d1049b55471fb97",
+          "subject": "[XLiveBase] Fixed potential null dereference in XStorageBuildServerPath",
+          "date": "2026-10-10T15:49:11Z"
+        },
+        {
+          "sha": "7609feaff3b31cc44a2c70350e667ca6b02e055b",
+          "subject": "[XLiveBase] Check results buffer size is large enough in XStorageEnumerate",
+          "date": "2026-10-10T15:54:58Z"
+        },
+        {
+          "sha": "c120414e5354d4916cebf46ece2877e42a8f1a2c",
+          "subject": "[XSocket] Avoid modifying the caller’s address in sendto",
+          "date": "2026-10-10T16:27:57Z"
+        },
+        {
+          "sha": "4ef3dc8d8bc10bed7042ae3d5d5fc57fa1ab5c7a",
+          "subject": "[XSocket] Only write to from_len in WSARecvFrom if from provided",
+          "date": "2026-10-10T16:40:23Z"
+        },
+        {
+          "sha": "a8b2a5a8e4f092cd6fe58e155ce0b69ce832edd8",
+          "subject": "[XSocket] Guard WSASendTo with null destination",
+          "date": "2026-10-10T17:00:16Z"
+        },
+        {
+          "sha": "a7ca21e0caf193ef34c173823d9cda3588dfc006",
+          "subject": "[XAM] Stop periodic maintenance when terminating title",
+          "date": "2026-10-11T18:53:02Z"
+        },
+        {
+          "sha": "97882092e0cd3cf860d161274a454b53404dc9c0",
+          "subject": "[NET] Fixed misc flag checks",
+          "date": "2026-10-11T21:58:15Z"
+        },
+        {
+          "sha": "1892233f02b5758972ccd6ccb978dbde107f32ba",
+          "subject": "[UPnP] Misc Improvements",
+          "date": "2026-10-11T23:06:08Z"
+        }
+      ],
+      "files": [
+        {
+          "filename": "src/xenia/kernel/kernel_state.cc",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 0
+        },
+        {
+          "filename": "src/xenia/kernel/upnp.cc",
+          "status": "modified",
+          "additions": 64,
+          "deletions": 48
+        },
+        {
+          "filename": "src/xenia/kernel/upnp.h",
+          "status": "modified",
+          "additions": 7,
+          "deletions": 7
+        },
+        {
+          "filename": "src/xenia/kernel/xam/apps/xlivebase_app.cc",
+          "status": "modified",
+          "additions": 51,
+          "deletions": 53
+        },
+        {
+          "filename": "src/xenia/kernel/xam/xam_net.cc",
+          "status": "modified",
+          "additions": 26,
+          "deletions": 14
+        },
+        {
+          "filename": "src/xenia/kernel/xam/xam_ui.cc",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 3
+        },
+        {
+          "filename": "src/xenia/kernel/xnet.h",
+          "status": "modified",
+          "additions": 24,
+          "deletions": 14
+        },
+        {
+          "filename": "src/xenia/kernel/xsocket.cc",
+          "status": "modified",
+          "additions": 53,
+          "deletions": 33
+        }
+      ]
+    }
+  ],
+  "selected_changes_present_at_consulted_heads": true,
+  "final_verification": {
+    "candidate_hashes_valid": true,
+    "watched_sources_unchanged": true,
+    "combined_git_apply_check_exit": 0,
+    "local_document_links_valid": true,
+    "documentation_diff_check_exit": 0,
+    "compilation_performed": false,
+    "semantic_tests_performed": false,
+    "gameplay_performed": false,
+    "netplay_session_performed": false,
+    "stable_core_patches_applied": false
+  }
+}

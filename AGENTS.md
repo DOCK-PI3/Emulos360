@@ -55,3 +55,16 @@ preparados para revisión; no publicar por cuenta propia.
 no autorizan reintegrar proveedores. Los datos y assets privados se conservan
 fuera de las releases; no borrar progreso al retirar un ejecutable.
 Commit, push y publicación corresponden al usuario.
+
+## Entrega 0.6.0 autorizada — 12 de octubre de 2026
+
+El usuario autoriza trabajar en main e incorporar mejoras acotadas y preparar
+builds Windows/Linux 0.6.0. Ocho correcciones se conservan en
+`patches/xenia-netplay/0002-core-maintenance-0.6.0.patch`, después del parche
+privado 0001 intacto. Consultar `docs/releases/0.6.0.md` y su evidencia antes de
+repetir candidatos históricos. Los checks individuales upstream pueden divergir
+por adaptaciones locales; comprobar también la serie agregada y la semántica.
+La referencia Git del submódulo permanece fijada: sus cambios se distribuyen
+como parches del repositorio padre, no como una actualización de toda la base.
+Los paquetes preparados no equivalen a gameplay o Netplay entre equipos
+validado. El propietario conserva commit, push, publicación y pruebas de juegos.

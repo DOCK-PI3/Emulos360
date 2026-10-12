@@ -19,6 +19,8 @@
 #include <QTcpServer>
 #include <QSignalSpy>
 #include <QScopeGuard>
+#define SDL_MAIN_HANDLED
+#include <SDL.h>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -27,6 +29,56 @@
 class UiTests : public QObject {
     Q_OBJECT
 private slots:
+    void gamepadMappingDialogLoadsAndClosesCleanly() {
+        SDL_SetMainReady(); QVERIFY(SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) == 0);
+        const int virtualIndex = SDL_JoystickAttachVirtual(SDL_JOYSTICK_TYPE_GAMECONTROLLER, 6, 16, 1);
+        QVERIFY(virtualIndex >= 0); auto* joystick = SDL_JoystickOpen(virtualIndex); QVERIFY(joystick);
+        const auto releaseJoystick = qScopeGuard([joystick, virtualIndex] {
+            SDL_JoystickClose(joystick); SDL_JoystickDetachVirtual(virtualIndex); SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
+        });
+        SDL_JoystickSetVirtualAxis(joystick, 4, -32768); SDL_JoystickSetVirtualAxis(joystick, 5, -32768);
+        SDL_JoystickUpdate();
+        QTemporaryDir data; Controller controller(data.filePath("settings.ini"));
+        QQmlEngine engine; QQmlComponent component(&engine);
+        component.loadFromModule("Los", "GamepadMappingDialog");
+        QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+        QQuickWindow window; window.resize(1280, 900); window.setColor(QColor("#101211")); window.show();
+        std::unique_ptr<QObject> dialog(component.createWithInitialProperties({{"controller", QVariant::fromValue(&controller)}}));
+        QVERIFY2(dialog != nullptr, qPrintable(component.errorString()));
+        dialog->setProperty("parent", QVariant::fromValue(window.contentItem()));
+        QVERIFY(QMetaObject::invokeMethod(dialog.get(), "open"));
+        QTRY_VERIFY(controller.gamepadMapper()->active());
+        for (int i = 0; i < controller.gamepadMapper()->devices().size(); ++i)
+            if (controller.gamepadMapper()->devices()[i].toMap()["index"].toInt() == virtualIndex) controller.gamepadMapper()->selectDevice(i);
+        SDL_JoystickSetVirtualButton(joystick, 0, 1);
+        SDL_JoystickSetVirtualAxis(joystick, 0, 20000);
+        SDL_JoystickSetVirtualAxis(joystick, 1, -20000);
+        SDL_JoystickSetVirtualAxis(joystick, 4, 18000);
+        QTRY_VERIFY(controller.gamepadMapper()->values()["a"].toDouble() > 0.9);
+        QVERIFY(controller.gamepadMapper()->values()["+leftx"].toDouble() > 0.5);
+        QCOMPARE(controller.gamepadMapper()->controls().size(), 25);
+        QVERIFY(dialog->findChild<QObject*>("saveGamepadMapping"));
+        const auto captures = qEnvironmentVariable("EMULOS_GAMEPAD_UI_CAPTURE");
+        for (const auto& family : {"xbox360", "xboxone", "ps3", "ps4", "ps5"}) {
+            dialog->setProperty("previewFamily", family); QTest::qWait(80);
+            if (!captures.isEmpty()) QVERIFY(window.grabWindow().save(captures + "/mapping-" + family + ".png"));
+        }
+        window.resize(760, 800); QTest::qWait(80);
+        if (!captures.isEmpty()) QVERIFY(window.grabWindow().save(captures + "/mapping-small.png"));
+        window.resize(960, 640); QTest::qWait(80);
+        if (!captures.isEmpty()) QVERIFY(window.grabWindow().save(captures + "/mapping-minimum.png"));
+        QVERIFY(QMetaObject::invokeMethod(dialog.get(), "close"));
+        QTRY_VERIFY(!controller.gamepadMapper()->active());
+        QQmlComponent settingsComponent(&engine); settingsComponent.loadFromModule("Los", "SettingsScreen");
+        QVERIFY2(settingsComponent.isReady(), qPrintable(settingsComponent.errorString()));
+        std::unique_ptr<QObject> settings(settingsComponent.createWithInitialProperties({{"controller", QVariant::fromValue(&controller)}, {"category", "input"}}));
+        QVERIFY(settings); auto* item = qobject_cast<QQuickItem*>(settings.get()); QVERIFY(item);
+        item->setParentItem(window.contentItem()); item->setSize(QSizeF(700, 750));
+        auto* open = settings->findChild<QObject*>("openGamepadMapping"); QVERIFY(open);
+        QVERIFY(QMetaObject::invokeMethod(open, "clicked"));
+        QTRY_VERIFY(controller.gamepadMapper()->active());
+        settings.reset(); QTRY_VERIFY(!controller.gamepadMapper()->active());
+    }
     void rendererPreferencesAndGameDialogLoadAndPersist() {
         QTemporaryDir directory; Controller controller(directory.filePath("settings.ini"));
         QQmlEngine engine; QQmlComponent preferences(&engine);
@@ -178,6 +230,14 @@ private slots:
         auto args=readArguments(); QVERIFY(args.contains("--draw_resolution_scale_x=1"));
         QVERIFY(args.contains("--gpu=vulkan")); QVERIFY(args.contains("--network_mode=2"));
         QVERIFY(args.contains("--api_address=http://127.0.0.1:8080/"));
+        QVERIFY(QDir().mkpath(data+"/controllers"));
+        QFile mapping(data+"/controllers/gamecontrollerdb.txt"); QVERIFY(mapping.open(QIODevice::WriteOnly));
+        mapping.write("03000000000000000000000000000000,Test,a:b1,b:b0,\n"); mapping.close();
+        players.launchGame(target,"545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(),10000);
+        args=readArguments(); QVERIFY(args.contains("--hid=any"));
+        QVERIFY(args.contains("--mappings_file="+QFileInfo(mapping).absoluteFilePath()));
+        QVERIFY(args.contains("--api_address=http://127.0.0.1:8080/"));
+        QVERIFY(args.contains("--storage_root="+settings.storagePath()));
         QVERIFY(cores->saveGameOptions("545408B4","","custom"));
         players.launchGame(target,"545408B4"); QTRY_VERIFY_WITH_TIMEOUT(!players.busy(),10000);
         for(const auto& arg:readArguments()) QVERIFY(!arg.startsWith("--draw_resolution") && !arg.startsWith("--postprocess"));

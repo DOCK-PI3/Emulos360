@@ -11,6 +11,7 @@
 #include "game_compatibility.h"
 #include "game_content.h"
 #include "app_updater.h"
+#include "gamepad_mapper.h"
 #include <QFutureWatcher>
 #include <QObject>
 #include <QSettings>
@@ -44,6 +45,7 @@ class Controller final : public QObject {
     Q_PROPERTY(GameCompatibility* compatibility READ compatibility CONSTANT)
     Q_PROPERTY(GameContent* content READ content CONSTANT)
     Q_PROPERTY(AppUpdater* updater READ updater CONSTANT)
+    Q_PROPERTY(GamepadMapper* gamepadMapper READ gamepadMapper CONSTANT)
     Q_PROPERTY(QVariantList coverOptions READ coverOptions NOTIFY coversChanged)
     Q_PROPERTY(QVariantMap coverImages READ coverImages NOTIFY coversChanged)
     Q_PROPERTY(bool coverBusy READ coverBusy NOTIFY coversChanged)
@@ -72,6 +74,7 @@ public:
     GameCompatibility* compatibility() { return &compatibility_; }
     GameContent* content() { return &content_; }
     AppUpdater* updater() { return &updater_; }
+    GamepadMapper* gamepadMapper() { return &gamepadMapper_; }
     QVariantList coverOptions() const { return coverOptions_; }
     QVariantMap coverImages() const { return coverImages_; }
     bool coverBusy() const { return !coverReplies_.isEmpty() || nextCover_ < coverOptions_.size(); }
@@ -114,6 +117,7 @@ private:
     GameStore store_;
     GameCompatibility compatibility_;
     GameContent content_;
+    GamepadMapper gamepadMapper_;
     QNetworkAccessManager network_;
     QList<QNetworkReply*> coverReplies_;
     QVariantList coverOptions_;

@@ -1,0 +1,41 @@
+From 4a904011fb1a18f30a2bb77e3477b3510e35d063 Mon Sep 17 00:00:00 2001
+From: Adrian <78108584+AdrianCassar@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 15:09:50 +0100
+Subject: [PATCH] [NET] Use consistent size in XNetQosLookup when copying
+ payload
+
+---
+ src/xenia/kernel/xam/xam_net.cc | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/src/xenia/kernel/xam/xam_net.cc b/src/xenia/kernel/xam/xam_net.cc
+index eab8a80a22b..66cd54d4fbf 100644
+--- a/src/xenia/kernel/xam/xam_net.cc
++++ b/src/xenia/kernel/xam/xam_net.cc
+@@ -1448,15 +1448,19 @@ dword_result_t NetDll_XNetQosLookup_entry(
+ 
+       if (chunk.http_code == HTTP_STATUS_CODE::HTTP_OK) {
+         if (chunk.response && chunk.size) {
+-          uint32_t data_ptr = kernel_memory()->SystemHeapAlloc(
+-              static_cast<uint16_t>(chunk.size));
+-          uint8_t* data = kernel_memory()->TranslateVirtual<uint8_t*>(data_ptr);
++          const uint16_t size = static_cast<uint16_t>(chunk.size);
++          const uint32_t data_ptr = kernel_memory()->SystemHeapAlloc(size);
+ 
+-          std::memcpy(data, chunk.response, chunk.size);
++          if (data_ptr) {
++            uint8_t* data =
++                kernel_memory()->TranslateVirtual<uint8_t*>(data_ptr);
+ 
+-          qos_info.data_ptr = data_ptr;
+-          qos_info.data_len = static_cast<uint16_t>(chunk.size);
+-          qos_info.flags |= XNET_XNQOSINFO::DATA_RECEIVED;
++            std::memcpy(data, chunk.response, size);
++
++            qos_info.data_ptr = data_ptr;
++            qos_info.data_len = size;
++            qos_info.flags |= XNET_XNQOSINFO::DATA_RECEIVED;
++          }
+         }
+       }
+ 

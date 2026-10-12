@@ -64,6 +64,7 @@ verificada en esta instalación.
 - [Compilar y abrir](docs/BUILD.md)
 - [Arquitectura y próximos hitos](docs/ARCHITECTURE.md)
 - [Ajustes del motor y consola](docs/SETTINGS.md)
+- [Mapeo completo y prueba visual de mandos](docs/CONTROLLER_MAPPING.md)
 - [Perfiles, avatares y partidas](docs/PLAYERS_AND_SAVES.md)
 - [Iconos y catálogo de compatibilidad](docs/GAME_COMPATIBILITY.md)
 - [Registro de cambios del fork](docs/FORK_CHANGES.md)

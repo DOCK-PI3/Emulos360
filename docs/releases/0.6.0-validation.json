@@ -1,0 +1,93 @@
+{
+  "version": "0.6.0",
+  "date": "2026-10-12",
+  "published": false,
+  "root_branch": "main",
+  "core_base": "6dbaa1fefd1e07cc3d5377e763c68fe8073cbe8c",
+  "series": [
+    "0001-emulos360.patch",
+    "0002-core-maintenance-0.6.0.patch"
+  ],
+  "accepted_upstream": [
+    "5ce7c336df060d043b0a2351889ec8789322d035",
+    "c7f5f15e1232a5f1aac77c40e2a171e12faec3f8",
+    "493d2d32ddb0d4b3d7073b1e4cc98da49305e28c",
+    "4a904011fb1a18f30a2bb77e3477b3510e35d063",
+    "1c81b867473806b2845a1946b2d185c9d888a319",
+    "19c23eb1123f891d44f6548429758b612fe0ae7e",
+    "1b242658e535fbd12645e4d2c12693771075b738",
+    "c8f214e2a9b0209ca8a0ad6cb3dfb155fe545ae2"
+  ],
+  "verification": {
+    "windows_core_link": "passed",
+    "linux_core_link": "passed Ubuntu 26.04 Clang 21",
+    "windows_cpu": "247 cases / 1077 assertions",
+    "linux_cpu": "247 cases / 1075 assertions",
+    "windows_threads": "7 cases / 108 assertions",
+    "linux_threads": "7 cases / 108 assertions",
+    "windows_events": "3 cases / 25 assertions",
+    "linux_events": "3 cases / 25 assertions",
+    "utf8_both": "13 cases / 466 assertions each",
+    "network_fragments_both": "204 assertions each",
+    "network_asan_ubsan": "passed Linux",
+    "cpu_extract_asan_ubsan": "2/2 passed, 4199424 extraction cases",
+    "windows_frontend": "5/5 passed",
+    "linux_frontend": "5/5 passed",
+    "windows_updater_fixtures": "replacement/preservation/rejected data passed",
+    "linux_updater_fixtures": "7/7 passed",
+    "profile_and_storage_bridges": "passed Windows/Linux, synthetic data only",
+    "ui_core_catalog": "282 public options plus 2 application-managed avatar flags verified",
+    "private_server": "3 passed / 1 skipped / 0 failed",
+    "windows_snapshot_audit": "2033 files matched; generated shader bytecode excluded",
+    "runtime_version_both": "Emulos360 0.6.0",
+    "runtime_captures": "passed Windows using development offscreen plugin/system fonts, Linux offscreen",
+    "linux_base_dependencies": "passed, including Qt Concurrent",
+    "installed_core_preserved": true,
+    "original_private_patch_preserved": true,
+    "windows_archive_entries": 19859,
+    "linux_archive_entries": 18423,
+    "linux_executable_modes_and_architecture": "ELF x86_64 and executable modes verified",
+    "archives_no_personal_data_or_extra_cores": true,
+    "archive_checksums_and_gzip_integrity": true,
+    "private_server_windows_real": "4/4 passed, actual packaged Node/MongoDB with temporary database",
+    "core_patch_series_idempotent": true,
+    "private_server_linux_real": "4/4 passed, actual packaged Node/MongoDB with temporary database",
+    "helper_summary_compatibility": "Local tail shorthand corrected to tail -n 4 after successful compilation/tests/package"
+  },
+  "limits": [
+    "No gameplay, physical GPU render comparisons or two-PC Netplay sessions tested for 0.6.0",
+    "Network fixtures execute exact source fragments with test host dependencies; not complete exports",
+    "No measured FPS improvement or guarantee of zero regressions",
+    "Published GitHub detection pending owner publication as normal v0.6.0 release"
+  ],
+  "records": {
+    "windows_core": {
+      "bytes": 19284992,
+      "sha256": "7a32874df106f139b2b9ac8ece5b4c13a285a21c047a77c907e8ed520de4f6db"
+    },
+    "windows_frontend": {
+      "bytes": 9010688,
+      "sha256": "69ba6b6047f1d9b3810acad5528822a1814a516e941dc1cc3b6d9797ad37de94"
+    },
+    "linux_core": {
+      "bytes": 19521504,
+      "sha256": "225268a4b6189d38f2dbe42ba05946f902cca71d65b2a27ddf679c3a51ab0b28"
+    },
+    "linux_frontend": {
+      "bytes": 16531392,
+      "sha256": "81d2fe8c986764d4ef4173f20f121ab50e2fc8b3dc963a086ab1c71759231a3c"
+    },
+    "aggregate_patch": {
+      "bytes": 16354,
+      "sha256": "a54539e8f46da8ed15fa376421b2f774f73b495cf6e89e7048db0e09e7564283"
+    },
+    "Emulos360-v0.6.0-windows-x64.zip": {
+      "bytes": 139078863,
+      "sha256": "62923b746afe435bca7b49db2b3b9a594a5e32fc6b5f8fe88a771050cf796638"
+    },
+    "Emulos360-v0.6.0-linux-x86_64.tar.gz": {
+      "bytes": 136407906,
+      "sha256": "0f88a185cf0e7d627b256ace73815f10d8f1ae95c8b0ee9d2a00a156c297f6d4"
+    }
+  }
+}

@@ -30,3 +30,11 @@ Reproducir un defecto concreto, registrar versión/TU, GPU, configuración y log
 preparar un cambio acotado, medir y probar regresiones. Los candidatos
 upstream preparados siguen sin estar integrados. Rivals sigue aplazado.
 Los documentos Nexia/Edge/XBLIG se conservan únicamente como historial.
+
+## Preparación 0.6.0 autorizada — 12 de octubre de 2026
+
+El usuario confirma main y autoriza incorporar las mejoras acotadas viables y
+crear builds Windows/Linux 0.6.0. La serie 0001 + 0002 conserva la base Netplay
+fijada y las extensiones propias. [Selección y límites](releases/0.6.0.md).
+Commit, push, publicación y controles finales de juegos siguen a cargo del
+propietario. No se promete ausencia absoluta de regresiones ni FPS nuevos.

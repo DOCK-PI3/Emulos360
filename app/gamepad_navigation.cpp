@@ -26,6 +26,7 @@ void installGamepadNavigation(Controller* controller, QObject* owner) {
     auto timer = new QTimer(owner);
     QObject::connect(timer,&QTimer::timeout,owner,[controller,getState,held=WORD(0),ticks=0,f8Held=false]() mutable {
         auto window = QGuiApplication::focusWindow();
+        if (controller->gamepadMapper()->active()) { held=0; ticks=0; return; }
         // A running core does not own input while the user browses the library.
         // Check native keyboard focus too: an embedded core can be a child of
         // the active Qt window while belonging to a different process.
@@ -110,6 +111,7 @@ void installGamepadNavigation(Controller* controller, QObject* owner) {
     auto timer = new QTimer(owner);
     QObject::connect(timer, &QTimer::timeout, owner, [controller, state]() {
         auto window = QGuiApplication::focusWindow();
+        if (controller->gamepadMapper()->active()) { state->held=0; state->ticks=0; return; }
         const auto coreWindow = controller->players()->coreWindow()->window();
         SDL_GameControllerUpdate();
         if (state->pad && !SDL_GameControllerGetAttached(state->pad)) {

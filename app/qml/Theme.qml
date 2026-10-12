@@ -20,6 +20,13 @@ QtObject {
     readonly property color dropdownText: "#ffffff"
     readonly property color dropdownDisabled: "#24362a"
     readonly property color dropdownDisabledText: "#afc3b3"
+    readonly property color controllerShell: "#343c39"
+    readonly property color controllerInset: "#202724"
+    readonly property color controllerLight: "#dce1df"
+    readonly property color controllerA: "#8ac64b"
+    readonly property color controllerB: "#ef716a"
+    readonly property color controllerX: "#67a9ea"
+    readonly property color controllerY: "#eacd65"
     readonly property int body: 11
     readonly property int heading: 17
     readonly property int display: 29

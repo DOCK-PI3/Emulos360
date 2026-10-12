@@ -16,7 +16,7 @@ try {
     try {
         $env:PATH = "$qtRoot/bin;$originalPath"
         if ($Test) {
-            ctest --test-dir build -C $Configuration -R '^(core_options_tests|library_tests|ui_tests|voice_party_tests)$' --output-on-failure
+            ctest --test-dir build -C $Configuration -R '^(gamepad_mapper_tests|core_options_tests|library_tests|ui_tests|voice_party_tests)$' --output-on-failure
             if ($LASTEXITCODE) { throw 'Fallaron las pruebas. Revisa build/*-results.txt.' }
         }
         if ($Package) {
@@ -46,6 +46,7 @@ try {
                 'plog-LICENSE.txt' = '.tools/libdatachannel/deps/plog/LICENSE'
                 'mbedtls-LICENSE.txt' = '.tools/mbedtls/LICENSE'
                 'opus-LICENSE.txt' = '.tools/opus/COPYING'
+                'SDL2-LICENSE.txt' = 'engine/xenia/third_party/SDL2/LICENSE.txt'
             }
             New-Item -ItemType Directory -Force out/Emulos360/licenses | Out-Null
             foreach ($entry in $voiceLicenses.GetEnumerator()) {

@@ -1,5 +1,11 @@
 # Candidatos upstream preparados
 
+> **Estado actualizado para 0.6.0:** CPU Extract, mutex/barrera Vulkan,
+> bind/fd_set/QoS, reanudación POSIX y upper_ascii se incorporan a las fuentes
+> mediante `patches/xenia-netplay/0002-core-maintenance-0.6.0.patch`.
+> [Alcance, pruebas y gameplay pendiente](../../docs/releases/0.6.0.md).
+> Los estados siguientes son históricos; viewport/fetch siguen sin integrar.
+
 Estos parches conservan las atribuciones de Canary. Los cuatro candidatos
 gráficos contienen sus diffs completos; el candidato CPU recoge únicamente
 el hunk de implementación oficial, sin importar el conjunto amplio de tests.
@@ -44,3 +50,23 @@ git -C engine/xenia apply --check ../../patches/xenia-upstream-candidates/vulkan
 Antes de integrar, completar las pruebas de ejecución y conservar el cambio en
 el flujo reproducible `patches/xenia-netplay/0001-emulos360.patch`. La aplicación
 en una copia de investigación no actualiza el motor del producto.
+
+## Candidatos adicionales — 12 de octubre de 2026
+
+Los siguientes cinco parches conservan el diff oficial completo, incluidos
+los tests upstream de POSIX y ASCII. Pasan individualmente git apply --check
+en la base local con sus cambios privados; la comprobación inversa falla.
+No están aplicados, compilados ni conectados a los scripts del producto.
+
+| Parche | Revisión | Límite principal pendiente |
+| --- | --- | --- |
+| [netplay-bind-null-upnp.patch](netplay-bind-null-upnp.patch) | `c7f5f15e1232a5f1aac77c40e2a171e12faec3f8` | UPnP ausente y puertos automáticos/mapeados |
+| [netplay-fd-set-bounds.patch](netplay-fd-set-bounds.patch) | `493d2d32ddb0d4b3d7073b1e4cc98da49305e28c` | Límite permitido frente al assert estricto de host_set::Load |
+| [netplay-qos-copy-size.patch](netplay-qos-copy-size.patch) | `4a904011fb1a18f30a2bb77e3477b3510e35d063` | Payload >65535 aún se estrecha a uint16; validar contrato y fallo de asignación |
+| [posix-created-suspended-resume.patch](posix-created-suspended-resume.patch) | `1c81b867473806b2845a1946b2d185c9d888a319` | Compilación/pruebas Linux, estrés y regreso a suspensión |
+| [utf8-upper-ascii.patch](utf8-upper-ascii.patch) | `19c23eb1123f891d44f6548429758b612fe0ae7e` | Tests descargados sin ejecutar; no hay efecto de gameplay identificado |
+
+[Informe y dependencias](../../docs/research/xenia-canary/14-SEGUIMIENTO-20261012.md)
+y [evidencia](../../docs/research/xenia-canary/core-seguimiento-evidencia-20261012.json).
+Estos checks no prueban compatibilidad, rendimiento ni Netplay. Los cinco
+candidatos previos mantienen su estado de validación histórica.

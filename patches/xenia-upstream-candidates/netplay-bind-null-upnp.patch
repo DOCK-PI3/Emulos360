@@ -1,0 +1,33 @@
+From c7f5f15e1232a5f1aac77c40e2a171e12faec3f8 Mon Sep 17 00:00:00 2001
+From: Adrian <78108584+AdrianCassar@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 15:34:58 +0100
+Subject: [PATCH] [NET] Fixed potential null dereference in bind
+
+---
+ src/xenia/kernel/xam/xam_net.cc | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/src/xenia/kernel/xam/xam_net.cc b/src/xenia/kernel/xam/xam_net.cc
+index 66cd54d4fbf..a116900239d 100644
+--- a/src/xenia/kernel/xam/xam_net.cc
++++ b/src/xenia/kernel/xam/xam_net.cc
+@@ -2159,15 +2159,14 @@ dword_result_t NetDll_bind_entry(dword_t caller, dword_t socket_handle,
+ 
+   const auto upnp = kernel_state()->emulator()->GetUPnP();
+ 
+-  uint16_t upnp_internal_port = upnp->GetMappedBindPort(name->address_port);
++  // Support wildcard port
++  uint16_t upnp_internal_port = socket->bound_port();
+ 
+   if (upnp) {
+     const uint16_t mapped_internal_port =
+         upnp->GetMappedBindPort(name->address_port);
+-
+-    // Support wildcard port
+-    if (!upnp_internal_port || !mapped_internal_port) {
+-      upnp_internal_port = socket->bound_port();
++    if (mapped_internal_port) {
++      upnp_internal_port = mapped_internal_port;
+     }
+ 
+     const std::string protocol = socket->GetProtocolUPnPString();

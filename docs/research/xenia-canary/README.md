@@ -67,3 +67,16 @@ El usuario autorizó un segundo core opcional. Consulta el [capítulo 11](11-SEG
 ## Integración indie posterior del 5 de octubre
 
 Consultar [el capítulo 12](12-XBLIG-AVATAR.md) y [XBLIG.md](../../XBLIG.md). La biblioteca reconoce XBLIG y Windows añade un proveedor independiente. Se obtuvo el runtime de consola y se instaló XNA Windows con autorización. Perfil y partidas se comparten; gameplay y avatares requieren validación y hay fallos de resolución XNA 3.1 documentados. El core Netplay permanece intacto.
+
+## Seguimiento del 12 de octubre de 2026
+
+[Capítulo 14: revisiones, cinco candidatos adicionales y pruebas pendientes](14-SEGUIMIENTO-20261012.md).
+Solo material de investigación y comprobación de contexto; no integración al
+core estable ni mejora de gameplay demostrada.
+
+## Preparación autorizada de 0.6.0 — 12 de octubre
+
+El usuario autoriza incorporar correcciones acotadas en main y preparar Windows/Linux.
+Ocho cambios seleccionados se conservan en la serie de parches 0001 + 0002;
+la validación de gameplay y Netplay del propietario sigue pendiente.
+[Alcance y validación de la entrega](../../releases/0.6.0.md).
